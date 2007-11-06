@@ -244,7 +244,7 @@ void dibujarPuntoLimite(Punto Q, GLint grosorQ,GLfloat colorQ[3]) {
 
   // Dibujamos el punto limite
   glBegin(GL_POINTS);
-    glVertex2i(Q.x(),Q.y());
+    glVertex2f(Q.x(),Q.y());
   glEnd();
 }
 
@@ -555,26 +555,27 @@ void __fastcall TGLForm2D::FormKeyDown(TObject *Sender, WORD &Key,
   if (Key == VK_SPACE) {
      // Cambiar a limite
      if (centrado == 1) {
-ShowMessage("Centrado -> Límite");
+/* ShowMessage("Centrado -> Límite");
       Punto T;
       T.nuevo (P.x() - Q.x(),P.y() - Q.y());
-      xLeft+=T.x();
-      xRight+=T.x();
-      yBot+=T.y();
-      yTop+=T.y();
+      */
+      xLeft+=Q.x();
+      xRight+=Q.x();
+      yBot+=Q.y();
+      yTop+=Q.y();
       /* P.nuevo(-Q.x(),-Q.y());
        Q.nuevo(xRight + xLeft, yTop + yBot);*/
        centrado = 2;
      }
      // Cambiar a origen
      else {
-ShowMessage("Límite -> Centrado");
-    Punto T;
-      T.nuevo (P.x() - Q.x(),P.y() - Q.y());
-      xLeft-=T.x();
-      xRight-=T.x();
-      yBot-=T.y();
-      yTop-=T.y();
+ /* ShowMessage("Límite -> Centrado");
+   Punto T;
+     T.nuevo (P.x() - Q.x(),P.y() - Q.y());*/
+      xLeft-=Q.x();
+      xRight-=Q.x();
+      yBot-=Q.y();
+      yTop-=Q.y();
 
     /*   Q.nuevo(-P.x(),-P.y());
        P.nuevo(xRight + xLeft, yTop + yBot);*/
