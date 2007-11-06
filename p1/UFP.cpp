@@ -432,7 +432,7 @@ void __fastcall TGLForm2D::FormKeyPress(TObject *Sender, char &Key)
 
      xLeft = xLn;
      xRight =xRn;
-     
+
      yBot = yBn;
      yTop = yTn;
    }
@@ -440,11 +440,25 @@ void __fastcall TGLForm2D::FormKeyPress(TObject *Sender, char &Key)
   // Tecla S -> Alejamos
   if (Key == 's' | Key == 'S') {
 
-     GLfloat a = (xRight - xLeft)*0.01;
-     xLeft -= a;
-     xRight+= a;
-     yBot -= a;
-     yTop += a;
+     GLfloat f= 0.95;
+     GLfloat xRn = (xRight + xLeft) / (GLfloat) 2;
+     xRn += (xRight - xLeft) * (GLfloat) 0.5 * (1/f);
+
+     GLfloat xLn = (xRight + xLeft) / (GLfloat) 2;
+     xLn -= (xRight - xLeft) * (GLfloat) 0.5 * (1/f);
+
+     GLfloat yTn = (yTop+yBot) / (GLfloat) 2;
+     yTn += (xRight - xLeft) * (GLfloat) 0.5 * (1/f);
+
+     GLfloat yBn = (yTop+yBot) / (GLfloat) 2;
+     yBn -= (xRight - xLeft) * (GLfloat) 0.5 * (1/f);
+
+
+    xLeft = xLn;
+     xRight =xRn;
+
+     yBot = yBn;
+     yTop = yTn;
    }
 
   // Tecla Z -> Anidamos
