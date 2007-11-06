@@ -278,8 +278,8 @@ void dibujarRectangulosAnidados(Punto A,Punto B,Punto C,Punto D,GLint cont,
            Aux.nuevo(B.x(),B.y());
            A.nuevo(B.x(),B.y());
            B.nuevo(C.x(),C.y());
-           C.nuevo( (GLint) C.x() - ((A.y()-B.y())/RAZON_AUREA), B.y());
-           D.nuevo( (GLint) A.x() - ((A.y()-B.y())/RAZON_AUREA), A.y());
+           C.nuevo( (GLfloat) C.x() - ((A.y()-B.y())/RAZON_AUREA), B.y());
+           D.nuevo( (GLfloat) A.x() - ((A.y()-B.y())/RAZON_AUREA), A.y());
            break;
 
       case 1: // Caso B
@@ -290,9 +290,9 @@ void dibujarRectangulosAnidados(Punto A,Punto B,Punto C,Punto D,GLint cont,
            D.nuevo(C.x() - (B.x()-A.x()),C.y());            */
 
            Aux.nuevo(A.x(),A.y());
-           A.nuevo(D.x(), (GLint) (C.y() + ((Aux.x()-D.x())/RAZON_AUREA)));
+           A.nuevo(D.x(), (GLfloat) (C.y() + ((Aux.x()-D.x())/RAZON_AUREA)));
            C.nuevo(B.x(),B.y());
-           B.nuevo(C.x(), (GLint) (C.y() + ((Aux.x()-D.x())/RAZON_AUREA)));
+           B.nuevo(C.x(), (GLfloat) (C.y() + ((Aux.x()-D.x())/RAZON_AUREA)));
            D.nuevo(C.x() - (B.x()-A.x()),C.y());
            break;
 
@@ -303,8 +303,8 @@ void dibujarRectangulosAnidados(Punto A,Punto B,Punto C,Punto D,GLint cont,
            C.nuevo(D.x(),D.y());
            D.nuevo(Aux.x(),Aux.y());    */
            Aux.nuevo(A.x(),A.y());
-           A.nuevo( (GLint) A.x()+((B.y()-C.y())/RAZON_AUREA), Aux.y());
-           B.nuevo( (GLint) D.x()+((B.y()-C.y())/RAZON_AUREA), D.y());
+           A.nuevo( (GLfloat) A.x()+((B.y()-C.y())/RAZON_AUREA), Aux.y());
+           B.nuevo( (GLfloat) D.x()+((B.y()-C.y())/RAZON_AUREA), D.y());
            C.nuevo(D.x(),D.y());
            D.nuevo(Aux.x(),Aux.y());
            break;
@@ -317,9 +317,9 @@ void dibujarRectangulosAnidados(Punto A,Punto B,Punto C,Punto D,GLint cont,
            D.nuevo(A.x(), Aux.y() + (B.x()-A.x())-3);     */
            Aux.nuevo(B.x(),B.y());
            B.nuevo(A.x(),A.y());
-           C.nuevo(Aux.x(), (GLint) A.y() - ((A.x()-D.x())/RAZON_AUREA));
+           C.nuevo(Aux.x(), (GLfloat) A.y() - ((A.x()-D.x())/RAZON_AUREA));
            A.nuevo(D.x(),D.y());
-           D.nuevo(A.x(), (GLint) A.y() - ((B.x()-A.x())/RAZON_AUREA));
+           D.nuevo(A.x(), (GLfloat) A.y() - ((B.x()-A.x())/RAZON_AUREA));
            break;
       }
 
@@ -370,10 +370,10 @@ void __fastcall TGLForm2D::GLScene() {
  glClear(GL_COLOR_BUFFER_BIT);
 
  // Restablecemos puntos iniciales
- A.nuevo(P.x()-longX, P.y()+longY);
- B.nuevo(P.x()+longX, P.y()+longY);
- C.nuevo(P.x()+longX, P.y()-longY);
- D.nuevo(P.x()-longX, P.y()-longY);
+ A.nuevo(-longX, +longY);
+ B.nuevo(+longX, +longY);
+ C.nuevo(+longX, -longY);
+ D.nuevo(-longX, -longY);
 
  // Dibujamos el Rectangulo inicial
  dibujarRectanguloInicial(A,B,C,D,grosorLinRect,colorLinRect);
@@ -384,7 +384,7 @@ void __fastcall TGLForm2D::GLScene() {
   // Dibujamos el punto central
  dibujarPuntoCentral(P,grosorP,colorP);
 
- Punto Q = calculaPuntoQ(A, B, C, D, R);
+  Q = calculaPuntoQ(A, B, C, D, R);
  // Dibujamos el punto Limite
  dibujarPuntoLimite(Q,grosorQ,colorQ);
 
@@ -417,18 +417,20 @@ void __fastcall TGLForm2D::FormKeyPress(TObject *Sender, char &Key)
 {
   // Tecla A -> Acercamos
   if (Key == 'a' | Key == 'A') {
-     xLeft += 5;
-     xRight -=5;
-     yBot += 5;
-     yTop -=5;
+     GLfloat a = (xRight - xLeft)*0.01;
+     xLeft += a;
+     xRight -=a;
+     yBot += a;
+     yTop -=a;
    }
 
   // Tecla S -> Alejamos
   if (Key == 's' | Key == 'S') {
-     xLeft -= 5;
-     xRight+= 5;
-     yBot -= 5;
-     yTop += 5;
+     GLfloat a = (xRight - xLeft)*0.01;
+     xLeft -= a;
+     xRight+= a;
+     yBot -= a;
+     yTop += a;
    }
 
   // Tecla Z -> Anidamos
@@ -525,14 +527,29 @@ void __fastcall TGLForm2D::FormKeyDown(TObject *Sender, WORD &Key,
   if (Key == VK_SPACE) {
      // Cambiar a limite
      if (centrado == 1) {
-       P.nuevo(-Q.x(),-Q.y());
-       Q.nuevo(xRight + xLeft, yTop + yBot);
+ShowMessage("Centrado -> Límite");
+      Punto T;
+      T.nuevo (P.x() - Q.x(),P.y() - Q.y());
+      xLeft+=T.x();
+      xRight+=T.x();
+      yBot+=T.y();
+      yTop+=T.y();
+      /* P.nuevo(-Q.x(),-Q.y());
+       Q.nuevo(xRight + xLeft, yTop + yBot);*/
        centrado = 2;
      }
      // Cambiar a origen
      else {
-       Q.nuevo(-P.x(),-P.y());
-       P.nuevo(xRight + xLeft, yTop + yBot);
+ShowMessage("Límite -> Centrado");
+    Punto T;
+      T.nuevo (P.x() - Q.x(),P.y() - Q.y());
+      xLeft-=T.x();
+      xRight-=T.x();
+      yBot-=T.y();
+      yTop-=T.y();
+
+    /*   Q.nuevo(-P.x(),-P.y());
+       P.nuevo(xRight + xLeft, yTop + yBot);*/
        centrado = 1;
      }
     }
