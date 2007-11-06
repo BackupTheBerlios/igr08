@@ -417,15 +417,29 @@ void __fastcall TGLForm2D::FormKeyPress(TObject *Sender, char &Key)
 {
   // Tecla A -> Acercamos
   if (Key == 'a' | Key == 'A') {
-     GLfloat a = (xRight - xLeft)*0.01;
-     xLeft += a;
-     xRight -=a;
-     yBot += a;
-     yTop -=a;
+     GLfloat f= 1.05;
+     GLfloat xRn = (xRight + xLeft) / (GLfloat) 2;
+     xRn += (xRight - xLeft) * (GLfloat) 0.5 * (1/f);
+
+     GLfloat xLn = (xRight + xLeft) / (GLfloat) 2;
+     xLn -= (xRight - xLeft) * (GLfloat) 0.5 * (1/f);
+
+     GLfloat yTn = (yTop+yBot) / (GLfloat) 2;
+     yTn += (xRight - xLeft) * (GLfloat) 0.5 * (1/f);
+
+     GLfloat yBn = (yTop+yBot) / (GLfloat) 2;
+     yBn -= (xRight - xLeft) * (GLfloat) 0.5 * (1/f);
+
+     xLeft = xLn;
+     xRight =xRn;
+     
+     yBot = yBn;
+     yTop = yTn;
    }
 
   // Tecla S -> Alejamos
   if (Key == 's' | Key == 'S') {
+
      GLfloat a = (xRight - xLeft)*0.01;
      xLeft -= a;
      xRight+= a;
@@ -467,7 +481,7 @@ void __fastcall TGLForm2D::FormKeyPress(TObject *Sender, char &Key)
 
   // Se actualiza el volumen de vista
   // para que su radio coincida con ratioViewPort
-  GLfloat RatioVolVista = (GLfloat) xRight/yTop;
+ /* GLfloat RatioVolVista = (GLfloat) xRight/yTop;
 
   if (RatioVolVista>=RatioViewPort){
      //Aumentamos yTop-yBot
@@ -478,7 +492,7 @@ void __fastcall TGLForm2D::FormKeyPress(TObject *Sender, char &Key)
      //Aumentamos xRight-xLeft
      xRight=RatioViewPort*yTop;
      xLeft=-xRight;
-     }
+     }     */
 
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
