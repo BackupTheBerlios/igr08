@@ -41,10 +41,6 @@ void __fastcall TGLForm2D::FormCreate(TObject *Sender) {
     // Coordenadas del punto central
     P.nuevo(xRight + xLeft, yTop + yBot);
 
-    // Coordenadas del punto limite
-    Qx = 82;
-    Qy = -50;
-
     // Establecemos las distancias con respecto a P
     longX = 180;
     longY = 110;
@@ -187,7 +183,7 @@ void dibujarRectanguloInicial(Punto A,Punto B,Punto C,Punto D,GLint grosorLinRec
 }
 
 // Dibuja las diagonales
-void dibujarDiagonales(Punto A,Punto B,Punto C,Punto D, Punto R, GLint grosorLinDiag,GLfloat colorLinDiag[3]) {
+void dibujarDiagonales(Punto A,Punto B,Punto C,Punto D, Punto & R, GLint grosorLinDiag,GLfloat colorLinDiag[3]) {
   // Selecionamos el color de las diagonales
   glColor3f(colorLinDiag[0],colorLinDiag[1],colorLinDiag[2]);
 
@@ -220,17 +216,31 @@ void dibujarDiagonales(Punto A,Punto B,Punto C,Punto D, Punto R, GLint grosorLin
   glDisable(GL_LINE_STIPPLE);
 }
 
+// Función que calcula el punto Q
+Punto TGLForm2D::calculaPuntoQ(Punto A, Punto B, Punto C, Punto D, Punto R){
+
+  //Calculos de la pendiente y del corte con el eje de ordenadas
+  GLfloat m_AC =(A.y()-C.y())/(GLfloat)(A.x()-C.x());
+  GLfloat b_AC = (m_AC * A.x())-A.y();
+
+  GLfloat m_BR = (B.y()-R.y())/(GLfloat)(B.x()-R.x());
+  GLfloat b_BR = (m_BR * B.x())-B.y();
+
+  GLfloat x =(b_BR - b_AC) / (m_AC - m_BR);
+  GLfloat y = (m_AC*x+b_AC);
+
+  Punto Q;
+  Q.nuevo(-x, -y);
+  return Q;
+  }
+
 // Función que dibuja el punto limite
-void dibujarPuntoLimite(Punto P, GLint Qx, GLint Qy, GLint grosorQ,GLfloat colorQ[3]) {
+void dibujarPuntoLimite(Punto Q, GLint grosorQ,GLfloat colorQ[3]) {
   // Selecionamos el color de dibujo
   glColor3f(colorQ[0],colorQ[1],colorQ[2]);
 
   // Seleccionamos el gorsor del punto central
   glPointSize(grosorQ);
-
-  // Calculo el punto Q con respecto a P
-  Punto Q;
-  Q.nuevo(P.x() + Qx, P.y() + Qy);
 
   // Dibujamos el punto limite
   glBegin(GL_POINTS);
@@ -374,8 +384,9 @@ void __fastcall TGLForm2D::GLScene() {
   // Dibujamos el punto central
  dibujarPuntoCentral(P,grosorP,colorP);
 
+ Punto Q = calculaPuntoQ(A, B, C, D, R);
  // Dibujamos el punto Limite
- dibujarPuntoLimite(P,Qx,Qy,grosorQ,colorQ);
+ dibujarPuntoLimite(Q,grosorQ,colorQ);
 
  // Dibujamos el resto de rectangulos
  dibujarRectangulosAnidados(A,B,C,D,cont,grosorLinRect,colorLinAct);
@@ -482,29 +493,39 @@ void __fastcall TGLForm2D::FormKeyDown(TObject *Sender, WORD &Key,
 {
   // Trasladamos hacia arriba
   if (Key == VK_UP) {
-     P.y(P.y() + 10);
+         GLfloat a = (yTop - yBot)* 0.05;
+         yBot+=a;
+         yTop+=a;
+//     P.y(P.y() + 10);
   }
 
   // Trasladamos hacia abajo
   if (Key == VK_DOWN) {
-    P.y(P.y() - 10);
+           GLfloat a = (yTop - yBot)* 0.05;
+         yBot-=a;
+         yTop-=a;
+  //    P.y(P.y() - 10);
   }
 
   // Trasladamos hacia derecha
   if (Key == VK_RIGHT) {
-    P.x(P.x() + 10);
+  GLfloat a = (xRight - xLeft)* 0.05;
+         xRight+=a;
+         xLeft+=a;
   }
 
   // Trasladamos hacia izquierda
   if (Key == VK_LEFT) {
-    P.x(P.x() - 10);
+  GLfloat a = (xRight - xLeft)* 0.05;
+         xRight-=a;
+         xLeft-=a;
   }
 
   // Cambiamos origen de coordenadas
   if (Key == VK_SPACE) {
      // Cambiar a limite
      if (centrado == 1) {
-       P.nuevo(-Qx,-Qy);
+       P.nuevo(-Q.x(),-Q.y());
        Q.nuevo(xRight + xLeft, yTop + yBot);
        centrado = 2;
      }

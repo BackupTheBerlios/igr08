@@ -89,9 +89,6 @@ private:	// User declarations
  // Distancia de los vertices con respecto al punto central P
  GLint longX, longY;
 
- // Coordenadas del punto limte
- GLint Qx,Qy;
-
  // Contador de rectangulos
  GLint cont;
 
@@ -128,6 +125,7 @@ private:	// User declarations
  // métodos privados
  void __fastcall SetPixelFormatDescriptor();
  void __fastcall GLScene();
+ Punto calculaPuntoQ(Punto A, Punto B, Punto C, Punto D, Punto R);
 
  public:		// User declarations
    __fastcall TGLForm2D(TComponent* Owner);

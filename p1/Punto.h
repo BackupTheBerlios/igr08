@@ -7,15 +7,15 @@
 class Punto {
 
   public:
-     void nuevo(GLint,GLint);
-     void x(GLint);
-     void y(GLint);
-     GLint x();
-     GLint y();
+     void nuevo(GLfloat,GLfloat);
+     void x(GLfloat);
+     void y(GLfloat);
+     GLfloat x();
+     GLfloat y();
 
   private:
-     GLint _x;
-     GLint _y;
+     GLfloat _x;
+     GLfloat _y;
 };
 
 #endif
