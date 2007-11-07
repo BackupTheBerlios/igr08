@@ -273,7 +273,7 @@ void dibujarPuntoLimite(Punto A, Punto B, Punto C, Punto R, Punto & Q,
 
   // Dibujamos el punto limite
   glBegin(GL_POINTS);
-    glVertex2f(Q.x(),Q.y());
+    glVertex2i(Q.x(),Q.y());
   glEnd();
 }
 
@@ -304,48 +304,16 @@ void dibujarRectangulosAnidados(Punto A,Punto B,Punto C,Punto D,GLint cont,
            A.nuevo(B.x(),B.y());
            B.nuevo(C.x(),C.y());
            C.nuevo(Aux.x()+(A.y()-B.y()),B.y());
-<<<<<<< UFP.cpp
            D.nuevo(Aux.x()+(A.y()-B.y()),A.y());
-=======
-<<<<<<< UFP.cpp
-           D.nuevo(Aux.x()+(A.y()-B.y()),A.y());
-=======
-           D.nuevo(Aux.x()+(A.y()-B.y()),A.y());       */
-
-           Aux.nuevo(B.x(),B.y());
-           A.nuevo(B.x(),B.y());
-           B.nuevo(C.x(),C.y());
-           C.nuevo( (GLfloat) C.x() - ((A.y()-B.y())/RAZON_AUREA), B.y());
-           D.nuevo( (GLfloat) A.x() - ((A.y()-B.y())/RAZON_AUREA), A.y());
->>>>>>> 1.6
->>>>>>> 1.7
            break;
 
       case 1: // Caso B
            // Restando el lado
            Aux.nuevo(A.x(),A.y());
-<<<<<<< UFP.cpp
            A.nuevo(D.x(),D.y()-(Aux.x()-D.x()));
-=======
-<<<<<<< UFP.cpp
-           A.nuevo(D.x(),D.y()-(Aux.x()-D.x()));
-=======
-           A.nuevo(D.x(), (GLfloat) (C.y() + ((Aux.x()-D.x())/RAZON_AUREA)));
->>>>>>> 1.6
->>>>>>> 1.7
            C.nuevo(B.x(),B.y());
-<<<<<<< UFP.cpp
            B.nuevo(C.x(),D.y() - (Aux.x()-D.x()));
            D.nuevo(C.x() - (B.x()-A.x()),C.y());            
-=======
-<<<<<<< UFP.cpp
-           B.nuevo(C.x(),D.y() - (Aux.x()-D.x()));
-           D.nuevo(C.x() - (B.x()-A.x()),C.y());            
-=======
-           B.nuevo(C.x(), (GLfloat) (C.y() + ((Aux.x()-D.x())/RAZON_AUREA)));
-           D.nuevo(C.x() - (B.x()-A.x()),C.y());
->>>>>>> 1.6
->>>>>>> 1.7
            break;
 
       case 2: // Caso C
@@ -354,17 +322,6 @@ void dibujarRectangulosAnidados(Punto A,Punto B,Punto C,Punto D,GLint cont,
            A.nuevo(B.x()-(B.y()-C.y()), Aux.y());
            B.nuevo(C.x()-(B.y()-C.y()), D.y());
            C.nuevo(D.x(),D.y());
-<<<<<<< UFP.cpp
-=======
-<<<<<<< UFP.cpp
-=======
-           D.nuevo(Aux.x(),Aux.y());    */
-           Aux.nuevo(A.x(),A.y());
-           A.nuevo( (GLfloat) A.x()+((B.y()-C.y())/RAZON_AUREA), Aux.y());
-           B.nuevo( (GLfloat) D.x()+((B.y()-C.y())/RAZON_AUREA), D.y());
-           C.nuevo(D.x(),D.y());
->>>>>>> 1.6
->>>>>>> 1.7
            D.nuevo(Aux.x(),Aux.y());
            break;
 
@@ -372,25 +329,9 @@ void dibujarRectangulosAnidados(Punto A,Punto B,Punto C,Punto D,GLint cont,
            // Restando el lado
            Aux.nuevo(B.x(),B.y());
            B.nuevo(A.x(),A.y());
-<<<<<<< UFP.cpp
            C.nuevo(Aux.x(), Aux.y()+(A.x()-D.x()));
-=======
-<<<<<<< UFP.cpp
-           C.nuevo(Aux.x(), Aux.y()+(A.x()-D.x()));
-=======
-           C.nuevo(Aux.x(), (GLfloat) A.y() - ((A.x()-D.x())/RAZON_AUREA));
->>>>>>> 1.6
->>>>>>> 1.7
            A.nuevo(D.x(),D.y());
-<<<<<<< UFP.cpp
            D.nuevo(A.x(), Aux.y() + (B.x()-A.x()));
-=======
-<<<<<<< UFP.cpp
-           D.nuevo(A.x(), Aux.y() + (B.x()-A.x()));
-=======
-           D.nuevo(A.x(), (GLfloat) A.y() - ((B.x()-A.x())/RAZON_AUREA));
->>>>>>> 1.6
->>>>>>> 1.7
            break;
       }
 
@@ -488,24 +429,10 @@ void __fastcall TGLForm2D::GLScene() {
  else {
 
  // Restablecemos puntos iniciales
-<<<<<<< UFP.cpp
  A.nuevo(P.x()-longX/2, P.y()+longY/2);
  B.nuevo(P.x()+longX/2, P.y()+longY/2);
  C.nuevo(P.x()+longX/2, P.y()-longY/2);
  D.nuevo(P.x()-longX/2, P.y()-longY/2);
-=======
-<<<<<<< UFP.cpp
- A.nuevo(P.x()-longX/2, P.y()+longY/2);
- B.nuevo(P.x()+longX/2, P.y()+longY/2);
- C.nuevo(P.x()+longX/2, P.y()-longY/2);
- D.nuevo(P.x()-longX/2, P.y()-longY/2);
-=======
- A.nuevo(-longX, +longY);
- B.nuevo(+longX, +longY);
- C.nuevo(+longX, -longY);
- D.nuevo(-longX, -longY);
->>>>>>> 1.6
->>>>>>> 1.7
 
  // Dibujamos el Rectangulo inicial
  dibujarRectanguloInicial(A,B,C,D,grosorLinRect,colorLinRect);
@@ -516,13 +443,6 @@ void __fastcall TGLForm2D::GLScene() {
   // Dibujamos el punto central
  dibujarPuntoCentral(P,grosorP,colorP);
 
-<<<<<<< UFP.cpp
-=======
-<<<<<<< UFP.cpp
-=======
-  Q = calculaPuntoQ(A, B, C, D, R);
->>>>>>> 1.6
->>>>>>> 1.7
  // Dibujamos el punto Limite
  dibujarPuntoLimite(A,B,C,R,Q,grosorQ,colorQ);
 
@@ -556,7 +476,6 @@ void __fastcall TGLForm2D::FormKeyPress(TObject *Sender, char &Key)
 {
   // Tecla A -> Acercamos
   if (Key == 'a' | Key == 'A') {
-<<<<<<< UFP.cpp
 
      // Calculamos las nuevas coordenadas del AVE
      GLfloat xRn = (xRight + xLeft) / (GLfloat) 2;
@@ -577,54 +496,10 @@ void __fastcall TGLForm2D::FormKeyPress(TObject *Sender, char &Key)
 
      yBot = yBn;
      yTop = yTn;
-=======
-<<<<<<< UFP.cpp
-
-     // Calculamos las nuevas coordenadas del AVE
-     GLfloat xRn = (xRight + xLeft) / (GLfloat) 2;
-     xRn += (xRight - xLeft) * (GLfloat) 0.5 * (1/F);
-
-     GLfloat xLn = (xRight + xLeft) / (GLfloat) 2;
-     xLn -= (xRight - xLeft) * (GLfloat) 0.5 * (1/F);
-
-     GLfloat yTn = (yTop+yBot) / (GLfloat) 2;
-     yTn += (xRight - xLeft) * (GLfloat) 0.5 * (1/F);
-
-     GLfloat yBn = (yTop+yBot) / (GLfloat) 2;
-     yBn -= (xRight - xLeft) * (GLfloat) 0.5 * (1/F);
-
-     // Actualizamos las variables del AVE
-     xLeft = xLn;
-     xRight =xRn;
-
-     yBot = yBn;
-     yTop = yTn;
-=======
-     GLfloat f= 1.05;
-     GLfloat xRn = (xRight + xLeft) / (GLfloat) 2;
-     xRn += (xRight - xLeft) * (GLfloat) 0.5 * (1/f);
-
-     GLfloat xLn = (xRight + xLeft) / (GLfloat) 2;
-     xLn -= (xRight - xLeft) * (GLfloat) 0.5 * (1/f);
-
-     GLfloat yTn = (yTop+yBot) / (GLfloat) 2;
-     yTn += (xRight - xLeft) * (GLfloat) 0.5 * (1/f);
-
-     GLfloat yBn = (yTop+yBot) / (GLfloat) 2;
-     yBn -= (xRight - xLeft) * (GLfloat) 0.5 * (1/f);
-
-     xLeft = xLn;
-     xRight =xRn;
-
-     yBot = yBn;
-     yTop = yTn;
->>>>>>> 1.6
->>>>>>> 1.7
    }
 
   // Tecla S -> Alejamos
   if (Key == 's' | Key == 'S') {
-<<<<<<< UFP.cpp
 
      // Calculamos las nuevas coordenadas del AVE
      GLfloat xRn = (xRight + xLeft) / (GLfloat) 2;
@@ -645,51 +520,6 @@ void __fastcall TGLForm2D::FormKeyPress(TObject *Sender, char &Key)
 
      yBot = yBn;
      yTop = yTn;
-=======
-<<<<<<< UFP.cpp
-
-     // Calculamos las nuevas coordenadas del AVE
-     GLfloat xRn = (xRight + xLeft) / (GLfloat) 2;
-     xRn += (xRight - xLeft) * (GLfloat) 0.5 * (1/f);
-
-     GLfloat xLn = (xRight + xLeft) / (GLfloat) 2;
-     xLn -= (xRight - xLeft) * (GLfloat) 0.5 * (1/f);
-
-     GLfloat yTn = (yTop+yBot) / (GLfloat) 2;
-     yTn += (xRight - xLeft) * (GLfloat) 0.5 * (1/f);
-
-     GLfloat yBn = (yTop+yBot) / (GLfloat) 2;
-     yBn -= (xRight - xLeft) * (GLfloat) 0.5 * (1/f);
-
-     // Actualizamos las variables del AVE
-     xLeft = xLn;
-     xRight =xRn;
-
-     yBot = yBn;
-     yTop = yTn;
-=======
-
-     GLfloat f= 0.95;
-     GLfloat xRn = (xRight + xLeft) / (GLfloat) 2;
-     xRn += (xRight - xLeft) * (GLfloat) 0.5 * (1/f);
-
-     GLfloat xLn = (xRight + xLeft) / (GLfloat) 2;
-     xLn -= (xRight - xLeft) * (GLfloat) 0.5 * (1/f);
-
-     GLfloat yTn = (yTop+yBot) / (GLfloat) 2;
-     yTn += (xRight - xLeft) * (GLfloat) 0.5 * (1/f);
-
-     GLfloat yBn = (yTop+yBot) / (GLfloat) 2;
-     yBn -= (xRight - xLeft) * (GLfloat) 0.5 * (1/f);
-
-
-    xLeft = xLn;
-     xRight =xRn;
-
-     yBot = yBn;
-     yTop = yTn;
->>>>>>> 1.6
->>>>>>> 1.7
    }
 
   // Tecla Z -> Anidamos
@@ -721,29 +551,8 @@ void __fastcall TGLForm2D::FormKeyPress(TObject *Sender, char &Key)
       Panel1->Visible = true;
     else
       Panel1->Visible = false;
-<<<<<<< UFP.cpp
   }
-=======
-<<<<<<< UFP.cpp
-  }
-=======
-   }
 
-  // Se actualiza el volumen de vista
-  // para que su radio coincida con ratioViewPort
- /* GLfloat RatioVolVista = (GLfloat) xRight/yTop;
->>>>>>> 1.6
->>>>>>> 1.7
-
-<<<<<<< UFP.cpp
-  // Tecla E -> Embaldosamos/Desembaldosamos
-  if (Key == 'e' | Key == 'E') {
-     if (embaldosado) {
-       embaldosado = false;
-       N = 1;
-       glViewport(0,0,ClientWidth,ClientHeight);
-       Embaldosar1->Caption = "&Embaldosar";
-=======
   // Tecla E -> Embaldosamos/Desembaldosamos
   if (Key == 'e' | Key == 'E') {
      if (embaldosado) {
@@ -752,20 +561,6 @@ void __fastcall TGLForm2D::FormKeyPress(TObject *Sender, char &Key)
        glViewport(0,0,ClientWidth,ClientHeight);
        Embaldosar1->Caption = "&Embaldosar";
      }
-<<<<<<< UFP.cpp
-     else {
-        AnsiString a;
-        a = InputBox("Embaldosado","Inserta el número de filas/columnas","");
-        if (a == "")
-           Application->MessageBox("Dato incorrecto o nulo","Error", MB_OK | MB_ICONHAND);
-        else {
-           N = StrToInt(a);
-           embaldosado = true;
-           Embaldosar1->Caption = "&Desembaldosar";
-        }
->>>>>>> 1.7
-     }
-<<<<<<< UFP.cpp
      else {
         AnsiString a;
         a = InputBox("Embaldosado","Inserta el número de filas/columnas","");
@@ -778,16 +573,6 @@ void __fastcall TGLForm2D::FormKeyPress(TObject *Sender, char &Key)
         }
      }
   }
-=======
-  }
-=======
-  else{
-     //Aumentamos xRight-xLeft
-     xRight=RatioViewPort*yTop;
-     xLeft=-xRight;
-     }     */
->>>>>>> 1.6
->>>>>>> 1.7
 
   // Modificamos al proyecccion
   glMatrixMode(GL_PROJECTION);
@@ -835,58 +620,18 @@ void __fastcall TGLForm2D::FormKeyDown(TObject *Sender, WORD &Key,
   if (Key == VK_SPACE) {
      // Cambiar a limite
      if (centrado == 1) {
-<<<<<<< UFP.cpp
        xRight += Q.x();
        xLeft += Q.x();
        yTop += Q.y();
        yBot += Q.y();
-=======
-<<<<<<< UFP.cpp
-       xRight += Q.x();
-       xLeft += Q.x();
-       yTop += Q.y();
-       yBot += Q.y();
-=======
-/* ShowMessage("Centrado -> Límite");
-      Punto T;
-      T.nuevo (P.x() - Q.x(),P.y() - Q.y());
-      */
-      xLeft+=Q.x();
-      xRight+=Q.x();
-      yBot+=Q.y();
-      yTop+=Q.y();
-      /* P.nuevo(-Q.x(),-Q.y());
-       Q.nuevo(xRight + xLeft, yTop + yBot);*/
->>>>>>> 1.6
->>>>>>> 1.7
        centrado = 2;
      }
      // Cambiar a origen
      else {
-<<<<<<< UFP.cpp
        xRight -= Q.x();
        xLeft -= Q.x();
        yTop -= Q.y();
        yBot -= Q.y();
-=======
-<<<<<<< UFP.cpp
-       xRight -= Q.x();
-       xLeft -= Q.x();
-       yTop -= Q.y();
-       yBot -= Q.y();
-=======
- /* ShowMessage("Límite -> Centrado");
-   Punto T;
-     T.nuevo (P.x() - Q.x(),P.y() - Q.y());*/
-      xLeft-=Q.x();
-      xRight-=Q.x();
-      yBot-=Q.y();
-      yTop-=Q.y();
-
-    /*   Q.nuevo(-P.x(),-P.y());
-       P.nuevo(xRight + xLeft, yTop + yBot);*/
->>>>>>> 1.6
->>>>>>> 1.7
        centrado = 1;
      }
     }
