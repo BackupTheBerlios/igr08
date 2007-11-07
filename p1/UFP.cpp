@@ -148,27 +148,27 @@ void __fastcall TGLForm2D::FormResize(TObject *Sender) {
 
   // Actualización del puerto de vista y su radio
   if ((ClientWidth<=1)||(ClientHeight<=1)){
-     ClientWidth=400/N;
-     ClientHeight=400/N;
+     ClientWidth = 400 / N;
+     ClientHeight= 400 / N;
      RatioViewPort=1.0;
      }
-  else RatioViewPort = (float)ClientWidth/(float)ClientHeight;
+  else RatioViewPort = (GLdouble) ClientWidth / (GLdouble) ClientHeight;
 
   glViewport(0,0,ClientWidth,ClientHeight);
 
   // Se actualiza el volumen de vista
   // para que su radio coincida con ratioViewPort
-  GLfloat RatioVolVista = (GLfloat) xRight/yTop;
+  GLfloat RatioVolVista = (GLfloat) xRight / yTop;
 
   if (RatioVolVista>=RatioViewPort){
      //Aumentamos yTop-yBot
-     yTop= xRight/RatioViewPort;
-     yBot=-yTop;
+     yTop = xRight / RatioViewPort;
+     yBot = -yTop;
      }
   else{
      //Aumentamos xRight-xLeft
-     xRight=RatioViewPort*yTop;
-     xLeft=-xRight;
+     xRight = RatioViewPort * yTop;
+     xLeft = -xRight;
      }
 
   glMatrixMode(GL_PROJECTION);
@@ -286,13 +286,13 @@ void TGLForm2D::dibujarPuntoLimite(Punto A, Punto B, Punto C, Punto R, Punto & Q
   glPointSize(grosorQ);
 
   // Calculos de la pendiente y del corte con el eje de ordenadas
-  GLdouble m_AC =(A.y()-C.y())/(GLfloat)(A.x()-C.x());
+  GLdouble m_AC = (A.y()-C.y()) / (GLdouble)(A.x()-C.x());
   GLdouble b_AC = (m_AC * A.x())-A.y();
 
-  GLdouble m_BR = (B.y()-R.y())/(GLfloat)(B.x()-R.x());
+  GLdouble m_BR = (B.y()-R.y())/ (GLdouble)(B.x()-R.x());
   GLdouble b_BR = (m_BR * B.x())-B.y();
 
-  GLdouble x =(b_BR - b_AC) / (m_AC - m_BR);
+  GLdouble x = (b_BR - b_AC) / (GLdouble)(m_AC - m_BR);
   GLdouble y = (m_AC*x+b_AC);
 
   // Asignamos las coordenadas calculadas previamente
@@ -507,10 +507,10 @@ void __fastcall TGLForm2D::FormKeyPress(TObject *Sender, char &Key)
      GLdouble xLn = (xRight + xLeft) / (GLdouble) 2;
      xLn -= (xRight - xLeft) * (GLdouble) 0.5 * (1/f);
 
-     GLdouble yTn = (yTop+yBot) / (GLdouble) 2;
+     GLdouble yTn = (yTop + yBot) / (GLdouble) 2;
      yTn += (xRight - xLeft) * (GLdouble) 0.5 * (1/f);
 
-     GLdouble yBn = (yTop+yBot) / (GLdouble) 2;
+     GLdouble yBn = (yTop + yBot) / (GLdouble) 2;
      yBn -= (xRight - xLeft) * (GLdouble) 0.5 * (1/f);
 
      // Actualizamos las variables del AVE
@@ -620,22 +620,22 @@ void __fastcall TGLForm2D::FormKeyDown(TObject *Sender, WORD &Key,
 
   // Cambiamos origen de coordenadas
   if (Key == VK_SPACE) {
-     GLdouble despX = (xRight + xLeft) / (GLdouble) 2;
-     GLdouble despY = (yTop + yBot) / (GLdouble) 2;
+     GLdouble despX = (xRight + xLeft) / 2;
+     GLdouble despY = (yTop + yBot) / 2;
      // Cambiar a limite
      if (centrado == 1) {
-        xRight += Q.x() - despX;
-        xLeft  += Q.x() - despX;
-        yTop   += Q.y() - despY;
-        yBot   += Q.y() - despY;
+        xRight += (GLint) Q.x() - despX;
+        xLeft  += (GLint) Q.x() - despX;
+        yTop   += (GLint) Q.y() - despY;
+        yBot   += (GLint) Q.y() - despY;
         centrado = 2;
      }
      // Cambiar a origen
      else {
-        xRight -= Q.x();
-        xLeft  -= Q.x();
-        yTop   -= Q.y();
-        yBot   -= Q.y();
+        xRight -= (GLint) Q.x();
+        xLeft  -= (GLint) Q.x();
+        yTop   -= (GLint) Q.y();
+        yBot   -= (GLint) Q.y();
         centrado = 1;
      }
     }
@@ -644,7 +644,7 @@ void __fastcall TGLForm2D::FormKeyDown(TObject *Sender, WORD &Key,
   if (Key == VK_ESCAPE) {
     Application->Terminate();
   }
- 
+
   // Modificamos la matriz de Proyecccion
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
@@ -943,6 +943,3 @@ void __fastcall TGLForm2D::Embaldosar1Click(TObject *Sender)
 }
 
 //---------------------------------------------------------------------------
-
-
-
