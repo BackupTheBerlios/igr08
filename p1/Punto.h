@@ -7,16 +7,16 @@
 class Punto {
 
   public:
-     void nuevo(GLfloat,GLfloat);
-     void x(GLfloat);
-     void y(GLfloat);
-     GLfloat x();
-     GLfloat y();
+     void nuevo(GLdouble,GLdouble);
+     void x(GLdouble);
+     void y(GLdouble);
+     GLdouble x();
+     GLdouble y();
 
   private:
-     GLfloat _x;
-     GLfloat _y;
+     GLdouble _x;
+     GLdouble _y;
 };
 
 #endif
- 
+  

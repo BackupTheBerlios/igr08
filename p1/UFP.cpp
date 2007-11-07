@@ -1,42 +1,25 @@
 #include <vcl.h>
+#include <math.h>
 #include "UFP.h"
 
 #pragma hdrstop
 #pragma link "CGRID"
 #pragma package(smart_init)
 #pragma resource "*.dfm"
-//---------------------------------------------------------------------------
-//        VARIABLES Y CONSTANTES GLOBALES
-//---------------------------------------------------------------------------
-// Puntero al componente de OpenGL
 TGLForm2D *GLForm2D;
 
-// Razón Aúrea
-const GLfloat RAZON_AUREA = 1.61803398874989484820458;
 
-// Factor para el movimiento de Traslacion
-const GLfloat T = 0.01;
-
-// Factor Multiplo para el ZOOM
-const GLfloat F = 1.05;
-
-// Factor Divisor para el ZOOM
-const GLfloat f = 0.95;
-
-// Activar/Desactivar color automatizado
-bool automatico;
-
-// Activar/Desactivar embaldosado (TILING)
-bool embaldosado;
-
-// Numero de Filas y columnas a embaldosar
-GLint N;
 //---------------------------------------------------------------------------
+//             MÉTODOS PUBLICOS
+//---------------------------------------------------------------------------
+
 // Creación del componente OpenGL sobre la Aplicación
 _fastcall TGLForm2D::TGLForm2D(TComponent* Owner)
-        : TForm(Owner)
-{}
+        : TForm(Owner) {}
+
 //---------------------------------------------------------------------------
+
+// Constructora de la Interface
 void __fastcall TGLForm2D::FormCreate(TObject *Sender) {
 
     // Identificador de la tarjeta grafica
@@ -49,6 +32,16 @@ void __fastcall TGLForm2D::FormCreate(TObject *Sender) {
     	ShowMessage(":-)~ hrc == NULL");
     if(wglMakeCurrent(hdc, hrc) == false)
     	ShowMessage("Could not MakeCurrent");
+
+    // Razón Aurea
+    RAZON_AUREA = (1 + sqrt(5)) / 2;
+
+    // Factor para el movimiento de Traslacion
+    T = 0.01;
+    // Factor Multiplo para el ZOOM
+    F = 1.05;
+    // Factor Divisor para el ZOOM
+    f = 0.95;
 
     // Color de fondo de la ventana
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -122,7 +115,10 @@ void __fastcall TGLForm2D::FormCreate(TObject *Sender) {
     // Numero de filas y columnas iniciales
     N = 1;
 }
+
 //---------------------------------------------------------------------------
+
+// Seleccionamos los parámetetros del formato de video
 void __fastcall TGLForm2D::SetPixelFormatDescriptor() {
 
     PIXELFORMATDESCRIPTOR pfd = {
@@ -144,7 +140,10 @@ void __fastcall TGLForm2D::SetPixelFormatDescriptor() {
     int PixelFormat = ChoosePixelFormat(hdc, &pfd);
     SetPixelFormat(hdc, PixelFormat, &pfd);
 }
+
 //---------------------------------------------------------------------
+
+// Redimensiona el Area visual de la Escena al dimensionar la ventana
 void __fastcall TGLForm2D::FormResize(TObject *Sender) {
 
   // Actualización del puerto de vista y su radio
@@ -181,22 +180,31 @@ void __fastcall TGLForm2D::FormResize(TObject *Sender) {
   GLScene();
 
 }
+
 //---------------------------------------------------------------------------
-// Función que dibuja el punto central
-void TGLForm2D::dibujarPuntoCentral(Punto P, GLint grosorP, GLfloat colorP[3]) {
-  // Selecionamos el color de dibujo
-  glColor3f(colorP[0],colorP[1],colorP[2]);
 
-  // Seleccionamos el gorsor del punto central
-  glPointSize(grosorP);
-
-  // Dibujaos el punto central
-  glBegin(GL_POINTS);
-    glVertex2f(P.x(),P.y());
-  glEnd();
+// Función que Repinta en la ventana
+void __fastcall TGLForm2D::FormPaint(TObject *Sender)
+{
+  GLScene();
 }
 
 //---------------------------------------------------------------------------
+
+// Destructora de la interface
+void __fastcall TGLForm2D::FormDestroy(TObject *Sender)
+{
+    ReleaseDC(Handle,hdc);
+    wglMakeCurrent(NULL, NULL);
+    wglDeleteContext(hrc);
+    // eliminar objetos creados
+}
+
+
+//---------------------------------------------------------------------------
+//             MÉTODOS PRIVADOS
+//---------------------------------------------------------------------------
+
 // Dibuja el Rectangulo inicial
 void TGLForm2D::dibujarRectanguloInicial(Punto A,Punto B,Punto C,Punto D,GLint grosorLinRect,GLfloat colorLinRect[3]) {
   // Selecionamos el color de dibujo
@@ -205,16 +213,17 @@ void TGLForm2D::dibujarRectanguloInicial(Punto A,Punto B,Punto C,Punto D,GLint g
   // Seleccionamos el grosor de linea
   glLineWidth(grosorLinRect);
 
-  // Dibujaos el rectangulo central
+  // Dibujaos el punto central
   glBegin(GL_LINE_LOOP);
-    glVertex2f(A.x(),A.y());
-    glVertex2f(B.x(),B.y());
-    glVertex2f(C.x(),C.y());
-    glVertex2f(D.x(),D.y());
+    glVertex2i(A.x(),A.y());
+    glVertex2i(B.x(),B.y());
+    glVertex2i(C.x(),C.y());
+    glVertex2i(D.x(),D.y());
   glEnd();
 }
 
 //---------------------------------------------------------------------------
+
 // Dibuja las diagonales
 void TGLForm2D::dibujarDiagonales(Punto A,Punto B,Punto C,Punto D,Punto & R,
                        GLint grosorLinDiag,GLfloat colorLinDiag[3]) {
@@ -232,8 +241,8 @@ void TGLForm2D::dibujarDiagonales(Punto A,Punto B,Punto C,Punto D,Punto & R,
 
   // Dibujamos la diagonal A-C
   glBegin(GL_LINES);
-    glVertex2f(A.x(),A.y());
-    glVertex2f(C.x(),C.y());
+    glVertex2i(A.x(),A.y());
+    glVertex2i(C.x(),C.y());
   glEnd();
 
   // Calculamos un punto auxiliar R
@@ -241,15 +250,32 @@ void TGLForm2D::dibujarDiagonales(Punto A,Punto B,Punto C,Punto D,Punto & R,
 
   // Dibujamos la diagonal B-R
   glBegin(GL_LINES);
-    glVertex2f(B.x(),B.y());
-    glVertex2f(R.x(),R.y());
+    glVertex2i(B.x(),B.y());
+    glVertex2i(R.x(),R.y());
   glEnd();
 
   // Deshabilitamos la opción de discontinuas
   glDisable(GL_LINE_STIPPLE);
 }
 
+//---------------------------------------------------------------------------
+
+// Función que dibuja el punto central P
+void TGLForm2D::dibujarPuntoCentral(Punto P, GLint grosorP, GLfloat colorP[3]) {
+  // Selecionamos el color de dibujo
+  glColor3f(colorP[0],colorP[1],colorP[2]);
+
+  // Seleccionamos el gorsor del punto central
+  glPointSize(grosorP);
+
+  // Dibujaos el punto central
+  glBegin(GL_POINTS);
+    glVertex2f(P.x(),P.y());
+  glEnd();
+}
+
 //-------------------------------------------------------------------------
+
 // Función que dibuja el punto limite
 void TGLForm2D::dibujarPuntoLimite(Punto A, Punto B, Punto C, Punto R, Punto & Q,
                         GLint grosorQ, GLfloat colorQ[3]) {
@@ -260,24 +286,26 @@ void TGLForm2D::dibujarPuntoLimite(Punto A, Punto B, Punto C, Punto R, Punto & Q
   glPointSize(grosorQ);
 
   // Calculos de la pendiente y del corte con el eje de ordenadas
-  GLfloat m_AC =(A.y()-C.y())/(GLfloat)(A.x()-C.x());
-  GLfloat b_AC = (m_AC * A.x())-A.y();
+  GLdouble m_AC =(A.y()-C.y())/(GLfloat)(A.x()-C.x());
+  GLdouble b_AC = (m_AC * A.x())-A.y();
 
-  GLfloat m_BR = (B.y()-R.y())/(GLfloat)(B.x()-R.x());
-  GLfloat b_BR = (m_BR * B.x())-B.y();
+  GLdouble m_BR = (B.y()-R.y())/(GLfloat)(B.x()-R.x());
+  GLdouble b_BR = (m_BR * B.x())-B.y();
 
-  GLfloat x =(b_BR - b_AC) / (m_AC - m_BR);
-  GLfloat y = (m_AC*x+b_AC);
+  GLdouble x =(b_BR - b_AC) / (m_AC - m_BR);
+  GLdouble y = (m_AC*x+b_AC);
 
+  // Asignamos las coordenadas calculadas previamente
   Q.nuevo(-x, -y);
 
   // Dibujamos el punto limite
   glBegin(GL_POINTS);
-    glVertex2f(Q.x(),Q.y());
+    glVertex2i(Q.x(),Q.y());
   glEnd();
 }
 
 //---------------------------------------------------------------------------
+
 // Dibuja los rectangulos anidados
 void TGLForm2D::dibujarRectangulosAnidados(Punto A,Punto B,Punto C,Punto D,GLint cont,
                                 GLint grosorLinRect,GLfloat colorLinAct[50][3]) {
@@ -313,7 +341,7 @@ void TGLForm2D::dibujarRectangulosAnidados(Punto A,Punto B,Punto C,Punto D,GLint
            A.nuevo(D.x(),D.y()-(Aux.x()-D.x()));
            C.nuevo(B.x(),B.y());
            B.nuevo(C.x(),D.y() - (Aux.x()-D.x()));
-           D.nuevo(C.x() - (B.x()-A.x()),C.y());            
+           D.nuevo(C.x() - (B.x()-A.x()),C.y());
            break;
 
       case 2: // Caso C
@@ -343,10 +371,10 @@ void TGLForm2D::dibujarRectangulosAnidados(Punto A,Punto B,Punto C,Punto D,GLint
 
     // Dibujamos el rectangulo siguiente
     glBegin(GL_LINE_LOOP);
-      glVertex2f(A.x(),A.y());
-      glVertex2f(B.x(),B.y());
-      glVertex2f(C.x(),C.y());
-      glVertex2f(D.x(),D.y());
+      glVertex2i(A.x(),A.y());
+      glVertex2i(B.x(),B.y());
+      glVertex2i(C.x(),C.y());
+      glVertex2i(D.x(),D.y());
     glEnd();
 
     c++;
@@ -372,11 +400,12 @@ void TGLForm2D::dibujarRectangulosAnidados(Punto A,Punto B,Punto C,Punto D,GLint
     // Selecionamos el color de dibujo
     glColor3f(colorLinAct[c][0],colorLinAct[c][1],colorLinAct[c][2]);
   }
-
 }
 
-// Dibuja las baldosas por separado
-void TGLForm2D::dibujarBaldosas() {
+//---------------------------------------------------------------------------
+
+// Dibuja los objetos de la escena
+void TGLForm2D::dibujarEscena() {
  // Restablecemos puntos iniciales
  A.nuevo(P.x()-longX/2, P.y()+longY/2);
  B.nuevo(P.x()+longX/2, P.y()+longY/2);
@@ -397,20 +426,17 @@ void TGLForm2D::dibujarBaldosas() {
 
  // Dibujamos el resto de rectangulos
  dibujarRectangulosAnidados(A,B,C,D,cont,grosorLinRect,colorLinAct);
+ }
 
- // Ejecutar lista de comandos en espera
- glFlush();
+//---------------------------------------------------------------------------
 
- // Habilitado uso del doble buffer
-// SwapBuffers(hdc);
-
-}
-
+// Dibuja la escena
 void __fastcall TGLForm2D::GLScene() {
 
  // Aplicamos el fondo de ventana establecido
  glClear(GL_COLOR_BUFFER_BIT);
 
+ // Si esta activado embaldosado ...
  if (embaldosado) {
    GLfloat pos_x = 0;
    GLfloat pos_y = 0;
@@ -419,77 +445,49 @@ void __fastcall TGLForm2D::GLScene() {
    for (int i=0; i<=N; i++) {
      for (int j=0; j<=N; j++) {
         glViewport(pos_x,pos_y,baldosa_x,baldosa_y);
-        dibujarBaldosas();
+        dibujarEscena();
         pos_y = baldosa_y * j;
      }
      pos_x = baldosa_x * i;
    }
-    SwapBuffers(hdc);
  }
 
+ // Sino dibujamso a escala normal
  else {
-
- // Restablecemos puntos iniciales
- A.nuevo(P.x()-longX/2, P.y()+longY/2);
- B.nuevo(P.x()+longX/2, P.y()+longY/2);
- C.nuevo(P.x()+longX/2, P.y()-longY/2);
- D.nuevo(P.x()-longX/2, P.y()-longY/2);
-
- // Dibujamos el Rectangulo inicial
- dibujarRectanguloInicial(A,B,C,D,grosorLinRect,colorLinRect);
-
- // Dibujamos diagonales
- dibujarDiagonales(A,B,C,D,R,grosorLinDiag,colorLinDiag);
-
-  // Dibujamos el punto central
- dibujarPuntoCentral(P,grosorP,colorP);
-
- // Dibujamos el punto Limite
- dibujarPuntoLimite(A,B,C,R,Q,grosorQ,colorQ);
-
- // Dibujamos el resto de rectangulos
- dibujarRectangulosAnidados(A,B,C,D,cont,grosorLinRect,colorLinAct);
+     dibujarEscena();
+ }
 
  // Ejecutar lista de comandos en espera
  glFlush();
 
  // Habilitado uso del doble buffer
  SwapBuffers(hdc);
- }
+
 }
 
+
 //---------------------------------------------------------------------------
-void __fastcall TGLForm2D::FormPaint(TObject *Sender)
-{
-  GLScene();
-}
-//---------------------------------------------------------------------------
-void __fastcall TGLForm2D::FormDestroy(TObject *Sender)
-{
-    ReleaseDC(Handle,hdc);
-    wglMakeCurrent(NULL, NULL);
-    wglDeleteContext(hrc);
-    // eliminar objetos creados
-}
+//             EVENTOS CON TECLADO
 //---------------------------------------------------------------------------
 
+// Funciones con teclas alfanuméricas
 void __fastcall TGLForm2D::FormKeyPress(TObject *Sender, char &Key)
 {
   // Tecla A -> Acercamos
   if (Key == 'a' | Key == 'A') {
 
      // Calculamos las nuevas coordenadas del AVE
-     GLfloat xRn = (xRight + xLeft) / (GLfloat) 2;
-     xRn += (xRight - xLeft) * (GLfloat) 0.5 * (1/F);
+     GLdouble xRn = (xRight + xLeft) / (GLdouble) 2;
+     xRn += (xRight - xLeft) * (GLdouble) 0.5 * (1/F);
 
-     GLfloat xLn = (xRight + xLeft) / (GLfloat) 2;
-     xLn -= (xRight - xLeft) * (GLfloat) 0.5 * (1/F);
+     GLdouble xLn = (xRight + xLeft) / (GLdouble) 2;
+     xLn -= (xRight - xLeft) * (GLdouble) 0.5 * (1/F);
 
-     GLfloat yTn = (yTop+yBot) / (GLfloat) 2;
-     yTn += (xRight - xLeft) * (GLfloat) 0.5 * (1/F);
+     GLdouble yTn = (yTop+yBot) / (GLdouble) 2;
+     yTn += (xRight - xLeft) * (GLdouble) 0.5 * (1/F);
 
-     GLfloat yBn = (yTop+yBot) / (GLfloat) 2;
-     yBn -= (xRight - xLeft) * (GLfloat) 0.5 * (1/F);
+     GLdouble yBn = (yTop+yBot) / (GLdouble) 2;
+     yBn -= (xRight - xLeft) * (GLdouble) 0.5 * (1/F);
 
      // Actualizamos las variables del AVE
      xLeft = xLn;
@@ -503,17 +501,17 @@ void __fastcall TGLForm2D::FormKeyPress(TObject *Sender, char &Key)
   if (Key == 's' | Key == 'S') {
 
      // Calculamos las nuevas coordenadas del AVE
-     GLfloat xRn = (xRight + xLeft) / (GLfloat) 2;
-     xRn += (xRight - xLeft) * (GLfloat) 0.5 * (1/f);
+     GLdouble xRn = (xRight + xLeft) / (GLdouble) 2;
+     xRn += (xRight - xLeft) * (GLdouble) 0.5 * (1/f);
 
-     GLfloat xLn = (xRight + xLeft) / (GLfloat) 2;
-     xLn -= (xRight - xLeft) * (GLfloat) 0.5 * (1/f);
+     GLdouble xLn = (xRight + xLeft) / (GLdouble) 2;
+     xLn -= (xRight - xLeft) * (GLdouble) 0.5 * (1/f);
 
-     GLfloat yTn = (yTop+yBot) / (GLfloat) 2;
-     yTn += (xRight - xLeft) * (GLfloat) 0.5 * (1/f);
+     GLdouble yTn = (yTop+yBot) / (GLdouble) 2;
+     yTn += (xRight - xLeft) * (GLdouble) 0.5 * (1/f);
 
-     GLfloat yBn = (yTop+yBot) / (GLfloat) 2;
-     yBn -= (xRight - xLeft) * (GLfloat) 0.5 * (1/f);
+     GLdouble yBn = (yTop+yBot) / (GLdouble) 2;
+     yBn -= (xRight - xLeft) * (GLdouble) 0.5 * (1/f);
 
      // Actualizamos las variables del AVE
      xLeft = xLn;
@@ -575,7 +573,7 @@ void __fastcall TGLForm2D::FormKeyPress(TObject *Sender, char &Key)
      }
   }
 
-  // Modificamos al proyecccion
+  // Modificamos la matriz de Proyecccion
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   gluOrtho2D(xLeft,xRight,yBot,yTop);
@@ -585,7 +583,10 @@ void __fastcall TGLForm2D::FormKeyPress(TObject *Sender, char &Key)
   glLoadIdentity();
   GLScene();
 }
+
 //---------------------------------------------------------------------------
+
+// Funciones con teclas de movimiento, espaciado y escape
 void __fastcall TGLForm2D::FormKeyDown(TObject *Sender, WORD &Key,
       TShiftState Shift)
 {
@@ -631,13 +632,10 @@ void __fastcall TGLForm2D::FormKeyDown(TObject *Sender, WORD &Key,
      }
      // Cambiar a origen
      else {
-        GLdouble oX = (xRight - xLeft) /  2;
-        GLdouble oY = (yTop - yBot) / 2;
-
-        xRight = oX;
-        xLeft  = -oX;
-        yTop   = oY;
-        yBot   = -oY;
+        xRight -= Q.x();
+        xLeft  -= Q.x();
+        yTop   -= Q.y();
+        yBot   -= Q.y();
         centrado = 1;
      }
     }
@@ -646,17 +644,23 @@ void __fastcall TGLForm2D::FormKeyDown(TObject *Sender, WORD &Key,
   if (Key == VK_ESCAPE) {
     Application->Terminate();
   }
-
-  // Modificamos las matrices
+ 
+  // Modificamos la matriz de Proyecccion
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   gluOrtho2D(xLeft,xRight,yBot,yTop);
 
+  // Redibujamos con los nuevos parámetros
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
   GLScene();
 }
+
+
 //---------------------------------------------------------------------------
+//             INTERACCIÓN CON EL MENU
+//---------------------------------------------------------------------------
+
 // Activamos Opciones de coloreado
 void __fastcall TGLForm2D::Comandos1Click(TObject *Sender)
 {
@@ -669,7 +673,10 @@ void __fastcall TGLForm2D::Comandos1Click(TObject *Sender)
       Panel2->Visible = false;
       }
 }
+
 //---------------------------------------------------------------------------
+
+// Muestra ayuda sobre los comandos
 void __fastcall TGLForm2D::Comandos2Click(TObject *Sender)
 {
   ShowMessage(" COMANDOS BÁSICOS \n\n  "
@@ -684,20 +691,26 @@ void __fastcall TGLForm2D::Comandos2Click(TObject *Sender)
               "Flechas = Traslación \n\n  "
               "      ESC = Salir");
 }
+
 //---------------------------------------------------------------------------
+
 // Autores de la práctica
 void __fastcall TGLForm2D::Autores1Click(TObject *Sender)
 {
   ShowMessage(" Iván Romero \n"
               " Pedro Sánchez");
 }
+
 //---------------------------------------------------------------------------
+
 // Terminar aplicación
 void __fastcall TGLForm2D::Salir1Click(TObject *Sender)
 {
  Application->Terminate();
 }
+
 //---------------------------------------------------------------------------
+
 // Cambiar colores
 void __fastcall TGLForm2D::CColorGrid1Change(TObject *Sender)
 {
@@ -812,10 +825,13 @@ void __fastcall TGLForm2D::CColorGrid1Change(TObject *Sender)
       glClearColor(ColorAux[0],ColorAux[1],ColorAux[2],1.0f);
    }
 
+   // Redibujamos con los cambios aplicados
    GLScene();
 
 }
+
 //---------------------------------------------------------------------------
+
 // Opciones de grosor de lineas y puntos
 void __fastcall TGLForm2D::GrosorPunto1Click(TObject *Sender)
 {
@@ -824,35 +840,45 @@ void __fastcall TGLForm2D::GrosorPunto1Click(TObject *Sender)
  else
     Panel1->Visible = false;
 }
+
 //---------------------------------------------------------------------------
+
 // Variamos el valor de grosor del punto origen P
 void __fastcall TGLForm2D::ScrollBar1Change(TObject *Sender)
 {
  grosorP = ScrollBar1->Position;
  GLScene();
 }
+
 //---------------------------------------------------------------------------
+
 // Variamos el valor de grosor del punto limite Q
 void __fastcall TGLForm2D::ScrollBar2Change(TObject *Sender)
 {
  grosorQ = ScrollBar2->Position;
  GLScene();
 }
+
 //---------------------------------------------------------------------------
+
 // Variamos el valor de grosor de las lineas de los rectangulos
 void __fastcall TGLForm2D::ScrollBar3Change(TObject *Sender)
 {
  grosorLinRect = ScrollBar3->Position;
  GLScene();
 }
+
 //---------------------------------------------------------------------------
+
 // Variamos el valor de grosor de las lineas de las diagonales
 void __fastcall TGLForm2D::ScrollBar4Change(TObject *Sender)
 {
  grosorLinDiag = ScrollBar4->Position;
  GLScene();
 }
+
 //---------------------------------------------------------------------------
+
 // Desabilitar opciones de color por teclado
 void __fastcall TGLForm2D::RadioButton2KeyPress(TObject *Sender, char &Key)
 {
@@ -890,7 +916,9 @@ void __fastcall TGLForm2D::RadioButton6KeyPress(TObject *Sender, char &Key)
  Panel2->Visible = false;
  automatico = false;
 }
+
 //---------------------------------------------------------------------------
+
 // Activar la opción de embaldosado
 void __fastcall TGLForm2D::Embaldosar1Click(TObject *Sender)
 {
@@ -913,6 +941,8 @@ void __fastcall TGLForm2D::Embaldosar1Click(TObject *Sender)
  }
   GLScene();
 }
+
 //---------------------------------------------------------------------------
+
 
 

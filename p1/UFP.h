@@ -49,8 +49,7 @@ class TGLForm2D : public TForm {
         void __fastcall FormPaint(TObject *Sender);
         void __fastcall FormDestroy(TObject *Sender);
         void __fastcall FormKeyPress(TObject *Sender, char &Key);
-        void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
-          TShiftState Shift);
+        void __fastcall FormKeyDown(TObject *Sender, WORD &Key,TShiftState Shift);
         void __fastcall Comandos1Click(TObject *Sender);
         void __fastcall Comandos2Click(TObject *Sender);
         void __fastcall Autores1Click(TObject *Sender);
@@ -128,16 +127,42 @@ class TGLForm2D : public TForm {
 
     // MÉTODOS PRIVADOS //
     void __fastcall SetPixelFormatDescriptor();
-
+    
     void __fastcall GLScene();
     void dibujarPuntoCentral(Punto P, GLint grosorP, GLfloat colorP[3]);
     void dibujarRectanguloInicial(Punto A,Punto B,Punto C,Punto D,GLint grosorLinRect,GLfloat colorLinRect[3]);
     void dibujarDiagonales(Punto A,Punto B,Punto C,Punto D,Punto & R, GLint grosorLinDiag,GLfloat colorLinDiag[3]);
     void TGLForm2D::dibujarPuntoLimite(Punto A, Punto B, Punto C, Punto R, Punto & Q, GLint grosorQ, GLfloat colorQ[3]);
     void TGLForm2D::dibujarRectangulosAnidados(Punto A,Punto B,Punto C,Punto D,GLint cont, GLint grosorLinRect,GLfloat colorLinAct[50][3]);
-    void TGLForm2D::dibujarBaldosas();
+    void TGLForm2D::dibujarEscena();
 
- public:  // MÉTODOS PÚBLICOS //
+ public:  // ATRIBUTOS PÚBLICOS  //
+
+     // Puntero al componente de OpenGL
+     TGLForm2D *GLForm2D;
+
+     // Razón Aúrea
+     GLdouble RAZON_AUREA;
+
+     // Factor para el movimiento de Traslacion
+     GLdouble T;
+
+     // Factor Multiplo para el ZOOM
+     GLdouble F;
+
+     // Factor Divisor para el ZOOM
+     GLdouble f;
+
+     // Activar/Desactivar color automatizado
+     bool automatico;
+
+     // Activar/Desactivar embaldosado (TILING)
+     bool embaldosado;
+
+     // Numero de Filas y columnas a embaldosar
+     GLint N;
+
+     // MÉTODOS PÚBLICOS //
    __fastcall TGLForm2D(TComponent* Owner);
 
 };
@@ -145,4 +170,5 @@ class TGLForm2D : public TForm {
 extern PACKAGE TGLForm2D *GLForm2D;
 //---------------------------------------------------------------------------
 #endif
+
 

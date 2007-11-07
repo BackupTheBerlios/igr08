@@ -7,28 +7,28 @@
 // Metodos publicos
 
 // Creamos un nuevo punto
-void Punto::nuevo(GLfloat a, GLfloat b) {
+void Punto::nuevo(GLdouble a, GLdouble b) {
    _x = a;
    _y = b;
 }
 
 // Pon coordenada x
-void Punto::x(GLfloat a) {
+void Punto::x(GLdouble a) {
    _x = a;
 }
 
 // Pon coordenada y
-void Punto::y(GLfloat b) {
+void Punto::y(GLdouble b) {
    _y = b;
 }
 
 // Dame coordenada x
-GLfloat Punto::x() {
+GLdouble Punto::x() {
    return _x;
 }
 
 // Dame coordenada y
-GLfloat Punto::y() {
+GLdouble Punto::y() {
    return _y;
 }
 
