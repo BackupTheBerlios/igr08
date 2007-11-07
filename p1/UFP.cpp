@@ -273,7 +273,7 @@ void TGLForm2D::dibujarPuntoLimite(Punto A, Punto B, Punto C, Punto R, Punto & Q
 
   // Dibujamos el punto limite
   glBegin(GL_POINTS);
-    glVertex2i(Q.x(),Q.y());
+    glVertex2f(Q.x(),Q.y());
   glEnd();
 }
 
@@ -343,10 +343,10 @@ void TGLForm2D::dibujarRectangulosAnidados(Punto A,Punto B,Punto C,Punto D,GLint
 
     // Dibujamos el rectangulo siguiente
     glBegin(GL_LINE_LOOP);
-      glVertex2i(A.x(),A.y());
-      glVertex2i(B.x(),B.y());
-      glVertex2i(C.x(),C.y());
-      glVertex2i(D.x(),D.y());
+      glVertex2f(A.x(),A.y());
+      glVertex2f(B.x(),B.y());
+      glVertex2f(C.x(),C.y());
+      glVertex2f(D.x(),D.y());
     glEnd();
 
     c++;
