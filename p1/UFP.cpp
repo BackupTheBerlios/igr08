@@ -630,10 +630,13 @@ void __fastcall TGLForm2D::FormKeyDown(TObject *Sender, WORD &Key,
      }
      // Cambiar a origen
      else {
-        xRight -= Q.x();
-        xLeft  -= Q.x();
-        yTop   -= Q.y();
-        yBot   -= Q.y();
+        GLdouble oX = (xRight - xLeft) /  2;
+        GLdouble oY = (yTop - yBot) / 2;
+
+        xRight = oX;
+        xLeft  = -oX;
+        yTop   = oY;
+        yBot   = -oY;
         centrado = 1;
      }
     }
