@@ -1165,4 +1165,3 @@ void __fastcall TGLForm2D::Embaldosar1Click(TObject *Sender)
 //---------------------------------------------------------------------------
 
 
-
