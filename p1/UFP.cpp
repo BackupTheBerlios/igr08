@@ -402,7 +402,7 @@ void TGLForm2D::dibujarBaldosas() {
  glFlush();
 
  // Habilitado uso del doble buffer
- SwapBuffers(hdc);
+// SwapBuffers(hdc);
 
 }
 
@@ -424,6 +424,7 @@ void __fastcall TGLForm2D::GLScene() {
      }
      pos_x = baldosa_x * i;
    }
+    SwapBuffers(hdc);
  }
 
  else {
