@@ -183,7 +183,7 @@ void __fastcall TGLForm2D::FormResize(TObject *Sender) {
 }
 //---------------------------------------------------------------------------
 // Función que dibuja el punto central
-void dibujarPuntoCentral(Punto P, GLint grosorP, GLfloat colorP[3]) {
+void TGLForm2D::dibujarPuntoCentral(Punto P, GLint grosorP, GLfloat colorP[3]) {
   // Selecionamos el color de dibujo
   glColor3f(colorP[0],colorP[1],colorP[2]);
 
@@ -192,13 +192,13 @@ void dibujarPuntoCentral(Punto P, GLint grosorP, GLfloat colorP[3]) {
 
   // Dibujaos el punto central
   glBegin(GL_POINTS);
-    glVertex2i(P.x(),P.y());
+    glVertex2f(P.x(),P.y());
   glEnd();
 }
 
 //---------------------------------------------------------------------------
 // Dibuja el Rectangulo inicial
-void dibujarRectanguloInicial(Punto A,Punto B,Punto C,Punto D,GLint grosorLinRect,GLfloat colorLinRect[3]) {
+void TGLForm2D::dibujarRectanguloInicial(Punto A,Punto B,Punto C,Punto D,GLint grosorLinRect,GLfloat colorLinRect[3]) {
   // Selecionamos el color de dibujo
   glColor3f(colorLinRect[0],colorLinRect[1],colorLinRect[2]);
 
@@ -216,7 +216,7 @@ void dibujarRectanguloInicial(Punto A,Punto B,Punto C,Punto D,GLint grosorLinRec
 
 //---------------------------------------------------------------------------
 // Dibuja las diagonales
-void dibujarDiagonales(Punto A,Punto B,Punto C,Punto D,Punto & R,
+void TGLForm2D::dibujarDiagonales(Punto A,Punto B,Punto C,Punto D,Punto & R,
                        GLint grosorLinDiag,GLfloat colorLinDiag[3]) {
   // Selecionamos el color de las diagonales
   glColor3f(colorLinDiag[0],colorLinDiag[1],colorLinDiag[2]);
@@ -251,7 +251,7 @@ void dibujarDiagonales(Punto A,Punto B,Punto C,Punto D,Punto & R,
 
 //-------------------------------------------------------------------------
 // Función que dibuja el punto limite
-void dibujarPuntoLimite(Punto A, Punto B, Punto C, Punto R, Punto & Q,
+void TGLForm2D::dibujarPuntoLimite(Punto A, Punto B, Punto C, Punto R, Punto & Q,
                         GLint grosorQ, GLfloat colorQ[3]) {
   // Selecionamos el color de dibujo
   glColor3f(colorQ[0],colorQ[1],colorQ[2]);
@@ -279,7 +279,7 @@ void dibujarPuntoLimite(Punto A, Punto B, Punto C, Punto R, Punto & Q,
 
 //---------------------------------------------------------------------------
 // Dibuja los rectangulos anidados
-void dibujarRectangulosAnidados(Punto A,Punto B,Punto C,Punto D,GLint cont,
+void TGLForm2D::dibujarRectangulosAnidados(Punto A,Punto B,Punto C,Punto D,GLint cont,
                                 GLint grosorLinRect,GLfloat colorLinAct[50][3]) {
   // Seleccionamos el grosor de linea
   glLineWidth(grosorLinRect);
@@ -372,11 +372,11 @@ void dibujarRectangulosAnidados(Punto A,Punto B,Punto C,Punto D,GLint cont,
     // Selecionamos el color de dibujo
     glColor3f(colorLinAct[c][0],colorLinAct[c][1],colorLinAct[c][2]);
   }
-  
+
 }
 
 // Dibuja las baldosas por separado
-void __fastcall TGLForm2D::dibujarBaldosas() {
+void TGLForm2D::dibujarBaldosas() {
  // Restablecemos puntos iniciales
  A.nuevo(P.x()-longX/2, P.y()+longY/2);
  B.nuevo(P.x()+longX/2, P.y()+longY/2);

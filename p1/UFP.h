@@ -128,9 +128,14 @@ class TGLForm2D : public TForm {
 
     // MÉTODOS PRIVADOS //
     void __fastcall SetPixelFormatDescriptor();
-    void __fastcall dibujarBaldosas();
-    void __fastcall GLScene();
 
+    void __fastcall GLScene();
+    void dibujarPuntoCentral(Punto P, GLint grosorP, GLfloat colorP[3]);
+    void dibujarRectanguloInicial(Punto A,Punto B,Punto C,Punto D,GLint grosorLinRect,GLfloat colorLinRect[3]);
+    void dibujarDiagonales(Punto A,Punto B,Punto C,Punto D,Punto & R, GLint grosorLinDiag,GLfloat colorLinDiag[3]);
+    void TGLForm2D::dibujarPuntoLimite(Punto A, Punto B, Punto C, Punto R, Punto & Q, GLint grosorQ, GLfloat colorQ[3]);
+    void TGLForm2D::dibujarRectangulosAnidados(Punto A,Punto B,Punto C,Punto D,GLint cont, GLint grosorLinRect,GLfloat colorLinAct[50][3]);
+    void TGLForm2D::dibujarBaldosas();
 
  public:  // MÉTODOS PÚBLICOS //
    __fastcall TGLForm2D(TComponent* Owner);
