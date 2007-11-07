@@ -205,12 +205,12 @@ void TGLForm2D::dibujarRectanguloInicial(Punto A,Punto B,Punto C,Punto D,GLint g
   // Seleccionamos el grosor de linea
   glLineWidth(grosorLinRect);
 
-  // Dibujaos el punto central
+  // Dibujaos el rectangulo central
   glBegin(GL_LINE_LOOP);
-    glVertex2i(A.x(),A.y());
-    glVertex2i(B.x(),B.y());
-    glVertex2i(C.x(),C.y());
-    glVertex2i(D.x(),D.y());
+    glVertex2f(A.x(),A.y());
+    glVertex2f(B.x(),B.y());
+    glVertex2f(C.x(),C.y());
+    glVertex2f(D.x(),D.y());
   glEnd();
 }
 
@@ -232,8 +232,8 @@ void TGLForm2D::dibujarDiagonales(Punto A,Punto B,Punto C,Punto D,Punto & R,
 
   // Dibujamos la diagonal A-C
   glBegin(GL_LINES);
-    glVertex2i(A.x(),A.y());
-    glVertex2i(C.x(),C.y());
+    glVertex2f(A.x(),A.y());
+    glVertex2f(C.x(),C.y());
   glEnd();
 
   // Calculamos un punto auxiliar R
@@ -241,8 +241,8 @@ void TGLForm2D::dibujarDiagonales(Punto A,Punto B,Punto C,Punto D,Punto & R,
 
   // Dibujamos la diagonal B-R
   glBegin(GL_LINES);
-    glVertex2i(B.x(),B.y());
-    glVertex2i(R.x(),R.y());
+    glVertex2f(B.x(),B.y());
+    glVertex2f(R.x(),R.y());
   glEnd();
 
   // Deshabilitamos la opción de discontinuas
