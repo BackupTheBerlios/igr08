@@ -140,3 +140,4 @@ class TGLForm2D : public TForm {
 extern PACKAGE TGLForm2D *GLForm2D;
 //---------------------------------------------------------------------------
 #endif
+
