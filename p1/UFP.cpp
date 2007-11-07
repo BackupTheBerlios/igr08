@@ -618,21 +618,23 @@ void __fastcall TGLForm2D::FormKeyDown(TObject *Sender, WORD &Key,
 
   // Cambiamos origen de coordenadas
   if (Key == VK_SPACE) {
+     GLdouble despX = (xRight + xLeft) / (GLdouble) 2;
+     GLdouble despY = (yTop + yBot) / (GLdouble) 2;
      // Cambiar a limite
      if (centrado == 1) {
-       xRight += Q.x();
-       xLeft += Q.x();
-       yTop += Q.y();
-       yBot += Q.y();
-       centrado = 2;
+        xRight += Q.x() - despX;
+        xLeft  += Q.x() - despX;
+        yTop   += Q.y() - despY;
+        yBot   += Q.y() - despY;
+        centrado = 2;
      }
      // Cambiar a origen
      else {
-       xRight -= Q.x();
-       xLeft -= Q.x();
-       yTop -= Q.y();
-       yBot -= Q.y();
-       centrado = 1;
+        xRight -= Q.x();
+        xLeft  -= Q.x();
+        yTop   -= Q.y();
+        yBot   -= Q.y();
+        centrado = 1;
      }
     }
 
