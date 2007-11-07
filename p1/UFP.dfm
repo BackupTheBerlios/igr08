@@ -1,6 +1,6 @@
 object GLForm2D: TGLForm2D
-  Left = 329
-  Top = 140
+  Left = 414
+  Top = 177
   Width = 408
   Height = 450
   Caption = 'Práctica 1: Rectángulo Aúreo'
@@ -302,6 +302,10 @@ object GLForm2D: TGLForm2D
       object GrosorPunto1: TMenuItem
         Caption = '&Grosor'
         OnClick = GrosorPunto1Click
+      end
+      object Embaldosar1: TMenuItem
+        Caption = '&Embaldosar'
+        OnClick = Embaldosar1Click
       end
       object Salir1: TMenuItem
         Caption = '&Salir'

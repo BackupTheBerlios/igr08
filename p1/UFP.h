@@ -15,9 +15,9 @@
 
 #include "Punto.h"
 //---------------------------------------------------------------------------
-class TGLForm2D : public TForm
-{
-__published:	// IDE-managed Components
+class TGLForm2D : public TForm {
+
+  __published:  // COMPONENTES DE INTERFACE //
         TMainMenu *MainMenu1;
         TMenuItem *Menu1;
         TMenuItem *Comandos1;
@@ -43,11 +43,12 @@ __published:	// IDE-managed Components
         TRadioButton *RadioButton4;
         TRadioButton *RadioButton5;
         TRadioButton *RadioButton6;
-  void __fastcall FormCreate(TObject *Sender);
-  void __fastcall FormResize(TObject *Sender);
-  void __fastcall FormPaint(TObject *Sender);
-  void __fastcall FormDestroy(TObject *Sender);
-  void __fastcall FormKeyPress(TObject *Sender, char &Key);
+        TMenuItem *Embaldosar1;
+        void __fastcall FormCreate(TObject *Sender);
+        void __fastcall FormResize(TObject *Sender);
+        void __fastcall FormPaint(TObject *Sender);
+        void __fastcall FormDestroy(TObject *Sender);
+        void __fastcall FormKeyPress(TObject *Sender, char &Key);
         void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
           TShiftState Shift);
         void __fastcall Comandos1Click(TObject *Sender);
@@ -66,71 +67,73 @@ __published:	// IDE-managed Components
         void __fastcall RadioButton4KeyPress(TObject *Sender, char &Key);
         void __fastcall RadioButton5KeyPress(TObject *Sender, char &Key);
         void __fastcall RadioButton6KeyPress(TObject *Sender, char &Key);
+        void __fastcall Embaldosar1Click(TObject *Sender);
 
-private:	// User declarations
- HDC hdc;
- HGLRC hrc;
+  private:     // ATRIBUTOS PRIVADOS  //
 
- // Ddefinen el tamaño del volumen de vista
- GLfloat xLeft,xRight,yTop,yBot;
+     // Identificador y manejador de graficos
+     HDC hdc;
+     HGLRC hrc;
 
- // Guarda el radio del puerto de vista
- GLfloat RatioViewPort;
+     // Definen el tamaño del volumen de vista
+     GLfloat xLeft,xRight,yTop,yBot;
 
- // Punto central y limite
- Punto P, Q;
+    // Guarda el radio del puerto de vista
+    GLfloat RatioViewPort;
 
- // Puntos del rectangulo
- Punto A, B, C, D;
+    // Punto central y limite
+    Punto P, Q;
 
- // Punto auxiliar R
- Punto R;
+    // Puntos del rectangulo
+    Punto A, B, C, D;
 
- // Distancia de los vertices con respecto al punto central P
- GLint longX, longY;
+    // Punto auxiliar R
+    Punto R;
 
- // Contador de rectangulos
- GLint cont;
+    // Distancia de los vertices con respecto al punto central P
+    GLfloat longX, longY;
 
- // Opción de centrado
- GLint centrado;
+    // Contador de rectangulos
+    GLint cont;
 
- // Grosor del Punto origen P
- GLint grosorP;
+    // Opción de centrado
+    GLint centrado;
 
-  // Grosor del Punto límite Q
- GLint grosorQ;
+    // Grosor del Punto origen P
+    GLint grosorP;
 
- // Grosor de líneas de rectángulos
- GLint grosorLinRect;
+    // Grosor del Punto límite Q
+    GLint grosorQ;
 
-  // Grosor de líneas de diagonales
- GLint grosorLinDiag;
+    // Grosor de líneas de rectángulos
+    GLint grosorLinRect;
 
- // Color del punto de Origen
- GLfloat colorP[3];
+    // Grosor de líneas de diagonales
+    GLint grosorLinDiag;
 
- // Color del punto de Límite
- GLfloat colorQ[3];
+    // Color del punto de Origen
+    GLfloat colorP[3];
 
- // Color de líneas de rectángulo inicial
- GLfloat colorLinRect[3];
+    // Color del punto de Límite
+    GLfloat colorQ[3];
 
- // Color de líneas de diagonales
- GLfloat colorLinDiag[3];
+    // Color de líneas de rectángulo inicial
+    GLfloat colorLinRect[3];
 
- // Color de líneas actual
- GLfloat colorLinAct[50][3];
+    // Color de líneas de diagonales
+    GLfloat colorLinDiag[3];
 
- // métodos privados
- void __fastcall SetPixelFormatDescriptor();
- void __fastcall GLScene();
- Punto calculaPuntoQ(Punto A, Punto B, Punto C, Punto D, Punto R);
+    // Color de líneas actual
+    GLfloat colorLinAct[50][3];
 
- public:		// User declarations
+    // MÉTODOS PRIVADOS //
+    void __fastcall SetPixelFormatDescriptor();
+    void __fastcall dibujarBaldosas();
+    void __fastcall GLScene();
+
+
+ public:  // MÉTODOS PÚBLICOS //
    __fastcall TGLForm2D(TComponent* Owner);
-
-
 
 };
 //---------------------------------------------------------------------------

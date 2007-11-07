@@ -1,15 +1,39 @@
 #include <vcl.h>
-#pragma hdrstop
 #include "UFP.h"
-//---------------------------------------------------------------------------
-#pragma package(smart_init)
+
+#pragma hdrstop
 #pragma link "CGRID"
+#pragma package(smart_init)
 #pragma resource "*.dfm"
-TGLForm2D *GLForm2D;
-const GLfloat RAZON_AUREA = 1.61803389;
-bool automatico;
 //---------------------------------------------------------------------------
-__fastcall TGLForm2D::TGLForm2D(TComponent* Owner)
+//        VARIABLES Y CONSTANTES GLOBALES
+//---------------------------------------------------------------------------
+// Puntero al componente de OpenGL
+TGLForm2D *GLForm2D;
+
+// Razón Aúrea
+const GLfloat RAZON_AUREA = 1.61803398874989484820458;
+
+// Factor para el movimiento de Traslacion
+const GLfloat T = 0.01;
+
+// Factor Multiplo para el ZOOM
+const GLfloat F = 1.05;
+
+// Factor Divisor para el ZOOM
+const GLfloat f = 0.95;
+
+// Activar/Desactivar color automatizado
+bool automatico;
+
+// Activar/Desactivar embaldosado (TILING)
+bool embaldosado;
+
+// Numero de Filas y columnas a embaldosar
+GLint N;
+//---------------------------------------------------------------------------
+// Creación del componente OpenGL sobre la Aplicación
+_fastcall TGLForm2D::TGLForm2D(TComponent* Owner)
         : TForm(Owner)
 {}
 //---------------------------------------------------------------------------
@@ -42,8 +66,9 @@ void __fastcall TGLForm2D::FormCreate(TObject *Sender) {
     P.nuevo(xRight + xLeft, yTop + yBot);
 
     // Establecemos las distancias con respecto a P
-    longX = 180;
-    longY = 110;
+    // base / altura = Razon Aurea
+    longX = 360;
+    longY = longX / RAZON_AUREA;
 
     // Contador de rectangulos
     cont = 0;
@@ -90,6 +115,12 @@ void __fastcall TGLForm2D::FormCreate(TObject *Sender) {
 
     // Coloreado automatico
     automatico = true;
+
+    // Embaldosado
+    embaldosado = false;
+
+    // Numero de filas y columnas iniciales
+    N = 1;
 }
 //---------------------------------------------------------------------------
 void __fastcall TGLForm2D::SetPixelFormatDescriptor() {
@@ -118,8 +149,8 @@ void __fastcall TGLForm2D::FormResize(TObject *Sender) {
 
   // Actualización del puerto de vista y su radio
   if ((ClientWidth<=1)||(ClientHeight<=1)){
-     ClientWidth=400;
-     ClientHeight=400;
+     ClientWidth=400/N;
+     ClientHeight=400/N;
      RatioViewPort=1.0;
      }
   else RatioViewPort = (float)ClientWidth/(float)ClientHeight;
@@ -143,7 +174,7 @@ void __fastcall TGLForm2D::FormResize(TObject *Sender) {
 
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  gluOrtho2D(xLeft,xRight, yBot,yTop);
+  gluOrtho2D(xLeft,xRight,yBot,yTop);
 
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
@@ -165,6 +196,7 @@ void dibujarPuntoCentral(Punto P, GLint grosorP, GLfloat colorP[3]) {
   glEnd();
 }
 
+//---------------------------------------------------------------------------
 // Dibuja el Rectangulo inicial
 void dibujarRectanguloInicial(Punto A,Punto B,Punto C,Punto D,GLint grosorLinRect,GLfloat colorLinRect[3]) {
   // Selecionamos el color de dibujo
@@ -182,8 +214,10 @@ void dibujarRectanguloInicial(Punto A,Punto B,Punto C,Punto D,GLint grosorLinRec
   glEnd();
 }
 
+//---------------------------------------------------------------------------
 // Dibuja las diagonales
-void dibujarDiagonales(Punto A,Punto B,Punto C,Punto D, Punto & R, GLint grosorLinDiag,GLfloat colorLinDiag[3]) {
+void dibujarDiagonales(Punto A,Punto B,Punto C,Punto D,Punto & R,
+                       GLint grosorLinDiag,GLfloat colorLinDiag[3]) {
   // Selecionamos el color de las diagonales
   glColor3f(colorLinDiag[0],colorLinDiag[1],colorLinDiag[2]);
 
@@ -203,8 +237,7 @@ void dibujarDiagonales(Punto A,Punto B,Punto C,Punto D, Punto & R, GLint grosorL
   glEnd();
 
   // Calculamos un punto auxiliar R
-  //R.nuevo(D.x() + (A.y() - D.y()), D.y());
-  R.nuevo((GLint) C.x() - ((A.y() - D.y())/RAZON_AUREA), D.y());
+  R.nuevo(D.x() + (A.y() - D.y()), D.y());
 
   // Dibujamos la diagonal B-R
   glBegin(GL_LINES);
@@ -216,10 +249,17 @@ void dibujarDiagonales(Punto A,Punto B,Punto C,Punto D, Punto & R, GLint grosorL
   glDisable(GL_LINE_STIPPLE);
 }
 
-// Función que calcula el punto Q
-Punto TGLForm2D::calculaPuntoQ(Punto A, Punto B, Punto C, Punto D, Punto R){
+//-------------------------------------------------------------------------
+// Función que dibuja el punto limite
+void dibujarPuntoLimite(Punto A, Punto B, Punto C, Punto R, Punto & Q,
+                        GLint grosorQ, GLfloat colorQ[3]) {
+  // Selecionamos el color de dibujo
+  glColor3f(colorQ[0],colorQ[1],colorQ[2]);
 
-  //Calculos de la pendiente y del corte con el eje de ordenadas
+  // Seleccionamos el gorsor del punto central
+  glPointSize(grosorQ);
+
+  // Calculos de la pendiente y del corte con el eje de ordenadas
   GLfloat m_AC =(A.y()-C.y())/(GLfloat)(A.x()-C.x());
   GLfloat b_AC = (m_AC * A.x())-A.y();
 
@@ -229,18 +269,7 @@ Punto TGLForm2D::calculaPuntoQ(Punto A, Punto B, Punto C, Punto D, Punto R){
   GLfloat x =(b_BR - b_AC) / (m_AC - m_BR);
   GLfloat y = (m_AC*x+b_AC);
 
-  Punto Q;
   Q.nuevo(-x, -y);
-  return Q;
-  }
-
-// Función que dibuja el punto limite
-void dibujarPuntoLimite(Punto Q, GLint grosorQ,GLfloat colorQ[3]) {
-  // Selecionamos el color de dibujo
-  glColor3f(colorQ[0],colorQ[1],colorQ[2]);
-
-  // Seleccionamos el gorsor del punto central
-  glPointSize(grosorQ);
 
   // Dibujamos el punto limite
   glBegin(GL_POINTS);
@@ -248,6 +277,7 @@ void dibujarPuntoLimite(Punto Q, GLint grosorQ,GLfloat colorQ[3]) {
   glEnd();
 }
 
+//---------------------------------------------------------------------------
 // Dibuja los rectangulos anidados
 void dibujarRectangulosAnidados(Punto A,Punto B,Punto C,Punto D,GLint cont,
                                 GLint grosorLinRect,GLfloat colorLinAct[50][3]) {
@@ -269,10 +299,14 @@ void dibujarRectangulosAnidados(Punto A,Punto B,Punto C,Punto D,GLint cont,
     switch (d) {
 
       case 0: // Caso A
-         /*  Aux.nuevo(A.x(),A.y());
+           // Restando el lado
+           Aux.nuevo(A.x(),A.y());
            A.nuevo(B.x(),B.y());
            B.nuevo(C.x(),C.y());
            C.nuevo(Aux.x()+(A.y()-B.y()),B.y());
+<<<<<<< UFP.cpp
+           D.nuevo(Aux.x()+(A.y()-B.y()),A.y());
+=======
            D.nuevo(Aux.x()+(A.y()-B.y()),A.y());       */
 
            Aux.nuevo(B.x(),B.y());
@@ -280,46 +314,59 @@ void dibujarRectangulosAnidados(Punto A,Punto B,Punto C,Punto D,GLint cont,
            B.nuevo(C.x(),C.y());
            C.nuevo( (GLfloat) C.x() - ((A.y()-B.y())/RAZON_AUREA), B.y());
            D.nuevo( (GLfloat) A.x() - ((A.y()-B.y())/RAZON_AUREA), A.y());
+>>>>>>> 1.6
            break;
 
       case 1: // Caso B
-        /* Aux.nuevo(A.x(),A.y());
-           A.nuevo(D.x(),D.y()-(Aux.x()-D.x())+5);
-           C.nuevo(B.x(),B.y());
-           B.nuevo(C.x(),D.y() - (Aux.x()-D.x())+5);
-           D.nuevo(C.x() - (B.x()-A.x()),C.y());            */
-
+           // Restando el lado
            Aux.nuevo(A.x(),A.y());
+<<<<<<< UFP.cpp
+           A.nuevo(D.x(),D.y()-(Aux.x()-D.x()));
+=======
            A.nuevo(D.x(), (GLfloat) (C.y() + ((Aux.x()-D.x())/RAZON_AUREA)));
+>>>>>>> 1.6
            C.nuevo(B.x(),B.y());
+<<<<<<< UFP.cpp
+           B.nuevo(C.x(),D.y() - (Aux.x()-D.x()));
+           D.nuevo(C.x() - (B.x()-A.x()),C.y());            
+=======
            B.nuevo(C.x(), (GLfloat) (C.y() + ((Aux.x()-D.x())/RAZON_AUREA)));
            D.nuevo(C.x() - (B.x()-A.x()),C.y());
+>>>>>>> 1.6
            break;
 
       case 2: // Caso C
-         /*Aux.nuevo(A.x(),A.y());
+           // Restando el lado
+           Aux.nuevo(A.x(),A.y());
            A.nuevo(B.x()-(B.y()-C.y()), Aux.y());
            B.nuevo(C.x()-(B.y()-C.y()), D.y());
            C.nuevo(D.x(),D.y());
+<<<<<<< UFP.cpp
+=======
            D.nuevo(Aux.x(),Aux.y());    */
            Aux.nuevo(A.x(),A.y());
            A.nuevo( (GLfloat) A.x()+((B.y()-C.y())/RAZON_AUREA), Aux.y());
            B.nuevo( (GLfloat) D.x()+((B.y()-C.y())/RAZON_AUREA), D.y());
            C.nuevo(D.x(),D.y());
+>>>>>>> 1.6
            D.nuevo(Aux.x(),Aux.y());
            break;
 
       case 3: // Caso D
-     /*    Aux.nuevo(B.x(),B.y());
-           B.nuevo(A.x(),A.y());
-           C.nuevo(Aux.x(), Aux.y()+(A.x()-D.x())-3);
-           A.nuevo(D.x(),D.y());
-           D.nuevo(A.x(), Aux.y() + (B.x()-A.x())-3);     */
+           // Restando el lado
            Aux.nuevo(B.x(),B.y());
            B.nuevo(A.x(),A.y());
+<<<<<<< UFP.cpp
+           C.nuevo(Aux.x(), Aux.y()+(A.x()-D.x()));
+=======
            C.nuevo(Aux.x(), (GLfloat) A.y() - ((A.x()-D.x())/RAZON_AUREA));
+>>>>>>> 1.6
            A.nuevo(D.x(),D.y());
+<<<<<<< UFP.cpp
+           D.nuevo(A.x(), Aux.y() + (B.x()-A.x()));
+=======
            D.nuevo(A.x(), (GLfloat) A.y() - ((B.x()-A.x())/RAZON_AUREA));
+>>>>>>> 1.6
            break;
       }
 
@@ -359,21 +406,17 @@ void dibujarRectangulosAnidados(Punto A,Punto B,Punto C,Punto D,GLint cont,
 
     // Selecionamos el color de dibujo
     glColor3f(colorLinAct[c][0],colorLinAct[c][1],colorLinAct[c][2]);
-
   }
   
 }
 
-void __fastcall TGLForm2D::GLScene() {
-
- // Aplicamos el fondo de ventana establecido
- glClear(GL_COLOR_BUFFER_BIT);
-
+// Dibuja las baldosas por separado
+void __fastcall TGLForm2D::dibujarBaldosas() {
  // Restablecemos puntos iniciales
- A.nuevo(-longX, +longY);
- B.nuevo(+longX, +longY);
- C.nuevo(+longX, -longY);
- D.nuevo(-longX, -longY);
+ A.nuevo(P.x()-longX/2, P.y()+longY/2);
+ B.nuevo(P.x()+longX/2, P.y()+longY/2);
+ C.nuevo(P.x()+longX/2, P.y()-longY/2);
+ D.nuevo(P.x()-longX/2, P.y()-longY/2);
 
  // Dibujamos el Rectangulo inicial
  dibujarRectanguloInicial(A,B,C,D,grosorLinRect,colorLinRect);
@@ -384,9 +427,8 @@ void __fastcall TGLForm2D::GLScene() {
   // Dibujamos el punto central
  dibujarPuntoCentral(P,grosorP,colorP);
 
-  Q = calculaPuntoQ(A, B, C, D, R);
  // Dibujamos el punto Limite
- dibujarPuntoLimite(Q,grosorQ,colorQ);
+ dibujarPuntoLimite(A,B,C,R,Q,grosorQ,colorQ);
 
  // Dibujamos el resto de rectangulos
  dibujarRectangulosAnidados(A,B,C,D,cont,grosorLinRect,colorLinAct);
@@ -396,6 +438,69 @@ void __fastcall TGLForm2D::GLScene() {
 
  // Habilitado uso del doble buffer
  SwapBuffers(hdc);
+
+}
+
+void __fastcall TGLForm2D::GLScene() {
+
+ // Aplicamos el fondo de ventana establecido
+ glClear(GL_COLOR_BUFFER_BIT);
+
+ if (embaldosado) {
+   GLfloat pos_x = 0;
+   GLfloat pos_y = 0;
+   GLfloat baldosa_x = ClientWidth / N;
+   GLfloat baldosa_y = ClientHeight / N;
+   for (int i=0; i<=N; i++) {
+     for (int j=0; j<=N; j++) {
+        glViewport(pos_x,pos_y,baldosa_x,baldosa_y);
+        dibujarBaldosas();
+        pos_y = baldosa_y * j;
+     }
+     pos_x = baldosa_x * i;
+   }
+ }
+
+ else {
+
+ // Restablecemos puntos iniciales
+<<<<<<< UFP.cpp
+ A.nuevo(P.x()-longX/2, P.y()+longY/2);
+ B.nuevo(P.x()+longX/2, P.y()+longY/2);
+ C.nuevo(P.x()+longX/2, P.y()-longY/2);
+ D.nuevo(P.x()-longX/2, P.y()-longY/2);
+=======
+ A.nuevo(-longX, +longY);
+ B.nuevo(+longX, +longY);
+ C.nuevo(+longX, -longY);
+ D.nuevo(-longX, -longY);
+>>>>>>> 1.6
+
+ // Dibujamos el Rectangulo inicial
+ dibujarRectanguloInicial(A,B,C,D,grosorLinRect,colorLinRect);
+
+ // Dibujamos diagonales
+ dibujarDiagonales(A,B,C,D,R,grosorLinDiag,colorLinDiag);
+
+  // Dibujamos el punto central
+ dibujarPuntoCentral(P,grosorP,colorP);
+
+<<<<<<< UFP.cpp
+=======
+  Q = calculaPuntoQ(A, B, C, D, R);
+>>>>>>> 1.6
+ // Dibujamos el punto Limite
+ dibujarPuntoLimite(A,B,C,R,Q,grosorQ,colorQ);
+
+ // Dibujamos el resto de rectangulos
+ dibujarRectangulosAnidados(A,B,C,D,cont,grosorLinRect,colorLinAct);
+
+ // Ejecutar lista de comandos en espera
+ glFlush();
+
+ // Habilitado uso del doble buffer
+ SwapBuffers(hdc);
+ }
 }
 
 //---------------------------------------------------------------------------
@@ -417,6 +522,28 @@ void __fastcall TGLForm2D::FormKeyPress(TObject *Sender, char &Key)
 {
   // Tecla A -> Acercamos
   if (Key == 'a' | Key == 'A') {
+<<<<<<< UFP.cpp
+
+     // Calculamos las nuevas coordenadas del AVE
+     GLfloat xRn = (xRight + xLeft) / (GLfloat) 2;
+     xRn += (xRight - xLeft) * (GLfloat) 0.5 * (1/F);
+
+     GLfloat xLn = (xRight + xLeft) / (GLfloat) 2;
+     xLn -= (xRight - xLeft) * (GLfloat) 0.5 * (1/F);
+
+     GLfloat yTn = (yTop+yBot) / (GLfloat) 2;
+     yTn += (xRight - xLeft) * (GLfloat) 0.5 * (1/F);
+
+     GLfloat yBn = (yTop+yBot) / (GLfloat) 2;
+     yBn -= (xRight - xLeft) * (GLfloat) 0.5 * (1/F);
+
+     // Actualizamos las variables del AVE
+     xLeft = xLn;
+     xRight =xRn;
+
+     yBot = yBn;
+     yTop = yTn;
+=======
      GLfloat f= 1.05;
      GLfloat xRn = (xRight + xLeft) / (GLfloat) 2;
      xRn += (xRight - xLeft) * (GLfloat) 0.5 * (1/f);
@@ -435,10 +562,33 @@ void __fastcall TGLForm2D::FormKeyPress(TObject *Sender, char &Key)
 
      yBot = yBn;
      yTop = yTn;
+>>>>>>> 1.6
    }
 
   // Tecla S -> Alejamos
   if (Key == 's' | Key == 'S') {
+<<<<<<< UFP.cpp
+
+     // Calculamos las nuevas coordenadas del AVE
+     GLfloat xRn = (xRight + xLeft) / (GLfloat) 2;
+     xRn += (xRight - xLeft) * (GLfloat) 0.5 * (1/f);
+
+     GLfloat xLn = (xRight + xLeft) / (GLfloat) 2;
+     xLn -= (xRight - xLeft) * (GLfloat) 0.5 * (1/f);
+
+     GLfloat yTn = (yTop+yBot) / (GLfloat) 2;
+     yTn += (xRight - xLeft) * (GLfloat) 0.5 * (1/f);
+
+     GLfloat yBn = (yTop+yBot) / (GLfloat) 2;
+     yBn -= (xRight - xLeft) * (GLfloat) 0.5 * (1/f);
+
+     // Actualizamos las variables del AVE
+     xLeft = xLn;
+     xRight =xRn;
+
+     yBot = yBn;
+     yTop = yTn;
+=======
 
      GLfloat f= 0.95;
      GLfloat xRn = (xRight + xLeft) / (GLfloat) 2;
@@ -459,6 +609,7 @@ void __fastcall TGLForm2D::FormKeyPress(TObject *Sender, char &Key)
 
      yBot = yBn;
      yTop = yTn;
+>>>>>>> 1.6
    }
 
   // Tecla Z -> Anidamos
@@ -471,7 +622,6 @@ void __fastcall TGLForm2D::FormKeyPress(TObject *Sender, char &Key)
      if (cont > 0)
        cont--;
    }
-
 
   // Tecla C -> Activamos/Desactivamos opción de color
   if (Key == 'c' | Key == 'C') {
@@ -491,31 +641,54 @@ void __fastcall TGLForm2D::FormKeyPress(TObject *Sender, char &Key)
       Panel1->Visible = true;
     else
       Panel1->Visible = false;
+<<<<<<< UFP.cpp
+  }
+=======
    }
 
   // Se actualiza el volumen de vista
   // para que su radio coincida con ratioViewPort
  /* GLfloat RatioVolVista = (GLfloat) xRight/yTop;
+>>>>>>> 1.6
 
-  if (RatioVolVista>=RatioViewPort){
-     //Aumentamos yTop-yBot
-     yTop= xRight/RatioViewPort;
-     yBot=-yTop;
+  // Tecla E -> Embaldosamos/Desembaldosamos
+  if (Key == 'e' | Key == 'E') {
+     if (embaldosado) {
+       embaldosado = false;
+       N = 1;
+       glViewport(0,0,ClientWidth,ClientHeight);
+       Embaldosar1->Caption = "&Embaldosar";
      }
+<<<<<<< UFP.cpp
+     else {
+        AnsiString a;
+        a = InputBox("Embaldosado","Inserta el número de filas/columnas","");
+        if (a == "")
+           Application->MessageBox("Dato incorrecto o nulo","Error", MB_OK | MB_ICONHAND);
+        else {
+           N = StrToInt(a);
+           embaldosado = true;
+           Embaldosar1->Caption = "&Desembaldosar";
+        }
+     }
+  }
+=======
   else{
      //Aumentamos xRight-xLeft
      xRight=RatioViewPort*yTop;
      xLeft=-xRight;
      }     */
+>>>>>>> 1.6
 
+  // Modificamos al proyecccion
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   gluOrtho2D(xLeft,xRight,yBot,yTop);
 
+  // Redibujamos con los nuevos parámetros
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
   GLScene();
-
 }
 //---------------------------------------------------------------------------
 void __fastcall TGLForm2D::FormKeyDown(TObject *Sender, WORD &Key,
@@ -523,38 +696,42 @@ void __fastcall TGLForm2D::FormKeyDown(TObject *Sender, WORD &Key,
 {
   // Trasladamos hacia arriba
   if (Key == VK_UP) {
-         GLfloat a = (yTop - yBot)* 0.05;
-         yBot+=a;
-         yTop+=a;
-//     P.y(P.y() + 10);
+    GLfloat ar = (yTop - yBot)* T;
+    yBot += ar;
+    yTop += ar;
   }
 
   // Trasladamos hacia abajo
   if (Key == VK_DOWN) {
-           GLfloat a = (yTop - yBot)* 0.05;
-         yBot-=a;
-         yTop-=a;
-  //    P.y(P.y() - 10);
+    GLfloat ab = (yTop - yBot)* T;
+    yBot -= ab;
+    yTop -= ab;
   }
 
   // Trasladamos hacia derecha
   if (Key == VK_RIGHT) {
-  GLfloat a = (xRight - xLeft)* 0.05;
-         xRight+=a;
-         xLeft+=a;
+    GLfloat der = (xRight - xLeft)* T;
+    xRight += der;
+    xLeft += der;
   }
 
   // Trasladamos hacia izquierda
   if (Key == VK_LEFT) {
-  GLfloat a = (xRight - xLeft)* 0.05;
-         xRight-=a;
-         xLeft-=a;
+    GLfloat izq = (xRight - xLeft)* T;
+    xRight -= izq;
+    xLeft -= izq;
   }
 
   // Cambiamos origen de coordenadas
   if (Key == VK_SPACE) {
      // Cambiar a limite
      if (centrado == 1) {
+<<<<<<< UFP.cpp
+       xRight += Q.x();
+       xLeft += Q.x();
+       yTop += Q.y();
+       yBot += Q.y();
+=======
 /* ShowMessage("Centrado -> Límite");
       Punto T;
       T.nuevo (P.x() - Q.x(),P.y() - Q.y());
@@ -565,10 +742,17 @@ void __fastcall TGLForm2D::FormKeyDown(TObject *Sender, WORD &Key,
       yTop+=Q.y();
       /* P.nuevo(-Q.x(),-Q.y());
        Q.nuevo(xRight + xLeft, yTop + yBot);*/
+>>>>>>> 1.6
        centrado = 2;
      }
      // Cambiar a origen
      else {
+<<<<<<< UFP.cpp
+       xRight -= Q.x();
+       xLeft -= Q.x();
+       yTop -= Q.y();
+       yBot -= Q.y();
+=======
  /* ShowMessage("Límite -> Centrado");
    Punto T;
      T.nuevo (P.x() - Q.x(),P.y() - Q.y());*/
@@ -579,6 +763,7 @@ void __fastcall TGLForm2D::FormKeyDown(TObject *Sender, WORD &Key,
 
     /*   Q.nuevo(-P.x(),-P.y());
        P.nuevo(xRight + xLeft, yTop + yBot);*/
+>>>>>>> 1.6
        centrado = 1;
      }
     }
@@ -619,7 +804,8 @@ void __fastcall TGLForm2D::Comandos2Click(TObject *Sender)
               "     Z = Anidar \n  "
               "     X = Desanidar \n\n "
               "     C = Color \n "
-              "     G = Grosor \n\n "
+              "     G = Grosor \n "
+              "     E = Embaldosar \n\n "
               "Espacio = Origen/Límite \n "
               "Flechas = Traslación \n\n  "
               "      ESC = Salir");
@@ -678,7 +864,7 @@ void __fastcall TGLForm2D::CColorGrid1Change(TObject *Sender)
              break;
 
      case 8: // Gris oscuro
-             ColorAux[0] = 0.2f; ColorAux[1] = 0.2f; ColorAux[2] = 0.2f;
+             ColorAux[0] = 0.4f; ColorAux[1] = 0.4f; ColorAux[2] = 0.4f;
              break;
 
      case 9: // Rojo
@@ -824,13 +1010,34 @@ void __fastcall TGLForm2D::RadioButton5KeyPress(TObject *Sender, char &Key)
  Panel2->Visible = false;
  automatico = true;
 }
-//---------------------------------------------------------------------------
-
 void __fastcall TGLForm2D::RadioButton6KeyPress(TObject *Sender, char &Key)
 {
  CColorGrid1->Visible = false;
  Panel2->Visible = false;
  automatico = false;
+}
+//---------------------------------------------------------------------------
+// Activar la opción de embaldosado
+void __fastcall TGLForm2D::Embaldosar1Click(TObject *Sender)
+{
+ if (embaldosado) {
+   embaldosado = false;
+   N = 1;
+   glViewport(0,0,ClientWidth,ClientHeight);
+   Embaldosar1->Caption = "&Embaldosar";
+ }
+ else {
+     AnsiString a;
+     a = InputBox("Embaldosado","Inserta el número de filas/columnas","");
+     if (a == "")
+       Application->MessageBox("Dato incorrecto o nulo","Error", MB_OK | MB_ICONHAND);
+     else {
+         N = StrToInt(a);
+         embaldosado = true;
+         Embaldosar1->Caption = "&Desembaldosar";
+     }
+ }
+  GLScene();
 }
 //---------------------------------------------------------------------------
 
