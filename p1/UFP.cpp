@@ -479,7 +479,8 @@ void __fastcall TGLForm2D::FormKeyPress(TObject *Sender, char &Key)
 {
   // Tecla A -> Acercamos
   if (Key == 'a' | Key == 'A') {
-
+        ShowMessage(FloatToStr(xRight)+ "  "+ FloatToStr(xLeft)+"\n"+ FloatToStr(yTop)+" "+FloatToStr(yBot));
+//        ShowMessage(FloatToStr((xRight+xLeft)/(yTop+yBot)));
      // Calculamos las nuevas coordenadas del AVE
      GLdouble xRn = (xRight + xLeft) / (GLdouble) 2;
      xRn += (xRight - xLeft) * (GLdouble) 0.5 * (1/F);
@@ -499,6 +500,7 @@ void __fastcall TGLForm2D::FormKeyPress(TObject *Sender, char &Key)
 
      yBot = yBn;
      yTop = yTn;
+                ShowMessage(xRight);
    }
 
   // Tecla S -> Alejamos
