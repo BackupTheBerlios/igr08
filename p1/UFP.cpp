@@ -479,8 +479,15 @@ void __fastcall TGLForm2D::FormKeyPress(TObject *Sender, char &Key)
 {
   // Tecla A -> Acercamos
   if (Key == 'a' | Key == 'A') {
-        ShowMessage(FloatToStr(xRight)+ "  "+ FloatToStr(xLeft)+"\n"+ FloatToStr(yTop)+" "+FloatToStr(yBot));
-//        ShowMessage(FloatToStr((xRight+xLeft)/(yTop+yBot)));
+
+
+  ////////////////
+        GLfloat RatViewPort = (GLfloat) ClientWidth / (GLfloat) ClientHeight;
+        GLfloat RatVolVista = (GLfloat) xRight / yTop;
+
+
+               ShowMessage("Antes:\n Radio View Port: " +FloatToStr(RatViewPort)+"\n\n"+"Radio Vol Vista: " + FloatToStr(RatVolVista));
+  //////////////////
      // Calculamos las nuevas coordenadas del AVE
      GLdouble xRn = (xRight + xLeft) / (GLdouble) 2;
      xRn += (xRight - xLeft) * (GLdouble) 0.5 * (1/F);
@@ -500,7 +507,7 @@ void __fastcall TGLForm2D::FormKeyPress(TObject *Sender, char &Key)
 
      yBot = yBn;
      yTop = yTn;
-                ShowMessage(xRight);
+               ShowMessage("Despues:\n Radio View Port: " +FloatToStr(RatViewPort)+"\n\n"+"Radio Vol Vista: " + FloatToStr(RatVolVista));
    }
 
   // Tecla S -> Alejamos
