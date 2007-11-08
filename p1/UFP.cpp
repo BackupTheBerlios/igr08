@@ -324,9 +324,11 @@ void TGLForm2D::dibujarRectangulosAnidados(Punto A,Punto B,Punto C,Punto D,GLint
   // Punto auxiliar
   Punto Aux;
 
-  while ( c < cont ) {
+  for (c = 0; c<cont; c++){
+//  while ( c < cont ) {
 
-    switch (d) {
+//    switch (d) {
+    switch (c%4) {
 
       case 0: // Caso A
            // Restando el lado
@@ -366,11 +368,11 @@ void TGLForm2D::dibujarRectangulosAnidados(Punto A,Punto B,Punto C,Punto D,GLint
       }
 
     // Apuntamos al siguiente rectangulo a dibujar
-    if (d >= 3)
+/*    if (d >= 3)
       d = 0;
     else
       d++;
-
+  */
     // Dibujamos el rectangulo siguiente
     glBegin(GL_LINE_LOOP);
       glVertex2i(A.x(),A.y());
@@ -379,7 +381,7 @@ void TGLForm2D::dibujarRectangulosAnidados(Punto A,Punto B,Punto C,Punto D,GLint
       glVertex2i(D.x(),D.y());
     glEnd();
 
-    c++;
+//    c++;
 
     // Modificamos el color automaticamente
     if (automatico) {

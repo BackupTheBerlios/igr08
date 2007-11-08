@@ -162,6 +162,9 @@ class TGLForm2D : public TForm {
      // Numero de Filas y columnas a embaldosar
      GLint N;
 
+     // Número máximo de rectangulos que se pueden anidar
+     int LIM_RECTANGULOS;
+
      // MÉTODOS PÚBLICOS //
    __fastcall TGLForm2D(TComponent* Owner);
 
