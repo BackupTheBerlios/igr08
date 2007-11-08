@@ -42,6 +42,8 @@ void __fastcall TGLForm2D::FormCreate(TObject *Sender) {
     F = 1.05;
     // Factor Divisor para el ZOOM
     f = 0.95;
+    // Limite de rectangulos que se pueden anidar
+    LIM_RECTANGULOS = 10;
 
     // Color de fondo de la ventana
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -523,7 +525,9 @@ void __fastcall TGLForm2D::FormKeyPress(TObject *Sender, char &Key)
 
   // Tecla Z -> Anidamos
   if (Key == 'z' | Key == 'Z') {
-     cont++;
+        if (cont<= LIM_RECTANGULOS){
+             cont++;
+             }
    }
 
   // Tecla X -> Desanidamos
