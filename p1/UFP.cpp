@@ -165,7 +165,8 @@ void __fastcall TGLForm2D::FormResize(TObject *Sender) {
   if (RatioVolVista>=RatioViewPort){
      //Aumentamos yTop-yBot
      yTop = xRight / RatioViewPort;
-     yBot = -yTop;
+//     yBot = -yTop;
+     yBot = xLeft / RatioViewPort;
      }
   else{
      //Aumentamos xRight-xLeft
@@ -486,7 +487,7 @@ void __fastcall TGLForm2D::FormKeyPress(TObject *Sender, char &Key)
         GLfloat RatVolVista = (GLfloat) xRight / yTop;
 
 
-           //    ShowMessage("Antes:\n Radio View Port: " +FloatToStr(RatViewPort)+"\n\n"+"Radio Vol Vista: " + FloatToStr(RatVolVista));
+               ShowMessage("Antes:\n Radio View Port: " +FloatToStr(RatViewPort)+"\n\n"+"Radio Vol Vista: " + FloatToStr(RatVolVista));
   //////////////////
      // Calculamos las nuevas coordenadas del AVE
      GLdouble xRn = (xRight + xLeft) / (GLdouble) 2;
