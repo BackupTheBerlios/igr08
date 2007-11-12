@@ -1,6 +1,6 @@
 object GLForm2D: TGLForm2D
-  Left = 414
-  Top = 177
+  Left = 306
+  Top = 157
   Width = 408
   Height = 450
   Caption = 'Práctica 1: Rectángulo Aúreo'

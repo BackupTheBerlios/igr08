@@ -486,7 +486,7 @@ void __fastcall TGLForm2D::FormKeyPress(TObject *Sender, char &Key)
         GLfloat RatVolVista = (GLfloat) xRight / yTop;
 
 
-               ShowMessage("Antes:\n Radio View Port: " +FloatToStr(RatViewPort)+"\n\n"+"Radio Vol Vista: " + FloatToStr(RatVolVista));
+           //    ShowMessage("Antes:\n Radio View Port: " +FloatToStr(RatViewPort)+"\n\n"+"Radio Vol Vista: " + FloatToStr(RatVolVista));
   //////////////////
      // Calculamos las nuevas coordenadas del AVE
      GLdouble xRn = (xRight + xLeft) / (GLdouble) 2;
@@ -496,18 +496,44 @@ void __fastcall TGLForm2D::FormKeyPress(TObject *Sender, char &Key)
      xLn -= (xRight - xLeft) * (GLdouble) 0.5 * (1/F);
 
      GLdouble yTn = (yTop+yBot) / (GLdouble) 2;
-     yTn += (xRight - xLeft) * (GLdouble) 0.5 * (1/F);
+     yTn += (yTop - yBot) * (GLdouble) 0.5 * (1/F);
 
      GLdouble yBn = (yTop+yBot) / (GLdouble) 2;
-     yBn -= (xRight - xLeft) * (GLdouble) 0.5 * (1/F);
+     yBn -= (yTop - yBot) * (GLdouble) 0.5 * (1/F);
 
-     // Actualizamos las variables del AVE
+
+
+
+      // Actualizamos las variables del AVE
      xLeft = xLn;
      xRight =xRn;
 
      yBot = yBn;
      yTop = yTn;
-               ShowMessage("Despues:\n Radio View Port: " +FloatToStr(RatViewPort)+"\n\n"+"Radio Vol Vista: " + FloatToStr(RatVolVista));
+
+     
+      RatViewPort = (GLfloat) ClientWidth / (GLfloat) ClientHeight;
+     RatVolVista = (GLfloat) xRight / yTop;
+
+
+      // Comprobamos que se no se deforma
+
+     /* if (RatVolVista>RatViewPort){
+     //Aumentamos yTop-yBot
+     yTn = xRn / RatViewPort;
+     yBn = -yTn;
+     }
+  else{
+     //Aumentamos xRight-xLeft
+     xRn = RatViewPort * yTn;
+     xLn = -xRn;
+     }
+         */
+
+
+     RatViewPort = (GLfloat) ClientWidth / (GLfloat) ClientHeight;
+     RatVolVista = (GLfloat) xRight / yTop;
+ //    ShowMessage("Despues:\n Radio View Port: " +FloatToStr(RatViewPort)+"\n\n"+"Radio Vol Vista: " + FloatToStr(RatVolVista));
    }
 
   // Tecla S -> Alejamos
@@ -521,10 +547,10 @@ void __fastcall TGLForm2D::FormKeyPress(TObject *Sender, char &Key)
      xLn -= (xRight - xLeft) * (GLdouble) 0.5 * (1/f);
 
      GLdouble yTn = (yTop + yBot) / (GLdouble) 2;
-     yTn += (xRight - xLeft) * (GLdouble) 0.5 * (1/f);
+     yTn += (yTop - yBot) * (GLdouble) 0.5 * (1/f);
 
      GLdouble yBn = (yTop + yBot) / (GLdouble) 2;
-     yBn -= (xRight - xLeft) * (GLdouble) 0.5 * (1/f);
+     yBn -= (yTop - yBot) * (GLdouble) 0.5 * (1/f);
 
      // Actualizamos las variables del AVE
      xLeft = xLn;
