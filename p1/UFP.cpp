@@ -171,7 +171,8 @@ void __fastcall TGLForm2D::FormResize(TObject *Sender) {
   else{
      //Aumentamos xRight-xLeft
      xRight = RatioViewPort * yTop;
-     xLeft = -xRight;
+//     xLeft = -xRight;
+     xLeft = RatioViewPort * yBot;
      }
 
   glMatrixMode(GL_PROJECTION);
@@ -303,7 +304,7 @@ void TGLForm2D::dibujarPuntoLimite(Punto A, Punto B, Punto C, Punto R, Punto & Q
 
   // Dibujamos el punto limite
   glBegin(GL_POINTS);
-    glVertex2i(Q.x(),Q.y());
+    glVertex2f(Q.x(),Q.y());
   glEnd();
 }
 
@@ -487,7 +488,7 @@ void __fastcall TGLForm2D::FormKeyPress(TObject *Sender, char &Key)
         GLfloat RatVolVista = (GLfloat) xRight / yTop;
 
 
-               ShowMessage("Antes:\n Radio View Port: " +FloatToStr(RatViewPort)+"\n\n"+"Radio Vol Vista: " + FloatToStr(RatVolVista));
+//               ShowMessage("Antes:\n Radio View Port: " +FloatToStr(RatViewPort)+"\n\n"+"Radio Vol Vista: " + FloatToStr(RatVolVista));
   //////////////////
      // Calculamos las nuevas coordenadas del AVE
      GLdouble xRn = (xRight + xLeft) / (GLdouble) 2;
@@ -666,18 +667,18 @@ void __fastcall TGLForm2D::FormKeyDown(TObject *Sender, WORD &Key,
      GLdouble despY = (yTop + yBot) / 2;
      // Cambiar a limite
      if (centrado == 1) {
-        xRight += (GLint) Q.x() - despX;
-        xLeft  += (GLint) Q.x() - despX;
-        yTop   += (GLint) Q.y() - despY;
-        yBot   += (GLint) Q.y() - despY;
+        xRight +=  Q.x() - despX;
+        xLeft  +=  Q.x() - despX;
+        yTop   +=  Q.y() - despY;
+        yBot   +=  Q.y() - despY;
         centrado = 2;
      }
      // Cambiar a origen
      else {
-        xRight -= (GLint) Q.x();
-        xLeft  -= (GLint) Q.x();
-        yTop   -= (GLint) Q.y();
-        yBot   -= (GLint) Q.y();
+        xRight -=  Q.x();
+        xLeft  -=  Q.x();
+        yTop   -=  Q.y();
+        yBot   -=  Q.y();
         centrado = 1;
      }
     }
