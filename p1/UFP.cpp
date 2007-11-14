@@ -164,13 +164,46 @@ void __fastcall TGLForm2D::FormResize(TObject *Sender) {
 
   if (RatioVolVista>=RatioViewPort){
      //Aumentamos yTop-yBot
-     yTop = xRight / RatioViewPort;
-     yBot = xLeft / RatioViewPort;
+   //  yTop = xRight / RatioViewPort;
+   //  yBot = xLeft / RatioViewPort;
+     /////////////////////////////
+
+     GLdouble altoN = (xRight - xLeft)  * ClientHeight /ClientWidth;
+     GLdouble yTn = ((yTop + yBot ) / (GLfloat)2 ) + altoN/2.0;
+
+     GLdouble yBn = ((yTop + yBot) / (GLfloat)2 ) - altoN/2.0;
+
+     // Actualizamos las variables del AVE
+     yBot = yBn;
+     yTop = yTn;
+
+
+
+
+     //////////////////////////////
+
+
+
      }
   else{
      //Aumentamos xRight-xLeft
-     xRight = RatioViewPort * yTop;
-     xLeft = RatioViewPort * yBot;
+   //  xRight = RatioViewPort * yTop;
+   //  xLeft = RatioViewPort * yBot;
+
+
+
+     ////////////////////////////////////
+
+     GLdouble anchoN = (yTop - yBot)  * ClientWidth / ClientHeight;
+     GLdouble xRn = ((xRight + xLeft) / (GLfloat)2 ) + anchoN/2.0;
+
+     GLdouble xLn = ((xRight + xLeft) / (GLfloat)2 ) - anchoN/2.0;
+
+     // Actualizamos las variables del AVE
+     xRight = xRn;
+     xLeft = xLn;
+
+     ////////////////////////////////////
      }
 
   glMatrixMode(GL_PROJECTION);
@@ -943,3 +976,4 @@ void __fastcall TGLForm2D::Embaldosar1Click(TObject *Sender)
 }
 
 //---------------------------------------------------------------------------
+
