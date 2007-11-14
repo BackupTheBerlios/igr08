@@ -165,13 +165,11 @@ void __fastcall TGLForm2D::FormResize(TObject *Sender) {
   if (RatioVolVista>=RatioViewPort){
      //Aumentamos yTop-yBot
      yTop = xRight / RatioViewPort;
-//     yBot = -yTop;
      yBot = xLeft / RatioViewPort;
      }
   else{
      //Aumentamos xRight-xLeft
      xRight = RatioViewPort * yTop;
-//     xLeft = -xRight;
      xLeft = RatioViewPort * yBot;
      }
 
@@ -318,7 +316,6 @@ void TGLForm2D::dibujarRectangulosAnidados(Punto A,Punto B,Punto C,Punto D,GLint
 
   // Contador actual
   GLint c = 0;
-  GLint d = 0;
 
   // Selecionamos el color de dibujo
   glColor3f(colorLinAct[c][0],colorLinAct[c][1],colorLinAct[c][2]);
@@ -327,9 +324,7 @@ void TGLForm2D::dibujarRectangulosAnidados(Punto A,Punto B,Punto C,Punto D,GLint
   Punto Aux;
 
   for (c = 0; c<cont; c++){
-//  while ( c < cont ) {
 
-//    switch (d) {
     switch (c%4) {
 
       case 0: // Caso A
@@ -369,12 +364,6 @@ void TGLForm2D::dibujarRectangulosAnidados(Punto A,Punto B,Punto C,Punto D,GLint
            break;
       }
 
-    // Apuntamos al siguiente rectangulo a dibujar
-/*    if (d >= 3)
-      d = 0;
-    else
-      d++;
-  */
     // Dibujamos el rectangulo siguiente
     glBegin(GL_LINE_LOOP);
       glVertex2i(A.x(),A.y());
@@ -383,7 +372,6 @@ void TGLForm2D::dibujarRectangulosAnidados(Punto A,Punto B,Punto C,Punto D,GLint
       glVertex2i(D.x(),D.y());
     glEnd();
 
-//    c++;
 
     // Modificamos el color automaticamente
     if (automatico) {
@@ -483,13 +471,6 @@ void __fastcall TGLForm2D::FormKeyPress(TObject *Sender, char &Key)
   if (Key == 'a' | Key == 'A') {
 
 
-  ////////////////
-        GLfloat RatViewPort = (GLfloat) ClientWidth / (GLfloat) ClientHeight;
-        GLfloat RatVolVista = (GLfloat) xRight / yTop;
-
-
-//               ShowMessage("Antes:\n Radio View Port: " +FloatToStr(RatViewPort)+"\n\n"+"Radio Vol Vista: " + FloatToStr(RatVolVista));
-  //////////////////
      // Calculamos las nuevas coordenadas del AVE
      GLdouble xRn = (xRight + xLeft) / (GLdouble) 2;
      xRn += (xRight - xLeft) * (GLdouble) 0.5 * (1/F);
@@ -512,30 +493,6 @@ void __fastcall TGLForm2D::FormKeyPress(TObject *Sender, char &Key)
 
      yBot = yBn;
      yTop = yTn;
-
-     
-      RatViewPort = (GLfloat) ClientWidth / (GLfloat) ClientHeight;
-     RatVolVista = (GLfloat) xRight / yTop;
-
-
-      // Comprobamos que se no se deforma
-
-     /* if (RatVolVista>RatViewPort){
-     //Aumentamos yTop-yBot
-     yTn = xRn / RatViewPort;
-     yBn = -yTn;
-     }
-  else{
-     //Aumentamos xRight-xLeft
-     xRn = RatViewPort * yTn;
-     xLn = -xRn;
-     }
-         */
-
-
-     RatViewPort = (GLfloat) ClientWidth / (GLfloat) ClientHeight;
-     RatVolVista = (GLfloat) xRight / yTop;
- //    ShowMessage("Despues:\n Radio View Port: " +FloatToStr(RatViewPort)+"\n\n"+"Radio Vol Vista: " + FloatToStr(RatVolVista));
    }
 
   // Tecla S -> Alejamos
