@@ -1,0 +1,13 @@
+Error 00088. 0x300010 (Thread 0x0D2C):
+Resource leak: The object (0x13867C8) was never deleted
+
+The object (0x013867C8) [size: 8 bytes] was created with new
+Call Tree:
+   0x004021AD(=glSkeleton.exe:0x01:0011AD) D:\Clase\Clase\5Ý\IGr\Practicas\P2\P2\UFP.cpp#131
+   0x4006F6D9(=VCL50.BPL:0x01:06E6D9)
+   0x40054117(=VCL50.BPL:0x01:053117)
+   0x4006DF7B(=VCL50.BPL:0x01:06CF7B)
+   0x400511D6(=VCL50.BPL:0x01:0501D6)
+   0x7E398734(=user32.dll:0x01:007734)
+
+------------------------------------------
