@@ -11,7 +11,7 @@ class Escena {
    Escena();
    void Resize();
    void Pinta();
-   Lista<DibujoLineas> * getEscena();
+   Lista<DibujoLineas> * getEscena() {return listaDibujos;}
 
 
   private:

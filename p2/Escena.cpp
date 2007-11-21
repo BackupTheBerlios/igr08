@@ -16,6 +16,4 @@ listaDibujos -> inicia();
    void Pinta(){
 
    }
-   Lista<DibujoLineas> * getEscena(){
-   return 0;
-   }
+

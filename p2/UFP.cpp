@@ -188,7 +188,7 @@ else{
 void __fastcall TGLForm2D::FormMouseDown(TObject *Sender,
       TMouseButton Button, TShiftState Shift, int X, int Y)
 {
-ShowMessage(X);       
+ShowMessage(AnsiString(X) + " "+ AnsiString(Y));       
 }
 //---------------------------------------------------------------------------
 
