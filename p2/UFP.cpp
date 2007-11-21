@@ -2,6 +2,7 @@
 #include <vcl.h>
 #pragma hdrstop
 #include "UFP.h"
+#include <fstream.h>
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 //---------------------------------------------------------------------------
@@ -132,4 +133,54 @@ ShowMessage("");
 delete l;
 }
 //---------------------------------------------------------------------------
+
+void __fastcall TGLForm2D::Abrir1Click(TObject *Sender)
+{
+if (OpenDialog1 ->Execute()){
+        char * path = OpenDialog1 -> FileName.c_str();
+        ShowMessage (path);
+        char * text = new char;
+        ifstream filein;
+        filein.open(path, ios::in);
+        // se lee hasta el carácter (;)
+        filein.getline(text, 200);
+        // se cierra el fichero
+        filein.close();
+
+
+        }
+else{
+        ShowMessage("El usuario canceló la operación");
+        }
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TGLForm2D::Guardar1Click(TObject *Sender)
+{
+if (SaveDialog1 ->Execute()){
+        char *  path = SaveDialog1 -> FileName.c_str();
+        ShowMessage (path);
+
+
+        // se crea un flujo de salida y se asocia con un fichero
+        ofstream fileout;
+        fileout.open(path, ios::out);
+        // se escribe el mismo texto y el nuevo número
+        fileout << "aaaaaa" << "; " << endl;
+        fileout.close();
+
+        }
+else{
+        ShowMessage("El usuario canceló la operación");
+        }
+}
+//---------------------------------------------------------------------------
+
+
+
+
+
+
+
+
 

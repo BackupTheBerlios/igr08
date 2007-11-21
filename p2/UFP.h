@@ -6,6 +6,8 @@
 #include <Controls.hpp>
 #include <StdCtrls.hpp>
 #include <Forms.hpp>
+#include <Dialogs.hpp>
+#include <Menus.hpp>
 
 #include <gl\gl.h>
 #include <gl\glu.h>
@@ -17,12 +19,20 @@
 class TGLForm2D : public TForm
 {
 __published:	// IDE-managed Components
+        TSaveDialog *SaveDialog1;
+        TOpenDialog *OpenDialog1;
+        TMainMenu *MainMenu1;
+        TMenuItem *Archivo1;
+        TMenuItem *Abrir1;
+        TMenuItem *Guardar1;
   void __fastcall FormCreate(TObject *Sender);
   void __fastcall FormResize(TObject *Sender);
   void __fastcall FormPaint(TObject *Sender);
   void __fastcall FormDestroy(TObject *Sender);
         void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
           TShiftState Shift);
+        void __fastcall Abrir1Click(TObject *Sender);
+        void __fastcall Guardar1Click(TObject *Sender);
 
 private:	// User declarations
  HDC hdc;

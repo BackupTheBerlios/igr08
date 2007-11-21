@@ -12,7 +12,7 @@ class DibujoLineas {
       DibujoLineas();
 
    private:
-      Segmento * lista_segmentos;
+      Lista<Segmento> * listaSegmentos;
 
 };
 
