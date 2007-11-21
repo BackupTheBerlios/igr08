@@ -9,7 +9,10 @@
 
 #pragma package(smart_init)
 
-Lapiz::Lapiz() : ang(0.0) {*pos = Punto2f(0,0);
+Lapiz::Lapiz() {
+
+ang = 0.0;
+pos = new Punto2f(0,0);
 }
 
 
@@ -17,6 +20,17 @@ Lapiz::Lapiz(Punto2f * pos, GLfloat a){
     ang = a;
     pos = pos -> clon();
 }
+
+   Lapiz::Lapiz (const Lapiz& l){
+
+   }
+          
+   Lapiz * Lapiz::clon() const{
+//        Lapiz * l = new Lapiz();
+//        *l = *this;
+//        return l;
+   }
+
 
 void Lapiz::lineTo (Punto2f * destino, bool esVisible){
         if ( esVisible){

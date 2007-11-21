@@ -7,6 +7,11 @@ USEFORM("UFP.cpp", GLForm2D);
 USEUNIT("Lapiz.cpp");
 USEUNIT("Punto2f.cpp");
 USEUNIT("conversiones.cpp");
+USEUNIT("Escena.cpp");
+USEUNIT("DibujoLineas.cpp");
+USEUNIT("Segmento.cpp");
+USEUNIT("Lista.cpp");
+USEUNIT("Nodo.cpp");
 //---------------------------------------------------------------------------
 WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -14,7 +19,7 @@ WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
         {
                  Application->Initialize();
                  Application->CreateForm(__classid(TGLForm2D), &GLForm2D);
-                 Application->Run();
+       Application->Run();
         }
         catch (Exception &exception)
         {
