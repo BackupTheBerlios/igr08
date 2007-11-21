@@ -1,9 +1,9 @@
 object GLForm2D: TGLForm2D
-  Left = 412
-  Top = 169
+  Left = 252
+  Top = 294
   Width = 408
   Height = 434
-  Caption = 'Formulario Principal'
+  Caption = 'Lineas y Curvas'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

@@ -1,10 +1,13 @@
 //---------------------------------------------------------------------------
+#pragma hdrstop
+#pragma package(smart_init)
 
 #include <vcl.h>
-#pragma hdrstop
-
 #include "DibujoLineas.h"
-
 //---------------------------------------------------------------------------
 
-#pragma package(smart_init)
+// Constructora por defecto
+DibujoLineas::DibujoLineas() {
+       lista_segmentos = null;
+}
+

@@ -1,10 +1,8 @@
 //---------------------------------------------------------------------------
-
 #include <vcl.h>
-#pragma hdrstop
-
 #include "Lista.h"
-
+#pragma hdrstop
+#pragma package(smart_init)
 //---------------------------------------------------------------------------
 
-#pragma package(smart_init)
+
