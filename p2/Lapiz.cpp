@@ -9,7 +9,14 @@
 
 #pragma package(smart_init)
 
-             Lapiz::Lapiz() : ang(0.0) {}
+Lapiz::Lapiz() : ang(0.0) {*pos = Punto2f(0,0);
+}
+
+
+Lapiz::Lapiz(Punto2f * pos, GLfloat a){
+    ang = a;
+    pos = pos -> clon();
+}
 
 void Lapiz::lineTo (Punto2f * destino, bool esVisible){
         if ( esVisible){
@@ -42,23 +49,48 @@ lineTo(p,esVisible);
 delete p;
 }
 
+//---------------------------------------------------------------------------
+
 void Lapiz::drawMotivo(Lapiz *l){
 
 }
+
+//---------------------------------------------------------------------------
+
 void Lapiz::drawTotal (Punto2f * posInicial, GLfloat angInicial){
 
 }
-void Lapiz::poliEspiral ( Punto2f * posInicial, GLfloat incrAng,
-                   GLfloat angInicial, GLfloat incrLong,
-                   GLfloat longInicial, int nPasos){
 
-                   }
+//---------------------------------------------------------------------------
+
+void Lapiz::poliEspiral ( Punto2f * posInicial, GLfloat incrAng,
+                          GLfloat angInicial, GLfloat incrLong,
+                          GLfloat longInicial, int nPasos){
+
+        Lapiz * l = new Lapiz (posInicial, angInicial);
+        Punto2f * posActual = posInicial -> clon();
+        for (int i = 0; i<nPasos; i++){
+                 l -> avanza(longInicial, true);
+                 longInicial += incrLong;
+                 l -> gira(incrAng);
+        }
+        delete l;
+}
+
+//---------------------------------------------------------------------------
+
 void Lapiz::poligonoR1 (Lapiz * l, GLfloat lado, int nlados){
 
 }
+
+//---------------------------------------------------------------------------
+
 void Lapiz::poligonoR2 (Punto2f * centro, GLfloat radio, int nlados){
 
 }
+
+//---------------------------------------------------------------------------
+
 void Lapiz::arco(Punto2f * inicio, Punto2f * fin, Punto2f *otro){
 
 }

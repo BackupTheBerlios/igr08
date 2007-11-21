@@ -18,6 +18,7 @@ GLfloat ang; // en radianes
 
 public:
 Lapiz();
+Lapiz(Punto2f * pos, GLfloat ang);
 void lineTo (Punto2f *, bool);
 void gira (GLfloat incrAng);
 void avanza (GLfloat longitud, bool esVisible);
