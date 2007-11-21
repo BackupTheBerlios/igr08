@@ -1,45 +1,47 @@
 //---------------------------------------------------------------------------
-
-#include <vcl.h>
 #pragma hdrstop
-
-#include "Lapiz.h"
-
-//---------------------------------------------------------------------------
-
 #pragma package(smart_init)
 
-Lapiz::Lapiz() {
+#include <vcl.h>
+#include "Lapiz.h"
+//---------------------------------------------------------------------------
 
-ang = 0.0;
-pos = new Punto2f(0,0);
+// Constructora por defecto
+Lapiz::Lapiz() {
+    ang = 0.0;
+    pos = new Punto2f(0,0);
 }
 
-
+// Constructora por parámetros
 Lapiz::Lapiz(Punto2f * pos, GLfloat a){
     ang = a;
     pos = pos -> clon();
 }
 
-   Lapiz::Lapiz (const Lapiz& l){
+// Constructora de copia
+Lapiz::Lapiz (const Lapiz& l){
+    ang = l.ang;
+    pos = l.pos -> clon();
+}
 
-   }
-          
-   Lapiz * Lapiz::clon() const{
-//        Lapiz * l = new Lapiz();
-//        *l = *this;
-//        return l;
-   }
+// Método Clon
+Lapiz * Lapiz::clon() const{
+    Lapiz * l = new Lapiz();
+    *l = *this;
+    return l;
+}
 
-
+// Dibuja un segmento desde la posicion relativa
 void Lapiz::lineTo (Punto2f * destino, bool esVisible){
-        if ( esVisible){
+
+    if ( esVisible){
         glBegin(GL_LINES);
                 glVertex2f(pos -> getX(), pos -> getY());
                 glVertex2f(destino -> getX(), destino -> getY());
         glEnd();
-        }
-        pos = destino; // clone;!!!!!
+    }
+
+    pos = destino; // clone;!!!!!
 }
 
 

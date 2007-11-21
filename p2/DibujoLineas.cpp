@@ -8,6 +8,6 @@
 
 // Constructora por defecto
 DibujoLineas::DibujoLineas() {
-       lista_segmentos = null;
+     //  lista_segmentos = null;
 }
 

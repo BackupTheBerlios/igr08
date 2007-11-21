@@ -14,4 +14,6 @@ class DibujoLineas {
    private:
       Segmento * lista_segmentos;
 
+};
+
 #endif
