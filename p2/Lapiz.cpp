@@ -41,13 +41,13 @@ void Lapiz::lineTo (Punto2f * destino, bool esVisible){
         glEnd();
     }
 
-    pos = destino; // clone;!!!!!
+    pos = destino->clon();
 }
 
-
-void Lapiz::gira (GLfloat incrAng){
+// Variamos el angulo actual de dibujo
+void Lapiz::gira (GLdouble incrAng){
         ang += incrAng;
-        GLfloat grados = r2g(ang);
+        GLdouble grados = r2g(ang);
 
         double  p_E;
         double parte_Decimal = modf(grados, &p_E);
@@ -57,12 +57,13 @@ void Lapiz::gira (GLfloat incrAng){
         grados += g2r(parte_Decimal);
 }
 
+// Avanzamos al siguiente punto relativo
 void Lapiz::avanza (GLfloat longitud, bool esVisible){
-GLfloat xD = pos -> getX() + longitud * cos (ang);
-GLfloat yD = pos -> getX() + longitud * sin (ang);
-Punto2f  * p = new Punto2f(xD,yD);
-lineTo(p,esVisible);
-delete p;
+        GLfloat xD = pos -> getX() + longitud * cos (ang);
+        GLfloat yD = pos -> getX() + longitud * sin (ang);
+        Punto2f  * p = new Punto2f(xD,yD);
+        lineTo(p,esVisible);
+        delete p;
 }
 
 //---------------------------------------------------------------------------
@@ -79,12 +80,12 @@ void Lapiz::drawTotal (Punto2f * posInicial, GLfloat angInicial){
 
 //---------------------------------------------------------------------------
 
+// Realiza los calculos para dibujar una poliEspiral
 void Lapiz::poliEspiral ( Punto2f * posInicial, GLfloat incrAng,
                           GLfloat angInicial, GLfloat incrLong,
                           GLfloat longInicial, int nPasos){
 
         Lapiz * l = new Lapiz (posInicial, angInicial);
-        Punto2f * posActual = posInicial -> clon();
         for (int i = 0; i<nPasos; i++){
                  l -> avanza(longInicial, true);
                  longInicial += incrLong;

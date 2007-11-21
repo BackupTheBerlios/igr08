@@ -15,7 +15,7 @@ class Lapiz {
       Lapiz * clon() const;
 
       void lineTo (Punto2f *, bool);
-      void gira (GLfloat incrAng);
+      void gira (GLdouble incrAng);
       void avanza (GLfloat longitud, bool esVisible);
       void drawMotivo(Lapiz *l);
       void drawTotal (Punto2f * posInicial, GLfloat angInicial);
