@@ -1,19 +1,23 @@
 //---------------------------------------------------------------------------
-#include <vcl.h>
-#include "Escena.h"
 #pragma hdrstop
 #pragma package(smart_init)
+
+#include <vcl.h>
+#include "Escena.h"
 //---------------------------------------------------------------------------
 
+// Constructora por defecto
 Escena::Escena(){
-listaDibujos = new Lista <DibujoLineas>();
-listaDibujos -> inicia();
+      listaDibujos = new Lista <DibujoLineas>();
+      listaDibujos -> inicia();
 }
 
- void Resize(){
+void Resize(){
 
- }
-   void Pinta(){
+}
 
-   }
+
+void Pinta(){
+
+}
 

@@ -29,6 +29,10 @@ object GLForm2D: TGLForm2D
   object MainMenu1: TMainMenu
     object Archivo1: TMenuItem
       Caption = '&Archivo'
+      object Nuevo1: TMenuItem
+        Caption = 'Nuevo...'
+        OnClick = Nuevo1Click
+      end
       object Abrir1: TMenuItem
         Caption = 'Abrir...'
         OnClick = Abrir1Click
@@ -36,6 +40,10 @@ object GLForm2D: TGLForm2D
       object Guardar1: TMenuItem
         Caption = 'Guardar...'
         OnClick = Guardar1Click
+      end
+      object Salir1: TMenuItem
+        Caption = 'Salir...'
+        OnClick = Salir1Click
       end
     end
   end

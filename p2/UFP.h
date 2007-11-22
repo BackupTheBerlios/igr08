@@ -25,16 +25,20 @@ __published:	// IDE-managed Components
         TMenuItem *Archivo1;
         TMenuItem *Abrir1;
         TMenuItem *Guardar1;
-  void __fastcall FormCreate(TObject *Sender);
-  void __fastcall FormResize(TObject *Sender);
-  void __fastcall FormPaint(TObject *Sender);
-  void __fastcall FormDestroy(TObject *Sender);
+        TMenuItem *Nuevo1;
+        TMenuItem *Salir1;
+        void __fastcall FormCreate(TObject *Sender);
+        void __fastcall FormResize(TObject *Sender);
+        void __fastcall FormPaint(TObject *Sender);
+        void __fastcall FormDestroy(TObject *Sender);
         void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
           TShiftState Shift);
         void __fastcall Abrir1Click(TObject *Sender);
         void __fastcall Guardar1Click(TObject *Sender);
         void __fastcall FormMouseDown(TObject *Sender, TMouseButton Button,
           TShiftState Shift, int X, int Y);
+        void __fastcall Nuevo1Click(TObject *Sender);
+        void __fastcall Salir1Click(TObject *Sender);
 
 private:	// User declarations
  HDC hdc;

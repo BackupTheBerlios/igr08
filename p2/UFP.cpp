@@ -35,7 +35,10 @@ void __fastcall TGLForm2D::FormCreate(TObject *Sender)
     //ClientHeight=400;
     RatioViewPort=1.0;
 
-    // inicialización de las variables del programa
+    // Inicialización de las variables del programa
+    // Al abrir programa creamos una nueva escena vacía
+    scene = new Escena();
+
 }
 //---------------------------------------------------------------------------
 void __fastcall TGLForm2D::SetPixelFormatDescriptor()
@@ -176,19 +179,41 @@ else{
 }
 //---------------------------------------------------------------------------
 
-
-
-
-
-
-
-
-
-
 void __fastcall TGLForm2D::FormMouseDown(TObject *Sender,
       TMouseButton Button, TShiftState Shift, int X, int Y)
 {
-ShowMessage(AnsiString(X) + " "+ AnsiString(Y));       
+ShowMessage(AnsiString(X) + " "+ AnsiString(Y));
 }
 //---------------------------------------------------------------------------
+// Si hemos dibujado algo preguntamos si queremos guardar y empezamos
+// una nueva escena
+void __fastcall TGLForm2D::Nuevo1Click(TObject *Sender) {
+
+   if (!(scene->getEscena()->vacia())) {
+      int ret = Application->MessageBox("¿ Desea guardar la escena actual ?",
+                                        "Escena Actual", MB_YESNO);
+      if (ret==6)
+          GLForm2D->Guardar1Click(0);
+   }
+
+   delete scene;
+   scene = new Escena();
+}
+//---------------------------------------------------------------------------
+// Si hemos dibujado algo preguntamos si queremos guardar y salimos !!!!
+void __fastcall TGLForm2D::Salir1Click(TObject *Sender)
+{
+   if (!(scene->getEscena()->vacia())) {
+      int ret = Application->MessageBox("¿ Desea guardar la escena actual ?",
+                                        "Escena Actual", MB_YESNO);
+      if (ret==6)
+          GLForm2D->Guardar1Click(0);
+   }
+
+   Application->Terminate();
+}
+//---------------------------------------------------------------------------
+
+
+
 
