@@ -46,5 +46,12 @@ object GLForm2D: TGLForm2D
         OnClick = Salir1Click
       end
     end
+    object Dibujar1: TMenuItem
+      Caption = 'Dibujar'
+      object Lineas1: TMenuItem
+        Caption = 'Lineas'
+        OnClick = Lineas1Click
+      end
+    end
   end
 end

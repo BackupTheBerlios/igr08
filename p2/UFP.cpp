@@ -39,6 +39,9 @@ void __fastcall TGLForm2D::FormCreate(TObject *Sender)
     // Al abrir programa creamos una nueva escena vacía
     scene = new Escena();
 
+    // Posicion actual
+    pos_actual = new Punto2f();
+
 }
 //---------------------------------------------------------------------------
 void __fastcall TGLForm2D::SetPixelFormatDescriptor()
@@ -130,10 +133,10 @@ void __fastcall TGLForm2D::FormDestroy(TObject *Sender)
 void __fastcall TGLForm2D::FormKeyDown(TObject *Sender, WORD &Key,
       TShiftState Shift)
 {
-Lapiz * l= new Lapiz();
-l->gira(3.0);
-ShowMessage("");
-delete l;
+    Lapiz * l= new Lapiz();
+    l->gira(3.0);
+    ShowMessage("");
+    delete l;
 }
 //---------------------------------------------------------------------------
 
@@ -180,9 +183,11 @@ else{
 //---------------------------------------------------------------------------
 
 void __fastcall TGLForm2D::FormMouseDown(TObject *Sender,
-      TMouseButton Button, TShiftState Shift, int X, int Y)
+      TMouseButton Button, TShiftState Shift, int a, int b)
 {
-ShowMessage(AnsiString(X) + " "+ AnsiString(Y));
+ X = a;
+ Y = b; 
+//ShowMessage(AnsiString(X) + " "+ AnsiString(Y));
 }
 //---------------------------------------------------------------------------
 // Si hemos dibujado algo preguntamos si queremos guardar y empezamos
@@ -204,8 +209,8 @@ void __fastcall TGLForm2D::Nuevo1Click(TObject *Sender) {
 void __fastcall TGLForm2D::Salir1Click(TObject *Sender)
 {
    if (!(scene->getEscena()->vacia())) {
-      int ret = Application->MessageBox("¿ Desea guardar la escena actual ?",
-                                        "Escena Actual", MB_YESNO);
+      int ret = Application->MessageBox("El archivo ha sido modificado\n\n¿Desea guardar la escena?",
+                                        "Advertencia", MB_YESNO);
       if (ret==6)
           GLForm2D->Guardar1Click(0);
    }
@@ -214,6 +219,12 @@ void __fastcall TGLForm2D::Salir1Click(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-
-
+void __fastcall TGLForm2D::Lineas1Click(TObject *Sender)
+{
+ Lapiz * l= new Lapiz();
+ Punto2f * p = new Punto2f(X,Y);   // Posicion del raton
+ Segmento * s = new Segmento(pos_actual,p);
+ //scene->getEscena()->getDibujoLineas()->inserta(s);  // Insertar segmento siguiente
+}
+//---------------------------------------------------------------------------
 

@@ -10,6 +10,7 @@ class DibujoLineas {
 
    public:
       DibujoLineas();
+      Lista<Segmento> * getDibujoLineas() {return listaSegmentos;}
 
    private:
       Lista<Segmento> * listaSegmentos;

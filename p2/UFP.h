@@ -14,6 +14,8 @@
 
 #include "Escena.h"
 #include "Lapiz.h"
+#include "Punto2f.h"
+#include "Segmento.h"
 
 //---------------------------------------------------------------------------
 class TGLForm2D : public TForm
@@ -27,6 +29,8 @@ __published:	// IDE-managed Components
         TMenuItem *Guardar1;
         TMenuItem *Nuevo1;
         TMenuItem *Salir1;
+        TMenuItem *Dibujar1;
+        TMenuItem *Lineas1;
         void __fastcall FormCreate(TObject *Sender);
         void __fastcall FormResize(TObject *Sender);
         void __fastcall FormPaint(TObject *Sender);
@@ -39,6 +43,7 @@ __published:	// IDE-managed Components
           TShiftState Shift, int X, int Y);
         void __fastcall Nuevo1Click(TObject *Sender);
         void __fastcall Salir1Click(TObject *Sender);
+        void __fastcall Lineas1Click(TObject *Sender);
 
 private:	// User declarations
  HDC hdc;
@@ -49,6 +54,12 @@ private:	// User declarations
  GLfloat RatioViewPort;
  // Guarda un puntero a la escena
  Escena * scene;
+ // Coordenada X actual del ratón
+ int X;
+  // Coordenada Y actual del ratón
+ int Y;
+ // Posicion Actual
+ Punto2f * pos_actual;
  // Métodos privados
  void __fastcall SetPixelFormatDescriptor();
  void __fastcall GLScene();
