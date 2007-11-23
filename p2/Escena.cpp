@@ -21,3 +21,7 @@ void Escena::Pinta(){
 
 }
 
+void Escena::inserta(Punto2f * p) {
+
+}
+

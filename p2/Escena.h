@@ -3,6 +3,7 @@
 #define EscenaH
 
 #include "DibujoLineas.h"
+#include "Punto2f.h"
 //---------------------------------------------------------------------------
 
 class Escena {
@@ -12,6 +13,8 @@ class Escena {
 
       void Resize();
       void Pinta();
+
+      void inserta(Punto2f * p);
 
       void setNombre(AnsiString cadena) { nombre = cadena; }
       void setModificada(bool valor) { estado = valor; }
