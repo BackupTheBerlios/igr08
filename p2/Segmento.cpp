@@ -23,3 +23,11 @@ Segmento::~Segmento(){
          delete inicio;
          delete final;
 }
+
+void Segmento::Pinta(){
+        glBegin(GL_LINES);
+                glVertex2f(this->getInicio()->getX() , this->getInicio()->getY());
+                glVertex2f(this->getFinal()->getX()  , this->getFinal()->getY());
+
+        glEnd();
+      }

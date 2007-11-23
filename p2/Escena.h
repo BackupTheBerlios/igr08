@@ -22,6 +22,8 @@ class Escena {
       AnsiString getNombre() { return nombre; }
       bool Modificada() { return estado; }
       Lista<DibujoLineas> * getEscena() {return listaDibujos;}
+      void Zoom(float factor);
+      void ZoomProgresivo(float factor, int nPasos);
 
    private:
       int xR, xL, yT, yB;

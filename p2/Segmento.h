@@ -16,6 +16,7 @@ class Segmento {
       Punto2f * getFinal(){return final;}
       void setInicio(Punto2f p);
       void setFinal(Punto2f p);
+      void Pinta();
 
    private:
       Punto2f * inicio;

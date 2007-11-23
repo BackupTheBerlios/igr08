@@ -41,7 +41,7 @@ void __fastcall TGLForm2D::FormCreate(TObject *Sender)
 
     // Posicion actual
     pos_actual = new Punto2f();
-
+     
 }
 //---------------------------------------------------------------------------
 void __fastcall TGLForm2D::SetPixelFormatDescriptor()
@@ -128,6 +128,9 @@ void __fastcall TGLForm2D::FormDestroy(TObject *Sender)
     wglMakeCurrent(NULL, NULL);
     wglDeleteContext(hrc);
     // eliminar objetos creados
+
+       delete pos_actual;
+       delete scene;
 }
 //---------------------------------------------------------------------------
 
