@@ -110,6 +110,7 @@ void __fastcall TGLForm2D::GLScene()
 glClear(GL_COLOR_BUFFER_BIT);
 
 // comandos para dibujar la escena
+scene->Pinta();
 
 glFlush();
 SwapBuffers(hdc);
@@ -186,8 +187,8 @@ void __fastcall TGLForm2D::FormMouseDown(TObject *Sender,
       TMouseButton Button, TShiftState Shift, int a, int b)
 {
  X = a;
- Y = b; 
-//ShowMessage(AnsiString(X) + " "+ AnsiString(Y));
+ Y = b;
+//ShowMessage(AnsiString(X) + " "+ AnsiString(Y)); */
 }
 //---------------------------------------------------------------------------
 // Si hemos dibujado algo preguntamos si queremos guardar y empezamos
@@ -221,10 +222,12 @@ void __fastcall TGLForm2D::Salir1Click(TObject *Sender)
 
 void __fastcall TGLForm2D::Lineas1Click(TObject *Sender)
 {
- Lapiz * l= new Lapiz();
- Punto2f * p = new Punto2f(X,Y);   // Posicion del raton
+
+ Punto2f * p = new Punto2f(X,Y);                // Posicion del raton
  Segmento * s = new Segmento(pos_actual,p);
- //scene->getEscena()->getDibujoLineas()->inserta(s);  // Insertar segmento siguiente
+ scene->getEscena()->getActual()->getDibujoLineas()->inserta(s); // Insertar segmento siguiente
+
+
 }
 //---------------------------------------------------------------------------
 

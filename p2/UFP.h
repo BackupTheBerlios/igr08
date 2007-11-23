@@ -54,12 +54,10 @@ private:	// User declarations
  GLfloat RatioViewPort;
  // Guarda un puntero a la escena
  Escena * scene;
- // Coordenada X actual del ratón
- int X;
-  // Coordenada Y actual del ratón
- int Y;
  // Posicion Actual
  Punto2f * pos_actual;
+ // Coordenadas del ratón
+ int X, Y;
  // Métodos privados
  void __fastcall SetPixelFormatDescriptor();
  void __fastcall GLScene();

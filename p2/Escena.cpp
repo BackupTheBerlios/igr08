@@ -12,12 +12,12 @@ Escena::Escena(){
       listaDibujos -> inicia();
 }
 
-void Resize(){
+void Escena::Resize(){
 
 }
 
 
-void Pinta(){
+void Escena::Pinta(){
 
 }
 
