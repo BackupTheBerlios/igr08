@@ -10,7 +10,9 @@ class DibujoLineas {
 
    public:
       DibujoLineas();
+      ~DibujoLineas(){ delete listaSegmentos;}
       Lista<Segmento> * getDibujoLineas() {return listaSegmentos;}
+      void Pinta();
 
    private:
       Lista<Segmento> * listaSegmentos;

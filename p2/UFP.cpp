@@ -40,8 +40,9 @@ void __fastcall TGLForm2D::FormCreate(TObject *Sender)
     scene = new Escena();
 
     // Posicion actual
-    pos_actual = new Punto2f();
-     
+   pos_actual = new Punto2f();
+
+
 }
 //---------------------------------------------------------------------------
 void __fastcall TGLForm2D::SetPixelFormatDescriptor()
@@ -68,7 +69,6 @@ void __fastcall TGLForm2D::SetPixelFormatDescriptor()
 //---------------------------------------------------------------------
 void __fastcall TGLForm2D::FormResize(TObject *Sender)
 {
-
  //se actualiza puerto de vista y su radio
   if ((ClientWidth<=1)||(ClientHeight<=1)){
      ClientWidth=400;
@@ -102,6 +102,7 @@ void __fastcall TGLForm2D::FormResize(TObject *Sender)
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
   GLScene();
+scene->Pinta();
 
 }
 //---------------------------------------------------------------------------
@@ -110,7 +111,8 @@ void __fastcall TGLForm2D::GLScene()
 glClear(GL_COLOR_BUFFER_BIT);
 
 // comandos para dibujar la escena
-scene->Pinta();
+//scene->Pinta();
+
 
 glFlush();
 SwapBuffers(hdc);
@@ -157,7 +159,7 @@ if (OpenDialog1 ->Execute()){
         // se cierra el fichero
         filein.close();
 
-
+//         delete text;  ?????
         }
 else{
         ShowMessage("El usuario canceló la operación");
@@ -228,8 +230,9 @@ void __fastcall TGLForm2D::Lineas1Click(TObject *Sender)
 
  Punto2f * p = new Punto2f(X,Y);                // Posicion del raton
  Segmento * s = new Segmento(pos_actual,p);
- scene->getEscena()->getActual()->getDibujoLineas()->inserta(s); // Insertar segmento siguiente
-
+// scene->getEscena()->getActual()->getDibujoLineas()->inserta(s); // Insertar segmento siguiente
+        delete p;
+        delete s;
 
 }
 //---------------------------------------------------------------------------

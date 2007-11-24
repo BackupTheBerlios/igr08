@@ -11,4 +11,9 @@ DibujoLineas::DibujoLineas() {
         listaSegmentos = new Lista <Segmento>();
         listaSegmentos->inicia();
 }
-
+void DibujoLineas::Pinta(){
+              while(!listaSegmentos->final()){
+                   listaSegmentos -> getActual() -> Pinta();
+                   listaSegmentos -> avanza();
+              }
+}

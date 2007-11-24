@@ -10,7 +10,7 @@ class Escena {
 
    public:
       Escena();
-
+      ~Escena();
       void Resize();
       void Pinta();
 

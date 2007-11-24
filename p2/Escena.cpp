@@ -10,7 +10,13 @@
 Escena::Escena(){
       listaDibujos = new Lista <DibujoLineas>();
       listaDibujos -> inicia();
+      xR, xL, yT, yB=0;
 }
+
+Escena::~Escena(){
+        delete listaDibujos;
+}
+
 
 void Escena::Resize(){
 
@@ -18,7 +24,10 @@ void Escena::Resize(){
 
 
 void Escena::Pinta(){
-       int a = 0;
+              while(!listaDibujos->final()){
+                   listaDibujos-> getActual()->Pinta();
+                   listaDibujos->avanza();
+              }
 }
 
 void Escena::inserta(Punto2f * p) {
