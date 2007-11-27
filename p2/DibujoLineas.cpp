@@ -17,3 +17,7 @@ void DibujoLineas::Pinta(){
                    listaSegmentos -> avanza();
               }
 }
+
+void DibujoLineas::inserta(Segmento * s) {
+        listaSegmentos->inserta(s);
+}

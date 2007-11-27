@@ -14,8 +14,8 @@ class Segmento {
 
       Punto2f * getInicio(){return inicio;}
       Punto2f * getFinal(){return final;}
-      void setInicio(Punto2f p);
-      void setFinal(Punto2f p);
+      void setInicio(Punto2f * p){inicio = p;}
+      void setFinal(Punto2f * p){final = p;}
       void Pinta();
 
    private:

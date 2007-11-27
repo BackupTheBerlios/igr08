@@ -24,6 +24,7 @@ Segmento::~Segmento(){
          delete final;
 }
 
+
 void Segmento::Pinta(){
         glBegin(GL_LINES);
                 glVertex2f(this->getInicio()->getX() , this->getInicio()->getY());

@@ -18,7 +18,7 @@ Escena::~Escena(){
 }
 
 
-void Escena::Resize(){
+void Escena::Resize(int CW, int CH){
 
 }
 
@@ -30,8 +30,8 @@ void Escena::Pinta(){
               }
 }
 
-void Escena::inserta(Punto2f * p) {
-
+void Escena::inserta(DibujoLineas * dl) {
+        listaDibujos->inserta(dl);
 }
 
 

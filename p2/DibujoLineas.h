@@ -13,6 +13,7 @@ class DibujoLineas {
       ~DibujoLineas(){ delete listaSegmentos;}
       Lista<Segmento> * getDibujoLineas() {return listaSegmentos;}
       void Pinta();
+      void inserta(Segmento * s);
 
    private:
       Lista<Segmento> * listaSegmentos;

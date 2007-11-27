@@ -11,16 +11,16 @@ class Escena {
    public:
       Escena();
       ~Escena();
-      void Resize();
+      void Resize(int CW, int CH);
       void Pinta();
 
-      void inserta(Punto2f * p);
+      void inserta(DibujoLineas * p);
 
       void setNombre(AnsiString cadena) { nombre = cadena; }
-      void setModificada(bool valor) { estado = valor; }
+      void setModificada(bool valor) { modificado = valor; }
 
       AnsiString getNombre() { return nombre; }
-      bool Modificada() { return estado; }
+      bool Modificada() { return modificado; }
       Lista<DibujoLineas> * getEscena() {return listaDibujos;}
       void Zoom(float factor);
       void ZoomProgresivo(float factor, int nPasos);
@@ -29,7 +29,7 @@ class Escena {
       int xR, xL, yT, yB;
       Lista<DibujoLineas> * listaDibujos;
       AnsiString nombre;
-      bool estado;
+      bool modificado;
 };
 
 #endif

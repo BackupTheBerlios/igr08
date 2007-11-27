@@ -56,8 +56,14 @@ private:	// User declarations
  Escena * scene;
  // Posicion Actual
  Punto2f * pos_actual;
- // Coordenadas del ratón
- int X, Y;
+ // Estado
+ int estado;
+ // Indica si es el primer clics
+ bool primerClic;
+ // Punto, segmento y dibujo de lineas auxiliares
+ Punto2f * p;
+ Segmento * s;
+ DibujoLineas * dl;
  // Métodos privados
  void __fastcall SetPixelFormatDescriptor();
  void __fastcall GLScene();

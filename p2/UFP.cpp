@@ -40,7 +40,7 @@ void __fastcall TGLForm2D::FormCreate(TObject *Sender)
     scene = new Escena();
 
     // Posicion actual
-   pos_actual = new Punto2f();
+    pos_actual = new Punto2f();
 
 
 }
@@ -102,16 +102,17 @@ void __fastcall TGLForm2D::FormResize(TObject *Sender)
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
   GLScene();
-scene->Pinta();
+
 
 }
 //---------------------------------------------------------------------------
 void __fastcall TGLForm2D::GLScene()
 {
 glClear(GL_COLOR_BUFFER_BIT);
+glColor3f(1.0,0.0,1.0);
 
 // comandos para dibujar la escena
-//scene->Pinta();
+scene->Pinta();
 
 
 glFlush();
@@ -189,11 +190,27 @@ else{
 //---------------------------------------------------------------------------
 
 void __fastcall TGLForm2D::FormMouseDown(TObject *Sender,
-      TMouseButton Button, TShiftState Shift, int a, int b)
+      TMouseButton Button, TShiftState Shift, int x, int y)
 {
- X = a;
- Y = b;
-//ShowMessage(AnsiString(X) + " "+ AnsiString(Y)); */
+
+switch(estado){
+        case 1:{// Polilínea
+                        //Convertir punto en pixeles a coordenadas de la escena abstracta.
+                  p = new Punto2f(x,y);
+                  if (primerClic){ // Añadir punto inicial
+                          s = new Segmento();
+                          s->setInicio(p);
+                          primerClic= false;
+                  }
+                  else { // Añadir punto final
+                          s->setFinal(p);
+                          dl->inserta(s);
+                          s = new Segmento();
+                          s->setInicio(p->clon());
+                  }
+                }
+
+}
 }
 //---------------------------------------------------------------------------
 // Si hemos dibujado algo preguntamos si queremos guardar y empezamos
@@ -227,13 +244,10 @@ void __fastcall TGLForm2D::Salir1Click(TObject *Sender)
 
 void __fastcall TGLForm2D::Lineas1Click(TObject *Sender)
 {
-
- Punto2f * p = new Punto2f(X,Y);                // Posicion del raton
- Segmento * s = new Segmento(pos_actual,p);
-// scene->getEscena()->getActual()->getDibujoLineas()->inserta(s); // Insertar segmento siguiente
-        delete p;
-        delete s;
-
+ estado = 1;
+ primerClic=true;
+ dl = new DibujoLineas();
+ scene->inserta(dl);
 }
 //---------------------------------------------------------------------------
 
