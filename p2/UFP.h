@@ -54,6 +54,8 @@ private:	// User declarations
  GLfloat RatioViewPort;
  // Guarda un puntero a la escena
  Escena * scene;
+ // Distancia equidistante del punto central
+ int distancia;
  // Posicion Actual
  Punto2f * pos_actual;
  // Estado

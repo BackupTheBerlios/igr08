@@ -25,23 +25,11 @@ void __fastcall TGLForm2D::FormCreate(TObject *Sender)
     //Cor de fondo de la ventana
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-    //inicialización del volumen de vista
-    xRight=200.0; xLeft=-xRight;
-    yTop=xRight; yBot=-yTop;
-    //Radio del volumen de vista == 1
+    // Distancia equidistante al centro
+    distancia = 400;
 
-    //inicialización del puerto de vista
-    //ClientWidth=400;
-    //ClientHeight=400;
-    RatioViewPort=1.0;
-
-    // Inicialización de las variables del programa
-    // Al abrir programa creamos una nueva escena vacía
-    scene = new Escena();
-
-    // Posicion actual
-    pos_actual = new Punto2f();
-
+    // Creamos una nueva escena
+    scene = new Escena(distancia);
 
 }
 //---------------------------------------------------------------------------
@@ -69,7 +57,7 @@ void __fastcall TGLForm2D::SetPixelFormatDescriptor()
 //---------------------------------------------------------------------
 void __fastcall TGLForm2D::FormResize(TObject *Sender)
 {
- //se actualiza puerto de vista y su radio
+  // Se actualiza puerto de vista y su radio
   if ((ClientWidth<=1)||(ClientHeight<=1)){
      ClientWidth=400;
      ClientHeight=400;
@@ -77,33 +65,11 @@ void __fastcall TGLForm2D::FormResize(TObject *Sender)
      }
   else RatioViewPort= (float)ClientWidth/(float)ClientHeight;
 
-  glViewport(0,0,ClientWidth,ClientHeight);
+  // Llamamos a la función Resize de la Escena
+  scene->Resize(ClientWidth,ClientHeight);
 
-  // se actualiza el volumen de vista
-  // para que su radio coincida con ratioViewPort
-  GLfloat RatioVolVista=xRight/yTop;
-
-  if (RatioVolVista>=RatioViewPort){
-     //Aumentamos yTop-yBot
-     yTop= xRight/RatioViewPort;
-     yBot=-yTop;
-     }
-  else{
-     //Aumentamos xRight-xLeft
-     xRight=RatioViewPort*yTop;
-     xLeft=-xRight;
-     }
-
-  glMatrixMode(GL_PROJECTION);
-  glLoadIdentity();
-  gluOrtho2D(xLeft,xRight, yBot,yTop);
-
-
-  glMatrixMode(GL_MODELVIEW);
-  glLoadIdentity();
+  // Refrescamos
   GLScene();
-
-
 }
 //---------------------------------------------------------------------------
 void __fastcall TGLForm2D::GLScene()
@@ -194,13 +160,14 @@ void __fastcall TGLForm2D::FormMouseDown(TObject *Sender,
 {
 
 switch(estado){
-        case 1:{// Polilínea
-                        //Convertir punto en pixeles a coordenadas de la escena abstracta.
+        case 1:{  // Polilínea
                   p = new Punto2f(x,y);
+                  scene->transformarXY(p,ClientWidth,ClientHeight);
+
                   if (primerClic){ // Añadir punto inicial
                           s = new Segmento();
                           s->setInicio(p);
-                          primerClic= false;
+                          primerClic = false;
                   }
                   else { // Añadir punto final
                           s->setFinal(p);
@@ -225,7 +192,7 @@ void __fastcall TGLForm2D::Nuevo1Click(TObject *Sender) {
    }
 
    delete scene;
-   scene = new Escena();
+   scene = new Escena(distancia);
 }
 //---------------------------------------------------------------------------
 // Si hemos dibujado algo preguntamos si queremos guardar y salimos !!!!

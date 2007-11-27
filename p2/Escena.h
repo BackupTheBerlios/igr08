@@ -9,12 +9,13 @@
 class Escena {
 
    public:
-      Escena();
+      Escena(int);
       ~Escena();
       void Resize(int CW, int CH);
       void Pinta();
 
       void inserta(DibujoLineas * p);
+      void transformarXY(Punto2f *, int, int);
 
       void setNombre(AnsiString cadena) { nombre = cadena; }
       void setModificada(bool valor) { modificado = valor; }
@@ -26,10 +27,15 @@ class Escena {
       void ZoomProgresivo(float factor, int nPasos);
 
    private:
-      int xR, xL, yT, yB;
-      Lista<DibujoLineas> * listaDibujos;
-      AnsiString nombre;
+      int xRight, xLeft;
+      int yTop, yBot;
+      float ratioViewPort;
       bool modificado;
+      AnsiString nombre;
+      Lista<DibujoLineas> * listaDibujos;
+
+      GLdouble convertirX(int,int);
+      GLdouble convertirY(int,int);
 };
 
 #endif
