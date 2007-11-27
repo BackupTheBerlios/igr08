@@ -45,19 +45,18 @@ void Escena::Resize(int CW, int CH) {
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluOrtho2D(xLeft,xRight, yBot,yTop);
+    gluOrtho2D(xLeft,xRight,yBot,yTop);
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     return;
 }
 
-
 void Escena::Pinta(){
-              while(!listaDibujos->final()){
-                   listaDibujos-> getActual()->Pinta();
-                   listaDibujos->avanza();
-              }
+    while(!listaDibujos->final()){
+         listaDibujos->getActual()->Pinta();
+         listaDibujos->avanza();
+   }
 }
 
 void Escena::inserta(DibujoLineas * dl) {
@@ -65,8 +64,8 @@ void Escena::inserta(DibujoLineas * dl) {
 }
 
 void Escena::transformarXY(Punto2f * p, int ancho, int alto) {
-        GLdouble x_Aux;
-        GLdouble y_Aux;
+        GLfloat x_Aux;
+        GLfloat y_Aux;
 
         x_Aux = convertirX(p->getX(), ancho);
         y_Aux = convertirY(p->getX(), alto);

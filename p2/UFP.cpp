@@ -26,7 +26,7 @@ void __fastcall TGLForm2D::FormCreate(TObject *Sender)
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
     // Distancia equidistante al centro
-    distancia = 400;
+    distancia = 200;
 
     // Creamos una nueva escena
     scene = new Escena(distancia);
@@ -75,11 +75,11 @@ void __fastcall TGLForm2D::FormResize(TObject *Sender)
 void __fastcall TGLForm2D::GLScene()
 {
 glClear(GL_COLOR_BUFFER_BIT);
+
 glColor3f(1.0,0.0,1.0);
 
 // comandos para dibujar la escena
 scene->Pinta();
-
 
 glFlush();
 SwapBuffers(hdc);
@@ -160,7 +160,7 @@ void __fastcall TGLForm2D::FormMouseDown(TObject *Sender,
 {
 
 switch(estado){
-        case 1:{  // Polilínea
+        case 1:   // Polilínea
                   p = new Punto2f(x,y);
                   scene->transformarXY(p,ClientWidth,ClientHeight);
 
@@ -174,11 +174,12 @@ switch(estado){
                           dl->inserta(s);
                           s = new Segmento();
                           s->setInicio(p->clon());
-                  }
-                }
+                       }
+                  break;
+        }
+        ShowMessage(s->getInicio()->getX());
+}
 
-}
-}
 //---------------------------------------------------------------------------
 // Si hemos dibujado algo preguntamos si queremos guardar y empezamos
 // una nueva escena
@@ -212,9 +213,9 @@ void __fastcall TGLForm2D::Salir1Click(TObject *Sender)
 void __fastcall TGLForm2D::Lineas1Click(TObject *Sender)
 {
  estado = 1;
- primerClic=true;
+ primerClic = true;
  dl = new DibujoLineas();
- scene->inserta(dl);
+ scene -> inserta(dl);
 }
 //---------------------------------------------------------------------------
 
