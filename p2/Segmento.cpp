@@ -24,10 +24,10 @@ Segmento::~Segmento(){
          delete final;
 }
 
-
+// Dibuja segmento actual
 void Segmento::Pinta(){
         glBegin(GL_LINES);
                 glVertex2f(inicio->getX() , inicio->getY());
-                glVertex2f(final->getX()  , final->getY());
+                glVertex2f(final->getX() , final->getY());
         glEnd();
       }

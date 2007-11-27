@@ -20,6 +20,30 @@ object GLForm2D: TGLForm2D
   OnResize = FormResize
   PixelsPerInch = 96
   TextHeight = 13
+  object Edit1: TEdit
+    Left = 256
+    Top = 24
+    Width = 121
+    Height = 21
+    TabOrder = 0
+    Text = 'Edit1'
+  end
+  object Edit2: TEdit
+    Left = 256
+    Top = 56
+    Width = 121
+    Height = 21
+    TabOrder = 1
+    Text = 'Edit1'
+  end
+  object Edit3: TEdit
+    Left = 256
+    Top = 88
+    Width = 121
+    Height = 21
+    TabOrder = 2
+    Text = 'Edit1'
+  end
   object SaveDialog1: TSaveDialog
     Left = 24
   end

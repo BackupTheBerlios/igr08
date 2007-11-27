@@ -177,7 +177,10 @@ switch(estado){
                        }
                   break;
         }
-        ShowMessage(s->getInicio()->getX());
+        //ShowMessage(s->getInicio()->getX());
+        Edit1->Text = dl->getDibujoLineas()->getLongitud();
+        Edit2->Text = s->getInicio()->getX();
+        Edit3->Text = s->getFinal()->getX();
 }
 
 //---------------------------------------------------------------------------
@@ -206,6 +209,7 @@ void __fastcall TGLForm2D::Salir1Click(TObject *Sender)
           GLForm2D->Guardar1Click(0);
    }
 
+   delete scene;
    Application->Terminate();
 }
 //---------------------------------------------------------------------------

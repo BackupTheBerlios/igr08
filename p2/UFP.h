@@ -31,6 +31,9 @@ __published:	// IDE-managed Components
         TMenuItem *Salir1;
         TMenuItem *Dibujar1;
         TMenuItem *Lineas1;
+        TEdit *Edit1;
+        TEdit *Edit2;
+        TEdit *Edit3;
         void __fastcall FormCreate(TObject *Sender);
         void __fastcall FormResize(TObject *Sender);
         void __fastcall FormPaint(TObject *Sender);
