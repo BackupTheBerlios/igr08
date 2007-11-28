@@ -18,3 +18,11 @@ Punto2f * Punto2f::clon() const {
         return p;
 }
 
+// Dibuja un punto
+void Punto2f::Pinta(){
+        glBegin(GL_POINTS);
+          glVertex2f(x,y);
+        glEnd();
+      }
+
+

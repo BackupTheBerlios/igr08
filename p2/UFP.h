@@ -31,9 +31,10 @@ __published:	// IDE-managed Components
         TMenuItem *Salir1;
         TMenuItem *Dibujar1;
         TMenuItem *Lineas1;
+        TMenuItem *Arcos1;
+        TMenuItem *Espirales1;
         TEdit *Edit1;
         TEdit *Edit2;
-        TEdit *Edit3;
         void __fastcall FormCreate(TObject *Sender);
         void __fastcall FormResize(TObject *Sender);
         void __fastcall FormPaint(TObject *Sender);
@@ -47,6 +48,7 @@ __published:	// IDE-managed Components
         void __fastcall Nuevo1Click(TObject *Sender);
         void __fastcall Salir1Click(TObject *Sender);
         void __fastcall Lineas1Click(TObject *Sender);
+        void __fastcall Arcos1Click(TObject *Sender);
 
 private:	// User declarations
  HDC hdc;
@@ -63,12 +65,17 @@ private:	// User declarations
  Punto2f * pos_actual;
  // Estado
  int estado;
- // Indica si es el primer clics
- bool primerClic;
  // Punto, segmento y dibujo de lineas auxiliares
  Punto2f * p;
  Segmento * s;
  DibujoLineas * dl;
+ // Puntos del Arco y contador
+ Punto2f* puntos[3];
+ int cont;
+
+ Punto2f * p_final;
+ Punto2f * p_otro;
+
  // Métodos privados
  void __fastcall SetPixelFormatDescriptor();
  void __fastcall GLScene();

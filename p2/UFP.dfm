@@ -21,27 +21,19 @@ object GLForm2D: TGLForm2D
   PixelsPerInch = 96
   TextHeight = 13
   object Edit1: TEdit
-    Left = 256
-    Top = 24
+    Left = 264
+    Top = 40
     Width = 121
     Height = 21
     TabOrder = 0
     Text = 'Edit1'
   end
   object Edit2: TEdit
-    Left = 256
-    Top = 56
+    Left = 264
+    Top = 72
     Width = 121
     Height = 21
     TabOrder = 1
-    Text = 'Edit1'
-  end
-  object Edit3: TEdit
-    Left = 256
-    Top = 88
-    Width = 121
-    Height = 21
-    TabOrder = 2
     Text = 'Edit1'
   end
   object SaveDialog1: TSaveDialog
@@ -75,6 +67,13 @@ object GLForm2D: TGLForm2D
       object Lineas1: TMenuItem
         Caption = 'Lineas'
         OnClick = Lineas1Click
+      end
+      object Arcos1: TMenuItem
+        Caption = 'Arcos'
+        OnClick = Arcos1Click
+      end
+      object Espirales1: TMenuItem
+        Caption = 'Espirales'
       end
     end
   end

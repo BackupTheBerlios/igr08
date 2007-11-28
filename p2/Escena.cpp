@@ -35,12 +35,12 @@ void Escena::Resize(int CW, int CH) {
     if (RatioVolVista >= ratioViewPort){
        //Aumentamos yTop-yBot
        yTop = xRight / ratioViewPort;
-       yBot =-yTop;
+       yBot = -yTop;
     }
     else{
        //Aumentamos xRight-xLeft
        xRight= ratioViewPort*yTop;
-       xLeft =-xRight;
+       xLeft = -xRight;
     }
 
     glMatrixMode(GL_PROJECTION);
@@ -49,12 +49,11 @@ void Escena::Resize(int CW, int CH) {
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    return;
 }
 
 void Escena::Pinta(){
    listaDibujos ->inicia();
-    while(!listaDibujos->final()){
+   while(!listaDibujos->final()){
          listaDibujos->getActual()->Pinta();
          listaDibujos->avanza();
    }
@@ -69,11 +68,10 @@ void Escena::transformarXY(Punto2f * p, int ancho, int alto) {
         GLfloat y_Aux;
 
         x_Aux = convertirX(p->getX(), ancho);
-        y_Aux = convertirY(p->getX(), alto);
+        y_Aux = convertirY(p->getY(), alto);
 
         p->setX(x_Aux);
-        p->setY(y_Aux);
-
+        p->setY(-y_Aux);
 }
 
 

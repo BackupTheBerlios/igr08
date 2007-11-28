@@ -9,11 +9,13 @@
 class Punto2f {
 
     public:
-
         Punto2f () : x(0.0), y(0.0) {}
         Punto2f (GLfloat X, GLfloat Y) : x(X), y(Y) {}
         Punto2f (const Punto2f&);
         Punto2f * clon() const;
+
+        void Pinta();
+
         GLfloat getX() {return x;}
         GLfloat getY() {return y;}
 

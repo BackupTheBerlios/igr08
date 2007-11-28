@@ -78,31 +78,23 @@ void __fastcall TGLForm2D::GLScene()
 {
 glClear(GL_COLOR_BUFFER_BIT);
 
-glColor3f(1.0,0.0,1.0);
-/*Punto2f * p1 = new Punto2f(0.0, 20.0);
-Punto2f * p2 = new Punto2f(100.0, 20.0);
-Punto2f * p3 = new Punto2f(200.0, 70.0);
-Punto2f * p4 = new Punto2f(60.0, 120.0);
-Punto2f * p5 = new Punto2f(180.0, 150.0);
-Punto2f * p6 = new Punto2f(100.0, 200.0);
-Segmento * s1 = new Segmento(p1,p2);
-Segmento * s2 = new Segmento(p2,p3);
-Segmento * s3 = new Segmento(p4,p5);
-Segmento * s4 = new Segmento(p5,p6);
+glColor3f(1.0,1.0,1.0);
+glLineWidth(2);
+glPointSize(3);
 
-DibujoLineas * dl = new DibujoLineas();
-dl->inserta(s1);
-dl->inserta(s2);
-dl->inserta(s3);
-dl->inserta(s4);
-scene-> inserta (dl);  
-
-    */
-
-// comandos para dibujar la escena
+// Comandos para dibujar la escena
 if (scene !=NULL) {
    scene->Pinta();
    }
+
+// Puntos provisionales del Arco
+if (estado == 2)
+   for (int i=0; i<=cont; i++)
+      if (puntos[i]!=NULL)
+         puntos[i]->Pinta();
+
+
+
 
 glFlush();
 SwapBuffers(hdc);
@@ -119,11 +111,11 @@ void __fastcall TGLForm2D::FormDestroy(TObject *Sender)
     ReleaseDC(Handle,hdc);
     wglMakeCurrent(NULL, NULL);
     wglDeleteContext(hrc);
-    // eliminar objetos creados
 
-       delete pos_actual;
-       delete scene;
-       scene = NULL;
+    // eliminar objetos creados
+    delete pos_actual;
+    delete scene;
+    scene = NULL;
 }
 //---------------------------------------------------------------------------
 
@@ -184,42 +176,39 @@ void __fastcall TGLForm2D::FormMouseDown(TObject *Sender,
 {
 
 switch(estado){
-        case 1:   // Polilínea
+        case 1:   // Polilíneas
                   p = new Punto2f(x,y);
                   scene->transformarXY(p,ClientWidth,ClientHeight);
 
                   if ( pos_actual== NULL)
                      pos_actual = p->clon();
-                  s= new Segmento(pos_actual, p);
+                  s = new Segmento(pos_actual, p);
                   dl->inserta(s);
                   pos_actual = p->clon();
-                  /*
-                  if (primerClic){ // Añadir punto inicial
-                          s = new Segmento();
-                          s->setInicio(p);
-                          primerClic = false;
-                  }
-                  else { // Añadir punto final
-                          s->setFinal(p);
-                          dl->inserta(s);
-                          s = new Segmento();
-                          s->setInicio(p->clon());
-                       }
-                   */
+
+                  GLScene();
+
                   break;
+
+        case 2:  // Arcos
+                if (cont <= 2) {
+
+                    puntos[cont] = new Punto2f(x,y);
+                    scene->transformarXY(puntos[cont],ClientWidth,ClientHeight);
+
+                    GLScene();
+
+                    cont++;
+                    }
+                 
+                 // Si cont = 3 dibujamos arco
+                 // e inicializamos cont a 0.
+                 // en otro caso cont++
+
+                 break;
         }
-        //ShowMessage(s->getInicio()->getX());
-        Edit1->Text = dl->getDibujoLineas()->getLongitud();
-        Edit2->Text = s->getInicio()->getX();
-        Edit3->Text = s->getFinal()->getX();
 
-        //dl->getDibujoLineas()->getActual()->Pinta();
 
-        Lista<Segmento> * ls =dl->getDibujoLineas();
-      ls-> inicia();
-        Segmento * s1 = ls->getActual();
-        s1->Pinta();
-        scene->Pinta();
 
 }
 
@@ -252,13 +241,31 @@ void __fastcall TGLForm2D::Salir1Click(TObject *Sender)
    Application->Terminate();
 }
 //---------------------------------------------------------------------------
-
+// Dibujamos Polilíneas
 void __fastcall TGLForm2D::Lineas1Click(TObject *Sender)
 {
  estado = 1;
- primerClic = true;
+ pos_actual = NULL;
  dl = new DibujoLineas();
  scene -> inserta(dl);
 }
 //---------------------------------------------------------------------------
+// Dibujamos Arcos
+void __fastcall TGLForm2D::Arcos1Click(TObject *Sender)
+{
+ estado = 2;
+ dl = new DibujoLineas();
+ scene -> inserta(dl);
+
+ cont = 0;
+
+ for (int i=0; i<3; i++)
+    puntos[i] = NULL;
+
+ Application->MessageBox("Señala 3 puntos: Inicial, Final y otro",
+                         "Dibujo del arco", MB_OK);
+
+}
+//---------------------------------------------------------------------------
+// Dibujamos espirales
 
