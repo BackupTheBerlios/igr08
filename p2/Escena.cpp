@@ -53,6 +53,7 @@ void Escena::Resize(int CW, int CH) {
 }
 
 void Escena::Pinta(){
+   listaDibujos ->inicia();
     while(!listaDibujos->final()){
          listaDibujos->getActual()->Pinta();
          listaDibujos->avanza();

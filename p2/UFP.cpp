@@ -66,7 +66,9 @@ void __fastcall TGLForm2D::FormResize(TObject *Sender)
   else RatioViewPort= (float)ClientWidth/(float)ClientHeight;
 
   // Llamamos a la función Resize de la Escena
-  scene->Resize(ClientWidth,ClientHeight);
+   if (scene !=NULL) {
+     scene->Resize(ClientWidth,ClientHeight);
+  }
 
   // Refrescamos
   GLScene();
@@ -77,9 +79,30 @@ void __fastcall TGLForm2D::GLScene()
 glClear(GL_COLOR_BUFFER_BIT);
 
 glColor3f(1.0,0.0,1.0);
+/*Punto2f * p1 = new Punto2f(0.0, 20.0);
+Punto2f * p2 = new Punto2f(100.0, 20.0);
+Punto2f * p3 = new Punto2f(200.0, 70.0);
+Punto2f * p4 = new Punto2f(60.0, 120.0);
+Punto2f * p5 = new Punto2f(180.0, 150.0);
+Punto2f * p6 = new Punto2f(100.0, 200.0);
+Segmento * s1 = new Segmento(p1,p2);
+Segmento * s2 = new Segmento(p2,p3);
+Segmento * s3 = new Segmento(p4,p5);
+Segmento * s4 = new Segmento(p5,p6);
+
+DibujoLineas * dl = new DibujoLineas();
+dl->inserta(s1);
+dl->inserta(s2);
+dl->inserta(s3);
+dl->inserta(s4);
+scene-> inserta (dl);  
+
+    */
 
 // comandos para dibujar la escena
-scene->Pinta();
+if (scene !=NULL) {
+   scene->Pinta();
+   }
 
 glFlush();
 SwapBuffers(hdc);
@@ -100,6 +123,7 @@ void __fastcall TGLForm2D::FormDestroy(TObject *Sender)
 
        delete pos_actual;
        delete scene;
+       scene = NULL;
 }
 //---------------------------------------------------------------------------
 
@@ -164,6 +188,12 @@ switch(estado){
                   p = new Punto2f(x,y);
                   scene->transformarXY(p,ClientWidth,ClientHeight);
 
+                  if ( pos_actual== NULL)
+                     pos_actual = p->clon();
+                  s= new Segmento(pos_actual, p);
+                  dl->inserta(s);
+                  pos_actual = p->clon();
+                  /*
                   if (primerClic){ // Añadir punto inicial
                           s = new Segmento();
                           s->setInicio(p);
@@ -175,12 +205,22 @@ switch(estado){
                           s = new Segmento();
                           s->setInicio(p->clon());
                        }
+                   */
                   break;
         }
         //ShowMessage(s->getInicio()->getX());
         Edit1->Text = dl->getDibujoLineas()->getLongitud();
         Edit2->Text = s->getInicio()->getX();
         Edit3->Text = s->getFinal()->getX();
+
+        //dl->getDibujoLineas()->getActual()->Pinta();
+
+        Lista<Segmento> * ls =dl->getDibujoLineas();
+      ls-> inicia();
+        Segmento * s1 = ls->getActual();
+        s1->Pinta();
+        scene->Pinta();
+
 }
 
 //---------------------------------------------------------------------------
@@ -209,7 +249,6 @@ void __fastcall TGLForm2D::Salir1Click(TObject *Sender)
           GLForm2D->Guardar1Click(0);
    }
 
-   delete scene;
    Application->Terminate();
 }
 //---------------------------------------------------------------------------
