@@ -191,7 +191,7 @@ switch(estado){
                   break;
 
         case 2:  // Arcos
-                if (cont <= 2) {
+                if (cont < 3) {
 
                     puntos[cont] = new Punto2f(x,y);
                     scene->transformarXY(puntos[cont],ClientWidth,ClientHeight);
@@ -199,8 +199,15 @@ switch(estado){
                     GLScene();
 
                     cont++;
-                    }
-                 
+                }
+
+                if (cont==3) {
+                    int nPasos;
+                    InputQuery("Solicitando datos",
+                               "Numero de iteraciones",
+                               nPasos);
+                }
+
                  // Si cont = 3 dibujamos arco
                  // e inicializamos cont a 0.
                  // en otro caso cont++
