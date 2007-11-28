@@ -33,8 +33,6 @@ __published:	// IDE-managed Components
         TMenuItem *Lineas1;
         TMenuItem *Arcos1;
         TMenuItem *Espirales1;
-        TEdit *Edit1;
-        TEdit *Edit2;
         void __fastcall FormCreate(TObject *Sender);
         void __fastcall FormResize(TObject *Sender);
         void __fastcall FormPaint(TObject *Sender);
@@ -49,6 +47,7 @@ __published:	// IDE-managed Components
         void __fastcall Salir1Click(TObject *Sender);
         void __fastcall Lineas1Click(TObject *Sender);
         void __fastcall Arcos1Click(TObject *Sender);
+        void __fastcall Espirales1Click(TObject *Sender);
 
 private:	// User declarations
  HDC hdc;
@@ -69,12 +68,16 @@ private:	// User declarations
  Punto2f * p;
  Segmento * s;
  DibujoLineas * dl;
- // Puntos del Arco y contador
+
+ // Variables necesarios para el Arco
  Punto2f* puntos[3];
  int cont;
+ int nPasos;
 
- Punto2f * p_final;
- Punto2f * p_otro;
+ // Variables necesarias para la Espiral
+ int longInicial;
+ int incLado;
+ double angGiro;
 
  // Métodos privados
  void __fastcall SetPixelFormatDescriptor();

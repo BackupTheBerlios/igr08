@@ -213,6 +213,15 @@ switch(estado){
                  // en otro caso cont++
 
                  break;
+
+        case 3: // Espirales
+
+                p = new Punto2f(x,y);
+                scene->transformarXY(p,ClientWidth,ClientHeight);
+
+                // Llamamos a lapiz para generar la espiral
+
+                break;
         }
 
 
@@ -275,4 +284,22 @@ void __fastcall TGLForm2D::Arcos1Click(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 // Dibujamos espirales
+
+void __fastcall TGLForm2D::Espirales1Click(TObject *Sender)
+{
+ estado = 3;
+ dl = new DibujoLineas();
+ scene -> inserta(dl);
+
+ InputQuery("Solicitando datos","Numero de iteraciones:",
+            nPasos);
+ InputQuery("Solicitando datos","Longitud inicial del lado:",
+            longInicial);
+ InputQuery("Solicitando datos","Incremento del lado:",
+            incLado);
+ InputQuery("Solicitando datos","AnguloGiro:",angGiro);
+
+ Application->MessageBox("Elige el centro","Espiral",MB_OK);
+}
+//---------------------------------------------------------------------------
 

@@ -20,22 +20,6 @@ object GLForm2D: TGLForm2D
   OnResize = FormResize
   PixelsPerInch = 96
   TextHeight = 13
-  object Edit1: TEdit
-    Left = 264
-    Top = 40
-    Width = 121
-    Height = 21
-    TabOrder = 0
-    Text = 'Edit1'
-  end
-  object Edit2: TEdit
-    Left = 264
-    Top = 72
-    Width = 121
-    Height = 21
-    TabOrder = 1
-    Text = 'Edit1'
-  end
   object SaveDialog1: TSaveDialog
     Left = 24
   end
@@ -74,6 +58,7 @@ object GLForm2D: TGLForm2D
       end
       object Espirales1: TMenuItem
         Caption = 'Espirales'
+        OnClick = Espirales1Click
       end
     end
   end
