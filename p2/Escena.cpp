@@ -15,7 +15,6 @@ Escena::Escena(int distancia){
       xLeft  = -xRight;
       yTop   =  xRight;
       yBot   = -yTop;
-
 }
 
 Escena::~Escena(){
@@ -49,11 +48,12 @@ void Escena::Resize(int CW, int CH) {
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
+
 }
 
 void Escena::Pinta(){
-   listaDibujos ->inicia();
-   while(!listaDibujos->final()){
+    listaDibujos ->inicia();
+    while(!listaDibujos->final()){
          listaDibujos->getActual()->Pinta();
          listaDibujos->avanza();
    }
@@ -61,6 +61,47 @@ void Escena::Pinta(){
 
 void Escena::inserta(DibujoLineas * dl) {
         listaDibujos->inserta(dl);
+}
+
+void Escena::teclado(WORD& Key) {
+
+  // Factor de mov de Traslaccion
+  GLfloat T = 0.01;
+
+  // Trasladamos hacia arriba
+  if (Key == VK_UP) {
+    GLfloat ar = (yTop - yBot)* T;
+    yBot += ar;
+    yTop += ar;
+  }
+
+  // Trasladamos hacia abajo
+  if (Key == VK_DOWN) {
+    GLfloat ab = (yTop - yBot)* T;
+    yBot -= ab;
+    yTop -= ab;
+  }
+
+  // Trasladamos hacia derecha
+  if (Key == VK_RIGHT) {
+    GLfloat der = (xRight - xLeft)* T;
+    xRight += der;
+    xLeft += der;
+  }
+
+  // Trasladamos hacia izquierda
+  if (Key == VK_LEFT) {
+    GLfloat izq = (xRight - xLeft)* T;
+    xRight -= izq;
+    xLeft -= izq;
+  }
+
+  glMatrixMode(GL_PROJECTION);
+  glLoadIdentity();
+  gluOrtho2D(xLeft,xRight,yBot,yTop);
+
+  glMatrixMode(GL_MODELVIEW);
+  glLoadIdentity();
 }
 
 void Escena::transformarXY(Punto2f * p, int ancho, int alto) {

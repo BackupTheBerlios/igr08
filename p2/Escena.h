@@ -17,6 +17,8 @@ class Escena {
       void inserta(DibujoLineas * p);
       void transformarXY(Punto2f *, int, int);
 
+      void teclado(WORD&);
+
       void setNombre(AnsiString cadena) { nombre = cadena; }
       void setModificada(bool valor) { modificado = valor; }
 

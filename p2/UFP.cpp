@@ -122,10 +122,8 @@ void __fastcall TGLForm2D::FormDestroy(TObject *Sender)
 void __fastcall TGLForm2D::FormKeyDown(TObject *Sender, WORD &Key,
       TShiftState Shift)
 {
-    Lapiz * l= new Lapiz();
-    l->gira(3.0);
-    ShowMessage("");
-    delete l;
+    scene->teclado(Key);
+    GLScene();
 }
 //---------------------------------------------------------------------------
 
@@ -149,7 +147,7 @@ else{
         }
 }
 //---------------------------------------------------------------------------
-
+// Guardar la escena actual
 void __fastcall TGLForm2D::Guardar1Click(TObject *Sender)
 {
 if (SaveDialog1 ->Execute()){
@@ -170,7 +168,7 @@ else{
         }
 }
 //---------------------------------------------------------------------------
-
+// Control del raton
 void __fastcall TGLForm2D::FormMouseDown(TObject *Sender,
       TMouseButton Button, TShiftState Shift, int x, int y)
 {
@@ -284,8 +282,7 @@ void __fastcall TGLForm2D::Arcos1Click(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 // Dibujamos espirales
-
-void __fastcall TGLForm2D::Espirales1Click(TObject *Sender)
+ void __fastcall TGLForm2D::Espirales1Click(TObject *Sender)
 {
  estado = 3;
  dl = new DibujoLineas();
