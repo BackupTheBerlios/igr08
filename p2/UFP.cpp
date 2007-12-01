@@ -93,7 +93,8 @@ if (estado == 2)
       if (puntos[i]!=NULL)
          puntos[i]->Pinta();
 
-
+// Lapiz * l = new Lapiz();
+// l->poliEspiral(new Punto2f(10,10),90,0,25,10,25);
 
 
 glFlush();
@@ -200,7 +201,6 @@ switch(estado){
                 }
 
                 if (cont==3) {
-                    int nPasos;
                     InputQuery("Solicitando datos",
                                "Numero de iteraciones",
                                nPasos);
@@ -214,10 +214,40 @@ switch(estado){
 
         case 3: // Espirales
 
+                GLfloat ang = 0.0;  // Angulo inicial 0.0
+
                 p = new Punto2f(x,y);
                 scene->transformarXY(p,ClientWidth,ClientHeight);
 
-                // Llamamos a lapiz para generar la espiral
+                if ( pos_actual== NULL)
+                     pos_actual = p->clon();
+
+                for (int i = 0; i<nPasos; i++) {
+                    GLfloat xD = pos_actual -> getX() + longInicial * cos (ang);
+                    GLfloat yD = pos_actual -> getY() + longInicial * sin (ang);
+
+                    Punto2f  * siguiente = new Punto2f(xD,yD);
+                    Segmento * s = new Segmento(pos_actual,siguiente);
+                    dl->inserta(s);
+
+                    pos_actual = siguiente->clon();
+                    delete siguiente;
+                    delete s;
+
+                    longInicial += incrLong;
+
+                    ang += incrAng;
+                    GLdouble grados = r2g(ang);
+                    double  p_E;
+                    double parte_Decimal = modf(grados, &p_E);
+                    int  parte_Entera = p_E;
+                    parte_Entera = parte_Entera % 360;
+                    grados = g2r(parte_Entera);
+                    grados += g2r(parte_Decimal);
+
+                }
+
+                GLScene();
 
                 break;
         }
@@ -240,6 +270,7 @@ void __fastcall TGLForm2D::Nuevo1Click(TObject *Sender) {
 
    delete scene;
    scene = new Escena(distancia);
+   GLScene();
 }
 //---------------------------------------------------------------------------
 // Si hemos dibujado algo preguntamos si queremos guardar y salimos !!!!
@@ -293,8 +324,8 @@ void __fastcall TGLForm2D::Arcos1Click(TObject *Sender)
  InputQuery("Solicitando datos","Longitud inicial del lado:",
             longInicial);
  InputQuery("Solicitando datos","Incremento del lado:",
-            incLado);
- InputQuery("Solicitando datos","AnguloGiro:",angGiro);
+            incrLong);
+ InputQuery("Solicitando datos","AnguloGiro:",incrAng);
 
  Application->MessageBox("Elige el centro","Espiral",MB_OK);
 }

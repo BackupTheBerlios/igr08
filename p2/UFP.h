@@ -76,8 +76,8 @@ private:	// User declarations
 
  // Variables necesarias para la Espiral
  int longInicial;
- int incLado;
- double angGiro;
+ int incrLong;
+ double incrAng;
 
  // Métodos privados
  void __fastcall SetPixelFormatDescriptor();
