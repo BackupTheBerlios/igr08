@@ -149,14 +149,24 @@ void Escena::ZoomProgresivo(float factor, int nPasos){
 // el area visible de la escena
 GLdouble Escena::convertirX(int x, int ancho) {
     GLdouble escalaAncho = (GLdouble)ancho/(xRight-xLeft);
-    return (x / escalaAncho + xLeft);
+   // GLdouble centro =   (xLeft-xRight)/2.0;
+   if (xLeft <0)
+        return (x / escalaAncho + xLeft);
+   else
+        return (x / escalaAncho -  xLeft);
+
 }
 
 // Escala la coordenada Y desde el puerto de vista hasta
 // el area visible de la escena
 GLdouble Escena::convertirY(int y, int alto) {
    GLdouble escalaAlto = (GLdouble)alto/(yTop-yBot);
-   return (y / escalaAlto + yBot);
+   // GLdouble centro =   (yBot-yTop)/2.0;
+   if (yTop<0)
+        return (y / escalaAlto +  yTop);
+   else
+        return (y / escalaAlto - yTop);
+
 }
 
 
