@@ -108,12 +108,12 @@ void Escena::teclado(WORD& Key) {
 
   // Tecla A -> Acercamos
   if (Key == 'a' | Key == 'A') {
-  Zoom(1.05);
+  Zoom(105);
   }
 
   // Tecla S -> Alejamos
   if (Key == 's' | Key == 'S') {
-  Zoom(0.95);
+  Zoom(95);
   }
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
@@ -136,10 +136,10 @@ void Escena::transformarXY(Punto2f * p, int ancho, int alto) {
 
 
 void Escena::Zoom(float F){
-        GLfloat RatViewPort = (GLfloat) ClientWidth / (GLfloat) ClientHeight;
-        GLfloat RatVolVista = (GLfloat) xRight / yTop;
+ /*       GLfloat RatViewPort = (GLfloat) ClientWidth / (GLfloat) ClientHeight;
+        GLfloat RatVolVista = (GLfloat) xRight / yTop;*/
 
-
+           F=F/100.0;
 //               ShowMessage("Antes:\n Radio View Port: " +FloatToStr(RatViewPort)+"\n\n"+"Radio Vol Vista: " + FloatToStr(RatVolVista));
   //////////////////
      // Calculamos las nuevas coordenadas del AVE
@@ -164,10 +164,11 @@ void Escena::Zoom(float F){
 
      yBot = yBn;
      yTop = yTn;
+     Pinta();
 
-     
-      RatViewPort = (GLfloat) ClientWidth / (GLfloat) ClientHeight;
-     RatVolVista = (GLfloat) xRight / yTop;
+
+/*      RatViewPort = (GLfloat) ClientWidth / (GLfloat) ClientHeight;
+     RatVolVista = (GLfloat) xRight / yTop;*/
 
 }
 bool Escena::ZoomProgresivo(float factor, int nPasos){
@@ -190,7 +191,8 @@ bool Escena::ZoomProgresivo(float factor, int nPasos){
                 Pinta();
                 xRight = xRp; xLeft = xLp;
                 yTop = yTp; yBot = yBp;
-                Sleep(100);
+
+                Sleep(deltaT);
         }
    return true;
    }

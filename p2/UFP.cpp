@@ -333,10 +333,11 @@ void __fastcall TGLForm2D::Arcos1Click(TObject *Sender)
 
 void __fastcall TGLForm2D::Zoom1Click(TObject *Sender)
 {
-float porcentaje;
-InputQuery("Solicitando datos","Porcentaje:",
-            porcentaje);
-scene->Zoom(porcentaje);
+AnsiString S_porcentaje="100";
+if (InputQuery("Solicitando datos","Porcentaje:", S_porcentaje))
+        {
+        scene->Zoom(StrToFloat(S_porcentaje));
+        }
 }
 //---------------------------------------------------------------------------
 
@@ -347,9 +348,7 @@ AnsiString S_iteraciones="3";
 if (InputQuery("Solicitando datos","Porcentaje:",S_porcentaje))
  {      if (InputQuery("Solicitando datos","Numero de iteraciones:", S_iteraciones))
         {
-        float por = StrToFloat(S_porcentaje);
-        int ite = StrToInt(S_iteraciones);
-                 scene->ZoomProgresivo(por,ite);
+                 scene->ZoomProgresivo(StrToFloat(S_porcentaje), StrToInt(S_iteraciones));
         }
  }
 }
