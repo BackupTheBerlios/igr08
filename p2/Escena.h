@@ -5,7 +5,7 @@
 #include "DibujoLineas.h"
 #include "Punto2f.h"
 
-#define deltaT 10
+#define deltaT 100
 //---------------------------------------------------------------------------
 
 class Escena {

@@ -57,14 +57,16 @@ void Escena::Resize(int CW, int CH) {
 }
 
 void Escena::Pinta(){
+//    glClear(GL_COLOR_BUFFER_BIT);
     listaDibujos ->inicia();
     while(!listaDibujos->final()){
          listaDibujos->getActual()->Pinta();
          listaDibujos->avanza();
    }
- // Ejecutar lista de comandos en espera
- glFlush();
 
+
+ // Ejecutar lista de comandos en espera
+ glFlush();       
  // Habilitado uso del doble buffer
  SwapBuffers(hdc);
 }
@@ -136,12 +138,8 @@ void Escena::transformarXY(Punto2f * p, int ancho, int alto) {
 
 
 void Escena::Zoom(float F){
- /*       GLfloat RatViewPort = (GLfloat) ClientWidth / (GLfloat) ClientHeight;
-        GLfloat RatVolVista = (GLfloat) xRight / yTop;*/
+     F=F/100.0;
 
-           F=F/100.0;
-//               ShowMessage("Antes:\n Radio View Port: " +FloatToStr(RatViewPort)+"\n\n"+"Radio Vol Vista: " + FloatToStr(RatVolVista));
-  //////////////////
      // Calculamos las nuevas coordenadas del AVE
      GLdouble xRn = (xRight + xLeft) / (GLdouble) 2;
      xRn += (xRight - xLeft) * (GLdouble) 0.5 * (1/F);
@@ -155,21 +153,19 @@ void Escena::Zoom(float F){
      GLdouble yBn = (yTop+yBot) / (GLdouble) 2;
      yBn -= (yTop - yBot) * (GLdouble) 0.5 * (1/F);
 
-
-
-
-      // Actualizamos las variables del AVE
+     // Actualizamos las variables del AVE
      xLeft = xLn;
      xRight =xRn;
 
      yBot = yBn;
      yTop = yTn;
-     Pinta();
+     glMatrixMode(GL_PROJECTION);
+  glLoadIdentity();
+  gluOrtho2D(xLeft,xRight,yBot,yTop);
 
-
-/*      RatViewPort = (GLfloat) ClientWidth / (GLfloat) ClientHeight;
-     RatVolVista = (GLfloat) xRight / yTop;*/
-
+//  glMatrixMode(GL_MODELVIEW);
+//  glLoadIdentity();
+     //     Pinta();
 }
 bool Escena::ZoomProgresivo(float factor, int nPasos){
    factor=factor/100.0;
