@@ -33,6 +33,9 @@ __published:	// IDE-managed Components
         TMenuItem *Lineas1;
         TMenuItem *Arcos1;
         TMenuItem *Espirales1;
+        TMenuItem *Escena1;
+        TMenuItem *Zoom1;
+        TMenuItem *ZoomProgresivo1;
         void __fastcall FormCreate(TObject *Sender);
         void __fastcall FormResize(TObject *Sender);
         void __fastcall FormPaint(TObject *Sender);
@@ -48,6 +51,8 @@ __published:	// IDE-managed Components
         void __fastcall Lineas1Click(TObject *Sender);
         void __fastcall Arcos1Click(TObject *Sender);
         void __fastcall Espirales1Click(TObject *Sender);
+        void __fastcall Zoom1Click(TObject *Sender);
+        void __fastcall ZoomProgresivo1Click(TObject *Sender);
 
 private:	// User declarations
  HDC hdc;

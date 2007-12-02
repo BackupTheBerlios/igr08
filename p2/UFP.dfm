@@ -61,5 +61,16 @@ object GLForm2D: TGLForm2D
         OnClick = Espirales1Click
       end
     end
+    object Escena1: TMenuItem
+      Caption = 'Escena'
+      object Zoom1: TMenuItem
+        Caption = 'Zoom...'
+        OnClick = Zoom1Click
+      end
+      object ZoomProgresivo1: TMenuItem
+        Caption = 'Zoom Progresivo...'
+        OnClick = ZoomProgresivo1Click
+      end
+    end
   end
 end

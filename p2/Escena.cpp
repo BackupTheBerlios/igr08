@@ -165,10 +165,9 @@ void Escena::Zoom(float F){
      RatVolVista = (GLfloat) xRight / yTop;
 
 }
-void Escena::ZoomProgresivo(float factor, int nPasos){
-
-// controlar f > 0
-//
+bool Escena::ZoomProgresivo(float factor, int nPasos){
+   factor=factor/100.0;
+   if (factor>0){
         int xRp, xLp, yTp, yBp;
         GLdouble cx = (xRight + xLeft) / 2.0;
         GLdouble cy = (yBot + yTop) / 2.0;
@@ -185,6 +184,9 @@ void Escena::ZoomProgresivo(float factor, int nPasos){
                 xRight = xRp; xLeft = xLp;
                 yTop = yTp; yBot = yBp;
         }
+   return true;
+   }
+   else return false;
 }
 
 /////////////////////////////////////////////////////

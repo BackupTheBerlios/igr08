@@ -26,11 +26,11 @@ class Escena {
       bool Modificada() { return modificado; }
       Lista<DibujoLineas> * getEscena() {return listaDibujos;}
       void Zoom(float factor);
-      void ZoomProgresivo(float factor, int nPasos);
+      bool ZoomProgresivo(float factor, int nPasos);
 
    private:
-      int xRight, xLeft;
-      int yTop, yBot;
+      GLfloat xRight, xLeft;
+      GLfloat yTop, yBot;
       int ClientWidth, ClientHeight; // Dimensiones de la ventana donde esta la escena
       float ratioViewPort;
       bool modificado;
