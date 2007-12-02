@@ -160,12 +160,8 @@ void Escena::Zoom(float F){
      yBot = yBn;
      yTop = yTn;
      glMatrixMode(GL_PROJECTION);
-  glLoadIdentity();
-  gluOrtho2D(xLeft,xRight,yBot,yTop);
-
-//  glMatrixMode(GL_MODELVIEW);
-//  glLoadIdentity();
-     //     Pinta();
+     glLoadIdentity();
+     gluOrtho2D(xLeft,xRight,yBot,yTop);
 }
 bool Escena::ZoomProgresivo(float factor, int nPasos){
    factor=factor/100.0;
@@ -177,10 +173,10 @@ bool Escena::ZoomProgresivo(float factor, int nPasos){
         glMatrixMode (GL_PROJECTION);
         for (int i =0; i<= nPasos; i++){
 
-                xRp = cx +0.5 * ((xRight-xLeft)/(1+incrF * i));
-                xLp = cx -0.5 * ((xRight-xLeft)/(1+incrF * i));
-                yTp = cy +0.5 * ((yTop-yBot)/(1+incrF * i));
-                yBp = cy -0.5 * ((yTop-yBot)/(1+incrF * i));
+                xRp = cx + 0.5 * ((xRight-xLeft)/(1+incrF * i));
+                xLp = cx - 0.5 * ((xRight-xLeft)/(1+incrF * i));
+                yTp = cy + 0.5 * ((yTop-yBot)/(1+incrF * i));
+                yBp = cy - 0.5 * ((yTop-yBot)/(1+incrF * i));
                 glClear(GL_COLOR_BUFFER_BIT);
                 glLoadIdentity();
                 gluOrtho2D(xLp,xRp, yBp, yTp);
