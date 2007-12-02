@@ -29,7 +29,7 @@ void __fastcall TGLForm2D::FormCreate(TObject *Sender)
     distancia = 200;
 
     // Creamos una nueva escena
-    scene = new Escena(distancia);
+    scene = new Escena(distancia, this-> ClientWidth, this->ClientHeight);
 
 }
 //---------------------------------------------------------------------------
@@ -269,7 +269,7 @@ void __fastcall TGLForm2D::Nuevo1Click(TObject *Sender) {
    }
 
    delete scene;
-   scene = new Escena(distancia);
+   scene = new Escena(distancia, this->ClientWidth, this->ClientHeight);
    GLScene();
 }
 //---------------------------------------------------------------------------

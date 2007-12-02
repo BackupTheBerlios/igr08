@@ -7,14 +7,16 @@
 //---------------------------------------------------------------------------
 
 // Constructora por defecto
-Escena::Escena(int distancia){
-      listaDibujos = new Lista <DibujoLineas>();
-      listaDibujos -> inicia();
-      ratioViewPort = 1.0;
-      xRight =  distancia;
-      xLeft  = -xRight;
-      yTop   =  xRight;
-      yBot   = -yTop;
+Escena::Escena(int distancia, int CW, int CH){
+        listaDibujos = new Lista <DibujoLineas>();
+        listaDibujos -> inicia();
+        ratioViewPort = 1.0;
+        xRight =  distancia;
+        xLeft  = -xRight;
+        yTop   =  xRight;
+        yBot   = -yTop;
+        ClientWidth = CW;
+        ClientHeight = CH;
 }
 
 Escena::~Escena(){
@@ -23,6 +25,9 @@ Escena::~Escena(){
 
 
 void Escena::Resize(int CW, int CH) {
+        ClientWidth = CW;
+        ClientHeight = CH;
+
 
     // Establecemos el nuevo Puerto de Vista
     glViewport(0, 0, CW, CH);
@@ -96,6 +101,15 @@ void Escena::teclado(WORD& Key) {
     xLeft -= izq;
   }
 
+  // Tecla A -> Acercamos
+  if (Key == 'a' | Key == 'A') {
+  Zoom(1.05);
+  }
+
+  // Tecla S -> Alejamos
+  if (Key == 's' | Key == 'S') {
+  Zoom(0.95);
+  }
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   gluOrtho2D(xLeft,xRight,yBot,yTop);
@@ -116,7 +130,39 @@ void Escena::transformarXY(Punto2f * p, int ancho, int alto) {
 }
 
 
-void Escena::Zoom(float factor){
+void Escena::Zoom(float F){
+        GLfloat RatViewPort = (GLfloat) ClientWidth / (GLfloat) ClientHeight;
+        GLfloat RatVolVista = (GLfloat) xRight / yTop;
+
+
+//               ShowMessage("Antes:\n Radio View Port: " +FloatToStr(RatViewPort)+"\n\n"+"Radio Vol Vista: " + FloatToStr(RatVolVista));
+  //////////////////
+     // Calculamos las nuevas coordenadas del AVE
+     GLdouble xRn = (xRight + xLeft) / (GLdouble) 2;
+     xRn += (xRight - xLeft) * (GLdouble) 0.5 * (1/F);
+
+     GLdouble xLn = (xRight + xLeft) / (GLdouble) 2;
+     xLn -= (xRight - xLeft) * (GLdouble) 0.5 * (1/F);
+
+     GLdouble yTn = (yTop+yBot) / (GLdouble) 2;
+     yTn += (yTop - yBot) * (GLdouble) 0.5 * (1/F);
+
+     GLdouble yBn = (yTop+yBot) / (GLdouble) 2;
+     yBn -= (yTop - yBot) * (GLdouble) 0.5 * (1/F);
+
+
+
+
+      // Actualizamos las variables del AVE
+     xLeft = xLn;
+     xRight =xRn;
+
+     yBot = yBn;
+     yTop = yTn;
+
+     
+      RatViewPort = (GLfloat) ClientWidth / (GLfloat) ClientHeight;
+     RatVolVista = (GLfloat) xRight / yTop;
 
 }
 void Escena::ZoomProgresivo(float factor, int nPasos){

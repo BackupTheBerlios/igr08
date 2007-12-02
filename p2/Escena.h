@@ -9,7 +9,7 @@
 class Escena {
 
    public:
-      Escena(int);
+      Escena(int,int, int);
       ~Escena();
       void Resize(int CW, int CH);
       void Pinta();
@@ -31,6 +31,7 @@ class Escena {
    private:
       int xRight, xLeft;
       int yTop, yBot;
+      int ClientWidth, ClientHeight; // Dimensiones de la ventana donde esta la escena
       float ratioViewPort;
       bool modificado;
       AnsiString nombre;
