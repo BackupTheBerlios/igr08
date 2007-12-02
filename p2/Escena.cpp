@@ -62,6 +62,11 @@ void Escena::Pinta(){
          listaDibujos->getActual()->Pinta();
          listaDibujos->avanza();
    }
+ // Ejecutar lista de comandos en espera
+ glFlush();
+
+ // Habilitado uso del doble buffer
+ SwapBuffers(hdc);
 }
 
 void Escena::inserta(DibujoLineas * dl) {
@@ -174,15 +179,18 @@ bool Escena::ZoomProgresivo(float factor, int nPasos){
         GLdouble incrF = (factor - 1) / (GLdouble) nPasos;
         glMatrixMode (GL_PROJECTION);
         for (int i =0; i<= nPasos; i++){
+
                 xRp = cx +0.5 * ((xRight-xLeft)/(1+incrF * i));
-                xLp = cx +0.5 * ((xRight-xLeft)/(1+incrF * i));
+                xLp = cx -0.5 * ((xRight-xLeft)/(1+incrF * i));
                 yTp = cy +0.5 * ((yTop-yBot)/(1+incrF * i));
-                yBp = cy +0.5 * ((yTop-yBot)/(1+incrF * i));
+                yBp = cy -0.5 * ((yTop-yBot)/(1+incrF * i));
+                glClear(GL_COLOR_BUFFER_BIT);
                 glLoadIdentity();
                 gluOrtho2D(xLp,xRp, yBp, yTp);
                 Pinta();
                 xRight = xRp; xLeft = xLp;
                 yTop = yTp; yBot = yBp;
+                Sleep(100);
         }
    return true;
    }

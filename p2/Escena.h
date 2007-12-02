@@ -21,6 +21,7 @@ class Escena {
 
       void setNombre(AnsiString cadena) { nombre = cadena; }
       void setModificada(bool valor) { modificado = valor; }
+      void setHDC(HDC h){ hdc=h; }
 
       AnsiString getNombre() { return nombre; }
       bool Modificada() { return modificado; }
@@ -39,6 +40,8 @@ class Escena {
 
       GLdouble convertirX(int,int);
       GLdouble convertirY(int,int);
+
+      HDC hdc;
 };
 
 #endif

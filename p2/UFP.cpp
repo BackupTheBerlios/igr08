@@ -30,7 +30,7 @@ void __fastcall TGLForm2D::FormCreate(TObject *Sender)
 
     // Creamos una nueva escena
     scene = new Escena(distancia, this-> ClientWidth, this->ClientHeight);
-
+    scene->setHDC(hdc);
 }
 //---------------------------------------------------------------------------
 void __fastcall TGLForm2D::SetPixelFormatDescriptor()
@@ -345,10 +345,9 @@ void __fastcall TGLForm2D::ZoomProgresivo1Click(TObject *Sender)
 AnsiString S_porcentaje="100";
 AnsiString S_iteraciones="3";
 if (InputQuery("Solicitando datos","Porcentaje:",S_porcentaje))
- {      ShowMessage("da");
-        if (InputQuery("Solicitando datos","Numero de iteraciones:", S_iteraciones))
-        {        ShowMessage("da");
-        float por =       StrToFloat(S_porcentaje);
+ {      if (InputQuery("Solicitando datos","Numero de iteraciones:", S_iteraciones))
+        {
+        float por = StrToFloat(S_porcentaje);
         int ite = StrToInt(S_iteraciones);
                  scene->ZoomProgresivo(por,ite);
         }
