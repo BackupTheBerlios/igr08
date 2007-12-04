@@ -222,40 +222,18 @@ switch(estado){
                 p = new Punto2f(x,y);
                 scene->transformarXY(p,ClientWidth,ClientHeight);
 
-                if ( pos_actual== NULL)
-                     pos_actual = p->clon();
 
-                for (int i = 0; i<nPasos; i++) {
-                    GLfloat xD = pos_actual -> getX() + longInicial * cos (ang);
-                    GLfloat yD = pos_actual -> getY() + longInicial * sin (ang);
-
-                    Punto2f  * siguiente = new Punto2f(xD,yD);
-                    Segmento * s = new Segmento(pos_actual,siguiente);
-                    dl->inserta(s);
-
-                    pos_actual = siguiente->clon();
-                    delete siguiente;
-                    delete s;
-
-                    longInicial += incrLong;
-
-                    ang += incrAng;
-                    GLdouble grados = r2g(ang);
-                    double  p_E;
-                    double parte_Decimal = modf(grados, &p_E);
-                    int  parte_Entera = p_E;
-                    parte_Entera = parte_Entera % 360;
-                    grados = g2r(parte_Entera);
-                    grados += g2r(parte_Decimal);
-
-                }
+                Lapiz * l = new Lapiz();
+                l->poliEspiral(p,incrAng,ang,incrLong,longInicial,nPasos,dl);
+                delete l;
 
                 GLScene();
 
                 break;
         }
 
-                  delete p;
+        if (p != NULL)
+           delete p;
 
 
 }
