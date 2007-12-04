@@ -92,10 +92,10 @@ if (estado == 2)
    for (int i=0; i<=cont; i++)
       if (puntos[i]!=NULL)
          puntos[i]->Pinta();
-
+/*
 Lapiz * l = new Lapiz();
 l->poliEspiral(new Punto2f(10,10),90,0,25,10,25);
-delete l;
+delete l; */
 
 glFlush();
 SwapBuffers(hdc);
