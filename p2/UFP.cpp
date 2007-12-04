@@ -93,9 +93,9 @@ if (estado == 2)
       if (puntos[i]!=NULL)
          puntos[i]->Pinta();
 
-// Lapiz * l = new Lapiz();
-// l->poliEspiral(new Punto2f(10,10),90,0,25,10,25);
-
+Lapiz * l = new Lapiz();
+l->poliEspiral(new Punto2f(10,10),90,0,25,10,25);
+delete l;
 
 glFlush();
 SwapBuffers(hdc);
@@ -174,19 +174,19 @@ void __fastcall TGLForm2D::FormMouseDown(TObject *Sender,
       TMouseButton Button, TShiftState Shift, int x, int y)
 {
 
+Punto2f * p;
 switch(estado){
         case 1:   // Polilíneas
                   p = new Punto2f(x,y);
                   scene->transformarXY(p,ClientWidth,ClientHeight);
-
-                  if ( pos_actual== NULL)
+                  if ( pos_actual== NULL){
                      pos_actual = p->clon();
+                     }
                   s = new Segmento(pos_actual, p);
                   dl->inserta(s);
+                  delete pos_actual;
                   pos_actual = p->clon();
-
                   GLScene();
-
                   break;
 
         case 2:  // Arcos
@@ -216,6 +216,7 @@ switch(estado){
 
         case 3: // Espirales
 
+            
                 GLfloat ang = 0.0;  // Angulo inicial 0.0
 
                 p = new Punto2f(x,y);
@@ -254,6 +255,7 @@ switch(estado){
                 break;
         }
 
+                  delete p;
 
 
 }

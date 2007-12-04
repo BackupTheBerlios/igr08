@@ -13,6 +13,7 @@ class Lapiz {
       Lapiz(Punto2f * pos, GLfloat ang);
       Lapiz (const Lapiz&);
       Lapiz * clon() const;
+      ~Lapiz(){delete pos;}
 
       void lineTo (Punto2f *, bool);
       void gira (GLdouble incrAng);

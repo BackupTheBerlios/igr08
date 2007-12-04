@@ -13,9 +13,10 @@ Lapiz::Lapiz() {
 }
 
 // Constructora por parámetros
-Lapiz::Lapiz(Punto2f * pos, GLfloat a){
+Lapiz::Lapiz(Punto2f * p, GLfloat a){
     ang = a;
-    pos = pos -> clon();
+    pos = p -> clon();
+    delete p;
 }
 
 // Constructora de copia
@@ -40,7 +41,7 @@ void Lapiz::lineTo (Punto2f * destino, bool esVisible){
                 glVertex2f(destino -> getX(), destino -> getY());
         glEnd();
     }
-
+    delete pos;
     pos = destino->clon();
 }
 

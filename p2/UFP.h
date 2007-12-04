@@ -69,8 +69,7 @@ private:	// User declarations
  Punto2f * pos_actual;
  // Estado
  int estado;
- // Punto, segmento y dibujo de lineas auxiliares
- Punto2f * p;
+ // Segmento y dibujo de lineas auxiliares
  Segmento * s;
  DibujoLineas * dl;
 
