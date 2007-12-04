@@ -201,9 +201,11 @@ switch(estado){
                 }
 
                 if (cont==3) {
-                    InputQuery("Solicitando datos",
-                               "Numero de iteraciones",
-                               nPasos);
+                   AnsiString dato = 10;
+                   InputQuery("Solicitando datos",
+                              "Numero de iteraciones",
+                              dato);
+                   nPasos = StrToInt(dato);
                 }
 
                  // Si cont = 3 dibujamos arco
@@ -318,14 +320,19 @@ void __fastcall TGLForm2D::Arcos1Click(TObject *Sender)
  estado = 3;
  dl = new DibujoLineas();
  scene -> inserta(dl);
+ AnsiString dato = 10;
 
- InputQuery("Solicitando datos","Numero de iteraciones:",
-            nPasos);
- InputQuery("Solicitando datos","Longitud inicial del lado:",
-            longInicial);
- InputQuery("Solicitando datos","Incremento del lado:",
-            incrLong);
- InputQuery("Solicitando datos","AnguloGiro:",incrAng);
+ InputQuery("Solicitando datos","Numero de iteraciones:",dato);
+ nPasos = StrToInt(dato);
+
+ InputQuery("Solicitando datos","Longitud inicial del lado:",dato);
+ longInicial = StrToInt(dato);
+
+ InputQuery("Solicitando datos","Incremento del lado:",dato);
+ incrLong = StrToInt(dato);
+
+ InputQuery("Solicitando datos","AnguloGiro:",dato);
+ incrAng = StrToInt(dato);
 
  Application->MessageBox("Elige el centro","Espiral",MB_OK);
 }
