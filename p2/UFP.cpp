@@ -341,3 +341,6 @@ if (InputQuery("Solicitando datos","Porcentaje:",S_porcentaje))
 }
 //---------------------------------------------------------------------------
 
+
+
+

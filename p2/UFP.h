@@ -79,9 +79,9 @@ private:	// User declarations
  int nPasos;
 
  // Variables necesarias para la Espiral
- int longInicial;
- int incrLong;
- double incrAng;
+ GLfloat longInicial;
+ GLfloat incrLong;
+ GLfloat incrAng;
 
  // Métodos privados
  void __fastcall SetPixelFormatDescriptor();

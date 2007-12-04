@@ -59,13 +59,11 @@ void Lapiz::gira (GLdouble incrAng){
 }
 
 // Avanzamos al siguiente punto relativo
-void Lapiz::avanza (GLfloat longitud, bool esVisible, Segmento* s){
+void Lapiz::avanza (GLfloat longitud, bool esVisible, Segmento*& s){
         GLfloat xD = pos -> getX() + longitud * cos (ang);
         GLfloat yD = pos -> getX() + longitud * sin (ang);
-        Punto2f  * p = new Punto2f(xD,yD);
-        s->setInicio(pos);
-        s->setFinal(p);
-        //s = new Segmento(pos,p);
+        Punto2f * p = new Punto2f(xD,yD);
+        s = new Segmento(pos,p);
         lineTo(p,esVisible);
         delete p;
 }
@@ -91,12 +89,12 @@ void Lapiz::poliEspiral ( Punto2f * posInicial, GLfloat incrAng,
 
         Lapiz * l = new Lapiz (posInicial, angInicial);
         for (int i = 0; i<nPasos; i++){
-                 Segmento* s = new Segmento();
+                 Segmento* s;
                  l -> avanza(longInicial, true, s);
                  longInicial += incrLong;
                  l -> gira(incrAng);
                  dl->inserta(s);
-                 //delete s;
+                 delete s;
         }
         delete l;
 }

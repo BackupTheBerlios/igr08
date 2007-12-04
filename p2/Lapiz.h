@@ -19,7 +19,7 @@ class Lapiz {
 
       void lineTo (Punto2f *, bool);
       void gira (GLdouble incrAng);
-      void avanza (GLfloat longitud, bool esVisible, Segmento*);
+      void avanza (GLfloat longitud, bool esVisible, Segmento*&);
       void drawMotivo(Lapiz *l);
       void drawTotal (Punto2f * posInicial, GLfloat angInicial);
       void poliEspiral ( Punto2f * posInicial, GLfloat incrAng,
