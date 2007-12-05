@@ -24,7 +24,6 @@ void __fastcall TGLForm2D::FormCreate(TObject *Sender)
     	ShowMessage("Could not MakeCurrent");
     //Cor de fondo de la ventana
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-
     // Distancia equidistante al centro
     distancia = 200;
 
