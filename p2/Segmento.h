@@ -17,6 +17,7 @@ class Segmento {
       void setInicio(Punto2f * p){inicio = p;}
       void setFinal(Punto2f * p){final = p;}
       void Pinta();
+      Segmento * clon() const;
 
    private:
       Punto2f * inicio;

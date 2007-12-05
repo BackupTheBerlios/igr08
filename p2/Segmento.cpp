@@ -31,3 +31,13 @@ void Segmento::Pinta(){
                 glVertex2f(final->getX() , final->getY());
         glEnd();
       }
+
+Segmento * Segmento::clon() const{
+       Punto2f* i = new Punto2f(inicio->getX(), inicio->getY());
+       Punto2f* f = new Punto2f(final->getX(), final->getY());
+       Segmento * r = new Segmento(i,f);
+       delete i;
+       delete f;
+       return r;
+
+}

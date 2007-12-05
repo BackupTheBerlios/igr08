@@ -5,7 +5,7 @@
 #include <fstream.h>
 #pragma package(smart_init)
 #pragma resource "*.dfm"
-//---------------------------------------------------------------------------
+//--------0-------------------------------------------------------------------
 TGLForm2D *GLForm2D;
 //---------------------------------------------------------------------------
 __fastcall TGLForm2D::TGLForm2D(TComponent* Owner)
@@ -175,6 +175,7 @@ void __fastcall TGLForm2D::FormMouseDown(TObject *Sender,
 {
 
 Punto2f * p;
+p=NULL;
 switch(estado){
         case 1:   // Polilíneas
                   p = new Punto2f(x,y);
@@ -226,14 +227,18 @@ switch(estado){
                 Lapiz * l = new Lapiz();
                 l->poliEspiral(p,incrAng,ang,incrLong,longInicial,nPasos,dl);
                 delete l;
-
+                p=NULL;
                 GLScene();
 
                 break;
         }
 
         if (p != NULL)
+           {
            delete p;
+           p=NULL;
+           }
+
 
 
 }

@@ -17,6 +17,7 @@ Lapiz::Lapiz(Punto2f * p, GLfloat a){
     ang = a;
     pos = p -> clon();
     delete p;
+    p=NULL;
 }
 
 // Constructora de copia
@@ -66,6 +67,7 @@ void Lapiz::avanza (GLfloat longitud, bool esVisible, Segmento*& s){
         s = new Segmento(pos,p);
         lineTo(p,esVisible);
         delete p;
+        p=NULL;
 }
 
 //---------------------------------------------------------------------------
@@ -97,6 +99,8 @@ void Lapiz::poliEspiral ( Punto2f * posInicial, GLfloat incrAng,
                  delete s;
         }
         delete l;
+//        delete posInicial;
+        posInicial=NULL;
 }
 
 //---------------------------------------------------------------------------

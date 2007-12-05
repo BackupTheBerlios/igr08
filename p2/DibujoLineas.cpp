@@ -20,5 +20,5 @@ void DibujoLineas::Pinta(){
 }
 
 void DibujoLineas::inserta(Segmento * s) {
-    listaSegmentos->inserta(s);
+    listaSegmentos->inserta(s->clon());
 }
