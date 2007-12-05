@@ -185,6 +185,7 @@ switch(estado){
                   s = new Segmento(pos_actual, p);
                   dl->inserta(s);
                   delete pos_actual;
+                  delete s;
                   pos_actual = p->clon();
                   GLScene();
                   break;

@@ -15,9 +15,21 @@
     }
 
     bool OutCode::operator== (OutCode) const{
-    bool retVal= true;
-//    this->arriba;
-    return retVal;
+        if (this->arriba != OutCode->arriba){
+        return false;
+        }
+        if (this->abajo != OutCode->abajo){
+        return false;
+        }
+
+        if (this->derecha != OutCode->derecha){
+        return false;
+        }
+
+        if (this->izquierda != OutCode->izquierda){
+        return false;
+        }
+        return true;
     }
 
 #pragma package(smart_init)

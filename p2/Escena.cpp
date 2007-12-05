@@ -191,20 +191,10 @@ bool Escena::ZoomProgresivo(float factor, int nPasos){
 
 // Recorte de la escena usando el algorimo de cohen sutherland
 Escena * Escena::recorte(Punto2f * NE, Punto2f * SO){
-    GLdouble x0;
-    GLdouble y0;
-    GLdouble x1;
-    GLdouble y1;
-    GLdouble xmin;
-    GLdouble xmax;
-    GLdouble ymin;
-    GLdouble ymax;
+    GLdouble x0, y0, x1, y1, xmin, xmax, ymin, ymax;
     int value;
-    bool accept;
-    bool done;
-    OutCode outcode0;
-    OutCode outcode1;
-    OutCode outcodeOut;
+    bool accept, done;
+    OutCode outcode0, outcode1, outcodeOut;
     //Outcodes for P0,P1, and whichever point lies outside the clip rectangle
     GLdouble x,y;
     accept = false;
