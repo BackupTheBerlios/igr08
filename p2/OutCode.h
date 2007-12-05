@@ -17,10 +17,10 @@ class OutCode
 
     OutCode(){arriba = false; abajo = false; derecha = false; izquierda = false;}
     OutCode(bool ar, bool ab, bool de, bool iz){  arriba = ar; abajo= ab; derecha= de; izquierda = iz;}
-    setArriba(bool a){arriba = a;}
-    setAbajo(bool a){abajo = a;}
-    setDerecha(bool a){derecha = a;}
-    setIzquierda(bool a){izquierda = a;}
+    void setArriba(bool a){arriba = a;}
+    void setAbajo(bool a){abajo = a;}
+    void setDerecha(bool a){derecha = a;}
+    void setIzquierda(bool a){izquierda = a;}
 
 };
 
