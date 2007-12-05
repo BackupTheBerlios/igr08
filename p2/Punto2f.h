@@ -22,6 +22,11 @@ class Punto2f {
         void setX(GLfloat X){x=X;}
         void setY(GLfloat Y){y=Y;}
 
+
+        Punto2f * puntoMedio(Punto2f *);
+        Punto2f * perpendicular();
+
+
     private:
         GLfloat x;
         GLfloat y;

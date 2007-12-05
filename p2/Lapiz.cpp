@@ -119,4 +119,18 @@ void Lapiz::poligonoR2 (Punto2f * centro, GLfloat radio, int nlados){
 
 void Lapiz::arco(Punto2f * inicio, Punto2f * fin, Punto2f *otro){
 
+
+//calcular mediatrices
+        // calcular puntos medios
+            Punto2f * A = inicio ->puntoMedio(otro);
+            Punto2f * B = otro ->puntoMedio(fin);
+        // calcular vector normal
+            GLdouble x = inicio->getX() - otro -> getX();
+            GLdouble y = inicio->getY() - otro -> getY();
+            Punto2f * v1 = new Punto2f(x,y); // es un vector
+            Punto2f * v1p= v1->perpendicular();
+
+// calcular punto de corte de las mediatrices.
+//calcular radio
+
 }
