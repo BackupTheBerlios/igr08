@@ -302,24 +302,32 @@ void __fastcall TGLForm2D::Arcos1Click(TObject *Sender)
 // Dibujamos espirales
  void __fastcall TGLForm2D::Espirales1Click(TObject *Sender)
 {
- estado = 3;
- dl = new DibujoLineas();
- scene -> inserta(dl);
- AnsiString dato = 10;
 
- InputQuery("Solicitando datos","Numero de iteraciones:",dato);
- nPasos = StrToInt(dato);
+ AnsiString dato = "10";
 
- InputQuery("Solicitando datos","Longitud inicial del lado:",dato);
- longInicial = StrToInt(dato);
+if(InputQuery("Solicitando datos","Numero de iteraciones:",dato))
+{
+    nPasos = StrToInt(dato);
+    if(InputQuery("Solicitando datos","Longitud inicial del lado:",dato))
+    {
+    longInicial = StrToInt(dato);
 
- InputQuery("Solicitando datos","Incremento del lado:",dato);
- incrLong = StrToInt(dato);
+    if (InputQuery("Solicitando datos","Incremento del lado:",dato))
+        {
+        incrLong = StrToInt(dato);
 
- InputQuery("Solicitando datos","AnguloGiro:",dato);
- incrAng = StrToInt(dato);
+        if (InputQuery("Solicitando datos","AnguloGiro:",dato))
+            {
+            incrAng = StrToInt(dato);
+            Application->MessageBox("Elige el centro","Espiral",MB_OK);
+             estado = 3;
+             dl = new DibujoLineas();
+             scene -> inserta(dl);
+            }
+        }
+    }
+ }
 
- Application->MessageBox("Elige el centro","Espiral",MB_OK);
 }
 //---------------------------------------------------------------------------
 
