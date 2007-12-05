@@ -207,11 +207,11 @@ Escena * Escena::recorte(Punto2f * NE, Punto2f * SO){
     OutCode outcodeOut;
     //Outcodes for P0,P1, and whichever point lies outside the clip rectangle
     GLdouble x,y;
-//    accept = false;
-//    done = false;
+    accept = false;
+    done = false;
     CompOutCode(x0, y0, outcode0);
     CompOutCode(x1, y1, outcode1);
-    repeat
+    do
       {
       if((outcode0=[]) and (outcode1=[]))  //Trivial accept and exit
         {accept = true; done=true; }
@@ -261,7 +261,7 @@ Escena * Escena::recorte(Punto2f * NE, Punto2f * SO){
               x1 = x; y1 = y; CompOutCode(x1,y1,outcode1);
             }
        }   //subdivide
-    }until done;  
+    }while !done;  
     if (accept ){
     MidpointLineReal(x0,y0,x1,y1,value); //Version for real coordinates
     }
