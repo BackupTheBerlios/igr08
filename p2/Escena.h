@@ -4,6 +4,7 @@
 
 #include "DibujoLineas.h"
 #include "Punto2f.h"
+#include "OutCode.h"
 
 #define deltaT 100
 //---------------------------------------------------------------------------
@@ -30,6 +31,8 @@ class Escena {
       Lista<DibujoLineas> * getEscena() {return listaDibujos;}
       void Zoom(float factor);
       bool ZoomProgresivo(float factor, int nPasos);
+      Escena * recorte(Punto2f *, Punto2f *);
+
 
    private:
       GLfloat xRight, xLeft;
