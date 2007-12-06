@@ -18,6 +18,8 @@
 #include "Segmento.h"
 
 //---------------------------------------------------------------------------
+const int MAX = 100;
+
 class TGLForm2D : public TForm
 {
 __published:	// IDE-managed Components
@@ -38,6 +40,8 @@ __published:	// IDE-managed Components
         TMenuItem *ZoomProgresivo1;
         TMenuItem *Editar1;
         TMenuItem *Seleccionar1;
+        TMenuItem *Borrar1;
+        TMenuItem *Bezier1;
         void __fastcall FormCreate(TObject *Sender);
         void __fastcall FormResize(TObject *Sender);
         void __fastcall FormPaint(TObject *Sender);
@@ -56,6 +60,8 @@ __published:	// IDE-managed Components
         void __fastcall Zoom1Click(TObject *Sender);
         void __fastcall ZoomProgresivo1Click(TObject *Sender);
         void __fastcall Seleccionar1Click(TObject *Sender);
+        void __fastcall Borrar1Click(TObject *Sender);
+        void __fastcall Bezier1Click(TObject *Sender);
 
 private:	// User declarations
  HDC hdc;
@@ -76,9 +82,11 @@ private:	// User declarations
  Segmento * s;
  DibujoLineas * dl;
 
- // Variables necesarios para el Arco
- Punto2f* puntos[3];
+ // Variables necesarios
+ Punto2f* puntos[MAX];
+ Punto2f* curva[MAX];
  int cont;
+ int total_puntos;
  int nPasos;
 
  // Variables necesarias para la Espiral

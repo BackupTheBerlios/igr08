@@ -83,7 +83,7 @@ if (scene !=NULL) {
    }
 
 // Puntos provisionales del Arco
-if (estado == 2)
+if (estado == 2 || estado == 5)
    for (int i=0; i<=cont; i++)
       if (puntos[i]!=NULL)
          puntos[i]->Pinta();
@@ -212,6 +212,9 @@ switch (estado) {
         case 3: { // Espirales
                   GLfloat ang = 0.0;  // Angulo inicial 0.0
 
+                  dl = new DibujoLineas();
+                  scene -> inserta(dl);
+
                   p = new Punto2f(x,y);
                   scene->transformarXY(p,ClientWidth,ClientHeight);
 
@@ -235,6 +238,29 @@ switch (estado) {
 
                   break;
                 }
+
+        case 5: { // Curva Bezier
+                  if (cont < total_puntos) {
+                      puntos[cont] = new Punto2f(x,y);
+                      scene->transformarXY(puntos[cont],ClientWidth,ClientHeight);
+
+                      GLScene();
+
+                      cont++;
+                    }
+                  else {
+
+                    Lapiz * l = new Lapiz();
+                    l->Bezier(puntos,total_puntos,curva);
+                    // Insertar curva en dl
+                    delete l;
+                    p=NULL;
+                  }
+
+                  GLScene();
+
+                  break;
+                 }
         }
 
         if (p != NULL) {
@@ -289,9 +315,10 @@ void __fastcall TGLForm2D::Arcos1Click(TObject *Sender)
  dl = new DibujoLineas();
  scene -> inserta(dl);
 
+ total_puntos = 3;
  cont = 0;
 
- for (int i=0; i<3; i++)
+ for (int i=0; i<total_puntos; i++)
     puntos[i] = NULL;
 
  Application->MessageBox("Señala 3 puntos: Inicial, Final y otro",
@@ -320,9 +347,7 @@ if(InputQuery("Solicitando datos","Numero de iteraciones:",dato))
             {
             incrAng = StrToInt(dato);
             Application->MessageBox("Elige el centro","Espiral",MB_OK);
-             estado = 3;
-             dl = new DibujoLineas();
-             scene -> inserta(dl);
+            estado = 3;
             }
         }
     }
@@ -357,6 +382,35 @@ if (InputQuery("Solicitando datos","Porcentaje:",S_porcentaje))
 void __fastcall TGLForm2D::Seleccionar1Click(TObject *Sender)
 {
  estado = 4;
+}
+//---------------------------------------------------------------------------
+// Borrado dibujo de lineas seleccionado
+void __fastcall TGLForm2D::Borrar1Click(TObject *Sender)
+{
+ scene->BorrarSeleccionado();
+ GLScene();
+}
+//---------------------------------------------------------------------------
+// Dibujado de una curva Bezier
+void __fastcall TGLForm2D::Bezier1Click(TObject *Sender)
+{
+ AnsiString Num_Puntos="10";
+ AnsiString Num_Lados="25";
+ if (InputQuery("Solicitando datos","Numero de puntos de control:",Num_Puntos)) {
+    total_puntos = StrToInt(Num_Puntos);
+    if (InputQuery("Solicitando datos","Numero de Lados:", Num_Lados)) {
+       estado = 5;
+       cont = 0;
+       nPasos = StrToInt(Num_Lados);
+       dl = new DibujoLineas();
+       scene -> inserta(dl);
+
+       for (int i=0; i<total_puntos; i++) {
+         puntos[i] = NULL;
+         curva[i] = NULL;
+       }
+    }
+  }
 }
 //---------------------------------------------------------------------------
 

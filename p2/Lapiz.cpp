@@ -134,3 +134,42 @@ void Lapiz::arco(Punto2f * inicio, Punto2f * fin, Punto2f *otro){
 //calcular radio
 
 }
+
+Punto2f* Lapiz::calcularBezier(Punto2f** cp,float t) {
+
+    float ax, bx, cx;
+    float ay, by, cy;
+    float ts, tc;
+    Punto2f* punto;
+ 
+    // Cálculamos los coeficientes polinomiales
+
+    cx = 3.0 * (cp[1]->getX() - cp[0]->getX());
+    bx = 3.0 * (cp[2]->getX() - cp[1]->getX()) - cx;
+    ax = cp[3]->getX() - cp[0]->getX() - cx - bx;
+ 
+    cy = 3.0 * (cp[1]->getY() - cp[0]->getY());
+    by = 3.0 * (cp[2]->getY() - cp[1]->getY()) - cy;
+    ay = cp[3]->getY() - cp[0]->getY() - cy - by;
+ 
+    // Calculamos el punto de curva en el parametro t
+
+    ts = t * t;
+    tc = ts * t;
+ 
+    punto->setX((ax * tc) + (bx * ts) + (cx * t) + cp[0]->getX());
+    punto->setY((ay * tc) + (by * ts) + (cy * t) + cp[0]->getY());
+ 
+    return punto;
+}
+
+
+void Lapiz::Bezier(Punto2f** puntosControl,int numeroDePuntos, Punto2f** curva) {
+    float dt;
+    int i;
+
+    dt = 1.0 / (numeroDePuntos - 1);
+
+    for (i=0; i<numeroDePuntos; i++)
+        curva[i] = calcularBezier(puntosControl,i*dt);
+}

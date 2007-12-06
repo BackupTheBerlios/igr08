@@ -49,16 +49,20 @@ object GLForm2D: TGLForm2D
     object Dibujar1: TMenuItem
       Caption = 'Dibujar'
       object Lineas1: TMenuItem
-        Caption = 'Lineas'
+        Caption = 'Lineas...'
         OnClick = Lineas1Click
       end
       object Arcos1: TMenuItem
-        Caption = 'Arcos'
+        Caption = 'Arcos...'
         OnClick = Arcos1Click
       end
       object Espirales1: TMenuItem
-        Caption = 'Espirales'
+        Caption = 'Espirales...'
         OnClick = Espirales1Click
+      end
+      object Bezier1: TMenuItem
+        Caption = 'Curva Bezier...'
+        OnClick = Bezier1Click
       end
     end
     object Escena1: TMenuItem
@@ -77,6 +81,10 @@ object GLForm2D: TGLForm2D
       object Seleccionar1: TMenuItem
         Caption = 'Seleccionar...'
         OnClick = Seleccionar1Click
+      end
+      object Borrar1: TMenuItem
+        Caption = 'Borrar...'
+        OnClick = Borrar1Click
       end
     end
   end

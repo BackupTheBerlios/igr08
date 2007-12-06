@@ -21,6 +21,7 @@ class Escena {
       void transformarXY(Punto2f *, int, int);
       void Seleccionar(Punto2f*);
       void Deseleccionar();
+      void BorrarSeleccionado();
 
       void teclado(WORD&);
 

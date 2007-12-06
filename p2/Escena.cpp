@@ -91,6 +91,18 @@ void Escena::Deseleccionar(){
    }
 }
 
+void Escena::BorrarSeleccionado() {
+    bool enc = false;
+    listaDibujos ->inicia();
+    while(!listaDibujos->final()&&!enc){
+         if (listaDibujos->getActual()->getOperacion()==2) {
+            listaDibujos->eliminaActual();
+            enc = true;
+         }
+         listaDibujos->avanza();
+   }
+}
+
 void Escena::teclado(WORD& Key) {
 
   // Factor de mov de Traslaccion
@@ -133,6 +145,12 @@ void Escena::teclado(WORD& Key) {
   if (Key == 's' | Key == 'S') {
   Zoom(95);
   }
+
+  // Tecla Supr -> Elimina dibujo seleccionado
+  if (Key == 46) {
+    this->BorrarSeleccionado();
+  }
+
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   gluOrtho2D(xLeft,xRight,yBot,yTop);
