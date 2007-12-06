@@ -11,7 +11,7 @@ class DibujoLineas {
    public:
       DibujoLineas();
       ~DibujoLineas(){ delete listaSegmentos;}
-      Lista<Segmento> * getDibujoLineas() {return listaSegmentos;}
+      Lista<Segmento> * getSegmentos() {return listaSegmentos;}
       void Pinta();
       void inserta(Segmento *);
       void Seleccionar(Punto2f*);

@@ -223,8 +223,25 @@ bool Escena::ZoomProgresivo(float factor, int nPasos){
    else return false;
 }
 
+void Escena::recorte(Punto2f * NE, Punto2f * SO){
+        DibujoLineas * dl;
+        Segmento * s;
+    listaDibujos ->inicia();
+    while(!listaDibujos->final()){
+        dl = listaDibujos->getActual(); //->getDibujoLineas();
+        dl->getSegmentos()->inicia();
+        while(!dl->getSegmentos()->final()) {
+                s = dl->getSegmentos()->getActual();
+                recorteLinea(NE, SO, s->getInicio(), s->getFinal());
+                dl->getSegmentos()->avanza();
+        }
+        listaDibujos->avanza();
+   }
+
+}
+
 // Recorte de la escena usando el algorimo de cohen sutherland
-Escena * Escena::recorteLinea(Punto2f * NE, Punto2f * SO, Punto2f * inicio, Punto2f * final) {
+void Escena::recorteLinea(Punto2f * NE, Punto2f * SO, Punto2f * inicio, Punto2f * final) {
     GLdouble x0, y0, x1, y1, xmin, xmax, ymin, ymax;
     int value;
     bool accept, done;
@@ -290,7 +307,7 @@ Escena * Escena::recorteLinea(Punto2f * NE, Punto2f * SO, Punto2f * inicio, Punt
     if (accept ){
 //    MidpointLineReal(x0,y0,x1,y1,value); //Version for real coordinates
     }
-           return 0;///////////
+         ///////////
 }  //CohenSutherlandLineClipAndDraw
 
 /////////////////////////////////////////////////////
