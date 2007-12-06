@@ -178,3 +178,7 @@ void Lapiz::Bezier(Punto2f** puntos,int num_Puntos,int Num_Lados,DibujoLineas* d
 
    }
 }
+
+void Lapiz::B_Splines(Punto2f** puntos,int num_Puntos,int Num_Lados,DibujoLineas* dl) {
+
+}

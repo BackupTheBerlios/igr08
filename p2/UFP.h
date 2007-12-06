@@ -43,6 +43,7 @@ __published:	// IDE-managed Components
         TMenuItem *Borrar1;
         TMenuItem *Bezier1;
         TMenuItem *Recorte1;
+        TMenuItem *CurvaBSplines1;
         void __fastcall FormCreate(TObject *Sender);
         void __fastcall FormResize(TObject *Sender);
         void __fastcall FormPaint(TObject *Sender);
@@ -74,6 +75,7 @@ __published:	// IDE-managed Components
           TShiftState Shift, TPoint &MousePos, bool &Handled);
         void __fastcall FormMouseWheelUp(TObject *Sender,
           TShiftState Shift, TPoint &MousePos, bool &Handled);
+        void __fastcall CurvaBSplines1Click(TObject *Sender);
 
 private:	// User declarations
  HDC hdc;
@@ -96,10 +98,10 @@ private:	// User declarations
 
  // Variables necesarios
  Punto2f* puntos[MAX];
- Punto2f* curva[MAX];
  int cont;
  int total_puntos;
  int nPasos;
+ int grado;
 
  // Variables necesarias para la Espiral
  GLfloat longInicial;

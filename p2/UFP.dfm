@@ -1,6 +1,6 @@
 object GLForm2D: TGLForm2D
-  Left = 506
-  Top = 185
+  Left = 616
+  Top = 248
   Width = 408
   Height = 434
   Caption = 'Lineas y Curvas'
@@ -62,12 +62,16 @@ object GLForm2D: TGLForm2D
         OnClick = Arcos1Click
       end
       object Espirales1: TMenuItem
-        Caption = 'Espirales...'
+        Caption = 'Espiral...'
         OnClick = Espirales1Click
       end
       object Bezier1: TMenuItem
-        Caption = 'Curva Bezier...'
+        Caption = 'Bezier...'
         OnClick = Bezier1Click
+      end
+      object CurvaBSplines1: TMenuItem
+        Caption = 'B-Splines...'
+        OnClick = CurvaBSplines1Click
       end
     end
     object Escena1: TMenuItem
