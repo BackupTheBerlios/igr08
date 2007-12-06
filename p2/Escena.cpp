@@ -233,8 +233,8 @@ Escena * Escena::recorte(Punto2f * NE, Punto2f * SO) {
     GLdouble x,y;
     accept = false;
     done = false;
-    CompOutCode(x0, y0, outcode0);
-    CompOutCode(x1, y1, outcode1);
+    CompOutCode(x0, y0, xmin, xmax, ymin, ymax, outcode0);
+    CompOutCode(x1, y1, xmin, xmax, ymin, ymax, outcode1);
     do
       {
       if(outcode0.esTodoFalse() & outcode1.esTodoFalse() )  //Trivial accept and exit
@@ -279,11 +279,11 @@ Escena * Escena::recorte(Punto2f * NE, Punto2f * SO) {
           // and get ready for next pass.}
           if (outcodeOut == outcode0)
             {
-              x0 = x; y0 = y; CompOutCode(x0,y0,outcode0);
+              x0 = x; y0 = y; CompOutCode(x0,y0,xmin, xmax, ymin, ymax,outcode0);
             }
           else
             {
-              x1 = x; y1 = y; CompOutCode(x1,y1,outcode1);
+              x1 = x; y1 = y; CompOutCode(x1,y1,xmin, xmax, ymin, ymax,outcode1);
             }
         }   //subdivide
       } while (!done);
@@ -327,13 +327,14 @@ GLdouble Escena::convertirY(int y, int alto) {
     void Escena::CompOutCode(GLdouble x, GLdouble y, GLdouble xmin, GLdouble xmax, GLdouble ymin, GLdouble ymax, OutCode &code)
 //    Compute outcode for the point (x,y)
 {
-      if      (y > ymax) {code = [TOP];}
-      else if (y < ymin) {code = [BOTTOM];}
+      if      (y > ymax) {code.setArriba(true);}
+      else if (y < ymin) {code.setAbajo(true);}
 
-      if      (x > xmax) {code = code + [RIGHT];}
-      else if (x < xmin) {code = code + [LEFT];}
+      if      (x > xmax) {code.setDerecha(true);}
+      else if (x < xmin) {code.setIzquierda(true);}
       int a =3;
 }
+
 
 
 
