@@ -34,7 +34,7 @@ class Escena {
       Lista<DibujoLineas> * getEscena() {return listaDibujos;}
       void Zoom(float factor);
       bool ZoomProgresivo(float factor, int nPasos);
-      Escena * recorte(Punto2f *, Punto2f *);
+      Escena * recorteLinea(Punto2f * , Punto2f *, Punto2f *, Punto2f *);
 
 
    private:

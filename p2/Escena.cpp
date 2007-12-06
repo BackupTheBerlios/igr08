@@ -224,7 +224,7 @@ bool Escena::ZoomProgresivo(float factor, int nPasos){
 }
 
 // Recorte de la escena usando el algorimo de cohen sutherland
-Escena * Escena::recorte(Punto2f * NE, Punto2f * SO) {
+Escena * Escena::recorteLinea(Punto2f * NE, Punto2f * SO, Punto2f * inicio, Punto2f * final) {
     GLdouble x0, y0, x1, y1, xmin, xmax, ymin, ymax;
     int value;
     bool accept, done;
@@ -332,7 +332,6 @@ GLdouble Escena::convertirY(int y, int alto) {
 
       if      (x > xmax) {code.setDerecha(true);}
       else if (x < xmin) {code.setIzquierda(true);}
-      int a =3;
 }
 
 
