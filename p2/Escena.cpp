@@ -72,7 +72,23 @@ void Escena::Pinta(){
 }
 
 void Escena::inserta(DibujoLineas * dl) {
-        listaDibujos->inserta(dl);
+    listaDibujos->inserta(dl);
+}
+
+void Escena::Seleccionar(Punto2f* p) {
+    listaDibujos ->inicia();
+    while(!listaDibujos->final()){
+         listaDibujos->getActual()->Seleccionar(p);
+         listaDibujos->avanza();
+    }
+}
+
+void Escena::Deseleccionar(){
+    listaDibujos ->inicia();
+    while(!listaDibujos->final()){
+         listaDibujos->getActual()->setOperacion(1);
+         listaDibujos->avanza();
+   }
 }
 
 void Escena::teclado(WORD& Key) {
@@ -190,7 +206,7 @@ bool Escena::ZoomProgresivo(float factor, int nPasos){
 }
 
 // Recorte de la escena usando el algorimo de cohen sutherland
-Escena * Escena::recorte(Punto2f * NE, Punto2f * SO){
+Escena * Escena::recorte(Punto2f * NE, Punto2f * SO) {
     GLdouble x0, y0, x1, y1, xmin, xmax, ymin, ymax;
     int value;
     bool accept, done;
@@ -251,8 +267,8 @@ Escena * Escena::recorte(Punto2f * NE, Punto2f * SO){
             {
               x1 = x; y1 = y; CompOutCode(x1,y1,outcode1);
             }
-       }   //subdivide
-    }while (!done);
+        }   //subdivide
+      } while (!done);
     if (accept ){
 //    MidpointLineReal(x0,y0,x1,y1,value); //Version for real coordinates
     }
@@ -301,4 +317,6 @@ GLdouble Escena::convertirY(int y, int alto) {
       */
       int a =3;
 }
+
+
 

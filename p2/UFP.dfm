@@ -72,5 +72,12 @@ object GLForm2D: TGLForm2D
         OnClick = ZoomProgresivo1Click
       end
     end
+    object Editar1: TMenuItem
+      Caption = 'Editar'
+      object Seleccionar1: TMenuItem
+        Caption = 'Seleccionar...'
+        OnClick = Seleccionar1Click
+      end
+    end
   end
 end

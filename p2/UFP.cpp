@@ -77,10 +77,6 @@ void __fastcall TGLForm2D::GLScene()
 {
 glClear(GL_COLOR_BUFFER_BIT);
 
-glColor3f(1.0,1.0,1.0);
-glLineWidth(2);
-glPointSize(3);
-
 // Comandos para dibujar la escena
 if (scene !=NULL) {
    scene->Pinta();
@@ -91,10 +87,6 @@ if (estado == 2)
    for (int i=0; i<=cont; i++)
       if (puntos[i]!=NULL)
          puntos[i]->Pinta();
-/*
-Lapiz * l = new Lapiz();
-l->poliEspiral(new Punto2f(10,10),90,0,25,10,25);
-delete l; */
 
 glFlush();
 SwapBuffers(hdc);
@@ -170,77 +162,85 @@ else{
 //---------------------------------------------------------------------------
 // Control del raton
 void __fastcall TGLForm2D::FormMouseDown(TObject *Sender,
-      TMouseButton Button, TShiftState Shift, int x, int y)
-{
+      TMouseButton Button, TShiftState Shift, int x, int y) {
 
 Punto2f * p;
 p=NULL;
-switch(estado){
-        case 1:   // Polilíneas
+
+switch (estado) {
+        case 1: { // Polilíneas
                   p = new Punto2f(x,y);
                   scene->transformarXY(p,ClientWidth,ClientHeight);
-                  if ( pos_actual== NULL){
+                  if ( pos_actual== NULL)
                      pos_actual = p->clon();
-                     }
+
                   s = new Segmento(pos_actual, p);
                   dl->inserta(s);
                   delete pos_actual;
                   delete s;
+
                   pos_actual = p->clon();
+
                   GLScene();
+
                   break;
-
-        case 2:  // Arcos
-                if (cont < 3) {
-
+                }
+        case 2: { // Arcos
+                  if (cont < 3) {
                     puntos[cont] = new Punto2f(x,y);
                     scene->transformarXY(puntos[cont],ClientWidth,ClientHeight);
 
                     GLScene();
 
                     cont++;
+                  }
+
+                  if (cont==3) {
+                     AnsiString dato = 10;
+                     InputQuery("Solicitando datos",
+                                "Numero de iteraciones",
+                                dato);
+                     nPasos = StrToInt(dato);
+                  }
+
+                  // Si cont = 3 dibujamos arco
+                  // e inicializamos cont a 0.
+                  // en otro caso cont++
+
+                  break;
                 }
+        case 3: { // Espirales
+                  GLfloat ang = 0.0;  // Angulo inicial 0.0
 
-                if (cont==3) {
-                   AnsiString dato = 10;
-                   InputQuery("Solicitando datos",
-                              "Numero de iteraciones",
-                              dato);
-                   nPasos = StrToInt(dato);
+                  p = new Punto2f(x,y);
+                  scene->transformarXY(p,ClientWidth,ClientHeight);
+
+
+                  Lapiz * l = new Lapiz();
+                  l->poliEspiral(p,incrAng,ang,incrLong,longInicial,nPasos,dl);
+                  delete l;
+                  p=NULL;
+
+                  GLScene();
+
+                  break;
                 }
+        case 4: { // Seleccionar
+                  p = new Punto2f(x,y);
+                  scene->transformarXY(p,ClientWidth,ClientHeight);
 
-                 // Si cont = 3 dibujamos arco
-                 // e inicializamos cont a 0.
-                 // en otro caso cont++
+                  scene->Seleccionar(p);
 
-                 break;
+                  GLScene();
 
-        case 3: // Espirales
-
-            
-                GLfloat ang = 0.0;  // Angulo inicial 0.0
-
-                p = new Punto2f(x,y);
-                scene->transformarXY(p,ClientWidth,ClientHeight);
-
-
-                Lapiz * l = new Lapiz();
-                l->poliEspiral(p,incrAng,ang,incrLong,longInicial,nPasos,dl);
-                delete l;
-                p=NULL;
-                GLScene();
-
-                break;
+                  break;
+                }
         }
 
-        if (p != NULL)
-           {
+        if (p != NULL) {
            delete p;
            p=NULL;
-           }
-
-
-
+        }
 }
 
 //---------------------------------------------------------------------------
@@ -353,7 +353,10 @@ if (InputQuery("Solicitando datos","Porcentaje:",S_porcentaje))
  }
 }
 //---------------------------------------------------------------------------
-
-
-
+// Selecciona un dibujo de lineas
+void __fastcall TGLForm2D::Seleccionar1Click(TObject *Sender)
+{
+ estado = 4;
+}
+//---------------------------------------------------------------------------
 

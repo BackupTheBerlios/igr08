@@ -32,6 +32,14 @@ void Segmento::Pinta(){
         glEnd();
       }
 
+// Dibuja Puntos de control
+void Segmento::Pinta2(){
+        glBegin(GL_POINTS);
+                glVertex2f(inicio->getX() , inicio->getY());
+                glVertex2f(final->getX() , final->getY());
+        glEnd();
+      }
+
 Segmento * Segmento::clon() const{
        Punto2f* i = new Punto2f(inicio->getX(), inicio->getY());
        Punto2f* f = new Punto2f(final->getX(), final->getY());
@@ -40,4 +48,17 @@ Segmento * Segmento::clon() const{
        delete f;
        return r;
 
+}
+
+bool Segmento::contiene(Punto2f* p){
+
+   if ((inicio->getX() < p->getX() + 10)&&(inicio->getX() > p->getX() - 10)&&
+      (inicio->getY() < p->getY() + 10)&&(inicio->getY() > p->getY() - 10))
+      return true;
+
+   if ((final->getX() < p->getX() + 10)&&(final->getX() > p->getX() - 10)&&
+      (final->getY() < p->getY() + 10)&&(final->getY() > p->getY()- 10))
+      return true;
+
+   return false;
 }

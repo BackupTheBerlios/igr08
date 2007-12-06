@@ -13,9 +13,9 @@ Punto2f::Punto2f (const Punto2f& p){
 
 // Método clon
 Punto2f * Punto2f::clon() const {
-        Punto2f* p = new Punto2f();
-        *p = *this;
-        return p;
+        Punto2f* p1 = new Punto2f();
+        *p1 = *this;
+        return p1;
 }
 
 // Dibuja un punto

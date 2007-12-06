@@ -15,7 +15,7 @@
     }
 
     bool OutCode::operator== (OutCode) const{
-        if (this->arriba != OutCode->arriba){
+     /*   if (this->arriba != OutCode->arriba){
         return false;
         }
         if (this->abajo != OutCode->abajo){
@@ -28,7 +28,7 @@
 
         if (this->izquierda != OutCode->izquierda){
         return false;
-        }
+        }   */
         return true;
     }
 
