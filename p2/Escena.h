@@ -48,7 +48,7 @@ class Escena {
 
       GLdouble convertirX(int,int);
       GLdouble convertirY(int,int);
-      void CompOutCode(GLdouble x, GLdouble y, OutCode &code);
+      void Escena::CompOutCode(GLdouble x, GLdouble y, GLdouble xmin, GLdouble xmax, GLdouble ymin, GLdouble ymax, OutCode &code);
 
       HDC hdc;
 };

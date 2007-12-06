@@ -14,8 +14,13 @@ object GLForm2D: TGLForm2D
   OldCreateOrder = False
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  OnDragDrop = FormDragDrop
+  OnDragOver = FormDragOver
   OnKeyDown = FormKeyDown
   OnMouseDown = FormMouseDown
+  OnMouseUp = FormMouseUp
+  OnMouseWheelDown = FormMouseWheelDown
+  OnMouseWheelUp = FormMouseWheelUp
   OnPaint = FormPaint
   OnResize = FormResize
   PixelsPerInch = 96
@@ -85,6 +90,10 @@ object GLForm2D: TGLForm2D
       object Borrar1: TMenuItem
         Caption = 'Borrar...'
         OnClick = Borrar1Click
+      end
+      object Recorte1: TMenuItem
+        Caption = 'Recorte'
+        OnClick = Recorte1Click
       end
     end
   end

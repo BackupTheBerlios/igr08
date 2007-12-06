@@ -414,3 +414,50 @@ void __fastcall TGLForm2D::Bezier1Click(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TGLForm2D::Recorte1Click(TObject *Sender)
+{
+estado = 5;         
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TGLForm2D::FormDragDrop(TObject *Sender, TObject *Source,
+      int X, int Y)
+{
+ShowMessage("dragdrop");          
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TGLForm2D::FormDragOver(TObject *Sender, TObject *Source,
+      int X, int Y, TDragState State, bool &Accept)
+{
+ShowMessage("dragover");          
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TGLForm2D::FormMouseUp(TObject *Sender,
+      TMouseButton Button, TShiftState Shift, int X, int Y)
+{
+//ShowMessage("mouseUp");
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TGLForm2D::FormMouseWheelDown(TObject *Sender,
+      TShiftState Shift, TPoint &MousePos, bool &Handled)
+{
+
+scene->Zoom(95);
+scene->Pinta();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TGLForm2D::FormMouseWheelUp(TObject *Sender,
+      TShiftState Shift, TPoint &MousePos, bool &Handled)
+{
+scene->Zoom(105);
+scene->Pinta();
+
+}
+//---------------------------------------------------------------------------
+

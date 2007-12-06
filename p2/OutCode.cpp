@@ -8,27 +8,27 @@
 //---------------------------------------------------------------------------
 
     bool OutCode::tieneAlgunaCoordenadaIgualQue(OutCode c){
-        return (igual(this->arriba,arriba) |
-                igual(this->abajo, abajo) |
-                igual(this->derecha,derecha) |
-                igual(this->izquierda,izquierda) );
+        return (igual(this->arriba,c.arriba) |
+                igual(this->abajo, c.abajo) |
+                igual(this->derecha,c.derecha) |
+                igual(this->izquierda,c.izquierda) );
     }
 
-    bool OutCode::operator== (OutCode) const{
-     /*   if (this->arriba != OutCode->arriba){
-        return false;
+    bool OutCode::operator== (OutCode otro) const{
+        if (this->arriba != otro.arriba){
+                return false;
         }
-        if (this->abajo != OutCode->abajo){
-        return false;
-        }
-
-        if (this->derecha != OutCode->derecha){
-        return false;
+        if (this->abajo != otro.abajo){
+                return false;
         }
 
-        if (this->izquierda != OutCode->izquierda){
-        return false;
-        }   */
+        if (this->derecha != otro.derecha){
+                return false;
+        }
+
+        if (this->izquierda != otro.izquierda){
+                return false;
+        }
         return true;
     }
 

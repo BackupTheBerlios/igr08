@@ -57,7 +57,7 @@ void Escena::Resize(int CW, int CH) {
 }
 
 void Escena::Pinta(){
-//    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT);
     listaDibujos ->inicia();
     while(!listaDibujos->final()){
          listaDibujos->getActual()->Pinta();
@@ -290,7 +290,7 @@ Escena * Escena::recorte(Punto2f * NE, Punto2f * SO) {
     if (accept ){
 //    MidpointLineReal(x0,y0,x1,y1,value); //Version for real coordinates
     }
-
+           return 0;///////////
 }  //CohenSutherlandLineClipAndDraw
 
 /////////////////////////////////////////////////////
@@ -324,15 +324,14 @@ GLdouble Escena::convertirY(int y, int alto) {
 
 
 // Método  privado para el recorte de líneas
-    void Escena::CompOutCode(GLdouble x, GLdouble y, OutCode &code)
+    void Escena::CompOutCode(GLdouble x, GLdouble y, GLdouble xmin, GLdouble xmax, GLdouble ymin, GLdouble ymax, OutCode &code)
 //    Compute outcode for the point (x,y)
 {
-/*      if      (y > ymax) {code = [TOP];}
+      if      (y > ymax) {code = [TOP];}
       else if (y < ymin) {code = [BOTTOM];}
 
       if      (x > xmax) {code = code + [RIGHT];}
       else if (x < xmin) {code = code + [LEFT];}
-      */
       int a =3;
 }
 

@@ -42,6 +42,7 @@ __published:	// IDE-managed Components
         TMenuItem *Seleccionar1;
         TMenuItem *Borrar1;
         TMenuItem *Bezier1;
+        TMenuItem *Recorte1;
         void __fastcall FormCreate(TObject *Sender);
         void __fastcall FormResize(TObject *Sender);
         void __fastcall FormPaint(TObject *Sender);
@@ -62,6 +63,17 @@ __published:	// IDE-managed Components
         void __fastcall Seleccionar1Click(TObject *Sender);
         void __fastcall Borrar1Click(TObject *Sender);
         void __fastcall Bezier1Click(TObject *Sender);
+        void __fastcall Recorte1Click(TObject *Sender);
+        void __fastcall FormDragDrop(TObject *Sender, TObject *Source,
+          int X, int Y);
+        void __fastcall FormDragOver(TObject *Sender, TObject *Source,
+          int X, int Y, TDragState State, bool &Accept);
+        void __fastcall FormMouseUp(TObject *Sender, TMouseButton Button,
+          TShiftState Shift, int X, int Y);
+        void __fastcall FormMouseWheelDown(TObject *Sender,
+          TShiftState Shift, TPoint &MousePos, bool &Handled);
+        void __fastcall FormMouseWheelUp(TObject *Sender,
+          TShiftState Shift, TPoint &MousePos, bool &Handled);
 
 private:	// User declarations
  HDC hdc;
