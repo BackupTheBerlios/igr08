@@ -135,41 +135,46 @@ void Lapiz::arco(Punto2f * inicio, Punto2f * fin, Punto2f *otro){
 
 }
 
-Punto2f* Lapiz::calcularBezier(Punto2f** cp,float t) {
 
-    float ax, bx, cx;
-    float ay, by, cy;
-    float ts, tc;
-    Punto2f* punto;
- 
-    // Cálculamos los coeficientes polinomiales
+void Lapiz::Casteljau(float t, Punto2f** puntos, Punto2f* p, int n) {
 
-    cx = 3.0 * (cp[1]->getX() - cp[0]->getX());
-    bx = 3.0 * (cp[2]->getX() - cp[1]->getX()) - cx;
-    ax = cp[3]->getX() - cp[0]->getX() - cx - bx;
- 
-    cy = 3.0 * (cp[1]->getY() - cp[0]->getY());
-    by = 3.0 * (cp[2]->getY() - cp[1]->getY()) - cy;
-    ay = cp[3]->getY() - cp[0]->getY() - cy - by;
- 
-    // Calculamos el punto de curva en el parametro t
+    for (int j=1; j<n; j++) {
+      for (int k=0; k<n-j; k++) {
+         float xd = (1-t) * puntos[k]->getX() + t * puntos[k+1]->getX();
+         puntos[k]->setX(xd);
 
-    ts = t * t;
-    tc = ts * t;
- 
-    punto->setX((ax * tc) + (bx * ts) + (cx * t) + cp[0]->getX());
-    punto->setY((ay * tc) + (by * ts) + (cy * t) + cp[0]->getY());
- 
-    return punto;
+         float yd = (1-t) * puntos[k]->getY() + t * puntos[k+1]->getY();
+         puntos[k]->setY(yd);
+      }
+    }
+
+    p->setX(puntos[0]->getX());
+    p->setY(puntos[0]->getY());
 }
 
+void Lapiz::Bezier(Punto2f** puntos,int num_Puntos,int Num_Lados,DibujoLineas* dl) {
 
-void Lapiz::Bezier(Punto2f** puntosControl,int numeroDePuntos, Punto2f** curva) {
-    float dt;
-    int i;
+   float t;
+   Punto2f* pos_actual;
+   Segmento* s;
+   pos_actual = NULL;
 
-    dt = 1.0 / (numeroDePuntos - 1);
+   // Punto Inicial
+   Punto2f* p = new Punto2f(puntos[0]->getX(),puntos[0]->getY());
 
-    for (i=0; i<numeroDePuntos; i++)
-        curva[i] = calcularBezier(puntosControl,i*dt);
+   for (int i=1; i<=Num_Lados; i++) {
+      t = (float) i/Num_Lados;
+      Casteljau(t,puntos,p,num_Puntos);
+
+      if ( pos_actual== NULL)
+         pos_actual = p->clon();
+
+      s = new Segmento(pos_actual, p);
+      dl->inserta(s);
+      delete pos_actual;
+      delete s;
+
+      pos_actual = p->clon();
+
+   }
 }

@@ -248,12 +248,12 @@ switch (estado) {
 
                       cont++;
                     }
-                  else {
 
+                  if (cont == total_puntos) {
                     Lapiz * l = new Lapiz();
-                    l->Bezier(puntos,total_puntos,curva);
-                    // Insertar curva en dl
+                    l->Bezier(puntos,total_puntos, nPasos,dl);
                     delete l;
+
                     p=NULL;
                   }
 
@@ -394,7 +394,7 @@ void __fastcall TGLForm2D::Borrar1Click(TObject *Sender)
 // Dibujado de una curva Bezier
 void __fastcall TGLForm2D::Bezier1Click(TObject *Sender)
 {
- AnsiString Num_Puntos="10";
+ AnsiString Num_Puntos="4";
  AnsiString Num_Lados="25";
  if (InputQuery("Solicitando datos","Numero de puntos de control:",Num_Puntos)) {
     total_puntos = StrToInt(Num_Puntos);

@@ -28,8 +28,10 @@ class Lapiz {
       void poligonoR1 (Lapiz * l, GLfloat lado, int nlados);
       void poligonoR2 (Punto2f * centro, GLfloat radio, int nlados);
       void arco(Punto2f * inicio, Punto2f * fin, Punto2f *otro);
-      void Bezier(Punto2f** ,int , Punto2f**);
-      Punto2f* calcularBezier(Punto2f**,float);
+
+      void Bezier(Punto2f** ,int , int, DibujoLineas*);
+      void Casteljau(float , Punto2f** , Punto2f* , int ); 
+
 
    private:
       Punto2f * pos;
