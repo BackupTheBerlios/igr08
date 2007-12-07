@@ -83,7 +83,7 @@ if (scene !=NULL) {
    }
 
 // Puntos provisionales del Arco
-if (estado == 2 || estado == 5)
+if (estado == 2 || estado == 5 || estado == 6)
    for (int i=0; i<=cont; i++)
       if (puntos[i]!=NULL)
          puntos[i]->Pinta();
@@ -253,7 +253,7 @@ switch (estado) {
                     Lapiz * l = new Lapiz();
                     l->Bezier(puntos,total_puntos, nPasos,dl);
                     delete l;
-
+                    estado = 0;
                     p=NULL;
                   }
 
@@ -274,9 +274,9 @@ switch (estado) {
 
                   if (cont == total_puntos) {
                     Lapiz * l = new Lapiz();
-                    l->B_Splines(puntos,total_puntos, nPasos,dl);
+                    l->B_Splines(puntos,total_puntos,nPasos,dl);
                     delete l;
-
+                    estado = 0;
                     p=NULL;
                   }
 

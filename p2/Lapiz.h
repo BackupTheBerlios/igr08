@@ -32,12 +32,17 @@ class Lapiz {
       void Bezier(Punto2f** ,int , int, DibujoLineas*);
       void Casteljau(float , Punto2f** , Punto2f* , int );
 
-      void B_Splines(Punto2f** ,int , int, DibujoLineas*); 
-
+      //void B_Splines(Punto2f** ,int ,int ,int ,DibujoLineas*);
+      void B_Splines(Punto2f** ,int ,int,DibujoLineas*); 
 
    private:
       Punto2f * pos;
       GLdouble ang;  // Radianes
+
+      // Funciones Auxiliares
+      //double Base(float, int, int, int);
+      //float Nudo(int, int, int);
+      double Base(float, int);
 };
 
 #endif

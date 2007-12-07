@@ -179,6 +179,159 @@ void Lapiz::Bezier(Punto2f** puntos,int num_Puntos,int Num_Lados,DibujoLineas* d
    }
 }
 
+double Lapiz::Base(float t, int i) {
+
+    double base;
+
+    switch (i) {
+
+       case  1: base = (t * t * t)/6;
+                break;
+       case  0: base = (1 + 3*t + 3*t*t - 3*t*t*t)/6;
+                break;
+       case -1: base = (4 - 6*t*t + 3*t*t*t)/6;
+                break;
+       case -2: base = (1 - 3*t + 3*t*t - t*t*t)/6;
+                break;
+    }
+
+    return base;
+}
+
 void Lapiz::B_Splines(Punto2f** puntos,int num_Puntos,int Num_Lados,DibujoLineas* dl) {
 
+     int ind;
+     float t, v;
+     float xd, yd;
+     Punto2f* pos_actual;
+     pos_actual = NULL;
+     Segmento* s;
+     Punto2f* p;
+
+     for (int i=0; i<Num_Lados; i++) {
+        t = (float) i/Num_Lados;
+        p = new Punto2f();
+        xd = 0; yd = 0;
+
+        for (int j=-2; j<=1; j++) {
+            v = Base(t,j);
+            ind = j + i;
+
+            if (ind < 0) // Aproximación desde el 1º punto
+              ind = 0;
+            else {       // Aproximación desde el Nº punto
+              if (ind >= num_Puntos)
+                 ind = num_Puntos - 1;
+            }
+
+            xd = p->getX() + puntos[ind]->getX() * v;
+            yd = p->getY() + puntos[ind]->getY() * v;
+
+            p->setX(xd);
+            p->setY(yd);
+        }
+
+        // Siguiente segmento a agregar
+        if (pos_actual == NULL)
+           pos_actual = p->clon();
+
+        s = new Segmento(pos_actual, p);
+        dl->inserta(s);
+        delete pos_actual;
+        delete s;
+
+        pos_actual = p->clon();
+        delete p;
+
+     }
+  }
+
+/*
+float Lapiz::Nudo(int i, int grado, int num_Puntos) {
+
+     float n;
+
+     if (i <= grado)
+        n = 0;
+     else {
+        if (i > num_Puntos)
+          n = num_Puntos - grado + 2;
+        else
+          n = i - grado + 1;
+     }
+     return n;
 }
+
+double Lapiz::Base(float t, int j, int g, int nP) {
+
+    double n1, n2;
+    double d1, d2;
+    double c1, c2;
+    double base;
+
+    if (g == 1) {
+      if ((t < Nudo(j+1,g,nP) && (Nudo(j,g,nP) <= t)))
+         base = 1;
+      else
+         base = 0;
+    }
+    else {
+         n1 = (t-j) * Base(t,j,g-1,nP);
+         n2 = (Nudo(j+g,g,nP) - t) * Base(t,j+1,g-1,nP);
+         d1 = Nudo(j+g-1,g,nP) - Nudo(j,g,nP);
+         d2 = Nudo(j+g,g,nP) - Nudo(j+1,g,nP);
+
+         if (d1 == 0)
+           c1 = 0;
+         else
+           c1 = (double) n1/d1;
+
+         if (d2 == 0)
+           c2 = 0;
+         else
+           c2 = (double) n2/d2;
+
+         base = c1 + c2;
+      }
+   return base;
+}
+
+void Lapiz::B_Splines(Punto2f** puntos,int num_Puntos,int nPasos,int grado,DibujoLineas* dl) {
+
+     float t;
+     double v;
+     float xd, yd;
+     Punto2f* pos_actual;
+     pos_actual = NULL;
+     Segmento* s;
+     Punto2f* p;
+
+     for (int i=1; i<=(nPasos * (num_Puntos - grado + 2)); i++) {
+         t = (float) i/nPasos;
+         p = new Punto2f();
+         xd = 0; yd = 0;
+
+         for (int j=0; j<num_Puntos; j++) {
+             v = (double) Base(t,j,grado,num_Puntos);
+
+             xd += puntos[j]->getX() * v;
+             yd += puntos[j]->getY() * v;
+
+             p->setX(xd);
+             p->setY(yd);
+         }
+
+        // Siguiente segmento a agregar
+        if (pos_actual == NULL)
+           pos_actual = p->clon();
+
+        s = new Segmento(pos_actual, p);
+        dl->inserta(s);
+        delete pos_actual;
+        delete s;
+        
+        pos_actual = p->clon();
+        delete p;
+     }
+}
+ */
