@@ -6,7 +6,7 @@
 #include "Punto2f.h"
 #include "OutCode.h"
 
-#define deltaT 100
+#define deltaT 50
 //---------------------------------------------------------------------------
 
 class Escena {
@@ -18,7 +18,7 @@ class Escena {
       void Pinta();
 
       void inserta(DibujoLineas * p);
-      void transformarXY(Punto2f *, int, int);
+      void transformarXY(Punto2f *);//, int, int);
       void Seleccionar(Punto2f*);
       void Deseleccionar();
       void BorrarSeleccionado();

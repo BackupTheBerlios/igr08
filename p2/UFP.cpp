@@ -170,7 +170,7 @@ p=NULL;
 switch (estado) {
         case 1: { // Polilíneas
                   p = new Punto2f(x,y);
-                  scene->transformarXY(p,ClientWidth,ClientHeight);
+                  scene->transformarXY(p);//,ClientWidth,ClientHeight);
                   if ( pos_actual== NULL)
                      pos_actual = p->clon();
 
@@ -188,7 +188,7 @@ switch (estado) {
         case 2: { // Arcos
                   if (cont < 3) {
                     puntos[cont] = new Punto2f(x,y);
-                    scene->transformarXY(puntos[cont],ClientWidth,ClientHeight);
+                    scene->transformarXY(puntos[cont]);//,ClientWidth,ClientHeight);
 
                     GLScene();
 
@@ -216,7 +216,7 @@ switch (estado) {
                   scene -> inserta(dl);
 
                   p = new Punto2f(x,y);
-                  scene->transformarXY(p,ClientWidth,ClientHeight);
+                  scene->transformarXY(p);//,ClientWidth,ClientHeight);
 
 
                   Lapiz * l = new Lapiz();
@@ -230,7 +230,7 @@ switch (estado) {
                 }
         case 4: { // Seleccionar
                   p = new Punto2f(x,y);
-                  scene->transformarXY(p,ClientWidth,ClientHeight);
+                  scene->transformarXY(p);//,ClientWidth,ClientHeight);
 
                   scene->Seleccionar(p);
 
@@ -242,7 +242,7 @@ switch (estado) {
         case 5: { // Curva Bezier
                   if (cont < total_puntos) {
                       puntos[cont] = new Punto2f(x,y);
-                      scene->transformarXY(puntos[cont],ClientWidth,ClientHeight);
+                      scene->transformarXY(puntos[cont]);//,ClientWidth,ClientHeight);
 
                       GLScene();
 
@@ -265,7 +265,7 @@ switch (estado) {
         case 6: { // Curva B-Splines
                   if (cont < total_puntos) {
                       puntos[cont] = new Punto2f(x,y);
-                      scene->transformarXY(puntos[cont],ClientWidth,ClientHeight);
+                      scene->transformarXY(puntos[cont]);//,ClientWidth,ClientHeight);
 
                       GLScene();
 
@@ -286,7 +286,7 @@ switch (estado) {
                  }
          case 7:
         p1 = new Punto2f(x,y);
-        scene->transformarXY(p1,ClientWidth, ClientHeight);
+        scene->transformarXY(p1);//,ClientWidth, ClientHeight);
 
 
 
@@ -527,7 +527,7 @@ if (estado == 7){
         Punto2f * p2 = new Punto2f(X,Y);
         glClear(GL_COLOR_BUFFER_BIT);
         scene->Pinta();
-        scene->transformarXY(p2,ClientWidth, ClientHeight);
+        scene->transformarXY(p2);//,ClientWidth, ClientHeight);
         glEnable(GL_LINE_STIPPLE);
         glLineStipple(1, 0xCCCC);
         glColor3f(1.0, 1.0, 0.0);

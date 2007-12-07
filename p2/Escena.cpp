@@ -159,7 +159,7 @@ void Escena::teclado(WORD& Key) {
   glLoadIdentity();
 }
 
-void Escena::transformarXY(Punto2f * p, int ancho, int alto) {
+void Escena::transformarXY(Punto2f * p){ //, int ancho, int alto) {
         GLfloat x_Aux;
         GLfloat y_Aux;
 
