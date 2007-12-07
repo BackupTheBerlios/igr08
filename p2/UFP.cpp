@@ -285,7 +285,8 @@ switch (estado) {
                   break;
                  }
          case 7:
-        p1= new Punto2f(x,y);
+        p1 = new Punto2f(x,y);
+        scene->transformarXY(p1,ClientWidth, ClientHeight);
 
 
         break;
@@ -512,14 +513,12 @@ void __fastcall TGLForm2D::FormMouseMove(TObject *Sender,
         if (p1!=NULL){
         Punto2f * p2 = new Punto2f(X,Y);
         glClear(GL_COLOR_BUFFER_BIT);
-        scene->transformarXY(p1,ClientWidth, ClientHeight);
         scene->transformarXY(p2,ClientWidth, ClientHeight);
         glBegin(GL_LINE_LOOP);
                 glVertex2f(p1->getX(),p1->getY());
                 glVertex2f(p2->getX(),p1->getY());
                 glVertex2f(p2->getX(),p2->getY());
                 glVertex2f(p1->getX(),p2->getY());
-
         glEnd();
         glFlush();
         SwapBuffers(hdc);
