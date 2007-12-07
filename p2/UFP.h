@@ -65,17 +65,15 @@ __published:	// IDE-managed Components
         void __fastcall Borrar1Click(TObject *Sender);
         void __fastcall Bezier1Click(TObject *Sender);
         void __fastcall Recorte1Click(TObject *Sender);
-        void __fastcall FormDragDrop(TObject *Sender, TObject *Source,
-          int X, int Y);
-        void __fastcall FormDragOver(TObject *Sender, TObject *Source,
-          int X, int Y, TDragState State, bool &Accept);
-        void __fastcall FormMouseUp(TObject *Sender, TMouseButton Button,
-          TShiftState Shift, int X, int Y);
         void __fastcall FormMouseWheelDown(TObject *Sender,
           TShiftState Shift, TPoint &MousePos, bool &Handled);
         void __fastcall FormMouseWheelUp(TObject *Sender,
           TShiftState Shift, TPoint &MousePos, bool &Handled);
         void __fastcall CurvaBSplines1Click(TObject *Sender);
+        void __fastcall FormMouseUp(TObject *Sender, TMouseButton Button,
+          TShiftState Shift, int X, int Y);
+        void __fastcall FormMouseMove(TObject *Sender, TShiftState Shift,
+          int X, int Y);
 
 private:	// User declarations
  HDC hdc;
@@ -95,6 +93,8 @@ private:	// User declarations
  // Segmento y dibujo de lineas auxiliares
  Segmento * s;
  DibujoLineas * dl;
+ Punto2f * p1,p2; // Puntos para el recorte
+
 
  // Variables necesarios
  Punto2f* puntos[MAX];

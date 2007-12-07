@@ -14,10 +14,9 @@ object GLForm2D: TGLForm2D
   OldCreateOrder = False
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  OnDragDrop = FormDragDrop
-  OnDragOver = FormDragOver
   OnKeyDown = FormKeyDown
   OnMouseDown = FormMouseDown
+  OnMouseMove = FormMouseMove
   OnMouseUp = FormMouseUp
   OnMouseWheelDown = FormMouseWheelDown
   OnMouseWheelUp = FormMouseWheelUp

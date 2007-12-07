@@ -284,12 +284,20 @@ switch (estado) {
 
                   break;
                  }
+         case 7:
+        p1= new Punto2f(x,y);
+
+
+        break;
+
         }
+
 
         if (p != NULL) {
            delete p;
            p=NULL;
         }
+
 }
 
 //---------------------------------------------------------------------------
@@ -437,32 +445,21 @@ void __fastcall TGLForm2D::Bezier1Click(TObject *Sender)
 
 void __fastcall TGLForm2D::Recorte1Click(TObject *Sender)
 {
-estado = 5;         
+estado = 7;
 }
 //---------------------------------------------------------------------------
 
 
-void __fastcall TGLForm2D::FormDragDrop(TObject *Sender, TObject *Source,
-      int X, int Y)
-{
-ShowMessage("dragdrop");          
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TGLForm2D::FormDragOver(TObject *Sender, TObject *Source,
-      int X, int Y, TDragState State, bool &Accept)
-{
-ShowMessage("dragover");          
-}
-//---------------------------------------------------------------------------
 
 
 void __fastcall TGLForm2D::FormMouseUp(TObject *Sender,
       TMouseButton Button, TShiftState Shift, int X, int Y)
 {
-//ShowMessage("mouseUp");
+//  ShowMessage("mouseup");
 }
 //---------------------------------------------------------------------------
+
+
 
 void __fastcall TGLForm2D::FormMouseWheelDown(TObject *Sender,
       TShiftState Shift, TPoint &MousePos, bool &Handled)
@@ -504,6 +501,32 @@ void __fastcall TGLForm2D::CurvaBSplines1Click(TObject *Sender)
        }
    }
  }
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TGLForm2D::FormMouseMove(TObject *Sender,
+      TShiftState Shift, int X, int Y)
+{
+  if (estado == 7){
+        if (p1!=NULL){
+        Punto2f * p2 = new Punto2f(X,Y);
+        glClear(GL_COLOR_BUFFER_BIT);
+        scene->transformarXY(p1,ClientWidth, ClientHeight);
+        scene->transformarXY(p2,ClientWidth, ClientHeight);
+        glBegin(GL_LINE_LOOP);
+                glVertex2f(p1->getX(),p1->getY());
+                glVertex2f(p2->getX(),p1->getY());
+                glVertex2f(p2->getX(),p2->getY());
+                glVertex2f(p1->getX(),p2->getY());
+
+        glEnd();
+        glFlush();
+        SwapBuffers(hdc);
+        delete p2;
+        }
+
+  }
 }
 //---------------------------------------------------------------------------
 

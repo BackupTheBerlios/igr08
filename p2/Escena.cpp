@@ -163,8 +163,8 @@ void Escena::transformarXY(Punto2f * p, int ancho, int alto) {
         GLfloat x_Aux;
         GLfloat y_Aux;
 
-        x_Aux = convertirX(p->getX(), ancho);
-        y_Aux = convertirY(p->getY(), alto);
+        x_Aux = convertirX(p->getX(), this->ClientWidth);
+        y_Aux = convertirY(p->getY(), this->ClientHeight);
 
         p->setX(x_Aux);
         p->setY(-y_Aux);
@@ -241,7 +241,7 @@ void Escena::recorte(Punto2f * NE, Punto2f * SO){
 }
 
 // Recorte de la escena usando el algorimo de cohen sutherland
-void Escena::recorteLinea(Punto2f * NE, Punto2f * SO, Punto2f * inicio, Punto2f * final) {
+void Escena::recorteLinea(Punto2f * esquina1, Punto2f * esquina2, Punto2f * inicio, Punto2f * final) {
     GLdouble x0, y0, x1, y1, xmin, xmax, ymin, ymax;
     int value;
     bool accept, done;
@@ -250,6 +250,18 @@ void Escena::recorteLinea(Punto2f * NE, Punto2f * SO, Punto2f * inicio, Punto2f 
     GLdouble x,y;
     accept = false;
     done = false;
+
+    x0 = inicio -> getX();
+    y0 = inicio -> getY();
+
+    x1 = final -> getX();
+    y1 = final -> getY();
+
+    xmin = min (esquina1->getX(), esquina2->getX());
+    xmax = max (esquina1->getX(), esquina2->getX());
+    ymin = min (esquina1->getY(), esquina2->getY());
+    ymax = max (esquina1->getY(), esquina2->getY());
+
     CompOutCode(x0, y0, xmin, xmax, ymin, ymax, outcode0);
     CompOutCode(x1, y1, xmin, xmax, ymin, ymax, outcode1);
     do
