@@ -461,8 +461,8 @@ void __fastcall TGLForm2D::FormMouseUp(TObject *Sender,
 if ( estado ==7){
         estado=0;
         scene->recorte(p1,p2);
-        delete p1;
-        delete p2;
+   /*     delete p1;
+        delete p2;*/
 }
 
 }

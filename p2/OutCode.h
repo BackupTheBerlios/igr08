@@ -31,7 +31,7 @@ class OutCode
     bool esTodoTrue() { return (arriba  & abajo & derecha & izquierda);}
     bool esTodoFalse(){return (!arriba  & !abajo & !derecha & !izquierda);}
     bool tieneAlgunaCoordenadaTrueIgualQue(OutCode);
-
+    void setAll(bool){arriba = false; abajo = false; derecha = false; izquierda= false; }
     bool operator== (OutCode) const;
 };
 

@@ -223,7 +223,7 @@ bool Escena::ZoomProgresivo(float factor, int nPasos){
    else return false;
 }
 
-void Escena::recorte(Punto2f * NE, Punto2f * SO){
+bool Escena::recorte(Punto2f * NE, Punto2f * SO){
         DibujoLineas * dl;
         Segmento * s;
     listaDibujos ->inicia();
@@ -238,10 +238,24 @@ void Escena::recorte(Punto2f * NE, Punto2f * SO){
         listaDibujos->avanza();
    }
 
+   /////////////////
+ /*  Punto2f * N,*S,*Inicio, *Final;
+   N = new Punto2f(100.0,100.0);
+   S = new Punto2f(-100.0,-100.0);
+   Inicio = new Punto2f(150.0,-50.0);
+   Final = new Punto2f(-50.0,-50.0);
+   recorteLinea(N,S,Inicio,Final);
+   int a =0;
+   delete N;
+   delete S;
+   delete Inicio;
+   delete Final; */
+   /////////////////
+      return true;
 }
 
 // Recorte de la escena usando el algorimo de cohen sutherland
-void Escena::recorteLinea(Punto2f * esquina1, Punto2f * esquina2, Punto2f * inicio, Punto2f * final) {
+bool Escena::recorteLinea(Punto2f * esquina1, Punto2f * esquina2, Punto2f * inicio, Punto2f * final) {
     GLdouble x0, y0, x1, y1, xmin, xmax, ymin, ymax;
     int value;
     bool accept, done;
@@ -303,12 +317,13 @@ void Escena::recorteLinea(Punto2f * esquina1, Punto2f * esquina2, Punto2f * inic
               y = y0 + (y1 - y0) * (xmin - x0) / (x1 - x0);
               x = xmin;
             }
- 
+
           // Now we move outside point to intersection point to clip,
-          // and get ready for next pass.}
+          // and get ready for next pass.
           if (outcodeOut == outcode0)
             {
-              x0 = x; y0 = y; CompOutCode(x0,y0,xmin, xmax, ymin, ymax,outcode0);
+              x0 = x; y0 = y;
+              CompOutCode(x0,y0,xmin, xmax, ymin, ymax,outcode0);
             }
           else
             {
@@ -317,9 +332,14 @@ void Escena::recorteLinea(Punto2f * esquina1, Punto2f * esquina2, Punto2f * inic
         }   //subdivide
       } while (!done);
     if (accept ){
-//    MidpointLineReal(x0,y0,x1,y1,value); //Version for real coordinates
+        inicio -> setX(x0);
+        inicio -> setY(y0);
+        final -> setX(x1);
+        final -> setY(y1);
+    //    MidpointLineReal(x0,y0,x1,y1,value); //Version for real coordinates
     }
          ///////////
+    return true;
 }  //CohenSutherlandLineClipAndDraw
 
 /////////////////////////////////////////////////////
@@ -356,11 +376,20 @@ GLdouble Escena::convertirY(int y, int alto) {
     void Escena::CompOutCode(GLdouble x, GLdouble y, GLdouble xmin, GLdouble xmax, GLdouble ymin, GLdouble ymax, OutCode &code)
 //    Compute outcode for the point (x,y)
 {
-      if      (y > ymax) {code.setArriba(true);}
-      else if (y < ymin) {code.setAbajo(true);}
+        code.setAll(false);
+        if      (y > ymax) {
+                code.setArriba(true);
+                }
+      else if (y < ymin) {
+                code.setAbajo(true);
+                }
 
-      if      (x > xmax) {code.setDerecha(true);}
-      else if (x < xmin) {code.setIzquierda(true);}
+      if      (x > xmax) {
+                code.setDerecha(true);
+                }
+      else if (x < xmin) {
+                code.setIzquierda(true);
+                }
 }
 
 

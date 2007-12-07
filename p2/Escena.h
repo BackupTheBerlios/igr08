@@ -34,7 +34,7 @@ class Escena {
       Lista<DibujoLineas> * getEscena() {return listaDibujos;}
       void Zoom(float factor);
       bool ZoomProgresivo(float factor, int nPasos);
-      void recorte(Punto2f * , Punto2f *);
+      bool recorte(Punto2f * , Punto2f *);
 
    private:
       GLfloat xRight, xLeft;
@@ -47,8 +47,8 @@ class Escena {
 
       GLdouble convertirX(int,int);
       GLdouble convertirY(int,int);
-      void Escena::CompOutCode(GLdouble x, GLdouble y, GLdouble xmin, GLdouble xmax, GLdouble ymin, GLdouble ymax, OutCode &code);
-      void recorteLinea(Punto2f * , Punto2f *, Punto2f *, Punto2f *);
+      void CompOutCode(GLdouble x, GLdouble y, GLdouble xmin, GLdouble xmax, GLdouble ymin, GLdouble ymax, OutCode &code);
+      bool recorteLinea(Punto2f * , Punto2f *, Punto2f *, Punto2f *);
       HDC hdc;
 };
 
