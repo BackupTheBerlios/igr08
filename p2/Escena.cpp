@@ -268,7 +268,7 @@ void Escena::recorteLinea(Punto2f * esquina1, Punto2f * esquina2, Punto2f * inic
       {
       if(outcode0.esTodoFalse() & outcode1.esTodoFalse() )  //Trivial accept and exit
         {accept = true; done=true; }
-      else if (outcode0.tieneAlgunaCoordenadaIgualQue(outcode1)) {
+      else if (outcode0.tieneAlgunaCoordenadaTrueIgualQue(outcode1)) {
         done = true; //Logical intersection is true, so trivial reject and exit.
         }
       else // Failed both tests, so calculate the line segment to clip;

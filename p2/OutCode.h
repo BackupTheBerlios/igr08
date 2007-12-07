@@ -30,7 +30,7 @@ class OutCode
 
     bool esTodoTrue() { return (arriba  & abajo & derecha & izquierda);}
     bool esTodoFalse(){return (!arriba  & !abajo & !derecha & !izquierda);}
-    bool tieneAlgunaCoordenadaIgualQue(OutCode);
+    bool tieneAlgunaCoordenadaTrueIgualQue(OutCode);
 
     bool operator== (OutCode) const;
 };

@@ -7,11 +7,16 @@
 
 //---------------------------------------------------------------------------
 
-    bool OutCode::tieneAlgunaCoordenadaIgualQue(OutCode c){
-        return (igual(this->arriba,c.arriba) |
+    bool OutCode::tieneAlgunaCoordenadaTrueIgualQue(OutCode c){
+        bool ar = igual(this->arriba,c.arriba) & c.arriba;
+        bool ab = igual(this->abajo, c.abajo) & c.abajo;
+        bool dr = igual(this->derecha,c.derecha) & c.derecha;
+        bool iz = igual(this->izquierda,c.izquierda) & c.izquierda;
+        return (ar | ab | dr | iz);
+        /*        return (igual(this->arriba,c.arriba) |
                 igual(this->abajo, c.abajo) |
                 igual(this->derecha,c.derecha) |
-                igual(this->izquierda,c.izquierda) );
+                igual(this->izquierda,c.izquierda) );*/
     }
 
     bool OutCode::operator== (OutCode otro) const{

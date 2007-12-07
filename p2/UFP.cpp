@@ -289,6 +289,8 @@ switch (estado) {
         scene->transformarXY(p1,ClientWidth, ClientHeight);
 
 
+
+
         break;
 
         }
@@ -456,7 +458,13 @@ estado = 7;
 void __fastcall TGLForm2D::FormMouseUp(TObject *Sender,
       TMouseButton Button, TShiftState Shift, int X, int Y)
 {
-//  ShowMessage("mouseup");
+if ( estado ==7){
+        estado=0;
+        scene->recorte(p1,p2);
+        delete p1;
+        delete p2;
+}
+
 }
 //---------------------------------------------------------------------------
 
@@ -509,19 +517,38 @@ void __fastcall TGLForm2D::CurvaBSplines1Click(TObject *Sender)
 void __fastcall TGLForm2D::FormMouseMove(TObject *Sender,
       TShiftState Shift, int X, int Y)
 {
+
+if (estado == 7){
+        p2 = new Punto2f(X,Y);
+
+}
   if (estado == 7){
         if (p1!=NULL){
         Punto2f * p2 = new Punto2f(X,Y);
         glClear(GL_COLOR_BUFFER_BIT);
+        scene->Pinta();
         scene->transformarXY(p2,ClientWidth, ClientHeight);
+        glEnable(GL_LINE_STIPPLE);
+        glLineStipple(1, 0xCCCC);
+        glColor3f(1.0, 1.0, 0.0);
         glBegin(GL_LINE_LOOP);
                 glVertex2f(p1->getX(),p1->getY());
                 glVertex2f(p2->getX(),p1->getY());
                 glVertex2f(p2->getX(),p2->getY());
                 glVertex2f(p1->getX(),p2->getY());
         glEnd();
+
+        glColor3f(0.0, 1.0, 1.0);
+        glBegin(GL_POINTS);
+                glVertex2f(p1->getX(),p1->getY());
+                glVertex2f(p2->getX(),p2->getY());
+        glEnd();
+
         glFlush();
         SwapBuffers(hdc);
+
+        glDisable(GL_LINE_STIPPLE);
+        glColor3f(1.0, 1.0, 1.0);
         delete p2;
         }
 

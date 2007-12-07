@@ -93,7 +93,7 @@ private:	// User declarations
  // Segmento y dibujo de lineas auxiliares
  Segmento * s;
  DibujoLineas * dl;
- Punto2f * p1,p2; // Puntos para el recorte
+ Punto2f * p1,* p2; // Puntos para el recorte
 
 
  // Variables necesarios
