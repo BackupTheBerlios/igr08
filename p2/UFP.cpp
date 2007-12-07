@@ -407,7 +407,9 @@ AnsiString S_iteraciones="3";
 if (InputQuery("Solicitando datos","Porcentaje:",S_porcentaje))
  {      if (InputQuery("Solicitando datos","Numero de iteraciones:", S_iteraciones))
         {
-                 scene->ZoomProgresivo(StrToFloat(S_porcentaje), StrToInt(S_iteraciones));
+                 if (!scene->ZoomProgresivo(StrToFloat(S_porcentaje), StrToInt(S_iteraciones))){
+                ShowMessage("El factor debe ser un número mayor que 0"); 
+                 }
         }
  }
 }
