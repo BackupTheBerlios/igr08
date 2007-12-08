@@ -1,6 +1,6 @@
 object GLForm2D: TGLForm2D
-  Left = 572
-  Top = 121
+  Left = 611
+  Top = 116
   Width = 408
   Height = 434
   Caption = 'Lineas y Curvas'
@@ -43,7 +43,6 @@ object GLForm2D: TGLForm2D
       end
       object Guardar1: TMenuItem
         Caption = 'Guardar...'
-        OnClick = Guardar1Click
       end
       object Salir1: TMenuItem
         Caption = 'Salir...'

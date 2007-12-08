@@ -172,7 +172,7 @@ else{
 }
 //---------------------------------------------------------------------------
 // Guardar la escena actual
-void __fastcall TGLForm2D::Guardar1Click(TObject *Sender)
+bool __fastcall TGLForm2D::Guardar1Click(TObject *Sender)
 {
 if (SaveDialog1 ->Execute()){
         char *  path = SaveDialog1 -> FileName.c_str();
@@ -185,10 +185,11 @@ if (SaveDialog1 ->Execute()){
         // se escribe el mismo texto y el nuevo número
         fileout << "aaaaaa" << "; " << endl;
         fileout.close();
-
+        return true;
         }
 else{
         ShowMessage("El usuario canceló la operación");
+        return false;
         }
 }
 //---------------------------------------------------------------------------
@@ -339,30 +340,37 @@ switch (estado) {
 // Si hemos dibujado algo preguntamos si queremos guardar y empezamos
 // una nueva escena
 void __fastcall TGLForm2D::Nuevo1Click(TObject *Sender) {
-
+   bool ok;
+   int ret;
    if (!(scene->getEscena()->vacia())) {
-      int ret = Application->MessageBox("¿ Desea guardar la escena actual ?",
+      ret = Application->MessageBox("¿ Desea guardar la escena actual ?",
                                         "Escena Actual", MB_YESNO);
-      if (ret==6)
-          GLForm2D->Guardar1Click(0);
+      if (ret==IDYES)
+          ok =GLForm2D->Guardar1Click(this);
    }
 
+   if (ok |ret==IDNO){
    delete scene;
    scene = new Escena(distancia, this->ClientWidth, this->ClientHeight);
    GLScene();
+   estado = 0;
+   }
 }
 //---------------------------------------------------------------------------
 // Si hemos dibujado algo preguntamos si queremos guardar y salimos !!!!
 void __fastcall TGLForm2D::Salir1Click(TObject *Sender)
 {
+   bool ok;
    if (!(scene->getEscena()->vacia())) {
       int ret = Application->MessageBox("El archivo ha sido modificado\n\n¿Desea guardar la escena?",
                                         "Advertencia", MB_YESNO);
-      if (ret==6)
-          GLForm2D->Guardar1Click(0);
+      if (ret==IDYES)
+         ok = GLForm2D->Guardar1Click(this);
    }
 
-   Application->Terminate();
+   if (ok)   {
+        Application->Terminate();
+   }
 }
 //---------------------------------------------------------------------------
 // Dibujamos Polilíneas

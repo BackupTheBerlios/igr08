@@ -51,7 +51,7 @@ __published:	// IDE-managed Components
         void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
           TShiftState Shift);
         void __fastcall Abrir1Click(TObject *Sender);
-        void __fastcall Guardar1Click(TObject *Sender);
+        bool __fastcall Guardar1Click(TObject *Sender);
         void __fastcall FormMouseDown(TObject *Sender, TMouseButton Button,
           TShiftState Shift, int X, int Y);
         void __fastcall Nuevo1Click(TObject *Sender);
