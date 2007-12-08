@@ -26,18 +26,22 @@ Segmento::~Segmento(){
 
 // Dibuja segmento actual
 void Segmento::Pinta(){
-        glBegin(GL_LINES);
-                glVertex2f(inicio->getX() , inicio->getY());
-                glVertex2f(final->getX() , final->getY());
-        glEnd();
+        if((inicio!=NULL) & (final!=NULL)){
+                glBegin(GL_LINES);
+                        glVertex2f(inicio->getX() , inicio->getY());
+                        glVertex2f(final->getX() , final->getY());
+                glEnd();
+        }
       }
 
 // Dibuja Puntos de control
 void Segmento::Pinta2(){
-        glBegin(GL_POINTS);
-                glVertex2f(inicio->getX() , inicio->getY());
-                glVertex2f(final->getX() , final->getY());
-        glEnd();
+        if((inicio!=NULL) & (final!=NULL)){
+                glBegin(GL_POINTS);
+                        glVertex2f(inicio->getX() , inicio->getY());
+                        glVertex2f(final->getX() , final->getY());
+                glEnd();
+        }
       }
 
 Segmento * Segmento::clon() const{
@@ -61,4 +65,16 @@ bool Segmento::contiene(Punto2f* p){
       return true;
 
    return false;
+}
+
+void Segmento::setPuntosNull(){
+        inicio=NULL;
+        final=NULL;
+}
+
+String Segmento::toString(){
+        String retVal = inicio->toString();
+        retVal += "\n"+final->toString();
+        return retVal;
+
 }

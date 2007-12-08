@@ -103,6 +103,14 @@ void Escena::BorrarSeleccionado() {
    }
 }
 
+String Escena::toString(){
+    listaDibujos ->inicia();
+    while(!listaDibujos->final()){
+         listaDibujos->getActual()->toString();
+         listaDibujos->avanza();
+   }
+}
+
 void Escena::teclado(WORD& Key) {
 
   // Factor de mov de Traslaccion
@@ -226,14 +234,20 @@ bool Escena::ZoomProgresivo(float factor, int nPasos){
 bool Escena::recorte(Punto2f * NE, Punto2f * SO){
         DibujoLineas * dl;
         Segmento * s;
+        bool ponerANull;
     listaDibujos ->inicia();
     while(!listaDibujos->final()){
         dl = listaDibujos->getActual(); //->getDibujoLineas();
         dl->getSegmentos()->inicia();
         while(!dl->getSegmentos()->final()) {
                 s = dl->getSegmentos()->getActual();
-                recorteLinea(NE, SO, s->getInicio(), s->getFinal());
+                Punto2f * hh = s->getInicio();
+                Punto2f * ii = s->getFinal();
+                recorteLinea(NE, SO, hh, ii,ponerANull);
                 dl->getSegmentos()->avanza();
+                if (ponerANull){
+                s->setPuntosNull();
+                }
         }
         listaDibujos->avanza();
    }
@@ -255,7 +269,7 @@ bool Escena::recorte(Punto2f * NE, Punto2f * SO){
 }
 
 // Recorte de la escena usando el algorimo de cohen sutherland
-bool Escena::recorteLinea(Punto2f * esquina1, Punto2f * esquina2, Punto2f * inicio, Punto2f * final) {
+bool Escena::recorteLinea(Punto2f * esquina1, Punto2f * esquina2, Punto2f * inicio, Punto2f * final, bool ponerANull) {
     GLdouble x0, y0, x1, y1, xmin, xmax, ymin, ymax;
     int value;
     bool accept, done;
@@ -264,6 +278,7 @@ bool Escena::recorteLinea(Punto2f * esquina1, Punto2f * esquina2, Punto2f * inic
     GLdouble x,y;
     accept = false;
     done = false;
+    ponerANull = false;
 
     x0 = inicio -> getX();
     y0 = inicio -> getY();
@@ -336,7 +351,17 @@ bool Escena::recorteLinea(Punto2f * esquina1, Punto2f * esquina2, Punto2f * inic
         inicio -> setY(y0);
         final -> setX(x1);
         final -> setY(y1);
+
     //    MidpointLineReal(x0,y0,x1,y1,value); //Version for real coordinates
+    }
+    else{
+        delete inicio;
+        delete final;
+        inicio = NULL;
+        final = NULL;
+        ponerANull= true;
+
+
     }
          ///////////
     return true;

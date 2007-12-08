@@ -30,6 +30,31 @@ void __fastcall TGLForm2D::FormCreate(TObject *Sender)
     // Creamos una nueva escena
     scene = new Escena(distancia, this-> ClientWidth, this->ClientHeight);
     scene->setHDC(hdc);
+
+    ////////////////////////
+
+//Punto2f * pf = new Punto2f(0.0,0.0);
+//Punto2f * pi = new Punto2f(0.0,100.0);
+/*Punto2f * pi = new Punto2f(100.0,100.0);
+Punto2f * pf = new Punto2f(200.0,100.0);
+Segmento * s1 = new Segmento(pi,pf);
+DibujoLineas * daa = new DibujoLineas();
+daa->inserta(s1);
+scene->inserta(daa);
+Punto2f * esquina1 = new Punto2f(-10.0,-10.0);
+Punto2f * esquina2 = new Punto2f(10.0,10.0);
+scene->recorte(esquina1, esquina2);
+scene->Pinta();
+int a = 3;
+
+delete esquina1;
+delete esquina2;
+delete pi;
+delete pf;
+delete s1;     */
+
+//scene = new Escena(distancia, this-> ClientWidth, this->ClientHeight);
+    ////////////////////////
 }
 //---------------------------------------------------------------------------
 void __fastcall TGLForm2D::SetPixelFormatDescriptor()
@@ -76,6 +101,8 @@ void __fastcall TGLForm2D::FormResize(TObject *Sender)
 void __fastcall TGLForm2D::GLScene()
 {
 glClear(GL_COLOR_BUFFER_BIT);
+      glLineWidth(2);
+      glPointSize(3);
 
 // Comandos para dibujar la escena
 if (scene !=NULL) {
@@ -463,6 +490,12 @@ void __fastcall TGLForm2D::FormMouseUp(TObject *Sender,
 if ( estado ==7){
         estado=0;
         scene->recorte(p1,p2);
+        scene->Pinta();
+
+        Segmento * saa= new Segmento(new Punto2f(10.0, 20.0),new Punto2f(30.0,40.0));
+        String res =saa->toString();
+        ShowMessage(res);
+        delete saa;
    /*     delete p1;
         delete p2;*/
 }

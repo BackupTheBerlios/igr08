@@ -16,11 +16,13 @@ class Segmento {
       Punto2f * getFinal(){return final;}
       void setInicio(Punto2f * p){inicio = p;}
       void setFinal(Punto2f * p){final = p;}
+      void setPuntosNull();
       void Pinta();
       void Pinta2();
       Segmento * clon() const;
 
       bool contiene(Punto2f*);
+      String toString();
 
    private:
       Punto2f * inicio;

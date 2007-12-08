@@ -27,8 +27,9 @@ void DibujoLineas::Pinta(){
    listaSegmentos ->inicia();
    while(!listaSegmentos->final()){
       listaSegmentos->getActual()->Pinta();
-      if (tipoOperacion == 2)
+      if (tipoOperacion == 2){
         listaSegmentos->getActual()->Pinta2();
+      }
       listaSegmentos->avanza();
    }
 }
@@ -50,4 +51,13 @@ void DibujoLineas::Seleccionar(Punto2f* p) {
      }
      listaSegmentos->avanza();
    }
+}
+
+String DibujoLineas::toString(){
+String retVal;
+        while(!listaSegmentos->final()){
+                listaSegmentos->getActual()->toString();
+                listaSegmentos->avanza();
+        }
+return retVal;
 }

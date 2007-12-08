@@ -25,4 +25,9 @@ void Punto2f::Pinta(){
         glEnd();
       }
 
+String Punto2f::toString(){
+String retVal = "x:"+  String (x)+", ";
+retVal += "y:"+ String (y) +"; ";
 
+return retVal;
+}
