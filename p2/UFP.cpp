@@ -43,15 +43,20 @@ daa->inserta(s1);
 scene->inserta(daa);
 Punto2f * esquina1 = new Punto2f(-10.0,-10.0);
 Punto2f * esquina2 = new Punto2f(10.0,10.0);
+String str =scene->toString();
+//ShowMessage(str);
 scene->recorte(esquina1, esquina2);
+str =scene->toString();
+ShowMessage(str);
 scene->Pinta();
-int a = 3;
+str =scene->toString();
+ShowMessage(str);
 
 delete esquina1;
 delete esquina2;
 delete pi;
 delete pf;
-delete s1;     */
+delete s1;   */
 
 //scene = new Escena(distancia, this-> ClientWidth, this->ClientHeight);
     ////////////////////////
@@ -487,19 +492,18 @@ estado = 7;
 void __fastcall TGLForm2D::FormMouseUp(TObject *Sender,
       TMouseButton Button, TShiftState Shift, int X, int Y)
 {
-if ( estado ==7){
-        estado=0;
-        scene->recorte(p1,p2);
-        scene->Pinta();
+        if ( estado ==7){
+                estado=0;
+                scene->recorte(p1,p2);
+                scene->Pinta();
 
-        Segmento * saa= new Segmento(new Punto2f(10.0, 20.0),new Punto2f(30.0,40.0));
+ /*       Segmento * saa= new Segmento(new Punto2f(10.0, 20.0),new Punto2f(30.0,40.0));
         String res =saa->toString();
         ShowMessage(res);
-        delete saa;
+        delete saa;*/
    /*     delete p1;
         delete p2;*/
-}
-
+        }
 }
 //---------------------------------------------------------------------------
 

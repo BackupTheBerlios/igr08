@@ -74,7 +74,7 @@ void Segmento::setPuntosNull(){
 
 String Segmento::toString(){
         String retVal = inicio->toString();
-        retVal += "\n"+final->toString();
+        retVal += "<>"+final->toString();
         return retVal;
 
 }

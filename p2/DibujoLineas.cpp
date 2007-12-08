@@ -54,10 +54,12 @@ void DibujoLineas::Seleccionar(Punto2f* p) {
 }
 
 String DibujoLineas::toString(){
-String retVal;
+String retVal="";
         while(!listaSegmentos->final()){
-                listaSegmentos->getActual()->toString();
+                retVal+= listaSegmentos->getActual()->toString()+"\n";
                 listaSegmentos->avanza();
         }
+
+retVal+="----------------\n";
 return retVal;
 }

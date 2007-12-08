@@ -104,11 +104,14 @@ void Escena::BorrarSeleccionado() {
 }
 
 String Escena::toString(){
+String retVal="";
     listaDibujos ->inicia();
     while(!listaDibujos->final()){
-         listaDibujos->getActual()->toString();
+         retVal += listaDibujos->getActual()->toString()+"\n";
          listaDibujos->avanza();
    }
+retVal+="================\n";
+return retVal;
 }
 
 void Escena::teclado(WORD& Key) {
@@ -241,6 +244,7 @@ bool Escena::recorte(Punto2f * NE, Punto2f * SO){
         dl->getSegmentos()->inicia();
         while(!dl->getSegmentos()->final()) {
                 s = dl->getSegmentos()->getActual();
+                ShowMessage(s->toString());
                 Punto2f * hh = s->getInicio();
                 Punto2f * ii = s->getFinal();
                 recorteLinea(NE, SO, hh, ii,ponerANull);
@@ -269,7 +273,7 @@ bool Escena::recorte(Punto2f * NE, Punto2f * SO){
 }
 
 // Recorte de la escena usando el algorimo de cohen sutherland
-bool Escena::recorteLinea(Punto2f * esquina1, Punto2f * esquina2, Punto2f * inicio, Punto2f * final, bool ponerANull) {
+bool Escena::recorteLinea(Punto2f * esquina1, Punto2f * esquina2, Punto2f * inicio, Punto2f * final, bool &ponerANull) {
     GLdouble x0, y0, x1, y1, xmin, xmax, ymin, ymax;
     int value;
     bool accept, done;
