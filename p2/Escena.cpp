@@ -244,10 +244,12 @@ bool Escena::recorte(Punto2f * NE, Punto2f * SO){
         dl->getSegmentos()->inicia();
         while(!dl->getSegmentos()->final()) {
                 s = dl->getSegmentos()->getActual();
-                ShowMessage(s->toString());
+                String str = s->toString();
+                //ShowMessage(str);
                 Punto2f * hh = s->getInicio();
                 Punto2f * ii = s->getFinal();
                 recorteLinea(NE, SO, hh, ii,ponerANull);
+                str = s->toString();
                 dl->getSegmentos()->avanza();
                 if (ponerANull){
                 s->setPuntosNull();

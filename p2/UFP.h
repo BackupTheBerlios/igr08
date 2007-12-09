@@ -44,6 +44,7 @@ __published:	// IDE-managed Components
         TMenuItem *Bezier1;
         TMenuItem *Recorte1;
         TMenuItem *CurvaBSplines1;
+        TMenuItem *Inspeccionar1;
         void __fastcall FormCreate(TObject *Sender);
         void __fastcall FormResize(TObject *Sender);
         void __fastcall FormPaint(TObject *Sender);
@@ -74,6 +75,7 @@ __published:	// IDE-managed Components
           TShiftState Shift, int X, int Y);
         void __fastcall FormMouseMove(TObject *Sender, TShiftState Shift,
           int X, int Y);
+        void __fastcall Inspeccionar1Click(TObject *Sender);
 
 private:	// User declarations
  HDC hdc;

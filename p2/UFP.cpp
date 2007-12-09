@@ -35,14 +35,14 @@ void __fastcall TGLForm2D::FormCreate(TObject *Sender)
 
 //Punto2f * pf = new Punto2f(0.0,0.0);
 //Punto2f * pi = new Punto2f(0.0,100.0);
-/*Punto2f * pi = new Punto2f(100.0,100.0);
-Punto2f * pf = new Punto2f(200.0,100.0);
+/*Punto2f * pi = new Punto2f(150.0,115.0);
+Punto2f * pf = new Punto2f(0.0,0.0);
 Segmento * s1 = new Segmento(pi,pf);
 DibujoLineas * daa = new DibujoLineas();
 daa->inserta(s1);
 scene->inserta(daa);
-Punto2f * esquina1 = new Punto2f(-10.0,-10.0);
-Punto2f * esquina2 = new Punto2f(10.0,10.0);
+Punto2f * esquina1 = new Punto2f(-100.0,-100.0);
+Punto2f * esquina2 = new Punto2f(100.0,100.0);
 String str =scene->toString();
 //ShowMessage(str);
 scene->recorte(esquina1, esquina2);
@@ -56,7 +56,7 @@ delete esquina1;
 delete esquina2;
 delete pi;
 delete pf;
-delete s1;   */
+delete s1;*/   
 
 //scene = new Escena(distancia, this-> ClientWidth, this->ClientHeight);
     ////////////////////////
@@ -317,16 +317,11 @@ switch (estado) {
 
                   break;
                  }
-         case 7:
+        case 7:
         p1 = new Punto2f(x,y);
         scene->transformarXY(p1);//,ClientWidth, ClientHeight);
-
-
-
-
         break;
-
-        }
+                }
 
 
         if (p != NULL) {
@@ -501,17 +496,16 @@ void __fastcall TGLForm2D::FormMouseUp(TObject *Sender,
       TMouseButton Button, TShiftState Shift, int X, int Y)
 {
         if ( estado ==7){
-                estado=0;
+                p2 = new Punto2f(X,Y);
+                scene->transformarXY(p2);
+                String str1 = p1->toString();
+                String str2 = p2->toString();
                 scene->recorte(p1,p2);
+                str1 = p1->toString();
+                str2 = p2->toString();
                 scene->Pinta();
-
- /*       Segmento * saa= new Segmento(new Punto2f(10.0, 20.0),new Punto2f(30.0,40.0));
-        String res =saa->toString();
-        ShowMessage(res);
-        delete saa;*/
-   /*     delete p1;
-        delete p2;*/
-        }
+                estado=0;
+                }
 }
 //---------------------------------------------------------------------------
 
@@ -520,18 +514,16 @@ void __fastcall TGLForm2D::FormMouseUp(TObject *Sender,
 void __fastcall TGLForm2D::FormMouseWheelDown(TObject *Sender,
       TShiftState Shift, TPoint &MousePos, bool &Handled)
 {
-
-scene->Zoom(95);
-scene->Pinta();
+        scene->Zoom(95);
+        scene->Pinta();
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TGLForm2D::FormMouseWheelUp(TObject *Sender,
       TShiftState Shift, TPoint &MousePos, bool &Handled)
 {
-scene->Zoom(105);
-scene->Pinta();
-
+        scene->Zoom(105);
+        scene->Pinta();
 }
 //---------------------------------------------------------------------------
 
@@ -565,13 +557,9 @@ void __fastcall TGLForm2D::FormMouseMove(TObject *Sender,
       TShiftState Shift, int X, int Y)
 {
 
-if (estado == 7){
-        p2 = new Punto2f(X,Y);
-
-}
   if (estado == 7){
         if (p1!=NULL){
-        Punto2f * p2 = new Punto2f(X,Y);
+        p2 = new Punto2f(X,Y);
         glClear(GL_COLOR_BUFFER_BIT);
         scene->Pinta();
         scene->transformarXY(p2);//,ClientWidth, ClientHeight);
@@ -598,8 +586,18 @@ if (estado == 7){
         glColor3f(1.0, 1.0, 1.0);
         delete p2;
         }
-
   }
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TGLForm2D::Inspeccionar1Click(TObject *Sender)
+{
+//String str = scene->toString();
+Lista <DibujoLineas> * l =scene->getEscena();
+l->inicia();
+DibujoLineas * dl = l->getActual();
+String str = dl->toString();
+ShowMessage(str);        
 }
 //---------------------------------------------------------------------------
 
