@@ -237,7 +237,7 @@ bool Escena::ZoomProgresivo(float factor, int nPasos){
 bool Escena::recorte(Punto2f * NE, Punto2f * SO){
         DibujoLineas * dl;
         Segmento * s;
-        bool ponerANull;
+//        bool ponerANull;
     listaDibujos ->inicia();
     while(!listaDibujos->final()){
         dl = listaDibujos->getActual(); //->getDibujoLineas();
@@ -246,15 +246,23 @@ bool Escena::recorte(Punto2f * NE, Punto2f * SO){
                 s = dl->getSegmentos()->getActual();
                 String str1 = s->toString();
                 //ShowMessage(str);
-                Punto2f * hh = s->getInicio();
-                Punto2f * ii = s->getFinal();
-                recorteLinea(NE, SO, hh, ii,ponerANull);
+//                Punto2f * hh = s->getInicio();
+//                Punto2f * ii = s->getFinal();
+                recorteLinea(NE, SO, s);
                 //String str2 = s->toString();
-                dl->getSegmentos()->avanza();
-                if (ponerANull){
-                s->setPuntosNull();
+
+                if (s==NULL){
+                        dl->getSegmentos()->eliminaActual();
+                }
+                else {
+                        dl->getSegmentos()->avanza();
+                }
+
+                /*if (ponerANull){
+                        s->setPuntosNull();
                 s=NULL;
                 }
+                */
         }
         listaDibujos->avanza();
    }
@@ -276,7 +284,7 @@ bool Escena::recorte(Punto2f * NE, Punto2f * SO){
 }
 
 // Recorte de la escena usando el algorimo de cohen sutherland
-bool Escena::recorteLinea(Punto2f * esquina1, Punto2f * esquina2, Punto2f * inicio, Punto2f * final, bool &ponerANull) {
+bool Escena::recorteLinea(Punto2f * esquina1, Punto2f * esquina2, Segmento * &segmento) {
     GLdouble x0, y0, x1, y1, xmin, xmax, ymin, ymax;
     int value;
     bool accept, done;
@@ -285,13 +293,13 @@ bool Escena::recorteLinea(Punto2f * esquina1, Punto2f * esquina2, Punto2f * inic
     GLdouble x,y;
     accept = false;
     done = false;
-    ponerANull = false;
-    if (inicio !=NULL){
-            x0 = inicio -> getX();
-            y0 = inicio -> getY();
+//    ponerANull = false;
+    if (segmento->getInicio() !=NULL){
+            x0 = segmento->getInicio() -> getX();
+            y0 = segmento->getInicio() -> getY();
 
-            x1 = final -> getX();
-            y1 = final -> getY();
+            x1 = segmento->getFinal() -> getX();
+            y1 = segmento->getFinal() -> getY();
 
             xmin = min (esquina1->getX(), esquina2->getX());
             xmax = max (esquina1->getX(), esquina2->getX());
@@ -353,19 +361,16 @@ bool Escena::recorteLinea(Punto2f * esquina1, Punto2f * esquina2, Punto2f * inic
                 }   //subdivide
               } while (!done);
             if (accept ){
-                inicio -> setX(x0);
-                inicio -> setY(y0);
-                final -> setX(x1);
-                final -> setY(y1);
+                segmento -> getInicio() -> setX(x0);
+                segmento -> getInicio() -> setY(y0);
+                segmento -> getFinal() -> setX(x1);
+                segmento -> getFinal() -> setY(y1);
 
             //    MidpointLineReal(x0,y0,x1,y1,value); //Version for real coordinates
             }
             else{
-                delete inicio;
-                delete final;
-                inicio = NULL;
-                final = NULL;
-                ponerANull= true;
+                //delete segmento;
+                segmento =NULL;
            }
             return true;
     }

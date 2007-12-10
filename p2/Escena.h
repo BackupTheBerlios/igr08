@@ -49,7 +49,7 @@ class Escena {
       GLdouble convertirX(int,int);
       GLdouble convertirY(int,int);
       void CompOutCode(GLdouble x, GLdouble y, GLdouble xmin, GLdouble xmax, GLdouble ymin, GLdouble ymax, OutCode &code);
-      bool recorteLinea(Punto2f * , Punto2f *, Punto2f *, Punto2f *, bool&);
+      bool recorteLinea(Punto2f * , Punto2f *, Segmento *&);
       HDC hdc;
 };
 
