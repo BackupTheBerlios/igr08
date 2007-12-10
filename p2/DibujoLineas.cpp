@@ -57,7 +57,12 @@ String DibujoLineas::toString(){
 String retVal="";
         listaSegmentos->inicia();
         while(!listaSegmentos->final()){
-                retVal+= listaSegmentos->getActual()->toString()+"\n";
+                Segmento * seg = listaSegmentos->getActual();
+                if (seg!=NULL){
+                retVal+= seg->toString()+"\n";
+                }
+
+
                 listaSegmentos->avanza();
         }
 
