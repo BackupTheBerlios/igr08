@@ -286,92 +286,90 @@ bool Escena::recorteLinea(Punto2f * esquina1, Punto2f * esquina2, Punto2f * inic
     accept = false;
     done = false;
     ponerANull = false;
+    if (inicio !=NULL){
+            x0 = inicio -> getX();
+            y0 = inicio -> getY();
 
-    x0 = inicio -> getX();
-    y0 = inicio -> getY();
+            x1 = final -> getX();
+            y1 = final -> getY();
 
-    x1 = final -> getX();
-    y1 = final -> getY();
+            xmin = min (esquina1->getX(), esquina2->getX());
+            xmax = max (esquina1->getX(), esquina2->getX());
+            ymin = min (esquina1->getY(), esquina2->getY());
+            ymax = max (esquina1->getY(), esquina2->getY());
 
-    xmin = min (esquina1->getX(), esquina2->getX());
-    xmax = max (esquina1->getX(), esquina2->getX());
-    ymin = min (esquina1->getY(), esquina2->getY());
-    ymax = max (esquina1->getY(), esquina2->getY());
+            CompOutCode(x0, y0, xmin, xmax, ymin, ymax, outcode0);
+            CompOutCode(x1, y1, xmin, xmax, ymin, ymax, outcode1);
+            do
+              {
+              if(outcode0.esTodoFalse() & outcode1.esTodoFalse() )  //Trivial accept and exit
+                {accept = true; done=true; }
+              else if (outcode0.tieneAlgunaCoordenadaTrueIgualQue(outcode1)) {
+                done = true; //Logical intersection is true, so trivial reject and exit.
+                }
+              else // Failed both tests, so calculate the line segment to clip;
+                   // from an outside point to an intersection with clip edge.
+                {
+                  //At least one endpoint is outside the clip rectangle; pick it.
+                  if (!outcode0.esTodoFalse() ){
+                    outcodeOut = outcode0;
+                  }
+                  else outcodeOut = outcode1;
+                  //Now find intersection point;
+                  //use formulas y=y0+slope*(x-x0),x=x0+(1/slope)*(y-y0).
 
-    CompOutCode(x0, y0, xmin, xmax, ymin, ymax, outcode0);
-    CompOutCode(x1, y1, xmin, xmax, ymin, ymax, outcode1);
-    do
-      {
-      if(outcode0.esTodoFalse() & outcode1.esTodoFalse() )  //Trivial accept and exit
-        {accept = true; done=true; }
-      else if (outcode0.tieneAlgunaCoordenadaTrueIgualQue(outcode1)) {
-        done = true; //Logical intersection is true, so trivial reject and exit.
-        }
-      else // Failed both tests, so calculate the line segment to clip;
-           // from an outside point to an intersection with clip edge.
-        {
-          //At least one endpoint is outside the clip rectangle; pick it.
-          if (!outcode0.esTodoFalse() ){
-            outcodeOut = outcode0;
-          }
-          else outcodeOut = outcode1;
-          //Now find intersection point;
-          //use formulas y=y0+slope*(x-x0),x=x0+(1/slope)*(y-y0).
+                  if (outcodeOut.getArriba())
+                    {     //Divide line at top of clip rectangle
+                      x = x0 + (x1 - x0) * (ymax - y0) / (y1 - y0);
+                      y = ymax;
+                    }
+                  else if (outcodeOut.getAbajo())
+                    {     //Divide line at bottom of clip rectangle
+                      x = x0 + (x1 - x0) * (ymin - y0) / (y1 - y0);
+                      y = ymin;
+                    }
 
-          if (outcodeOut.getArriba())
-            {     //Divide line at top of clip rectangle
-              x = x0 + (x1 - x0) * (ymax - y0) / (y1 - y0);
-              y = ymax;
+                  if (outcodeOut.getDerecha())
+                    {     //Divide line at right edge of clip rectangle
+                      y = y0 + (y1 - y0) * (xmax - x0) / (x1 - x0);
+                      x = xmax;
+                    }
+                  else if (outcodeOut.getIzquierda())
+                    { //Divide line at left edge of clip rectangle
+                      y = y0 + (y1 - y0) * (xmin - x0) / (x1 - x0);
+                      x = xmin;
+                    }
+
+                  // Now we move outside point to intersection point to clip, and get ready for next pass.
+                  if (outcodeOut == outcode0)
+                    {
+                      x0 = x; y0 = y;
+                      CompOutCode(x0,y0,xmin, xmax, ymin, ymax,outcode0);
+                    }
+                  else
+                    {
+                      x1 = x; y1 = y; CompOutCode(x1,y1,xmin, xmax, ymin, ymax,outcode1);
+                    }
+                }   //subdivide
+              } while (!done);
+            if (accept ){
+                inicio -> setX(x0);
+                inicio -> setY(y0);
+                final -> setX(x1);
+                final -> setY(y1);
+
+            //    MidpointLineReal(x0,y0,x1,y1,value); //Version for real coordinates
             }
-          else if (outcodeOut.getAbajo())
-            {     //Divide line at bottom of clip rectangle
-              x = x0 + (x1 - x0) * (ymin - y0) / (y1 - y0);
-              y = ymin;
-            }
-
-          if (outcodeOut.getDerecha())
-            {     //Divide line at right edge of clip rectangle
-              y = y0 + (y1 - y0) * (xmax - x0) / (x1 - x0);
-              x = xmax;
-            }
-          else if (outcodeOut.getIzquierda())
-            { //Divide line at left edge of clip rectangle
-              y = y0 + (y1 - y0) * (xmin - x0) / (x1 - x0);
-              x = xmin;
-            }
-
-          // Now we move outside point to intersection point to clip,
-          // and get ready for next pass.
-          if (outcodeOut == outcode0)
-            {
-              x0 = x; y0 = y;
-              CompOutCode(x0,y0,xmin, xmax, ymin, ymax,outcode0);
-            }
-          else
-            {
-              x1 = x; y1 = y; CompOutCode(x1,y1,xmin, xmax, ymin, ymax,outcode1);
-            }
-        }   //subdivide
-      } while (!done);
-    if (accept ){
-        inicio -> setX(x0);
-        inicio -> setY(y0);
-        final -> setX(x1);
-        final -> setY(y1);
-
-    //    MidpointLineReal(x0,y0,x1,y1,value); //Version for real coordinates
+            else{
+                delete inicio;
+                delete final;
+                inicio = NULL;
+                final = NULL;
+                ponerANull= true;
+           }
+            return true;
     }
-    else{
-        delete inicio;
-        delete final;
-        inicio = NULL;
-        final = NULL;
-        ponerANull= true;
-
-
-    }
-         ///////////
-    return true;
+    else return false;
 }  //CohenSutherlandLineClipAndDraw
 
 /////////////////////////////////////////////////////
