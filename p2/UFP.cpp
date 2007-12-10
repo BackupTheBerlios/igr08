@@ -498,13 +498,15 @@ void __fastcall TGLForm2D::FormMouseUp(TObject *Sender,
         if ( estado ==7){
                 p2 = new Punto2f(X,Y);
                 scene->transformarXY(p2);
-                String str1 = p1->toString();
-                String str2 = p2->toString();
+                String str1 = scene->toString();
                 scene->recorte(p1,p2);
-                str1 = p1->toString();
-                str2 = p2->toString();
+                String str2 = scene->toString();
                 scene->Pinta();
                 estado=0;
+                delete p1;
+                delete p2;
+                p1 = NULL;
+                p2 = NULL;
                 }
 }
 //---------------------------------------------------------------------------
