@@ -252,7 +252,7 @@ switch (estado) {
                   scene->transformarXY(p);//,ClientWidth,ClientHeight);
 
 
-                  Lapiz * l = new Lapiz();
+                  Lapiz * l = new Lapiz (p, ang);
                   l->poliEspiral(p,incrAng,ang,incrLong,longInicial,nPasos,dl);
                   delete l;
                   p=NULL;

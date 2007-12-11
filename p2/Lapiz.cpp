@@ -48,21 +48,36 @@ void Lapiz::lineTo (Punto2f * destino, bool esVisible){
 
 // Variamos el angulo actual de dibujo
 void Lapiz::gira (GLdouble incrAng){
-        ang += incrAng;
-        GLdouble grados = r2g(ang);
+/*        GLdouble radianes = g2r(incrAng);*/
 
-        double  p_E;
-        double parte_Decimal = modf(grados, &p_E);
+//        ang += radianes;
+//        GLdouble grados = r2g(ang);
+
+/*        double  p_E;
+        double parte_Decimal = modf(radianes, &p_E);
         int  parte_Entera = p_E;
         parte_Entera = parte_Entera % 360;
-        grados = g2r(parte_Entera);
-        grados += g2r(parte_Decimal);
+        GLdouble grados = r2g(parte_Entera);
+        grados += r2g(parte_Decimal);
+        ang+=g2r(grados);
+  */
+        ///////////////////////////
+ GLdouble sum = incrAng + r2g(ang);
+ double  p_E;
+ double parte_Decimal = modf(sum, &p_E);
+ int  parte_Entera = p_E;
+ parte_Entera = parte_Entera % 360;
+ GLdouble grados = g2r(parte_Entera);
+ grados += g2r(parte_Decimal);
+ ang = grados;
+
+
 }
 
 // Avanzamos al siguiente punto relativo
 void Lapiz::avanza (GLfloat longitud, bool esVisible, Segmento*& s){
         GLfloat xD = pos -> getX() + longitud * cos (ang);
-        GLfloat yD = pos -> getX() + longitud * sin (ang);
+        GLfloat yD = pos -> getY() + longitud * sin (ang);
         Punto2f * p = new Punto2f(xD,yD);
         s = new Segmento(pos,p);
         lineTo(p,esVisible);
@@ -89,16 +104,16 @@ void Lapiz::poliEspiral ( Punto2f * posInicial, GLfloat incrAng,
                           GLfloat angInicial, GLfloat incrLong,
                           GLfloat longInicial, int nPasos, DibujoLineas* dl){
 
-        Lapiz * l = new Lapiz (posInicial, angInicial);
+//        Lapiz * l = new Lapiz (posInicial, angInicial);
         for (int i = 0; i<nPasos; i++){
                  Segmento* s;
-                 l -> avanza(longInicial, true, s);
+                 this -> avanza(longInicial, true, s);
                  longInicial += incrLong;
-                 l -> gira(incrAng);
+                 this -> gira(incrAng);
                  dl->inserta(s);
                  delete s;
         }
-        delete l;
+//        delete l;
 //        delete posInicial;
         posInicial=NULL;
 }
