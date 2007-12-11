@@ -36,12 +36,41 @@ Punto2f * Punto2f::puntoMedio(Punto2f *otro){
     GLfloat x = this->getX()+otro->getX();
     GLfloat y = this->getY()+otro->getY();
     Punto2f *retVal = new Punto2f(x,y);
+    return retVal;
 }
 
-Punto2f *  Punto2f::operator-( Punto2f * otro) {
+Punto2f *  Punto2f::operator+( Punto2f otro) {
 
-    GLfloat x = this->getX() - otro->getX();
-    GLfloat y = this->getY() - otro->getY();
+    GLfloat x = this->getX() + otro.getX();
+    GLfloat y = this->getY() + otro.getY();
     Punto2f * retVal = new Punto2f(x,y);
     return retVal;
   }
+
+Punto2f *  Punto2f::operator-( Punto2f otro) {
+
+    GLfloat x = this->getX() - otro.getX();
+    GLfloat y = this->getY() - otro.getY();
+    Punto2f * retVal = new Punto2f(x,y);
+    return retVal;
+  }
+
+Punto2f *  Punto2f::multiplicar(GLdouble k){
+GLfloat x =  this->getX()*k;
+GLfloat y =  this->getY()* k;
+     return (new Punto2f(x ,y));
+}
+
+Punto2f *  Punto2f::dividir(GLdouble k){
+        GLfloat x =  this->getX() / k;
+        GLfloat y =  this->getY() / k;
+        return (new Punto2f(x ,y));
+}
+
+GLdouble Punto2f::dot(Punto2f *otro){
+        return (this->getX()* otro->getX()) + (this->getY()* otro->getY());
+}
+
+Punto2f * Punto2f::perpendicular(){
+        return new Punto2f(-this->getY(),this->getX());
+}

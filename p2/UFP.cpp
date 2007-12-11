@@ -35,6 +35,18 @@ void __fastcall TGLForm2D::FormCreate(TObject *Sender)
     //scene->Pinta();
     //GLScene();
 /////////////////////////////////////////////////
+
+//////////////////////////////////
+/*
+Punto2f * a = new Punto2f(3,2);
+Punto2f * b = new Punto2f(4,7);
+Punto2f * aux;
+
+aux = a->perpendicular();
+GLfloat aass= aux->dot(a);
+int aas=0;
+*/
+//////////////////////////////////
 }
 //---------------------------------------------------------------------------
 void __fastcall TGLForm2D::SetPixelFormatDescriptor()
@@ -91,7 +103,7 @@ if (scene !=NULL) {
 
 // Puntos provisionales del Arco
 if (estado == 2 || estado == 5 || estado == 6)
-   for (int i=0; i<=cont; i++)
+   for (int i=0; i<cont; i++)
       if (puntos[i]!=NULL)
          puntos[i]->Pinta();
 
@@ -213,11 +225,27 @@ switch (estado) {
                     //calculo Punto Medio B
                     Punto2f *B = puntos[1]->puntoMedio(puntos[2]);
 
-                    Punto2f *InicioOtro; // es un vector
-                    Punto2f *OtroFinal; // es un vector
-                    Punto2f * vAux;
-                    vAux = *puntos[0] - puntos[2];
+                    Punto2f *BA;  // es un vector
+                    Punto2f *Va;  // es un vector
+                    Punto2f *Vap;  // es un vector
+                    Punto2f *Vb;   // es un vector
+                    Punto2f *Vbp;  // es un vector
 
+                    Punto2f *P0P1; // es un vector
+                    Punto2f *P1P2; // es un vector
+
+                    Vap = *puntos[1] - *puntos[2];
+                    Va = Vap->perpendicular();
+                    Vbp = *puntos[2] - *puntos[0];
+                    Vb = Vbp->perpendicular();
+                    GLdouble k1, k2;
+                    BA = *A - *B;
+
+                    k2=BA->dot(Vap);
+                    k2=k2/(Vb->dot(Vap));
+
+                    k1=(*B+(*Vb->multiplicar(k2))-A);
+//                    k1= *k1->dividir(Va);
 
 
                     delete A; //???
