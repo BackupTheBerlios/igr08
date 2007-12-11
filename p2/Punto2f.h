@@ -25,6 +25,8 @@ class Punto2f {
 
         Punto2f * puntoMedio(Punto2f *);
         Punto2f * perpendicular();
+        Punto2f *  operator-(Punto2f *);
+
         String toString();
 
 

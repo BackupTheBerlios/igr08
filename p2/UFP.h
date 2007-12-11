@@ -18,7 +18,7 @@
 #include "Segmento.h"
 
 //---------------------------------------------------------------------------
-const int MAX = 100;
+const int MAX = 3; //100;
 
 class TGLForm2D : public TForm
 {

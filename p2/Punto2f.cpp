@@ -31,3 +31,17 @@ retVal += "y:"+ String (y) +"; ";
 
 return retVal;
 }
+
+Punto2f * Punto2f::puntoMedio(Punto2f *otro){
+    GLfloat x = this->getX()+otro->getX();
+    GLfloat y = this->getY()+otro->getY();
+    Punto2f *retVal = new Punto2f(x,y);
+}
+
+Punto2f *  Punto2f::operator-( Punto2f * otro) {
+
+    GLfloat x = this->getX() - otro->getX();
+    GLfloat y = this->getY() - otro->getY();
+    Punto2f * retVal = new Punto2f(x,y);
+    return retVal;
+  }

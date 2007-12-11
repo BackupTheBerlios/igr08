@@ -5,7 +5,7 @@
 #include <fstream.h>
 #pragma package(smart_init)
 #pragma resource "*.dfm"
-//--------0-------------------------------------------------------------------
+//---------------------------------------------------------------------------
 TGLForm2D *GLForm2D;
 //---------------------------------------------------------------------------
 __fastcall TGLForm2D::TGLForm2D(TComponent* Owner)
@@ -30,36 +30,11 @@ void __fastcall TGLForm2D::FormCreate(TObject *Sender)
     // Creamos una nueva escena
     scene = new Escena(distancia, this-> ClientWidth, this->ClientHeight);
     scene->setHDC(hdc);
-
-    ////////////////////////
-
-//Punto2f * pf = new Punto2f(0.0,0.0);
-//Punto2f * pi = new Punto2f(0.0,100.0);
-/*Punto2f * pi = new Punto2f(150.0,115.0);
-Punto2f * pf = new Punto2f(0.0,0.0);
-Segmento * s1 = new Segmento(pi,pf);
-DibujoLineas * daa = new DibujoLineas();
-daa->inserta(s1);
-scene->inserta(daa);
-Punto2f * esquina1 = new Punto2f(-100.0,-100.0);
-Punto2f * esquina2 = new Punto2f(100.0,100.0);
-String str =scene->toString();
-//ShowMessage(str);
-scene->recorte(esquina1, esquina2);
-str =scene->toString();
-ShowMessage(str);
-scene->Pinta();
-str =scene->toString();
-ShowMessage(str);
-
-delete esquina1;
-delete esquina2;
-delete pi;
-delete pf;
-delete s1;*/   
-
-//scene = new Escena(distancia, this-> ClientWidth, this->ClientHeight);
-    ////////////////////////
+    
+////////////////// Lab 1 pto 01 /////////////////
+    //scene->Pinta();
+    //GLScene();
+/////////////////////////////////////////////////
 }
 //---------------------------------------------------------------------------
 void __fastcall TGLForm2D::SetPixelFormatDescriptor()
@@ -221,10 +196,8 @@ switch (estado) {
         case 2: { // Arcos
                   if (cont < 3) {
                     puntos[cont] = new Punto2f(x,y);
-                    scene->transformarXY(puntos[cont]);//,ClientWidth,ClientHeight);
-
+                    scene->transformarXY(puntos[cont]);
                     GLScene();
-
                     cont++;
                   }
 
@@ -234,6 +207,21 @@ switch (estado) {
                                 "Numero de iteraciones",
                                 dato);
                      nPasos = StrToInt(dato);
+
+                     //calculo Punto Medio A
+                     Punto2f *A = puntos[0]->puntoMedio(puntos[2]);
+                    //calculo Punto Medio B
+                    Punto2f *B = puntos[1]->puntoMedio(puntos[2]);
+
+                    Punto2f *InicioOtro; // es un vector
+                    Punto2f *OtroFinal; // es un vector
+                    Punto2f * vAux;
+                    vAux = *puntos[0] - puntos[2];
+
+
+
+                    delete A; //???
+                    delete B; //???
                   }
 
                   // Si cont = 3 dibujamos arco
@@ -508,6 +496,10 @@ void __fastcall TGLForm2D::FormMouseUp(TObject *Sender,
                 p1 = NULL;
                 p2 = NULL;
                 }
+/////////////////////// Lab 1 pto 1 /////////////////////////
+                //    scene->Pinta();
+/////////////////////////////////////////////////////////////
+
 }
 //---------------------------------------------------------------------------
 
