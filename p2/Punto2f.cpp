@@ -35,7 +35,7 @@ return retVal;
 Punto2f * Punto2f::puntoMedio(Punto2f *otro){
     GLfloat x = this->getX()+otro->getX();
     GLfloat y = this->getY()+otro->getY();
-    Punto2f *retVal = new Punto2f(x,y);
+    Punto2f *retVal = new Punto2f(x/2.0,y/2.0);
     return retVal;
 }
 
