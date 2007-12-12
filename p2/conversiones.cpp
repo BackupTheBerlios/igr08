@@ -23,9 +23,8 @@ GLfloat g2r(GLfloat grados){
 
 String redondea(GLfloat num){
 
-String retVal = String (num);
-
-int pos = strcspn( const char *str1, const char *str2 );
-
-return retVal;
+  String aux = String (num);
+  int pos = strcspn( aux.c_str(), "," );
+  String retVal = aux.SubString(1, pos+3);
+  return retVal;
 }

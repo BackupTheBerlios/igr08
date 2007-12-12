@@ -13,3 +13,5 @@
 
 GLfloat r2g(GLfloat);
 GLfloat g2r(GLfloat);
+
+String redondea(GLfloat num);
