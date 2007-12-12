@@ -121,7 +121,7 @@ String retVal="";
          retVal += listaDibujos->getActual()->toString2();
          listaDibujos->avanza();
    }
-//retVal+="=";
+retVal+="=";
 return retVal;
 }
 

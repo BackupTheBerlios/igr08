@@ -162,34 +162,76 @@ void __fastcall TGLForm2D::FormKeyDown(TObject *Sender, WORD &Key,
 void __fastcall TGLForm2D::Abrir1Click(TObject *Sender)
 {
 if (OpenDialog1 ->Execute()){
-        char * text = new char;
+        char * linea = new char();
         char * path = OpenDialog1 -> FileName.c_str();
         distancia = scene->getDistancia();
         delete scene;
-        scene = new Escena(distancia, ClientWidth, ClientHeight);
-        GLfloat x;
-        GLfloat y;
-        Punto2f *p1, *p2;
-         text = "";
+        //distancia = scene->getDistancia();
+        scene = new Escena(200, ClientWidth, ClientHeight);
+        int i;
+        AnsiString cad;
+        AnsiString c1, c2;
+        GLfloat x,y;
+        //Segmento *s;
+        //Punto2f *p1, *p2;
+
         ifstream filein;
         filein.open(path, ios::in);
-        while (!filein.eof()){
-            dl = new DibujoLineas();
-           while (text!="-"){
-               filein.getline(text, 200);
-               parte(text, x, y);
+        filein.getline(linea, 25);
+        cad = linea;
+        while (cad.SubString(1,1)!="="){
+           dl = new DibujoLineas();
+           while (cad.SubString(1,1)!="x"){
+               // Obtenemos 1º Punto
+               i = 1;
+               c1 = "";
+               c2 = "";
+               while (cad.SubString(i,1)!=";") {
+                 c1 += cad.SubString(i,1);
+                 i++;
+               }
+               i++;
+               while (cad.SubString(i,1)!=";") {
+                 c2 += cad.SubString(i,1);
+                 i++;
+               }
+
+               x = c1.ToInt();
+               y = c2.ToInt();
                p1 = new Punto2f(x,y);
-               filein.getline(text, 200);
-               parte(text, x, y);
+
+               // Obtenemos 2º punto
+               filein.getline(linea, 25);
+               cad = linea;
+               i = 1;
+               c1 = "";
+               c2 = "";
+               while (cad.SubString(i,1)!=";") {
+                 c1 += cad.SubString(i,1);
+                 i++;
+               }
+               i++;
+               while (cad.SubString(i,1)!=";") {
+                 c2 += cad.SubString(i,1);
+                 i++;
+               }
+
+               x = c1.ToInt();
+               y = c2.ToInt();
                p2 = new Punto2f(x,y);
-               s = new Segmento (p1, p2);
+
+               // Insertamos segmento en la lista
+               s = new Segmento(p1,p2);
                dl->inserta(s);
-            }
+
+               filein.getline(linea, 25);
+               cad = linea;
+           }
             scene->inserta(dl);
+            filein.getline(linea, 25);
+            cad = linea;
         }
         filein.close();
-
-//         delete text;  ?????
         }
 else{
         ShowMessage("El usuario canceló la operación");
@@ -201,6 +243,7 @@ void __fastcall TGLForm2D::Guardar1Click(TObject *Sender)
 {
 if (SaveDialog1 ->Execute()){
         char *  path = SaveDialog1 -> FileName.c_str();
+
         // se crea un flujo de salida y se asocia con un fichero
         ofstream fileout;
         fileout.open(path, ios::out);
@@ -209,11 +252,9 @@ if (SaveDialog1 ->Execute()){
         // se escribe el mismo texto y el nuevo número
         fileout << ff << endl;
         fileout.close();
-//        return true;
         }
 else{
         ShowMessage("El usuario canceló la operación");
-//        return false;
         }
 }
 //---------------------------------------------------------------------------

@@ -2,6 +2,8 @@
 #ifndef Punto2fH
 #define Punto2fH
 
+#include <math.h>
+
 #include <gl\gl.h>
 #include <gl\glu.h>
 //---------------------------------------------------------------------------

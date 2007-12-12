@@ -2,6 +2,7 @@
 #include <vcl.h>
 #include "Punto2f.h"
 #pragma hdrstop
+#include <stdio.h>
 #pragma package(smart_init)
 //---------------------------------------------------------------------------
 
@@ -34,8 +35,8 @@ String Punto2f::toString(){
 
 
 String Punto2f::toString2(){
-   String retVal = String (x)+";";
-   retVal += String (y)+"\n";
+   String retVal = String((int)x) + ";";
+   retVal += String ((int)y)+";\n";
    return retVal;
 }
 
