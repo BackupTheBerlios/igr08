@@ -1,6 +1,6 @@
 object GLForm2D: TGLForm2D
-  Left = 317
-  Top = 155
+  Left = 540
+  Top = 147
   Width = 408
   Height = 434
   Caption = 'Lineas y Curvas'
@@ -101,6 +101,10 @@ object GLForm2D: TGLForm2D
     object Inspeccionar1: TMenuItem
       Caption = 'Inspeccionar Escena'
       OnClick = Inspeccionar1Click
+    end
+    object Poligono1: TMenuItem
+      Caption = 'Poligono'
+      OnClick = Poligono1Click
     end
   end
 end

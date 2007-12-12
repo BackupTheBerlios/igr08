@@ -38,7 +38,7 @@ void __fastcall TGLForm2D::FormCreate(TObject *Sender)
 
 //////////////////////////////////
 
-        puntos[0] = new Punto2f(35.0,10.0); // Punto inicial
+  /*      puntos[0] = new Punto2f(35.0,10.0); // Punto inicial
         puntos[1] = new Punto2f(95.0,10.0); // punto final
         puntos[2] = new Punto2f(65.0,20.0); // Punto otro
         //calculo Punto Medio A
@@ -64,7 +64,7 @@ void __fastcall TGLForm2D::FormCreate(TObject *Sender)
         aux2= *BmenosA + *aux2;
         k1 = aux2->getX() / Va->getX();
         aux2 = Va->multiplicar(k1);
-        Punto2f * centro = *A + *aux2;
+        Punto2f * centro = *A + *aux2; */
 //////////////////////////////////
 }
 //---------------------------------------------------------------------------
@@ -233,38 +233,39 @@ switch (estado) {
                   }
 
                   if (cont==3) {
-                     AnsiString dato = 10;
-                     InputQuery("Solicitando datos",
+                        AnsiString dato = 10;
+                        InputQuery("Solicitando datos",
                                 "Numero de iteraciones",
                                 dato);
-                     nPasos = StrToInt(dato);
+                        nPasos = StrToInt(dato);
 
-                     //calculo Punto Medio A
-                     Punto2f *A = puntos[0]->puntoMedio(puntos[2]);
-                    //calculo Punto Medio B
-                    Punto2f *B = puntos[1]->puntoMedio(puntos[2]);
+                        puntos[0] = new Punto2f(35.0,10.0); // Punto inicial
+                        puntos[1] = new Punto2f(95.0,10.0); // punto final
+                        puntos[2] = new Punto2f(65.0,20.0); // Punto otro
+                        //calculo Punto Medio A
+                        Punto2f *A = puntos[0]->puntoMedio(puntos[2]);
+                        //calculo Punto Medio B
+                        Punto2f *B = puntos[1]->puntoMedio(puntos[2]);
 
-                    Punto2f *BA;  // es un vector
-                    Punto2f *Va;  // es un vector
-                    Punto2f *Vap;  // es un vector
-                    Punto2f *Vb;   // es un vector
-                    Punto2f *Vbp;  // es un vector
+                        Punto2f *BA, *Va, *Vap, *Vb, *Vbp, *P0P1, *P1P2; // son vectores
 
-                    Punto2f *P0P1; // es un vector
-                    Punto2f *P1P2; // es un vector
+                        Vap = *puntos[2] - *puntos[0];
+                        Va = Vap->perpendicular();
+                        Vbp = *puntos[1] - *puntos[2];
+                        Vb = Vbp->perpendicular();
+                        GLdouble k1, k2;
+                        BA = *A - *B;
 
-                    Vap = *puntos[1] - *puntos[2];
-                    Va = Vap->perpendicular();
-                    Vbp = *puntos[2] - *puntos[0];
-                    Vb = Vbp->perpendicular();
-                    GLdouble k1, k2;
-                    BA = *A - *B;
+                        k2=BA->dot(Vap);
+                        GLdouble  aux = Vb->dot(Vap);
+                        k2=k2/aux;
 
-                    k2=BA->dot(Vap);
-                    k2=k2/(Vb->dot(Vap));
-
-                    k1=(*B+(*Vb->multiplicar(k2))-A);
-//                    k1= *k1->dividir(Va);
+                        Punto2f * BmenosA = *B-*A;
+                        Punto2f * aux2 = Vb->multiplicar(k2);
+                        aux2= *BmenosA + *aux2;
+                        k1 = aux2->getX() / Va->getX();
+                        aux2 = Va->multiplicar(k1);
+                        Punto2f * centro = *A + *aux2;
 
 
                     delete A; //???
@@ -639,6 +640,19 @@ l->inicia();
 DibujoLineas * dl = l->getActual();
 String str = dl->toString();
 ShowMessage(str);        
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TGLForm2D::Poligono1Click(TObject *Sender)
+{
+DibujoLineas * dib = new DibujoLineas();
+Punto2f * pi = new Punto2f(10.0,20.0);
+Lapiz * lap = new Lapiz(pi, 0);
+lap->poligonoR1(90,8,dib);
+scene->inserta(dib);
+
+
+delete lap;
 }
 //---------------------------------------------------------------------------
 

@@ -120,19 +120,28 @@ void Lapiz::poliEspiral ( Punto2f * posInicial, GLfloat incrAng,
 
 //---------------------------------------------------------------------------
 
-void Lapiz::poligonoR1 (Lapiz * l, GLfloat lado, int nlados){
+void Lapiz::poligonoR1 (GLfloat lado, int nlados, DibujoLineas* dl){
+        GLdouble alfa = 360.0 / (GLdouble) nlados;
+        GLdouble beta = (180.0 - alfa) / 2.0;
+        GLdouble gamma = 180 - 2*beta;
+        for (int i = 0; i<nlados; i++){
+                Segmento* s;
+                this->avanza(lado, true, s);
+                this->gira(gamma);
+                dl->inserta(s);
+                delete s;
+        }
+}
+
+//---------------------------------------------------------------------------
+
+void Lapiz::poligonoR2 (Punto2f * centro, GLfloat radio, int nlados, DibujoLineas* dl){
 
 }
 
 //---------------------------------------------------------------------------
 
-void Lapiz::poligonoR2 (Punto2f * centro, GLfloat radio, int nlados){
-
-}
-
-//---------------------------------------------------------------------------
-
-void Lapiz::arco(Punto2f * inicio, Punto2f * fin, Punto2f *otro){
+void Lapiz::arco(Punto2f * inicio, Punto2f * fin, Punto2f *otro, DibujoLineas* dl){
 
 
 //calcular mediatrices
