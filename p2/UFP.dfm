@@ -43,6 +43,7 @@ object GLForm2D: TGLForm2D
       end
       object Guardar1: TMenuItem
         Caption = 'Guardar...'
+        OnClick = Guardar1Click
       end
       object Salir1: TMenuItem
         Caption = 'Salir...'

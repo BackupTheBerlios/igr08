@@ -19,6 +19,7 @@ class DibujoLineas {
       void setOperacion(int o) {tipoOperacion = o; }
       int getOperacion() { return tipoOperacion; }
       String toString();
+      String toString2();
 
    private:
       Lista<Segmento> * listaSegmentos;

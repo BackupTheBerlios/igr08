@@ -79,6 +79,14 @@ String Segmento::toString(){
                 return retVal;
         }
         return "";
+}
 
 
+String Segmento::toString2(){
+        if (inicio !=NULL & final !=NULL){
+                String retVal = inicio->toString2();
+                retVal += final->toString2();
+                return retVal;
+        }
+        return "";
 }

@@ -114,6 +114,18 @@ retVal+="================\n";
 return retVal;
 }
 
+String Escena::toString2(){
+String retVal="";
+    listaDibujos ->inicia();
+    while(!listaDibujos->final()){
+         retVal += listaDibujos->getActual()->toString2();
+         listaDibujos->avanza();
+   }
+//retVal+="=";
+return retVal;
+}
+
+
 void Escena::teclado(WORD& Key) {
 
   // Factor de mov de Traslaccion
@@ -387,9 +399,9 @@ GLdouble Escena::convertirX(int x, int ancho) {
     GLdouble escalaAncho = (GLdouble)ancho/(xRight-xLeft);
    // GLdouble centro =   (xLeft-xRight)/2.0;
    if (xLeft <0)
-        return (x / escalaAncho + xLeft);
+        return (x / (GLfloat) escalaAncho + xLeft);
    else
-        return (x / escalaAncho -  xLeft);
+        return (x / (GLfloat) escalaAncho -  xLeft);
 
 }
 
@@ -399,9 +411,9 @@ GLdouble Escena::convertirY(int y, int alto) {
    GLdouble escalaAlto = (GLdouble)alto/(yTop-yBot);
    // GLdouble centro =   (yBot-yTop)/2.0;
    if (yTop<0)
-        return (y / escalaAlto +  yTop);
+        return (y / (GLfloat) escalaAlto +  yTop);
    else
-        return (y / escalaAlto - yTop);
+        return (y / (GLfloat) escalaAlto - yTop);
 
 }
 

@@ -69,3 +69,20 @@ String retVal="";
 retVal+="----------------\n";
 return retVal;
 }
+
+
+
+String DibujoLineas::toString2(){
+String retVal="";
+        listaSegmentos->inicia();
+        while(!listaSegmentos->final()){
+                Segmento * seg = listaSegmentos->getActual();
+                if (seg!=NULL){
+                retVal+= seg->toString2();
+                }
+                listaSegmentos->avanza();
+        }
+
+retVal+="-\n";
+return retVal;
+}

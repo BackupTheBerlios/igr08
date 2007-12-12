@@ -4,6 +4,8 @@
 #include <gl\glu.h>
 
 #include "math.h"
+#include <stdio.h>
+
 #ifndef conversionesH
 #define conversionesH
 //---------------------------------------------------------------------------

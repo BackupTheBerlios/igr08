@@ -26,10 +26,17 @@ void Punto2f::Pinta(){
       }
 
 String Punto2f::toString(){
-String retVal = "x:"+  String (x)+", ";
-retVal += "y:"+ String (y) +"; ";
+   String retVal = "x:"+  String (x)+", ";
+   retVal += "y:"+ String (y) +"; ";
 
-return retVal;
+   return retVal;
+}
+
+
+String Punto2f::toString2(){
+   String retVal = String (x)+";";
+   retVal += String (y)+"\n";
+   return retVal;
 }
 
 Punto2f * Punto2f::puntoMedio(Punto2f *otro){

@@ -36,6 +36,8 @@ void __fastcall TGLForm2D::FormCreate(TObject *Sender)
     //GLScene();
 /////////////////////////////////////////////////
 
+
+
 //////////////////////////////////
 
   /*      puntos[0] = new Punto2f(35.0,10.0); // Punto inicial
@@ -160,14 +162,34 @@ void __fastcall TGLForm2D::FormKeyDown(TObject *Sender, WORD &Key,
 void __fastcall TGLForm2D::Abrir1Click(TObject *Sender)
 {
 if (OpenDialog1 ->Execute()){
-        char * path = OpenDialog1 -> FileName.c_str();
-        ShowMessage (path);
         char * text = new char;
+        char * path = OpenDialog1 -> FileName.c_str();
+        delete scene;
+        distancia = scene->getDistancia();
+        scene = new Escena(distancia, ClientWidth, ClientHeight);
+        GLfloat x;
+        GLfloat y;
+        Punto2f *p1, *p2;
+
         ifstream filein;
         filein.open(path, ios::in);
-        // se lee hasta el carácter (;)
-        filein.getline(text, 200);
-        // se cierra el fichero
+        while (filein.eof()){
+            dl = new DibujoLineas();
+           while (text!="-"){
+               filein.getline(text, 200);
+           //     x = text...
+           //     y = das;
+                p1 = new Punto2f(x,y);
+
+                filein.getline(text, 200);
+             //   x = text...
+             //   y = das;
+                p2 = new Punto2f(x,y);
+                s = new Segmento (p1, p2);
+                dl->inserta(s);
+            }
+            scene->inserta(dl);
+        }
         filein.close();
 
 //         delete text;  ?????
@@ -178,7 +200,7 @@ else{
 }
 //---------------------------------------------------------------------------
 // Guardar la escena actual
-bool __fastcall TGLForm2D::Guardar1Click(TObject *Sender)
+void __fastcall TGLForm2D::Guardar1Click(TObject *Sender)
 {
 if (SaveDialog1 ->Execute()){
         char *  path = SaveDialog1 -> FileName.c_str();
@@ -188,14 +210,16 @@ if (SaveDialog1 ->Execute()){
         // se crea un flujo de salida y se asocia con un fichero
         ofstream fileout;
         fileout.open(path, ios::out);
+        String cadena = scene->toString2();
+        char * ff=  cadena.c_str();
         // se escribe el mismo texto y el nuevo número
-        fileout << "aaaaaa" << "; " << endl;
+        fileout << ff << endl;
         fileout.close();
-        return true;
+//        return true;
         }
 else{
         ShowMessage("El usuario canceló la operación");
-        return false;
+//        return false;
         }
 }
 //---------------------------------------------------------------------------
@@ -371,16 +395,17 @@ switch (estado) {
 // Si hemos dibujado algo preguntamos si queremos guardar y empezamos
 // una nueva escena
 void __fastcall TGLForm2D::Nuevo1Click(TObject *Sender) {
-   bool ok;
+  // bool ok;
    int ret;
    if (!(scene->getEscena()->vacia())) {
       ret = Application->MessageBox("¿ Desea guardar la escena actual ?",
                                         "Escena Actual", MB_YESNO);
       if (ret==IDYES)
-          ok =GLForm2D->Guardar1Click(this);
+          //ok =
+          GLForm2D->Guardar1Click(this);
    }
 
-   if (ok |ret==IDNO){
+   if (/*ok |*/ret==IDNO){
    delete scene;
    scene = new Escena(distancia, this->ClientWidth, this->ClientHeight);
    GLScene();
@@ -391,17 +416,18 @@ void __fastcall TGLForm2D::Nuevo1Click(TObject *Sender) {
 // Si hemos dibujado algo preguntamos si queremos guardar y salimos !!!!
 void __fastcall TGLForm2D::Salir1Click(TObject *Sender)
 {
-   bool ok;
+//   bool ok;
    if (!(scene->getEscena()->vacia())) {
       int ret = Application->MessageBox("El archivo ha sido modificado\n\n¿Desea guardar la escena?",
                                         "Advertencia", MB_YESNO);
       if (ret==IDYES)
-         ok = GLForm2D->Guardar1Click(this);
+         //ok =
+         GLForm2D->Guardar1Click(this);
    }
-
-   if (ok)   {
         Application->Terminate();
-   }
+/*   if (ok)   {
+
+   }*/
 }
 //---------------------------------------------------------------------------
 // Dibujamos Polilíneas
@@ -638,7 +664,7 @@ void __fastcall TGLForm2D::Inspeccionar1Click(TObject *Sender)
 Lista <DibujoLineas> * l =scene->getEscena();
 l->inicia();
 DibujoLineas * dl = l->getActual();
-String str = dl->toString();
+String str = scene->toString2();
 ShowMessage(str);        
 }
 //---------------------------------------------------------------------------

@@ -31,12 +31,8 @@ class Punto2f {
         Punto2f *  multiplicar(GLdouble);
         Punto2f *  dividir(GLdouble);
 
-
-
-
-
-
         String toString();
+        String toString2();
 
 
     private:

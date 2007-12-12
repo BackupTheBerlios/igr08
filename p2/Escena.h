@@ -28,6 +28,7 @@ class Escena {
       void setNombre(AnsiString cadena) { nombre = cadena; }
       void setModificada(bool valor) { modificado = valor; }
       void setHDC(HDC h){ hdc=h; }
+      int getDistancia(){return xRight;}
 
       AnsiString getNombre() { return nombre; }
       bool Modificada() { return modificado; }
@@ -36,6 +37,7 @@ class Escena {
       bool ZoomProgresivo(float factor, int nPasos);
       bool recorte(Punto2f * , Punto2f *);
       String toString();
+      String toString2();
 
    private:
       GLfloat xRight, xLeft;

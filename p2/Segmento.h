@@ -23,7 +23,7 @@ class Segmento {
 
       bool contiene(Punto2f*);
       String toString();
-
+      String toString2();
    private:
       Punto2f * inicio;
       Punto2f * final;
