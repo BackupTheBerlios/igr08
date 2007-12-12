@@ -164,29 +164,26 @@ void __fastcall TGLForm2D::Abrir1Click(TObject *Sender)
 if (OpenDialog1 ->Execute()){
         char * text = new char;
         char * path = OpenDialog1 -> FileName.c_str();
-        delete scene;
         distancia = scene->getDistancia();
+        delete scene;
         scene = new Escena(distancia, ClientWidth, ClientHeight);
         GLfloat x;
         GLfloat y;
         Punto2f *p1, *p2;
-
+         text = "";
         ifstream filein;
         filein.open(path, ios::in);
-        while (filein.eof()){
+        while (!filein.eof()){
             dl = new DibujoLineas();
            while (text!="-"){
                filein.getline(text, 200);
-           //     x = text...
-           //     y = das;
-                p1 = new Punto2f(x,y);
-
-                filein.getline(text, 200);
-             //   x = text...
-             //   y = das;
-                p2 = new Punto2f(x,y);
-                s = new Segmento (p1, p2);
-                dl->inserta(s);
+               parte(text, x, y);
+               p1 = new Punto2f(x,y);
+               filein.getline(text, 200);
+               parte(text, x, y);
+               p2 = new Punto2f(x,y);
+               s = new Segmento (p1, p2);
+               dl->inserta(s);
             }
             scene->inserta(dl);
         }
@@ -204,9 +201,6 @@ void __fastcall TGLForm2D::Guardar1Click(TObject *Sender)
 {
 if (SaveDialog1 ->Execute()){
         char *  path = SaveDialog1 -> FileName.c_str();
-        ShowMessage (path);
-
-
         // se crea un flujo de salida y se asocia con un fichero
         ofstream fileout;
         fileout.open(path, ios::out);
