@@ -99,13 +99,5 @@ object GLForm2D: TGLForm2D
         OnClick = Recorte1Click
       end
     end
-    object Inspeccionar1: TMenuItem
-      Caption = 'Inspeccionar Escena'
-      OnClick = Inspeccionar1Click
-    end
-    object Poligono1: TMenuItem
-      Caption = 'Poligono'
-      OnClick = Poligono1Click
-    end
   end
 end

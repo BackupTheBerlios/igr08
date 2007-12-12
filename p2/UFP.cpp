@@ -692,18 +692,7 @@ void __fastcall TGLForm2D::FormMouseMove(TObject *Sender,
   }
 }
 //---------------------------------------------------------------------------
-
-void __fastcall TGLForm2D::Inspeccionar1Click(TObject *Sender)
-{
-//String str = scene->toString();
-Lista <DibujoLineas> * l =scene->getEscena();
-l->inicia();
-DibujoLineas * dl = l->getActual();
-String str = scene->toString2();
-ShowMessage(str);        
-}
-//---------------------------------------------------------------------------
-
+/*
 void __fastcall TGLForm2D::Poligono1Click(TObject *Sender)
 {
 DibujoLineas * dib = new DibujoLineas();
@@ -711,9 +700,8 @@ Punto2f * pi = new Punto2f(10.0,20.0);
 Lapiz * lap = new Lapiz(pi, 0);
 lap->poligonoR1(90,8,dib);
 scene->inserta(dib);
-
-
 delete lap;
 }
+*/
 //---------------------------------------------------------------------------
 
