@@ -158,13 +158,13 @@ void Lapiz::arcoR2 (Punto2f * centro, GLfloat radio, int nlados, GLdouble angIni
         GLdouble beta = (180.0 - alfa) / 2.0;
         GLdouble gamma = 180 - 2*beta;
 
-        //GLdouble theta = 180 - 2*beta;
-        GLdouble theta = angInicial +alfa;
+        GLdouble theta = 180 - 2*beta;
+ //       theta = angInicial +alfa;
         GLfloat cose =   cos(g2r(beta));
         this->pos->setX(centro->getX()+(cos(g2r(angInicial))*radio));
-        this->pos->setY(centro->getY()-(sin(g2r(angInicial))*radio));
+        this->pos->setY(centro->getY()+(sin(g2r(angInicial))*radio));
 //        this->ang= g2r(theta);
-        this->ang = g2r(angInicial+90);
+        this->ang = g2r(angInicial+90+(theta/2.0));
 
         GLfloat lado = cos(g2r(beta))*radio*2;
         arcoR3(lado, nlados, theta, dl);
