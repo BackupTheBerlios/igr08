@@ -206,7 +206,20 @@ void Lapiz::arco(Punto2f * inicio, Punto2f * final, Punto2f *otro, int nlados, D
 
 void Lapiz::arco(Punto2f * centro, GLdouble radio, GLdouble angInicial, GLdouble angFinal, int nlados, DibujoLineas* dl){
         // calcular poner al lapiz con angulo correcto
-        // calcular posicion correcta
+        this->ang= g2r(angInicial+90);
+
+        GLfloat dyi, dxi;
+        GLfloat ang = angFinal-angInicial;
+        for (int i = 0; i<=nlados; i++{
+                dxi = cos(angInicial+(i * ang / nlados));
+                dyi = sin(angInicial+(i * ang / nlados));
+                // calcular posicion correcta
+                this->pos->setX(centro->getX()+dxi);
+                this->pos->setX(centro->getY()+dyi);
+                
+        }
+
+
         poligonoR2 (centro, radio, nlados, dl);
 }
 
