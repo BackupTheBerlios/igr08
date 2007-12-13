@@ -27,7 +27,7 @@ class Lapiz {
                    GLfloat longInicial, int nPasos, DibujoLineas*);
       void poligonoR1 (GLfloat lado, int nlados, DibujoLineas* dl);
       void poligonoR2 (Punto2f * centro, GLfloat radio, int nlados, DibujoLineas* dl);
-      void arco(Punto2f * inicio, Punto2f * fin, Punto2f *otro, DibujoLineas* dl);
+      void arco(Punto2f * inicio, Punto2f * fin, Punto2f *otro, int nlados, DibujoLineas* dl);
 
       void Bezier(Punto2f** ,int , int, DibujoLineas*);
       void Casteljau(float , Punto2f** , Punto2f* , int );
@@ -43,6 +43,7 @@ class Lapiz {
       //double Base(float, int, int, int);
       //float Nudo(int, int, int);
       double Base(float, int);
+      void arco(Punto2f * centro, GLdouble radio, GLdouble angInicial, GLdouble angFinal, int nlados, DibujoLineas*);
 };
 
 #endif

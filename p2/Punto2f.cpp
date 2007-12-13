@@ -82,3 +82,11 @@ GLdouble Punto2f::dot(Punto2f *otro){
 Punto2f * Punto2f::perpendicular(){
         return new Punto2f(-this->getY(),this->getX());
 }
+
+
+GLdouble Punto2f::distancia(Punto2f *otro){
+        Punto2f * vectorDistancia = *otro - *this;
+        GLdouble x = vectorDistancia->getX();
+        GLdouble y = vectorDistancia->getY();
+        return (sqrt(x*x+y*y));
+}

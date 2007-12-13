@@ -28,6 +28,7 @@ class Punto2f {
         Punto2f * puntoMedio(Punto2f *);
         GLdouble dot(Punto2f *);
         Punto2f * perpendicular();
+        GLdouble distancia(Punto2f *);
         Punto2f *  operator+(Punto2f);
         Punto2f *  operator-(Punto2f);
         Punto2f *  multiplicar(GLdouble);

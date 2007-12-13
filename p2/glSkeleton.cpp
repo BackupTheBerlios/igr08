@@ -13,6 +13,7 @@ USEUNIT("Lista.cpp");
 USEUNIT("Nodo.cpp");
 USEUNIT("OutCode.cpp");
 USEUNIT("Punto2f.cpp");
+USE("glSkeleton.todo", ToDo);
 //---------------------------------------------------------------------------
 WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {

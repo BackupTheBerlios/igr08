@@ -152,24 +152,63 @@ void Lapiz::poligonoR2 (Punto2f * centro, GLfloat radio, int nlados, DibujoLinea
 
 //---------------------------------------------------------------------------
 
-void Lapiz::arco(Punto2f * inicio, Punto2f * fin, Punto2f *otro, DibujoLineas* dl){
+void Lapiz::arco(Punto2f * inicio, Punto2f * final, Punto2f *otro, int nlados, DibujoLineas* dl){
 
+        //calculo Punto Medio A
+        Punto2f *A = inicio->puntoMedio(otro);
+        //calculo Punto Medio B
+        Punto2f *B = final->puntoMedio(otro);
+
+        Punto2f *BA, *Va, *Vap, *Vb, *Vbp, *P0P1, *P1P2; // son vectores
+
+        Vap = *otro - *inicio;
+        Va = Vap->perpendicular();
+        Vbp = *final - *otro;
+        Vb = Vbp->perpendicular();
+        GLdouble k1, k2;
+        BA = *A - *B;
+
+        k2=BA->dot(Vap);
+        GLdouble  aux = Vb->dot(Vap);
+        k2=k2/aux;
+
+        Punto2f * BmenosA = *B-*A;
+        Punto2f * aux2 = Vb->multiplicar(k2);
+        aux2= *BmenosA + *aux2;
+        k1 = aux2->getX() / Va->getX();
+        aux2 = Va->multiplicar(k1);
+        Punto2f * centro = *A + *aux2;
+        GLfloat radio = centro->distancia(inicio);
+
+        GLfloat angInicial, angFinal; // en radianes??
+        angInicial= asin((inicio->getY() - centro->getY())/radio);
+        angFinal= asin((final->getY() -  centro->getY())/radio);
+
+        arco(centro, radio, angInicial, angFinal, nlados, dl);
+        delete A; //???
+        delete B; //???
 
 //calcular mediatrices
         // calcular puntos medios
-            Punto2f * A = inicio ->puntoMedio(otro);
+/*            Punto2f * A = inicio ->puntoMedio(otro);
             Punto2f * B = otro ->puntoMedio(fin);
         // calcular vector normal
             GLdouble x = inicio->getX() - otro -> getX();
             GLdouble y = inicio->getY() - otro -> getY();
             Punto2f * v1 = new Punto2f(x,y); // es un vector
             Punto2f * v1p= v1->perpendicular();
-
+  */
 // calcular punto de corte de las mediatrices.
 //calcular radio
 
 }
 
+
+void Lapiz::arco(Punto2f * centro, GLdouble radio, GLdouble angInicial, GLdouble angFinal, int nlados, DibujoLineas* dl){
+        // calcular poner al lapiz con angulo correcto
+        // calcular posicion correcta
+        poligonoR2 (centro, radio, nlados, dl);
+}
 
 void Lapiz::Casteljau(float t, Punto2f** puntos, Punto2f* p, int n) {
 
