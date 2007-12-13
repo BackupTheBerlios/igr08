@@ -619,6 +619,7 @@ void __fastcall TGLForm2D::FormMouseWheelDown(TObject *Sender,
 {
         scene->Zoom(95);
         scene->Pinta();
+        GLScene();
 }
 //---------------------------------------------------------------------------
 
@@ -627,6 +628,7 @@ void __fastcall TGLForm2D::FormMouseWheelUp(TObject *Sender,
 {
         scene->Zoom(105);
         scene->Pinta();
+        GLScene();
 }
 //---------------------------------------------------------------------------
 
@@ -727,12 +729,13 @@ delete pi;*/
 
 
 DibujoLineas * dib = new DibujoLineas();
+Punto2f * centro = new Punto2f(0.0,0.0);
 Punto2f * inicio = new Punto2f(0.0,0.0);
-Punto2f * final = new Punto2f(100.0,0.0);
-Punto2f * otro = new Punto2f(50.0,20.0);
+//Punto2f * final = new Punto2f(100.0,0.0);
+//Punto2f * otro = new Punto2f(50.0,20.0);
 Lapiz * lap = new Lapiz(inicio, 0);
 inicio = new Punto2f(0.0,0.0);
-lap->arco(inicio, final, otro, 40, dib);
+lap->arcoR2 (centro, 60, 40, 0, 180,dib);
 scene->inserta(dib);
 delete lap;
 

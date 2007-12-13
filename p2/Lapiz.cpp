@@ -154,17 +154,17 @@ void Lapiz::poligonoR2 (Punto2f * centro, GLfloat radio, int nlados, DibujoLinea
 
 void Lapiz::arcoR2 (Punto2f * centro, GLfloat radio, int nlados, GLdouble angInicial, GLdouble angFinal, DibujoLineas* dl){
         GLdouble apertura = max (angInicial, angFinal) - min (angInicial, angFinal);
-        apertura = r2g (apertura);
         GLdouble alfa = apertura / (GLdouble) nlados;
         GLdouble beta = (180.0 - alfa) / 2.0;
         GLdouble gamma = 180 - 2*beta;
 
         //GLdouble theta = 180 - 2*beta;
-        GLdouble theta = r2g(angInicial) +alfa;
+        GLdouble theta = angInicial +alfa;
         GLfloat cose =   cos(g2r(beta));
         this->pos->setX(centro->getX()+(cos(g2r(angInicial))*radio));
         this->pos->setY(centro->getY()-(sin(g2r(angInicial))*radio));
-        this->ang= g2r(theta);
+//        this->ang= g2r(theta);
+        this->ang = g2r(angInicial+90);
 
         GLfloat lado = cos(g2r(beta))*radio*2;
         arcoR3(lado, nlados, theta, dl);
