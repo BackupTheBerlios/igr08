@@ -76,6 +76,7 @@ void Lapiz::gira (GLdouble incrAng){
 
 // Avanzamos al siguiente punto relativo
 void Lapiz::avanza (GLfloat longitud, bool esVisible, Segmento*& s){
+        GLfloat aa = longitud * cos(ang);
         GLfloat xD = pos -> getX() + longitud * cos (ang);
         GLfloat yD = pos -> getY() + longitud * sin (ang);
         Punto2f * p = new Punto2f(xD,yD);
@@ -136,7 +137,17 @@ void Lapiz::poligonoR1 (GLfloat lado, int nlados, DibujoLineas* dl){
 //---------------------------------------------------------------------------
 
 void Lapiz::poligonoR2 (Punto2f * centro, GLfloat radio, int nlados, DibujoLineas* dl){
+        GLdouble alfa = 360.0 / (GLdouble) nlados;
+        GLdouble beta = (180.0 - alfa) / 2.0;
+        GLdouble gamma = 180 - 2*beta;
+        GLdouble theta = 180 - 2*beta;
+        GLfloat cose =   cos(g2r(beta));
+        this->pos->setX(centro->getX()+(cos(g2r(beta))*radio));
+        this->pos->setY(centro->getY()-(sin(g2r(beta))*radio));
+        this->ang= g2r(theta);
 
+        GLfloat lado = cos(g2r(beta))*radio*2;
+        poligonoR1(lado, nlados, dl);
 }
 
 //---------------------------------------------------------------------------

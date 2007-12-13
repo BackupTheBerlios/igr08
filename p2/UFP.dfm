@@ -99,5 +99,9 @@ object GLForm2D: TGLForm2D
         OnClick = Recorte1Click
       end
     end
+    object lapiz1: TMenuItem
+      Caption = 'lapiz'
+      OnClick = lapiz1Click
+    end
   end
 end
