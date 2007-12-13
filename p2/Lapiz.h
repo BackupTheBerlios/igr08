@@ -29,6 +29,8 @@ class Lapiz {
       void poligonoR2 (Punto2f * centro, GLfloat radio, int nlados, DibujoLineas* dl);
       void arco(Punto2f * inicio, Punto2f * fin, Punto2f *otro, int nlados, DibujoLineas* dl);
 
+
+      void Lapiz::arcoR2 (Punto2f * centro, GLfloat radio, int nlados, GLdouble angInicial, GLdouble angFinal, DibujoLineas* dl);
       void Bezier(Punto2f** ,int , int, DibujoLineas*);
       void Casteljau(float , Punto2f** , Punto2f* , int );
 

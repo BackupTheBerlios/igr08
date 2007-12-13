@@ -708,7 +708,7 @@ delete lap;
 void __fastcall TGLForm2D::lapiz1Click(TObject *Sender)
 {
 
-DibujoLineas * dib = new DibujoLineas();
+/*DibujoLineas * dib = new DibujoLineas();
 Punto2f * pi = new Punto2f(0.0,0.0);
 Lapiz * lap = new Lapiz(pi, 0);
 lap->poligonoR1(90,4,dib);
@@ -723,9 +723,20 @@ pi = new Punto2f(0.0,0.0);
 lap->poligonoR2(pi, 80,5,dib);
 scene->inserta(dib);
 delete lap;
-delete pi;
+delete pi;*/
 
+
+DibujoLineas * dib = new DibujoLineas();
+Punto2f * inicio = new Punto2f(0.0,0.0);
+Punto2f * final = new Punto2f(100.0,0.0);
+Punto2f * otro = new Punto2f(50.0,20.0);
+Lapiz * lap = new Lapiz(inicio, 0);
+inicio = new Punto2f(0.0,0.0);
+lap->arco(inicio, final, otro,4,dib);
+scene->inserta(dib);
+delete lap;
 
 }
 //---------------------------------------------------------------------------
+
 

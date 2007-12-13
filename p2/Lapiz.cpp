@@ -152,6 +152,29 @@ void Lapiz::poligonoR2 (Punto2f * centro, GLfloat radio, int nlados, DibujoLinea
 
 //---------------------------------------------------------------------------
 
+void Lapiz::arcoR2 (Punto2f * centro, GLfloat radio, int nlados, GLdouble angInicial, GLdouble angFinal, DibujoLineas* dl){
+        GLdouble apertura = max (angInicial, angFinal) - min (angInicial, angFinal);
+        apertura = r2g (apertura);
+        GLdouble alfa = apertura / (GLdouble) nlados;
+        GLdouble beta = (180.0 - alfa) / 2.0;
+        GLdouble gamma = 180 - 2*beta;
+
+        //GLdouble theta = 180 - 2*beta;
+        GLdouble theta = r2g(angInicial) +alfa;
+        GLfloat cose =   cos(g2r(beta));
+        this->pos->setX(centro->getX()+(cos(g2r(angInicial))*radio));
+        this->pos->setY(centro->getY()-(sin(g2r(angInicial))*radio));
+        this->ang= g2r(theta);
+
+        GLfloat lado = cos(g2r(beta))*radio*2;
+//        poligonoR1(lado, nlados, dl);
+}
+//---------------------------------------------------------------------------
+
+void arcoR2 (int lado,  int nlados, DibujoLineas* dl){
+
+}
+//---------------------------------------------------------------------------
 void Lapiz::arco(Punto2f * inicio, Punto2f * final, Punto2f *otro, int nlados, DibujoLineas* dl){
 
         //calculo Punto Medio A
@@ -181,7 +204,7 @@ void Lapiz::arco(Punto2f * inicio, Punto2f * final, Punto2f *otro, int nlados, D
         GLfloat radio = centro->distancia(inicio);
 
         GLfloat angInicial, angFinal; // en radianes??
-        angInicial= asin((inicio->getY() - centro->getY())/radio);
+        angInicial= acos((inicio->getX() - centro->getX())/radio);
         angFinal= asin((final->getY() -  centro->getY())/radio);
 
         arco(centro, radio, angInicial, angFinal, nlados, dl);
@@ -206,11 +229,11 @@ void Lapiz::arco(Punto2f * inicio, Punto2f * final, Punto2f *otro, int nlados, D
 
 void Lapiz::arco(Punto2f * centro, GLdouble radio, GLdouble angInicial, GLdouble angFinal, int nlados, DibujoLineas* dl){
         // calcular poner al lapiz con angulo correcto
-        this->ang= g2r(angInicial+90);
+        this->ang = angInicial + g2r(90);
 
         GLfloat dyi, dxi;
-        GLfloat ang = angFinal-angInicial;
-        for (int i = 0; i<=nlados; i++{
+//        GLfloat ang = angFinal-angInicial;
+        for (int i = 0; i<=nlados; i++){
                 dxi = cos(angInicial+(i * ang / nlados));
                 dyi = sin(angInicial+(i * ang / nlados));
                 // calcular posicion correcta
