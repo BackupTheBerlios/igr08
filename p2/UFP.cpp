@@ -732,7 +732,7 @@ Punto2f * final = new Punto2f(100.0,0.0);
 Punto2f * otro = new Punto2f(50.0,20.0);
 Lapiz * lap = new Lapiz(inicio, 0);
 inicio = new Punto2f(0.0,0.0);
-lap->arco(inicio, final, otro,4,dib);
+lap->arco(inicio, final, otro, 40, dib);
 scene->inserta(dib);
 delete lap;
 

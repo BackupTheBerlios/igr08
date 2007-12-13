@@ -167,12 +167,17 @@ void Lapiz::arcoR2 (Punto2f * centro, GLfloat radio, int nlados, GLdouble angIni
         this->ang= g2r(theta);
 
         GLfloat lado = cos(g2r(beta))*radio*2;
-//        poligonoR1(lado, nlados, dl);
+        arcoR3(lado, nlados, theta, dl);
 }
 //---------------------------------------------------------------------------
 
-void arcoR2 (int lado,  int nlados, DibujoLineas* dl){
-
+void Lapiz::arcoR3 (GLdouble lado,  int nlados, GLdouble theta, DibujoLineas* dl){
+    Segmento * s;
+    for (int i = 0; i<nlados; i++){
+        avanza(lado, true, s);
+        gira (theta);
+        dl->inserta(s);
+    }
 }
 //---------------------------------------------------------------------------
 void Lapiz::arco(Punto2f * inicio, Punto2f * final, Punto2f *otro, int nlados, DibujoLineas* dl){
@@ -207,7 +212,7 @@ void Lapiz::arco(Punto2f * inicio, Punto2f * final, Punto2f *otro, int nlados, D
         angInicial= acos((inicio->getX() - centro->getX())/radio);
         angFinal= asin((final->getY() -  centro->getY())/radio);
 
-        arco(centro, radio, angInicial, angFinal, nlados, dl);
+        arcoR2(centro, radio, angInicial, angFinal, nlados, dl);
         delete A; //???
         delete B; //???
 
@@ -243,7 +248,7 @@ void Lapiz::arco(Punto2f * centro, GLdouble radio, GLdouble angInicial, GLdouble
         }
 
 
-        poligonoR2 (centro, radio, nlados, dl);
+//        poligonoR2 (centro, radio, nlados, dl);
 }
 
 void Lapiz::Casteljau(float t, Punto2f** puntos, Punto2f* p, int n) {
