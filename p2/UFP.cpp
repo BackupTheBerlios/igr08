@@ -292,13 +292,18 @@ switch (estado) {
                   }
 
                   if (cont==3) {
-                        AnsiString dato = 10;
+                        AnsiString dato = 2;
                         InputQuery("Solicitando datos",
                                 "Numero de iteraciones",
                                 dato);
                         nPasos = StrToInt(dato);
 
-                        puntos[0] = new Punto2f(35.0,10.0); // Punto inicial
+                        Lapiz * lap = new Lapiz();
+                        lap->arco(puntos[0], puntos[1], puntos[2], nPasos, dl);
+                        scene->inserta(dl);
+                        delete lap;
+                        
+                     /*   puntos[0] = new Punto2f(35.0,10.0); // Punto inicial
                         puntos[1] = new Punto2f(95.0,10.0); // punto final
                         puntos[2] = new Punto2f(65.0,20.0); // Punto otro
                         //calculo Punto Medio A
@@ -329,6 +334,7 @@ switch (estado) {
 
                     delete A; //???
                     delete B; //???
+                    */
                   }
 
                   // Si cont = 3 dibujamos arco
@@ -731,12 +737,12 @@ delete pi;*/
 DibujoLineas * dib = new DibujoLineas();
 Punto2f * centro = new Punto2f(0.0,0.0);
 Punto2f * inicio = new Punto2f(0.0,0.0);
-//Punto2f * final = new Punto2f(100.0,0.0);
-//Punto2f * otro = new Punto2f(50.0,20.0);
+Punto2f * final = new Punto2f(100.0,0.0);
+Punto2f * otro = new Punto2f(50.0,20.0);
 Lapiz * lap = new Lapiz(inicio, 0);
 inicio = new Punto2f(0.0,0.0);
-lap->arcoR2 (centro, 60, 20, 160, 20,dib);
-
+//lap->arcoR2 (centro, 60, 20, 160, 380,dib);
+lap->arco(inicio, final, otro, 2, dib);
 scene->inserta(dib);
 delete lap;
 
