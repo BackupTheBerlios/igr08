@@ -213,6 +213,7 @@ void Lapiz::arco(Punto2f * inicio, Punto2f * final, Punto2f *otro, int nlados, D
         angFinal= asin((final->getY() -  centro->getY())/radio);
 
         arcoR2(centro, radio, nlados, r2g(angInicial), r2g(angFinal), dl);
+        this->poligonoR2(centro, radio, nlados, dl);
         delete A; //???
         delete B; //???
 

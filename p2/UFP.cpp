@@ -145,7 +145,9 @@ void __fastcall TGLForm2D::FormDestroy(TObject *Sender)
     wglDeleteContext(hrc);
 
     // eliminar objetos creados
-    delete pos_actual;
+
+        delete pos_actual;
+
     delete scene;
     scene = NULL;
 }
