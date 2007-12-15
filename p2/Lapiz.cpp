@@ -162,7 +162,7 @@ void Lapiz::arcoR2 (Punto2f * centro, GLfloat radio, int nlados, GLdouble angIni
  //       theta = angInicial +alfa;
         GLfloat cose =   cos(g2r(beta));
         if (angInicial<angFinal){
-                if (angInicial<angOtro){
+                if (angInicial<normaliza(angOtro)){
                         this->pos->setX(centro->getX()+(cos(g2r(angInicial))*radio));
                         this->pos->setY(centro->getY()+(sin(g2r(angInicial))*radio));
                         this->ang = g2r(angInicial+90+(theta/2.0));
@@ -174,7 +174,7 @@ void Lapiz::arcoR2 (Punto2f * centro, GLfloat radio, int nlados, GLdouble angIni
                     }
          }
         else {
-                if (angInicial>angOtro){
+                if (angInicial>normaliza(angOtro)){
                         this->pos->setX(centro->getX()+(cos(g2r(angFinal))*radio));
                         this->pos->setY(centro->getY()+(sin(g2r(angFinal))*radio));
                         this->ang = g2r(angFinal+90+(theta/2.0));
@@ -232,7 +232,13 @@ void Lapiz::arco(Punto2f * inicio, Punto2f * final, Punto2f *otro, int nlados, D
         angInicial= acos((inicio->getX() - centro->getX())/radio);
         angFinal= asin((final->getY() -  centro->getY())/radio);
         angOtro= asin((otro->getY() -  centro->getY())/radio);
-
+        if (centro->getY()>inicio->getY()){
+                angInicial = -angInicial;
+                }
+        if (centro->getX()>final->getX()){
+                angFinal = 180 - r2g(angFinal);
+                angFinal  = g2r(angFinal);
+        }
         arcoR2(centro, radio, nlados, r2g(angInicial), r2g(angOtro),r2g(angFinal), dl);
     //    this->poligonoR2(centro, radio, nlados, dl);
         delete A; //???
