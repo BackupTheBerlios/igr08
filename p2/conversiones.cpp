@@ -39,3 +39,14 @@ void parte(char * texto, GLfloat &n1, GLfloat &n2){
   n2 = Sn2.ToDouble();
 
 }
+
+
+GLfloat normaliza(GLfloat num){
+
+        if (num<0) {
+                return num+360;
+                }
+        else{
+                return num;
+                }
+}

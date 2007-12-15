@@ -14,5 +14,7 @@
 GLfloat r2g(GLfloat);
 GLfloat g2r(GLfloat);
 
+GLfloat normaliza(GLfloat);
+
 String redondea(GLfloat);
 void parte(char *, GLfloat &, GLfloat &);

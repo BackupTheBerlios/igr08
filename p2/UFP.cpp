@@ -294,7 +294,7 @@ switch (estado) {
                   }
 
                   if (cont==3) {
-                        AnsiString dato = 2;
+                        AnsiString dato = 200;
                         InputQuery("Solicitando datos",
                                 "Numero de iteraciones",
                                 dato);
