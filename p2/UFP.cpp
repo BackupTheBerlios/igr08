@@ -148,8 +148,14 @@ void __fastcall TGLForm2D::FormDestroy(TObject *Sender)
 
         delete pos_actual;
 
-    delete scene;
-    scene = NULL;
+        delete scene;
+        scene = NULL;
+
+        for (int i=0; i<cont; i++){
+                delete puntos[i];
+                puntos[i]= NULL;
+        }
+
 }
 //---------------------------------------------------------------------------
 
@@ -487,7 +493,7 @@ void __fastcall TGLForm2D::Arcos1Click(TObject *Sender)
 {
  estado = 2;
  dl = new DibujoLineas();
- scene -> inserta(dl);
+
 
  total_puntos = 3;
  cont = 0;

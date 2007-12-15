@@ -88,5 +88,6 @@ GLdouble Punto2f::distancia(Punto2f *otro){
         Punto2f * vectorDistancia = *otro - *this;
         GLdouble x = vectorDistancia->getX();
         GLdouble y = vectorDistancia->getY();
+        delete vectorDistancia;
         return (sqrt(x*x+y*y));
 }

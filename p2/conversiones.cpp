@@ -50,3 +50,6 @@ GLfloat normaliza(GLfloat num){
                 return num;
                 }
 }
+
+
+//GLdouble calculaApertura(GLdouble ai, GLdouble af){}

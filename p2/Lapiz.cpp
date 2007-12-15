@@ -152,8 +152,12 @@ void Lapiz::poligonoR2 (Punto2f * centro, GLfloat radio, int nlados, DibujoLinea
 
 //---------------------------------------------------------------------------
 void Lapiz::arcoR2 (Punto2f * centro, GLfloat radio, int nlados, GLdouble angInicial, GLdouble angOtro, GLdouble angFinal, DibujoLineas* dl){
-        GLdouble apertura;
-        apertura = max (angInicial, angFinal) - min (angInicial, angFinal);
+        GLdouble apertura, aIn, aFn, aOn;
+        aFn = normaliza (angFinal);
+        aIn = normaliza(angInicial);
+        aOn = normaliza(angOtro);
+        
+        apertura =  aFn -aIn;
         GLdouble alfa = apertura / (GLdouble) nlados;
         GLdouble beta = (180.0 - alfa) / 2.0;
         GLdouble gamma = 180 - 2*beta;
@@ -161,8 +165,8 @@ void Lapiz::arcoR2 (Punto2f * centro, GLfloat radio, int nlados, GLdouble angIni
         GLdouble theta = 180 - 2*beta;
  //       theta = angInicial +alfa;
         GLfloat cose =   cos(g2r(beta));
-        if (angInicial<angFinal){
-                if (angInicial<normaliza(angOtro)){
+        if (aIn<aFn){
+                if (aIn < aOn){
                         this->pos->setX(centro->getX()+(cos(g2r(angInicial))*radio));
                         this->pos->setY(centro->getY()+(sin(g2r(angInicial))*radio));
                         this->ang = g2r(angInicial+90+(theta/2.0));
@@ -174,7 +178,7 @@ void Lapiz::arcoR2 (Punto2f * centro, GLfloat radio, int nlados, GLdouble angIni
                     }
          }
         else {
-                if (angInicial>normaliza(angOtro)){
+                if (aIn>aOn){
                         this->pos->setX(centro->getX()+(cos(g2r(angFinal))*radio));
                         this->pos->setY(centro->getY()+(sin(g2r(angFinal))*radio));
                         this->ang = g2r(angFinal+90+(theta/2.0));
@@ -197,6 +201,7 @@ void Lapiz::arcoR3 (GLdouble lado,  int nlados, GLdouble theta, DibujoLineas* dl
         avanza(lado, true, s);
         gira (theta);
         dl->inserta(s);
+        delete s;
     }
 }
 //---------------------------------------------------------------------------
@@ -222,10 +227,11 @@ void Lapiz::arco(Punto2f * inicio, Punto2f * final, Punto2f *otro, int nlados, D
 
         Punto2f * BmenosA = *B-*A;
         Punto2f * aux2 = Vb->multiplicar(k2);
+        Punto2f * del = aux2;
         aux2= *BmenosA + *aux2;
         k1 = aux2->getX() / Va->getX();
-        aux2 = Va->multiplicar(k1);
-        Punto2f * centro = *A + *aux2;
+        Punto2f * aux3 = Va->multiplicar(k1);
+        Punto2f * centro = *A + *aux3;
         GLfloat radio = centro->distancia(inicio);
 
         GLfloat angInicial, angFinal, angOtro;
@@ -243,7 +249,16 @@ void Lapiz::arco(Punto2f * inicio, Punto2f * final, Punto2f *otro, int nlados, D
     //    this->poligonoR2(centro, radio, nlados, dl);
         delete A; //???
         delete B; //???
-
+        delete Vap;
+        delete Va;
+        delete Vbp;
+        delete Vb;
+        delete aux2;
+        delete aux3;
+        delete del;
+        delete BA;
+        delete BmenosA;
+        delete centro;
 //calcular mediatrices
         // calcular puntos medios
 /*            Punto2f * A = inicio ->puntoMedio(otro);
