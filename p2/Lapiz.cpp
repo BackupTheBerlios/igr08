@@ -151,25 +151,16 @@ void Lapiz::poligonoR2 (Punto2f * centro, GLfloat radio, int nlados, DibujoLinea
 }
 
 //---------------------------------------------------------------------------
-void Lapiz::arcoR2 (Punto2f * centro, GLfloat radio, int nlados, GLdouble angInicial, GLdouble angOtro, GLdouble angFinal, DibujoLineas* dl){
+void Lapiz::arcoR2 (Punto2f * centro, GLfloat radio, int nlados, GLdouble angInicial, GLdouble angOtro, GLdouble angFinal, DibujoLineas* dl, bool righthanded){
         GLdouble apertura, aIn, aFn, aOn, aPn;
         aFn = normaliza (angFinal);
         aIn = normaliza(angInicial);
         aOn = normaliza(angOtro);
-
-      //  apertura =  aFn -aIn;
-      //  aPn= normaliza(apertura);
-       aPn = calculaApertura (aIn, aFn, aOn);
-//        aPn = abs(aPn);
-//        GLdouble alfa = apertura / (GLdouble) nlados;
+        aPn = calculaApertura (aIn, aFn, aOn);
         GLdouble alfa = aPn / (GLdouble) nlados;
         GLdouble beta = (180.0 - alfa) / 2.0;
-   //     GLdouble gamma = 180 - 2*beta;
-
         GLdouble theta = 180 - 2*beta;
- //       theta = angInicial +alfa;
-       // GLfloat cose =   cos(g2r(beta));
-       if (girarDerecha(aOn, aIn, aFn)){
+       if (righthanded){
                 this->pos->setX(centro->getX()+(cos(g2r(angFinal))*radio));
                 this->pos->setY(centro->getY()+(sin(g2r(angFinal))*radio));
                 this->ang = g2r(angFinal+90+(theta/2.0));
@@ -262,7 +253,24 @@ void Lapiz::arco(Punto2f * inicio, Punto2f * final, Punto2f *otro, int nlados, D
         angFinal = centro->angulo2 (final);
         angOtro = centro -> angulo2 (otro);
 
-        arcoR2(centro, radio, nlados, angInicial, angOtro, angFinal, dl);
+        bool  righthanded, lefthanded;
+        GLdouble angOF, angIO, angX;
+        angIO = atan2(otro->getY()-inicio->getY(), otro->getX()-inicio->getX());
+        angOF = atan2(final->getY()-otro->getY(), final->getX()-otro->getX());
+        angIO = normaliza2(r2g(angIO));
+        angOF = normaliza2(r2g(angOF));
+        angX = angOF - angIO;
+        if (angX < 0.0) {
+                righthanded = true;
+                lefthanded = false;
+                }
+        if (angX > 0.0) {
+                lefthanded = true;
+                righthanded = false;
+                }
+
+
+        arcoR2(centro, radio, nlados, angInicial, angOtro, angFinal, dl, righthanded);
     //    this->poligonoR2(centro, radio, nlados, dl);
         delete A; //???
         delete B; //???

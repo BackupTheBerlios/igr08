@@ -57,15 +57,18 @@ GLfloat normaliza2(GLfloat ang){
         }
         else {
                 if (ang < -180) {
-                        ang_X += 360;
+                        ang += 360;
                 }
         }
+        return ang;
 
 }
 
 GLdouble calculaApertura(GLdouble ai, GLdouble af, GLdouble ao){
         GLdouble aPn;
-
+         ao = normaliza2 (ao);
+         ai = normaliza (ai);
+         af = normaliza (af);
          if ((ao<ai & ao>af) | (ao>ai & ao<af)){
                 aPn = max (ai, af)  - min (af, ai);
          }

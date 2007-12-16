@@ -15,6 +15,7 @@ GLfloat r2g(GLfloat);
 GLfloat g2r(GLfloat);
 
 GLfloat normaliza(GLfloat);
+GLfloat normaliza2(GLfloat ang);
 GLdouble calculaApertura(GLdouble ai, GLdouble af, GLdouble ao);
 bool girarDerecha (GLdouble otro, GLdouble inicio, GLdouble final);
 
