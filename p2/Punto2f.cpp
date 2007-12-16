@@ -91,3 +91,59 @@ GLdouble Punto2f::distancia(Punto2f *otro){
         delete vectorDistancia;
         return (sqrt(x*x+y*y));
 }
+
+GLdouble Punto2f::modulo(){
+        return (sqrt(x*x+y*y));
+}
+
+
+GLdouble Punto2f::angulo2(Punto2f *otro){
+            Punto2f * div = *otro-*this;
+            GLdouble retVal;
+            GLdouble tg = div->getX() / (GLdouble) div->getY();
+            retVal = atan(tg);
+            retVal = r2g(retVal);
+            if (otro->getX()< this->getX())
+            {
+                if (otro->getY()< this->getY()){
+                        retVal = 90+ (retVal*-1);
+                }
+                else {
+                        retVal = 90+ (retVal*-1);
+                }
+            }
+
+
+
+            delete div;
+            return retVal;
+}
+
+/*GLdouble Punto2f::angulo3(Punto2f *otro){
+            Punto2f * div = *this-*otro;
+            Punto2f * horizontal = new Punto2f(1000,0);
+            GLdouble dividendo = div->dot(horizontal);
+            GLdouble mod1, mod2;
+            mod1 = horizontal->modulo();
+            mod2 = otro->modulo();
+            GLdouble divisor = mod1 * mod2;
+
+            GLdouble retVal = r2g(acos(dividendo / divisor));
+            if ((div->getY()<0) & (div->getX()<0)){
+                retVal = retVal - 90;
+            }
+            if ((div->getY()>0) & (div->getX()<0)){
+                retVal = retVal + 90;
+            }
+
+            if ((div->getY()<0) & (div->getX()>0)){
+              //  retVal = retVal + 90;
+            }
+
+            if ((div->getY()>0) & (div->getX()>0)){
+                retVal = retVal +275;
+            }
+            delete div;
+            delete horizontal;
+            return retVal;
+}     */

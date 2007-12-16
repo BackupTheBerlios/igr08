@@ -6,6 +6,8 @@
 
 #include <gl\gl.h>
 #include <gl\glu.h>
+
+#include "conversiones.h"
 //---------------------------------------------------------------------------
 
 class Punto2f {
@@ -33,6 +35,8 @@ class Punto2f {
         Punto2f *  operator-(Punto2f);
         Punto2f *  multiplicar(GLdouble);
         Punto2f *  dividir(GLdouble);
+        GLdouble angulo2( Punto2f *otro);
+        GLdouble modulo();
 
         String toString();
         String toString2();

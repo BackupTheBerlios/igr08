@@ -741,7 +741,7 @@ scene->inserta(dib);
 delete lap;
 delete pi;*/
 
-
+/*
 DibujoLineas * dib = new DibujoLineas();
 Punto2f * centro = new Punto2f(0.0,0.0);
 Punto2f * inicio = new Punto2f(0.0,0.0);
@@ -752,8 +752,26 @@ inicio = new Punto2f(0.0,0.0);
 //lap->arcoR2 (centro, 60, 20, 160, 380,dib);
 lap->arco(inicio, final, otro, 2, dib);
 scene->inserta(dib);
-delete lap;
+delete lap;   */
+Punto2f * centro = new Punto2f(0.0,0.0);
+Punto2f * inicio = new Punto2f(30.0,40.0);
+ShowMessage (centro->angulo2(inicio));
+delete inicio; delete centro;
 
+ centro = new Punto2f(0.0,0.0);
+ inicio = new Punto2f(-30.0,40.0);
+ShowMessage (centro->angulo2(inicio));
+delete inicio; delete centro;
+
+ centro = new Punto2f(0.0,0.0);
+inicio = new Punto2f(30.0,-40.0);
+ShowMessage (centro->angulo2(inicio));
+delete inicio; delete centro;
+
+ centro = new Punto2f(0.0,0.0);
+inicio = new Punto2f(-30.0,-40.0);
+ShowMessage (centro->angulo2(inicio));
+delete inicio; delete centro;
 }
 //---------------------------------------------------------------------------
 

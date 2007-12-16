@@ -1,6 +1,6 @@
 object GLForm2D: TGLForm2D
-  Left = 542
-  Top = 120
+  Left = 615
+  Top = 116
   Width = 408
   Height = 434
   Caption = 'Lineas y Curvas'
