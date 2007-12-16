@@ -106,12 +106,22 @@ GLdouble Punto2f::angulo2(Punto2f *otro){
             if (otro->getX()< this->getX())
             {
                 if (otro->getY()< this->getY()){
-                        retVal = 90+ (retVal*-1);
+                        retVal = 180+ retVal;
                 }
                 else {
                         retVal = 90+ (retVal*-1);
                 }
             }
+
+            else {
+                if (otro->getY()< this->getY()){
+                        retVal = (90+ retVal)*-1;
+                }
+                else {
+                        retVal = 90-retVal;
+                }
+            }
+
 
 
 

@@ -310,6 +310,13 @@ switch (estado) {
                         lap->arco(puntos[0], puntos[1], puntos[2], nPasos, dl);
                         scene->inserta(dl);
                         delete lap;
+                        for (int i=0; i<cont; i++){
+                                delete puntos[i];
+                                puntos[i]= NULL;
+                        }
+                        estado = 0;
+                        cont = 0;
+
                         
                      /*   puntos[0] = new Punto2f(35.0,10.0); // Punto inicial
                         puntos[1] = new Punto2f(95.0,10.0); // punto final

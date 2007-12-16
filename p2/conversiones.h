@@ -15,6 +15,8 @@ GLfloat r2g(GLfloat);
 GLfloat g2r(GLfloat);
 
 GLfloat normaliza(GLfloat);
+GLdouble calculaApertura(GLdouble ai, GLdouble af, GLdouble ao);
+bool girarDerecha (GLdouble otro, GLdouble inicio, GLdouble final);
 
 String redondea(GLfloat);
 void parte(char *, GLfloat &, GLfloat &);

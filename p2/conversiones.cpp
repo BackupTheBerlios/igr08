@@ -51,5 +51,39 @@ GLfloat normaliza(GLfloat num){
                 }
 }
 
+GLfloat normaliza2(GLfloat ang){
+        if (ang > 180) {
+                ang -= 360;
+        }
+        else {
+                if (ang < -180) {
+                        ang_X += 360;
+                }
+        }
 
-//GLdouble calculaApertura(GLdouble ai, GLdouble af){}
+}
+
+GLdouble calculaApertura(GLdouble ai, GLdouble af, GLdouble ao){
+        GLdouble aPn;
+
+         if ((ao<ai & ao>af) | (ao>ai & ao<af)){
+                aPn = max (ai, af)  - min (af, ai);
+         }
+         else {
+               aPn = 360 - (ai - af);
+             }
+         return aPn;
+}
+
+
+bool girarDerecha (GLdouble otro, GLdouble inicio, GLdouble final){
+        GLdouble so = sin (g2r(otro));
+        GLdouble si = sin (g2r(inicio));
+        GLdouble sf = sin (g2r(final));
+        if (so > max(si, sf))
+                return true;
+        else return false; 
+
+}
+
+
