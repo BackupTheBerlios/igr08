@@ -163,7 +163,7 @@ void Lapiz::arcoR2 (Punto2f * centro, GLfloat radio, int nlados, GLdouble angIni
        if (righthanded){
                 this->pos->setX(centro->getX()+(cos(g2r(angFinal))*radio));
                 this->pos->setY(centro->getY()+(sin(g2r(angFinal))*radio));
-                this->ang = g2r(angFinal+90+(theta/2.0));
+                this->ang = g2r(angFinal+90-(theta/2.0));
        }
 
        else {
