@@ -337,18 +337,23 @@ void Lapiz::Casteljau(float t, Punto2f** puntos, Punto2f* p, int n) {
 
 void Lapiz::Bezier(Punto2f** puntos,int num_Puntos,int Num_Lados,DibujoLineas* dl) {
 
-   float t;
+   float ti, tj, incr;
    Punto2f* pos_actual;
    Segmento* s;
    pos_actual = NULL;
 
    // Punto Inicial
    Punto2f* p = new Punto2f(puntos[0]->getX(),puntos[0]->getY());
+   ti = 0.0;
+   tj = 1.0;
+   incr = (float) tj / Num_Lados;
 
-   for (int i=1; i<=Num_Lados; i++) {
-      t = (float) i/Num_Lados;
-      Casteljau(t,puntos,p,num_Puntos);
+   //for (int i=1; i<=Num_Lados; i++) {
+   while (ti<=tj) {
+      //t = (float) i/Num_Lados;
+      Casteljau(ti,puntos,p,num_Puntos);
 
+      ti += incr;
       if ( pos_actual== NULL)
          pos_actual = p->clon();
 
@@ -362,6 +367,148 @@ void Lapiz::Bezier(Punto2f** puntos,int num_Puntos,int Num_Lados,DibujoLineas* d
    }
 }
 
+/*
+
+int Lapiz::fact(int n) {
+
+  int num = 1;
+
+  if (n!=0)
+    for (int i=n; i>=1; i--)
+      num = num * i;
+
+  return num;
+}
+
+float Lapiz::elevado(float base, int exp) {
+
+   float res = (float) base;
+
+   for (int i=2; i<=exp; i++)
+     res = (float) res * base;
+
+   return res;
+}
+
+float Lapiz::BaseB(int n, int k, float t) {
+
+    float factorial = (float) fact(n) / (fact(k) * fact(n-k));
+
+    return (float) factorial * elevado(1-t,n-k) * elevado(t,n);
+
+}
+
+void Lapiz::Bezier(Punto2f** puntos,int Num_Puntos,int Num_Lados,DibujoLineas* dl) {
+
+   float xd, yd;
+   float ti, tj;
+   float v, incr;
+   Punto2f* pos_actual;
+   Punto2f* p;
+   Segmento* s;
+   pos_actual = NULL;
+
+   ti = 0.0;
+   tj = 1.0;
+
+   incr = (float) tj / Num_Lados;
+   //xd = puntos[0]->getX();
+   //yd = puntos[0]->getY();
+
+   while (ti<=tj) {
+     //t = (float) i / Num_Lados;
+     //xd = puntos[0]->getX();
+     //yd = puntos[0]->getY();
+     xd = 0;
+     yd = 0;
+
+     for (int k=0; k<Num_Puntos; k++) {
+        v = (float) BaseB(Num_Puntos,k,ti);
+        xd += puntos[k]->getX() * v;
+        //puntos[k]->setX(xd);
+        yd += puntos[k]->getY() * v;
+        //puntos[k]->setY(yd);
+     }
+
+     ti += incr;
+
+     p = new Punto2f(xd,yd);
+
+     if (pos_actual == NULL)
+       pos_actual = p->clon();
+
+     s = new Segmento(pos_actual, p);
+     dl->inserta(s);
+     delete pos_actual;
+     delete s;
+
+     pos_actual = p->clon();
+   }
+}
+*/
+
+float Lapiz::BaseN(float t) {
+
+   float res = 0.0;
+
+   if (0 <= t && t <= 1)
+      res = (float) t * t * (1/2.0);
+   else if (1 < t && t <= 2)
+          res = (float) (3/4.0) - (t - 3/2.0) * (t - 3/2.0);
+        else if (2 < t && t <= 3)
+               res = (float) (1/2.0) * (3.0 - t) * (3.0 - t);
+
+   return res;
+}
+
+
+void Lapiz::B_Splines(Punto2f** puntos,int num_Puntos,int Num_Lados,DibujoLineas* dl) {
+
+     int ind;
+     float ti, tj;
+     float v, incr;
+     float xd, yd;
+     Punto2f* pos_actual;
+     pos_actual = NULL;
+     Segmento* s;
+     Punto2f* p;
+
+     ti = 2.0;
+     tj = num_Puntos + 1;
+     incr = (float) (tj - 2) / Num_Lados;
+
+     // xd = puntos[0]->getX() * BaseN(ti-0);
+     // yd = puntos[0]->getY() * BaseN(ti-0);
+
+     //xd = 0;
+     //yd = 0;
+
+     while (ti<tj) {
+
+       xd = 0;
+       yd = 0;
+
+       for (int k=0; k<num_Puntos; k++) {
+          v = (float) BaseN(ti-k);
+          xd += puntos[k]->getX() * v;
+          yd += puntos[k]->getY() * v;
+       }
+       ti += incr;
+
+       p = new Punto2f(xd,yd);
+
+       if (pos_actual == NULL)
+         pos_actual = p->clon();
+
+       s = new Segmento(pos_actual, p);
+       dl->inserta(s);
+       delete pos_actual;
+       delete s;
+
+       pos_actual = p->clon();
+      }
+}
+/*
 double Lapiz::Base(float t, int i) {
 
     double base;
@@ -428,7 +575,7 @@ void Lapiz::B_Splines(Punto2f** puntos,int num_Puntos,int Num_Lados,DibujoLineas
 
      }
   }
-
+  */
 /*
 float Lapiz::Nudo(int i, int grado, int num_Puntos) {
 

@@ -657,23 +657,23 @@ void __fastcall TGLForm2D::CurvaBSplines1Click(TObject *Sender)
 {
  AnsiString Num_Puntos = "10";
  AnsiString Num_Lados = "30";
- AnsiString Grado_Suavidad = "3";
+ //AnsiString Grado_Suavidad = "3";
 
  if (InputQuery("Solicitando datos","Numero de puntos:",Num_Puntos)) {
     total_puntos = StrToInt(Num_Puntos);
     if (InputQuery("Solicitando datos","Numero de Lados:", Num_Lados)) {
        nPasos = StrToInt(Num_Lados);
-       if (InputQuery("Solicitando datos","Grado de Suavidad:", Grado_Suavidad)) {
+      // if (InputQuery("Solicitando datos","Grado de Suavidad:", Grado_Suavidad)) {
        estado = 6;
        cont = 0;
-       grado = StrToInt(Grado_Suavidad);
+       //grado = StrToInt(Grado_Suavidad);
        dl = new DibujoLineas();
        scene -> inserta(dl);
 
        for (int i=0; i<total_puntos; i++)
          puntos[i] = NULL;
        }
-   }
+  // }
  }
 }
 //---------------------------------------------------------------------------

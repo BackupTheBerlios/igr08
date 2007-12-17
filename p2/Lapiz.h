@@ -4,6 +4,8 @@
 
 #include "Punto2f.h"
 #include "Segmento.h"
+#include "Escena.h"
+#include "math.h"
 #include "DibujoLineas.h"
 #include "conversiones.h"
 //---------------------------------------------------------------------------
@@ -47,6 +49,10 @@ class Lapiz {
       //double Base(float, int, int, int);
       //float Nudo(int, int, int);
       double Base(float, int);
+      float BaseN(float);
+      //float BaseB(int, int, float);
+      //int fact(int);
+      //float elevado(float, int );
       void arco(Punto2f * centro, GLdouble radio, GLdouble angInicial, GLdouble angFinal, int nlados, DibujoLineas*);
 };
 
