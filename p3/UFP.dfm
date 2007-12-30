@@ -3,7 +3,7 @@ object GLForm2D: TGLForm2D
   Top = 191
   Width = 608
   Height = 630
-  Caption = 'Pimball'
+  Caption = 'Arkanoid'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
