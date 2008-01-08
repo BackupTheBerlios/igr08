@@ -6,6 +6,11 @@ USERES("glSkeleton.res");
 USEFORM("UFP.cpp", GLForm2D);
 USEUNIT("PV.cpp");
 USEUNIT("Conversiones.cpp");
+USEUNIT("Obstaculo.cpp");
+USEUNIT("Convexo.cpp");
+USEUNIT("Circulo.cpp");
+USEUNIT("Pelota.cpp");
+USEUNIT("Rectangulo.cpp");
 //---------------------------------------------------------------------------
 WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -13,7 +18,7 @@ WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
         {
                  Application->Initialize();
                  Application->CreateForm(__classid(TGLForm2D), &GLForm2D);
-                 Application->Run();
+         Application->Run();
         }
         catch (Exception &exception)
         {

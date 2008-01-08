@@ -4,7 +4,8 @@
   <MACROS>
     <VERSION value="BCB.05.03"/>
     <PROJECT value="glSkeleton.exe"/>
-    <OBJFILES value="glSkeleton.obj UFP.obj PV.obj Conversiones.obj"/>
+    <OBJFILES value="glSkeleton.obj UFP.obj PV.obj Conversiones.obj Obstaculo.obj Convexo.obj 
+      Circulo.obj Pelota.obj Rectangulo.obj"/>
     <RESFILES value="glSkeleton.res"/>
     <DEFFILE value=""/>
     <RESDEPEN value="$(RESFILES) UFP.dfm"/>

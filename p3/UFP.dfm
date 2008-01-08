@@ -13,4 +13,8 @@ object GLForm2D: TGLForm2D
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
+  object Timer1: TTimer
+    Left = 8
+    Top = 24
+  end
 end

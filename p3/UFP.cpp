@@ -102,3 +102,4 @@ void __fastcall TGLForm2D::FormKeyDown(TObject *Sender, WORD &Key,
     GLScene();
 }
 
+

@@ -7,6 +7,7 @@
 #include <Forms.hpp>
 #include <Dialogs.hpp>
 #include <Menus.hpp>
+#include <ExtCtrls.hpp>
 
 #include <gl\gl.h>
 #include <gl\glu.h>
@@ -14,6 +15,7 @@
 class TGLForm2D : public TForm  {
 
 __published:	// IDE-managed Components
+    TTimer *Timer1;
         void __fastcall FormCreate(TObject *Sender);
         void __fastcall FormResize(TObject *Sender);
         void __fastcall FormPaint(TObject *Sender);
