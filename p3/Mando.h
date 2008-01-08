@@ -1,16 +1,17 @@
 //---------------------------------------------------------------------------
 #include "Obstaculo.h"
-#ifndef RectanguloH
-#define RectanguloH
+#ifndef MandoH
+#define MandoH
 //---------------------------------------------------------------------------
-class Rectangulo : public Obstaculo{
+class Mando : public Obstaculo {
 
     public:
-        Rectangulo();
-        ~Rectangulo();
+        Mando();
+        ~Mando();
         void Pinta();
 
     private:
+
 
 };
 #endif

@@ -9,7 +9,6 @@ class Convexo : public Obstaculo{
         Convexo();
         ~Convexo();
         void Pinta();
-        
 
     private:
 

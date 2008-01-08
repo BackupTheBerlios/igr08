@@ -8,7 +8,8 @@
 TGLForm2D *GLForm2D;
 //---------------------------------------------------------------------------
 __fastcall TGLForm2D::TGLForm2D(TComponent* Owner)
-        : TForm(Owner) { }
+        : TForm(Owner)
+{}
 //---------------------------------------------------------------------------
 void __fastcall TGLForm2D::FormCreate(TObject *Sender)
 {
@@ -21,8 +22,10 @@ void __fastcall TGLForm2D::FormCreate(TObject *Sender)
     	ShowMessage("Could not MakeCurrent");
     //Cor de fondo de la ventana
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    // Distancia equidistante al centro
-    distancia = 200;
+
+    estado = false;
+
+    scene = NULL;
 }
 //---------------------------------------------------------------------------
 void __fastcall TGLForm2D::SetPixelFormatDescriptor()
@@ -58,8 +61,8 @@ void __fastcall TGLForm2D::FormResize(TObject *Sender)
   else RatioViewPort= (float)ClientWidth/(float)ClientHeight;
 
   // Llamamos a la función Resize de la Escena
-  // if (scene !=NULL) {
-  //  scene->Resize(ClientWidth,ClientHeight);
+  if (scene !=NULL)
+    scene->Resize(ClientWidth,ClientHeight);
 
   // Refrescamos
   GLScene();
@@ -72,8 +75,8 @@ glClear(GL_COLOR_BUFFER_BIT);
       glPointSize(3);
 
 // Comandos para dibujar la escena
-//if (scene !=NULL)
-//   scene->Pinta();
+if (scene != NULL)
+  scene->Dibuja();
 
 glFlush();
 SwapBuffers(hdc);
@@ -90,16 +93,29 @@ void __fastcall TGLForm2D::FormDestroy(TObject *Sender)
     wglMakeCurrent(NULL, NULL);
     wglDeleteContext(hrc);
 
-    // eliminar objetos creados
-    //    delete scene;
-    //    scene = NULL;
+    // Eliminar objetos creados
+    delete scene;
+    scene = NULL;
 }
 //---------------------------------------------------------------------------
+// Control del teclado
 void __fastcall TGLForm2D::FormKeyDown(TObject *Sender, WORD &Key,
       TShiftState Shift)
 {
-    //scene->teclado(Key);
-    GLScene();
+    if (!estado)
+      scene->Teclado(Key);
 }
+//---------------------------------------------------------------------------
+// Comienza la partida previa al juego
+// Timer para la animacion
+// Inicia la configuracion de la partida
+void __fastcall TGLForm2D::Nueva1Click(TObject *Sender)
+{
+  scene = NULL;
+  scene = new Escena(ClientWidth,ClientHeight);
+  GLScene();
+}
+//---------------------------------------------------------------------------
+
 
 

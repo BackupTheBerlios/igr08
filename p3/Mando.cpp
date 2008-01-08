@@ -1,25 +1,21 @@
 //---------------------------------------------------------------------------
 #include <vcl.h>
 #pragma hdrstop
-#include "Obstaculo.h"
+#include "Mando.h"
 //---------------------------------------------------------------------------
 // Constructora
-Obstaculo::Obstaculo() {
+Mando::Mando() : Obstaculo() {
 
 }
 
 // Destructora
-Obstaculo::~Obstaculo() {
+Mando::~Mando() {
 
 }
 
 // Metodo que pinta la pelota
-void Obstaculo::Pinta() {
+void Mando::Pinta() {
 
 }
 #pragma package(smart_init)
-
-
-
-
-
+ 
