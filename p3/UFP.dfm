@@ -1,8 +1,8 @@
 object GLForm2D: TGLForm2D
-  Left = 399
-  Top = 162
-  Width = 608
-  Height = 630
+  Left = 292
+  Top = 57
+  Width = 508
+  Height = 650
   Caption = 'Arkanoid'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET

@@ -5,7 +5,7 @@
 //---------------------------------------------------------------------------
 // Constructora
 Rectangulo::Rectangulo() : Obstaculo() {
-
+    
 }
 
 // Destructora

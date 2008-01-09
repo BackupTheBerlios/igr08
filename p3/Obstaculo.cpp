@@ -3,9 +3,15 @@
 #pragma hdrstop
 #include "Obstaculo.h"
 //---------------------------------------------------------------------------
-// Constructora
+// Constructora por defecto
 Obstaculo::Obstaculo() {
 
+}
+
+// Constructora con parametros
+Obstaculo::Obstaculo(PV pos,PV** vertices,int v) {
+     posicion = pos;
+     velocidad = v;
 }
 
 // Destructora

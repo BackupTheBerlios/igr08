@@ -7,6 +7,7 @@ class Obstaculo {
 
     public:
         Obstaculo();
+        Obstaculo(PV, PV**, int);
         ~Obstaculo();
 
         virtual void Pinta();
