@@ -1,6 +1,6 @@
 object GLForm2D: TGLForm2D
-  Left = 277
-  Top = 180
+  Left = 399
+  Top = 162
   Width = 608
   Height = 630
   Caption = 'Arkanoid'
@@ -13,6 +13,7 @@ object GLForm2D: TGLForm2D
   Menu = MainMenu1
   OldCreateOrder = False
   OnKeyDown = FormKeyDown
+  OnPaint = FormPaint
   PixelsPerInch = 96
   TextHeight = 13
   object Timer1: TTimer
@@ -33,7 +34,7 @@ object GLForm2D: TGLForm2D
       end
     end
     object Detalles1: TMenuItem
-      Caption = '&Obstaculos'
+      Caption = '&Obstáculos'
       object Convexo1: TMenuItem
         Caption = '&Convexos'
       end

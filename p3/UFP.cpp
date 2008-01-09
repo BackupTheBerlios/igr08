@@ -71,8 +71,7 @@ void __fastcall TGLForm2D::FormResize(TObject *Sender)
 void __fastcall TGLForm2D::GLScene()
 {
 glClear(GL_COLOR_BUFFER_BIT);
-      glLineWidth(2);
-      glPointSize(3);
+glClearColor(1.0,1.0,1.0,0.0);
 
 // Comandos para dibujar la escena
 if (scene != NULL)
