@@ -93,8 +93,10 @@ void __fastcall TGLForm2D::FormDestroy(TObject *Sender)
     wglDeleteContext(hrc);
 
     // Eliminar objetos creados
-    delete scene;
-    scene = NULL;
+   if (scene != NULL){
+      delete scene;
+      scene = NULL;
+   }
 }
 //---------------------------------------------------------------------------
 // Control del teclado
