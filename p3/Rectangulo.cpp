@@ -8,7 +8,7 @@ Rectangulo::Rectangulo() : Obstaculo() {
 
 }
 
-Rectangulo::Rectangulo(PV * poscicion, PV**vertices) : Obstaculo() {
+Rectangulo::Rectangulo(PV**vertices, PV * poscicion) : Obstaculo() {
 
 }
 
