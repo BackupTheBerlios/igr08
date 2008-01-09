@@ -15,8 +15,6 @@ Mando::Mando(PV** v, PV * posicion, int velocidad) : Obstaculo() {
       x= v[i]-> getX();
       y= v[i]-> getY();
       vertices[i] = new PV(x,y);
-//      vertices[i]->setX(x);
-//      vertices[i]->setY(y);
    }
 
 
@@ -28,7 +26,7 @@ Mando::~Mando() {
 
 // Metodo que pinta la pelota
 void Mando::Pinta() {
-glBegin(GL_LINES);
+glBegin(GL_POLYGON);
    for(int i=0; i<=3; i++){
       glVertex2d(vertices[i]->getX(),vertices[i]->getY());
    }

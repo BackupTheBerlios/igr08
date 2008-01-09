@@ -20,10 +20,15 @@ Escena::Escena(int CW, int CH){
 
         PV * p_Mando = new PV(10,50);
         PV** vertices= new PV*();
-        vertices[0]= new PV (400,400);
+/*        vertices[0]= new PV (400,400);
         vertices[1]= new PV (500,400);
         vertices[2]= new PV (500,450);
         vertices[3]= new PV (400,450);
+  */
+        vertices[0]= new PV (100,-120);
+        vertices[1]= new PV (150,-120);
+        vertices[2]= new PV (150,-150);
+        vertices[3]= new PV (100,-150);
 
         mando = new Mando(vertices, p_Mando, 1);
         pelota = new Pelota();
@@ -86,7 +91,8 @@ void Escena::Dibuja() {
 
     // Dibujamos las pareces
     glColor3f(1.0, 1.0, 0.0);
-    paredes->Pinta();
+//    paredes->Pinta();   <========
+/////////
     
     // Dibujamos la pelota
     glColor3f(1.0, 1.0, 1.0);
