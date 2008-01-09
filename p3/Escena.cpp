@@ -62,6 +62,7 @@ void Escena::Resize(int CW, int CH) {
 void Escena::Dibuja() {
     glClear(GL_COLOR_BUFFER_BIT);
 
+
     // Dibujamos los obstaculos fijos/moviles
     glColor3f(1.0, 0.0, 1.0);
     listaDeObstaculos ->inicia();
@@ -124,4 +125,37 @@ void Escena::Teclado(WORD& Key) {
   glLoadIdentity();
 }
 
+// Transforma a corrdenadas de la Escena
+void Escena::TransformarXY(PV * p){
+        GLdouble x_Aux;
+        GLdouble y_Aux;
+
+        x_Aux = convertirX(p->getX(), this->ClientWidth);
+        y_Aux = convertirY(p->getY(), this->ClientHeight);
+
+        p->setX(x_Aux);
+        p->setY(-y_Aux);
+}
+
+// Escala la coordenada X desde el P.Vista hasta el AVE
+GLdouble Escena::convertirX(int x, int ancho) {
+    GLdouble escalaAncho = (GLdouble)ancho/(xRight-xLeft);
+   // GLdouble centro =   (xLeft-xRight)/2.0;
+   if (xLeft <0)
+        return (x / (GLfloat) escalaAncho + xLeft);
+   else
+        return (x / (GLfloat) escalaAncho -  xLeft);
+
+}
+
+// Escala la coordenada Y desde el P.Vista hasta el AVE
+GLdouble Escena::convertirY(int y, int alto) {
+   GLdouble escalaAlto = (GLdouble)alto/(yTop-yBot);
+   // GLdouble centro =   (yBot-yTop)/2.0;
+   if (yTop<0)
+        return (y / (GLfloat) escalaAlto +  yTop);
+   else
+        return (y / (GLfloat) escalaAlto - yTop);
+
+}
 #pragma package(smart_init)

@@ -17,6 +17,7 @@ class Escena {
       void Dibuja();
 
       void InsertaObstaculo(Obstaculo *);
+      void TransformarXY(PV *);
       void Teclado(WORD&);
 
    private:
