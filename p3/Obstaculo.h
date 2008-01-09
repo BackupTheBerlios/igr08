@@ -7,25 +7,28 @@ class Obstaculo {
 
     public:
         Obstaculo();
-        Obstaculo(PV, PV**, int);
+        Obstaculo(PV*, PV**, int);
         ~Obstaculo();
 
         virtual void Pinta();
         bool getEsVisible(){return esVisible;}
         void setEsVisible(bool eV) {esVisible = eV;}
 
-        PV getPosicion() { return posicion; }
-        void setPosicion(PV punto) { posicion = punto; }
+        PV* getPosicion() { return posicion; }
+        void setPosicion(PV *punto) { posicion = punto->clon(); }
 
         int getVelocidad() { return velocidad; }
         void setVelocidad(int v) { velocidad = v;}
 
+    protected:
+        PV** vertices;
     private:
         bool esVisible;
-        PV** vertices;
+
         PV** normales;
-        PV posicion;
+        PV * posicion;
         int velocidad;
+        void calculaNormales();
 
 };
 

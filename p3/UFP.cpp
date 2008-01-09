@@ -24,8 +24,9 @@ void __fastcall TGLForm2D::FormCreate(TObject *Sender)
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
     estado = false;
-
     scene = NULL;
+
+    // Inicializar mando etc.
 }
 //---------------------------------------------------------------------------
 void __fastcall TGLForm2D::SetPixelFormatDescriptor()
@@ -100,7 +101,7 @@ void __fastcall TGLForm2D::FormDestroy(TObject *Sender)
 void __fastcall TGLForm2D::FormKeyDown(TObject *Sender, WORD &Key,
       TShiftState Shift)
 {
-    if (!estado)
+    if (estado)
       scene->Teclado(Key);
 }
 //---------------------------------------------------------------------------
@@ -109,7 +110,10 @@ void __fastcall TGLForm2D::FormKeyDown(TObject *Sender, WORD &Key,
 // Inicia la configuracion de la partida
 void __fastcall TGLForm2D::Nueva1Click(TObject *Sender)
 {
-  scene = NULL;
+   if (scene != NULL){
+      delete scene;
+      scene = NULL;
+   }
   scene = new Escena(ClientWidth,ClientHeight);
   GLScene();
 }

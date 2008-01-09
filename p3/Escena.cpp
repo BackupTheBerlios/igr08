@@ -17,7 +17,15 @@ Escena::Escena(int CW, int CH){
         estado = false;
 
         paredes = new Rectangulo();
-        mando = new Mando();
+
+        PV * p_Mando = new PV(10,50);
+        PV** vertices= new PV*();
+        vertices[0]= new PV (400,400);
+        vertices[1]= new PV (500,400);
+        vertices[2]= new PV (500,450);
+        vertices[3]= new PV (400,450);
+
+        mando = new Mando(vertices, p_Mando, 1);
         pelota = new Pelota();
 }
 
@@ -102,14 +110,14 @@ void Escena::Teclado(WORD& Key) {
 
   // Mueve mando hacia derecha
   if (Key == VK_RIGHT) {
-     PV pos_Nueva = PV(mando->getPosicion().getX() + mando->getVelocidad(), mando->getPosicion().getY());
-     mando->setPosicion(pos_Nueva);
+     PV pos_Nueva = PV(mando->getPosicion()->getX() + mando->getVelocidad(), mando->getPosicion()->getY());
+     mando->setPosicion(&pos_Nueva);
   }
 
   // Mueve mando hacia izquierda
   if (Key == VK_LEFT) {
-     PV pos_Nueva = PV(mando->getPosicion().getX() - mando->getVelocidad(), mando->getPosicion().getY());
-     mando->setPosicion(pos_Nueva);
+     PV pos_Nueva = PV(mando->getPosicion()->getX() - mando->getVelocidad(), mando->getPosicion()->getY());
+     mando->setPosicion(&pos_Nueva);
   }
 
   // Tecla A -> Acercamos

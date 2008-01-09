@@ -5,11 +5,11 @@
 //---------------------------------------------------------------------------
 // Constructora por defecto
 Obstaculo::Obstaculo() {
-
+   vertices = new PV*();
 }
 
 // Constructora con parametros
-Obstaculo::Obstaculo(PV pos,PV** vertices,int v) {
+Obstaculo::Obstaculo(PV* pos,PV** vertices,int v) {
      posicion = pos;
      velocidad = v;
 }
