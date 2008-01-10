@@ -1,6 +1,7 @@
 //---------------------------------------------------------------------------
 #include "Obstaculo.h"
-#include "Lista.h"
+#include <list.h>
+//#include "Lista.h"
 #include "Pelota.h"
 #include "Mando.h"
 #include "Rectangulo.h"
@@ -25,7 +26,7 @@ class Escena {
       GLfloat yTop, yBot;
       int ClientWidth, ClientHeight;
       float ratioViewPort;
-      Lista<Obstaculo> * listaDeObstaculos;
+      list <Obstaculo> * listaDeObstaculos;
       bool estado;
 
       Mando * mando;

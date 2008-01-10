@@ -32,6 +32,7 @@ __published:	// IDE-managed Components
         void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
           TShiftState Shift);
         void __fastcall Nueva1Click(TObject *Sender);
+        void __fastcall Iniciar1Click(TObject *Sender);
 
 private:	// User declarations
  HDC hdc;

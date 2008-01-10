@@ -5,8 +5,8 @@
 //---------------------------------------------------------------------------
 // Constructora por defecto
 Escena::Escena(int CW, int CH){
-        listaDeObstaculos = new Lista <Obstaculo>();
-        listaDeObstaculos -> inicia();
+        listaDeObstaculos = new list <Obstaculo>();
+//        listaDeObstaculos -> inicia();
         ratioViewPort = 1.0;
         xRight =  CW / 2;
         xLeft  = -xRight;
@@ -47,7 +47,7 @@ Escena::Escena(int CW, int CH){
         vert_Mando[2]= new PV (150,-150);
         vert_Mando[3]= new PV (100,-150);
 
-        mando = new Mando(vert_Mando, pos_Mando, 1);
+        mando = new Mando(vert_Mando, pos_Mando, 10);
         pelota = new Pelota();
 }
 
@@ -95,6 +95,14 @@ void Escena::Dibuja() {
 
     // Dibujamos los obstaculos fijos/moviles
     glColor3f(1.0, 0.0, 1.0);
+
+    list<Obstaculo>::iterator it;
+    for( it = listaDeObstaculos->begin(); it != listaDeObstaculos->end(); it++ ) {
+         if (it->getEsVisible()){
+                 it->Pinta();
+         }
+    }
+    /*
     listaDeObstaculos ->inicia();
     while(!listaDeObstaculos->final()){
        if (listaDeObstaculos->getActual()->getEsVisible()) {
@@ -102,6 +110,7 @@ void Escena::Dibuja() {
          listaDeObstaculos->avanza();
        }
     }
+    */
     // Dibujamos el mando
     glColor3f(0.0, 1.0, 0.0);
     mando->Pinta();
@@ -125,7 +134,8 @@ void Escena::Dibuja() {
 
 // Insertamos un obstaculo fijo/movil en la Escena
 void Escena::InsertaObstaculo(Obstaculo * objeto) {
-    listaDeObstaculos->inserta(objeto);
+//    listaDeObstaculos->inserta(objeto);
+    listaDeObstaculos->push_front(*objeto);
 }
 
 // Controles de movimiento
@@ -143,17 +153,18 @@ void Escena::Teclado(WORD& Key) {
      mando->setPosicion(&pos_Nueva);
   }
 
-  // Tecla A -> Acercamos
+  // Tecla P -> Pausar el juego
   if (Key == 'p' | Key == 'P') {
         // pausar el juego
   }
-
+  this->Dibuja();
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   gluOrtho2D(xLeft,xRight,yBot,yTop);
 
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
+
 }
 
 // Transforma a corrdenadas de la Escena

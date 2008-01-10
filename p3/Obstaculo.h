@@ -22,12 +22,13 @@ class Obstaculo {
 
     protected:
         PV** vertices;
+        PV * posicion;
+        int velocidad;
     private:
         bool esVisible;
 
         PV** normales;
-        PV * posicion;
-        int velocidad;
+
         void calculaNormales();
 
 };

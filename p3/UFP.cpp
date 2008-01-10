@@ -123,3 +123,9 @@ void __fastcall TGLForm2D::Nueva1Click(TObject *Sender)
 
 
 
+void __fastcall TGLForm2D::Iniciar1Click(TObject *Sender)
+{
+estado = true;        
+}
+//---------------------------------------------------------------------------
+

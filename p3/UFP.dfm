@@ -31,6 +31,7 @@ object GLForm2D: TGLForm2D
       end
       object Iniciar1: TMenuItem
         Caption = '&Iniciar'
+        OnClick = Iniciar1Click
       end
       object Salir1: TMenuItem
         Caption = '&Salir'

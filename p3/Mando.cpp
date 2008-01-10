@@ -8,7 +8,7 @@ Mando::Mando() : Obstaculo() {
 
 }
 
-Mando::Mando(PV** v, PV * posicion, int velocidad) : Obstaculo() {
+Mando::Mando(PV** v, PV * pos, int vel) : Obstaculo() {
        GLdouble x, y;
 
    for(int i=0; i<=3; i++){
@@ -16,12 +16,16 @@ Mando::Mando(PV** v, PV * posicion, int velocidad) : Obstaculo() {
       y= v[i]-> getY();
       vertices[i] = new PV(x,y);
    }
+   posicion = pos;
+   velocidad = vel;
 
 
 }
 // Destructora
 Mando::~Mando() {
-
+   for(int i=0; i<=3; i++){
+      delete vertices[i];
+   }
 }
 
 // Metodo que pinta la pelota
