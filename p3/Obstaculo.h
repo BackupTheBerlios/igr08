@@ -1,5 +1,6 @@
 //---------------------------------------------------------------------------
 #include "PV.h"
+#include <list.h>
 #ifndef ObstaculoH
 #define ObstaculoH
 //---------------------------------------------------------------------------
@@ -21,11 +22,13 @@ class Obstaculo {
         void setVelocidad(int v) { velocidad = v;}
 
     protected:
-        PV** vertices;
+        list <PV> * vertices;
+      //  PV** vertices;
         PV * posicion;
         int velocidad;
-    private:
         bool esVisible;
+    private:
+
 
         PV** normales;
 

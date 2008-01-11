@@ -20,10 +20,13 @@ Rectangulo::~Rectangulo() {
 // Metodo que pinta las paredes
 void Rectangulo::Pinta() {
 glBegin(GL_LINES);
-   for(int i=0; i<=3; i++){
+/*   for(int i=0; i<=3; i++){
       glVertex2d(vertices[i]->getX(),vertices[i]->getY());
-//      glVertex2d(1.1, 20.321);
-   }
+   }*/
+   list<PV>::iterator it;
+    for( it = vertices->begin(); it != vertices->end(); it++ ) {
+         glVertex2d(it->getX(), it->getY());
+    }
 glEnd();
 }
 #pragma package(smart_init)

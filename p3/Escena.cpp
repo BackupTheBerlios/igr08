@@ -17,9 +17,10 @@ Escena::Escena(int CW, int CH){
         estado = false;
 
         PV * pos_Rectangulo = new PV(10,50);
-        PV** vert_Rectangulo = new PV*();
-
-        vert_Rectangulo[0]= new PV (10,-10);
+//        PV** vert_Rectangulo = new PV*();
+        list <PV> * vert_Rectangulo = new list <PV>();
+        PV pv;
+     /*   vert_Rectangulo[0]= new PV (10,-10);
         vert_Rectangulo[1]= new PV (11,-11);
         vert_Rectangulo[2]= new PV (10,-12);
         vert_Rectangulo[3]= new PV (10,-13);
@@ -35,17 +36,19 @@ Escena::Escena(int CW, int CH){
 ///     ...
         vert_Rectangulo[0]= new PV (10,-10);
 
-
-        paredes = new Rectangulo(vert_Rectangulo, pos_Rectangulo);
+      */
+     //   paredes = new Rectangulo(vert_Rectangulo, pos_Rectangulo);
 
 ////////////////////////////////
         PV * pos_Mando = new PV(10,50);
-        PV** vert_Mando = new PV*();
+    //    PV** vert_Mando = new PV*();
+        list <PV> * vert_Mando = new list <PV>();
 
-        vert_Mando[0]= new PV (100,-120);
-        vert_Mando[1]= new PV (150,-120);
-        vert_Mando[2]= new PV (150,-150);
-        vert_Mando[3]= new PV (100,-150);
+        pv = PV (100,-120);
+        vert_Mando ->push_front(PV(100,-120));
+        vert_Mando ->push_front(PV (150,-120));
+        vert_Mando ->push_front(PV (150,-150));
+        vert_Mando ->push_front(PV (100,-150));
 
         mando = new Mando(vert_Mando, pos_Mando, 10);
         pelota = new Pelota();

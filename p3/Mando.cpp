@@ -8,14 +8,10 @@ Mando::Mando() : Obstaculo() {
 
 }
 
-Mando::Mando(PV** v, PV * pos, int vel) : Obstaculo() {
+Mando::Mando(list<PV>* v, PV * pos, int vel) : Obstaculo() {
        GLdouble x, y;
 
-   for(int i=0; i<=3; i++){
-      x= v[i]-> getX();
-      y= v[i]-> getY();
-      vertices[i] = new PV(x,y);
-   }
+   vertices = v;
    posicion = pos;
    velocidad = vel;
 
@@ -23,17 +19,19 @@ Mando::Mando(PV** v, PV * pos, int vel) : Obstaculo() {
 }
 // Destructora
 Mando::~Mando() {
-   for(int i=0; i<=3; i++){
-      delete vertices[i];
-   }
+   delete vertices;
 }
 
-// Metodo que pinta la pelota
+//Pintar el mando
 void Mando::Pinta() {
+int x, y;
 glBegin(GL_POLYGON);
-   for(int i=0; i<=3; i++){
-      glVertex2d(vertices[i]->getX(),vertices[i]->getY());
-   }
+   list<PV>::iterator it;
+    for( it = vertices->begin(); it != vertices->end(); it++ ) {
+        x = it->getX();
+        y = it->getY();
+         glVertex2d(x, y);
+    }
 glEnd();
 
 

@@ -8,7 +8,8 @@ class Mando : public Obstaculo {
     public:
         Mando();
         ~Mando();
-        Mando(PV**, PV *, int);
+        Mando(list<PV>*, PV *, int);
+//        Mando(PV**, PV *, int);
         void Pinta();
 
     private:
