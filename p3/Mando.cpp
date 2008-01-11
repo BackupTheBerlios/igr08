@@ -24,17 +24,19 @@ Mando::~Mando() {
 
 //Pintar el mando
 void Mando::Pinta() {
-int x, y;
-glBegin(GL_POLYGON);
-   list<PV>::iterator it;
-    for( it = vertices->begin(); it != vertices->end(); it++ ) {
-        x = it->getX();
-        y = it->getY();
-         glVertex2d(x, y);
-    }
-glEnd();
-
-
+        glBegin(GL_POLYGON);
+            list<PV>::iterator it;
+            for( it = vertices->begin(); it != vertices->end(); it++ ) {
+                glVertex2d(it->getX(), it->getY());
+                }
+        glEnd();
+}
+void Mando::Mueve (PV mov) {
+        list<PV>::iterator it;
+        for( it = vertices->begin(); it != vertices->end(); it++ ) {
+                it->setX(it->getX()+mov.getX());
+                it->setY(it->getY()+mov.getY());
+        }
 }
 #pragma package(smart_init)
  

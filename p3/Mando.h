@@ -11,6 +11,7 @@ class Mando : public Obstaculo {
         Mando(list<PV>*, PV *, int);
 //        Mando(PV**, PV *, int);
         void Pinta();
+        void Mueve(PV);
 
     private:
 

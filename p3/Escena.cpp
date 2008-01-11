@@ -146,14 +146,16 @@ void Escena::Teclado(WORD& Key) {
 
   // Mueve mando hacia derecha
   if (Key == VK_RIGHT) {
-     PV pos_Nueva = PV(mando->getPosicion()->getX() + mando->getVelocidad(), mando->getPosicion()->getY());
-     mando->setPosicion(&pos_Nueva);
+/*     PV pos_Nueva = PV(mando->getPosicion()->getX() + mando->getVelocidad(), mando->getPosicion()->getY());
+     mando->setPosicion(&pos_Nueva);*/
+     mando->Mueve(PV(10,0));
   }
 
   // Mueve mando hacia izquierda
   if (Key == VK_LEFT) {
-     PV pos_Nueva = PV(mando->getPosicion()->getX() - mando->getVelocidad(), mando->getPosicion()->getY());
-     mando->setPosicion(&pos_Nueva);
+/*     PV pos_Nueva = PV(mando->getPosicion()->getX() - mando->getVelocidad(), mando->getPosicion()->getY());
+     mando->setPosicion(&pos_Nueva);*/
+     mando->Mueve(PV(-10,0));
   }
 
   // Tecla P -> Pausar el juego
