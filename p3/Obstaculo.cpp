@@ -10,9 +10,8 @@ Obstaculo::Obstaculo() {
 }
 
 // Constructora con parametros
-Obstaculo::Obstaculo(PV* pos,PV** vertices,int v) {
-     posicion = pos;
-     velocidad = v;
+Obstaculo::Obstaculo(list<PV>* lv) {
+        vertices = lv;
 }
 
 // Destructora
@@ -20,8 +19,7 @@ Obstaculo::~Obstaculo() {
 
 }
 
-// Metodo que pinta la pelota
-void Obstaculo::Pinta() {
+void Obstaculo::Pinta(){
 
 }
 #pragma package(smart_init)

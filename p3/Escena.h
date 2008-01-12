@@ -5,6 +5,8 @@
 #include "Pelota.h"
 #include "Mando.h"
 #include "Rectangulo.h"
+#include "Lapiz.h"
+#include "Convexo.h"
 #ifndef EscenaH
 #define EscenaH
 //---------------------------------------------------------------------------

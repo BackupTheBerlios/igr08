@@ -14,6 +14,7 @@ class Mando : public Obstaculo {
         void Mueve(PV);
 
     private:
+        int velocidad;
 
 
 };

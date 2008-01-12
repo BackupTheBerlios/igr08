@@ -4,15 +4,7 @@
 
 #include "conversiones.h"
 //---------------------------------------------------------------------------
-// Convertir GRADOS a RADIANES
-GLdouble r2g(GLdouble radianes){
-    return radianes * 180.0 / M_PI;
-}
 
-// Convertir RADIANES a GRADOS
-GLdouble g2r(GLdouble grados){
-    return grados *  M_PI / 180.0;
-}
 
 // Normaliza los numeros negativos
 GLfloat normaliza(GLfloat num){

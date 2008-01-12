@@ -45,8 +45,12 @@ Escena::Escena(int CW, int CH){
 
         // Cargamos los obstaculos
         Obstaculo a;
-        
-
+        PV * pl = new PV(100,100);
+        Lapiz * l = new Lapiz(pl, 0);
+        list<PV>* listaVertices_Obstaculo = new list<PV>();
+        l->poligonoR1(50,5,listaVertices_Obstaculo);
+        Convexo * c1 = new Convexo(listaVertices_Obstaculo);
+        listaDeObstaculos-> push_front(*c1);
 
         // Cargamos la pelota
         pelota = new Pelota();
@@ -62,6 +66,7 @@ Escena::Escena(int CW, int CH){
 // Destructora de clase
 Escena::~Escena(){
         delete listaDeObstaculos;
+        delete pelota;
 }
 
 // Metodo Resize de la Escena

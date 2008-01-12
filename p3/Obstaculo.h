@@ -8,7 +8,7 @@ class Obstaculo {
 
     public:
         Obstaculo();
-        Obstaculo(PV*, PV**, int);
+        Obstaculo(list<PV>*);
         ~Obstaculo();
 
         virtual void Pinta();
@@ -18,14 +18,14 @@ class Obstaculo {
         PV* getPosicion() { return posicion; }
         void setPosicion(PV *punto) { posicion = punto->clon(); }
 
-        int getVelocidad() { return velocidad; }
-        void setVelocidad(int v) { velocidad = v;}
+  //      int getVelocidad() { return velocidad; }
+//        void setVelocidad(int v) { velocidad = v;}
 
     protected:
         list <PV> * vertices;
       //  PV** vertices;
         PV * posicion;
-        int velocidad;
+//       int velocidad;
         bool esVisible;
     private:
 

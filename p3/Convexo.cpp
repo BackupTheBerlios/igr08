@@ -9,6 +9,10 @@ Convexo::Convexo() : Obstaculo() {
 
 }
 
+Convexo::Convexo(list<PV>* listaVertices): Obstaculo(listaVertices){
+
+}
+
 // Destructora
 Convexo::~Convexo() {
 
