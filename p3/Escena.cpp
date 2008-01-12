@@ -16,42 +16,35 @@ Escena::Escena(int CW, int CH){
         ClientHeight = CH;
         estado = false;
 
-        PV * pos_Rectangulo = new PV(10,50);
-//        PV** vert_Rectangulo = new PV*();
+
+        // Cargamos las paredes que limitan el espacio del juego
+        PV * pos_Rectangulo = new PV(xRight,yTop);
+        TransformarXY(pos_Rectangulo);
+
         list <PV> * vert_Rectangulo = new list <PV>();
-        PV pv;
-     /*   vert_Rectangulo[0]= new PV (10,-10);
-        vert_Rectangulo[1]= new PV (11,-11);
-        vert_Rectangulo[2]= new PV (10,-12);
-        vert_Rectangulo[3]= new PV (10,-13);
-        vert_Rectangulo[4]= new PV (10,-14);
-        vert_Rectangulo[5]= new PV (10,-15);
-        vert_Rectangulo[6]= new PV (10,-16);
-        vert_Rectangulo[7]= new PV (10,-17);
-        vert_Rectangulo[8]= new PV (10,-10);
-        vert_Rectangulo[9]= new PV (10,-10);
-        vert_Rectangulo[10]= new PV (10,-10);
-        vert_Rectangulo[11]= new PV (10,-10);
-        vert_Rectangulo[12]= new PV (10,-10);
-///     ...
-        vert_Rectangulo[0]= new PV (10,-10);
 
-      */
-     //   paredes = new Rectangulo(vert_Rectangulo, pos_Rectangulo);
+        vert_Rectangulo->push_front(PV (pos_Rectangulo->getX() - 225, pos_Rectangulo->getY() + 280));
+        vert_Rectangulo->push_front(PV (pos_Rectangulo->getX() + 225, pos_Rectangulo->getY() + 280));
+        vert_Rectangulo->push_front(PV (pos_Rectangulo->getX() + 225, pos_Rectangulo->getY() - 300));
+        vert_Rectangulo->push_front(PV (pos_Rectangulo->getX() - 225, pos_Rectangulo->getY() - 300));
 
-////////////////////////////////
+
+        paredes = new Rectangulo(vert_Rectangulo, pos_Rectangulo);
+
+        // Cargamos el mando
         PV * pos_Mando = new PV(250,550);
         TransformarXY(pos_Mando);
-    //    PV** vert_Mando = new PV*();
+
         list <PV> * vert_Mando = new list <PV>();
 
-        //pv = PV (100,-120);
-        vert_Mando ->push_front(PV(pos_Mando->getX() - 40,pos_Mando->getY() + 10));
-        vert_Mando ->push_front(PV(pos_Mando->getX() + 40,pos_Mando->getY() + 10));
-        vert_Mando ->push_front(PV(pos_Mando->getX() + 40,pos_Mando->getY() - 10));
-        vert_Mando ->push_front(PV(pos_Mando->getX() - 40,pos_Mando->getY() - 10));
+        vert_Mando ->push_front(PV(pos_Mando->getX() - 40, pos_Mando->getY() + 10));
+        vert_Mando ->push_front(PV(pos_Mando->getX() + 40, pos_Mando->getY() + 10));
+        vert_Mando ->push_front(PV(pos_Mando->getX() + 40, pos_Mando->getY() - 10));
+        vert_Mando ->push_front(PV(pos_Mando->getX() - 40, pos_Mando->getY() - 10));
 
         mando = new Mando(vert_Mando, pos_Mando, 10);
+
+        // Cargamos la pelota
         pelota = new Pelota();
 
         glMatrixMode(GL_PROJECTION);
@@ -127,9 +120,8 @@ void Escena::Dibuja() {
 
     // Dibujamos las paredes
     glColor3f(1.0, 1.0, 0.0);
-//    paredes->Pinta();   <======== Incializar array de vertices de las paredes
-/////////
-    
+    paredes->Pinta();
+
     // Dibujamos la pelota
     glColor3f(1.0, 1.0, 1.0);
     if (!estado)

@@ -9,7 +9,6 @@ Mando::Mando() : Obstaculo() {
 }
 
 Mando::Mando(list<PV>* v, PV * pos, int vel) : Obstaculo() {
-       GLdouble x, y;
 
    vertices = v;
    posicion = pos;

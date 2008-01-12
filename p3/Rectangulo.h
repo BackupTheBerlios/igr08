@@ -7,8 +7,8 @@ class Rectangulo : public Obstaculo{
 
     public:
         Rectangulo();
-        Rectangulo(PV**vertices, PV * poscicion);
-        Rectangulo(PV * poscicion, PV**vertices);
+        Rectangulo(list<PV>*, PV *);
+
         ~Rectangulo();
         void Pinta();
 

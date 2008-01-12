@@ -9,7 +9,7 @@ class Mando : public Obstaculo {
         Mando();
         ~Mando();
         Mando(list<PV>*, PV *, int);
-//        Mando(PV**, PV *, int);
+
         void Pinta();
         void Mueve(PV);
 
