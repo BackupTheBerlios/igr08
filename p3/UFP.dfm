@@ -15,6 +15,7 @@ object GLForm2D: TGLForm2D
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
+  OnMouseDown = FormMouseDown
   OnPaint = FormPaint
   OnResize = FormResize
   PixelsPerInch = 96
@@ -41,6 +42,7 @@ object GLForm2D: TGLForm2D
       Caption = '&Obstáculos'
       object Convexo1: TMenuItem
         Caption = '&Convexos'
+        OnClick = Convexo1Click
       end
       object Circulos1: TMenuItem
         Caption = '&Circulos'

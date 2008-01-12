@@ -23,7 +23,8 @@ void __fastcall TGLForm2D::FormCreate(TObject *Sender)
     //Cor de fondo de la ventana
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-    estado = false;
+    estado = 0;
+    play = false;
     scene = NULL;
 
     // Inicializar mando etc.
@@ -103,7 +104,7 @@ void __fastcall TGLForm2D::FormDestroy(TObject *Sender)
 void __fastcall TGLForm2D::FormKeyDown(TObject *Sender, WORD &Key,
       TShiftState Shift)
 {
-    if (estado)
+    if (play)
       scene->Teclado(Key);
     GLScene();
 }
@@ -117,14 +118,67 @@ void __fastcall TGLForm2D::Nueva1Click(TObject *Sender)
       delete scene;
       scene = NULL;
    }
-  estado = false;
+  play = false;
+  estado = 1;
   scene = new Escena(ClientWidth,ClientHeight);
   GLScene();
 }
 //---------------------------------------------------------------------------
 void __fastcall TGLForm2D::Iniciar1Click(TObject *Sender)
 {
-estado = true;        
+play = true;
+}
+//---------------------------------------------------------------------------
+void __fastcall TGLForm2D::Convexo1Click(TObject *Sender)
+{
+  if (estado == 1) {
+  AnsiString dato = "10";
+
+  if (InputQuery("Solicitando datos","Numero de Lados:",dato)) {
+    nLados = StrToInt(dato);
+    if (InputQuery("Solicitando datos","Logitud del Lado:",dato)) {
+        longLado = StrToInt(dato);
+        Application->MessageBox("Elige el centro","Poligono Convexo",MB_OK);
+        estado = 2;
+     }
+   }
+}
+}
+//---------------------------------------------------------------------------
+// Seleccion de posision e inserccion de obstaculos
+void __fastcall TGLForm2D::FormMouseDown(TObject *Sender,
+      TMouseButton Button, TShiftState Shift, int X, int Y)
+{
+ PV * p;
+ p = NULL;
+ PV * pos_actual;
+
+ switch (estado) {
+        case 2: { // Poligonos convexos
+                  p = new PV(X,Y);
+                  scene->TransformarXY(p);
+                  if (pos_actual== NULL)
+                     pos_actual = p->clon();
+                  break;
+                }
+
+        case 3: { // Poligonos convexos
+                  p = new PV(X,Y);
+                  scene->TransformarXY(p);
+                  if (pos_actual== NULL)
+                     pos_actual = p->clon();
+                  break;
+                }
+
+        default: break;
+ }
+
+
+ if (p != NULL) {
+    delete p;
+    p = NULL;
+ }
+
 }
 //---------------------------------------------------------------------------
 

@@ -12,6 +12,7 @@
 #include <gl\gl.h>
 #include <gl\glu.h>
 #include "Escena.h"
+#include "PV.h"
 //---------------------------------------------------------------------------
 class TGLForm2D : public TForm  {
 
@@ -33,6 +34,9 @@ __published:	// IDE-managed Components
           TShiftState Shift);
         void __fastcall Nueva1Click(TObject *Sender);
         void __fastcall Iniciar1Click(TObject *Sender);
+        void __fastcall Convexo1Click(TObject *Sender);
+        void __fastcall FormMouseDown(TObject *Sender, TMouseButton Button,
+          TShiftState Shift, int X, int Y);
 
 private:	// User declarations
  HDC hdc;
@@ -42,11 +46,16 @@ private:	// User declarations
  // Guarda el radio del puerto de vista
  GLfloat RatioViewPort;
 
- // Estado
- bool estado;
+ // Estado de partida
+ bool play;
 
  // Escena
  Escena* scene;
+
+ // Variables auxiliares
+ int estado;
+ int nLados;
+ int longLado;
 
  // Métodos privados
  void __fastcall SetPixelFormatDescriptor();
