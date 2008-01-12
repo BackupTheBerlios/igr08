@@ -105,6 +105,7 @@ void __fastcall TGLForm2D::FormKeyDown(TObject *Sender, WORD &Key,
 {
     if (estado)
       scene->Teclado(Key);
+    GLScene();
 }
 //---------------------------------------------------------------------------
 // Comienza la partida previa al juego
@@ -116,13 +117,11 @@ void __fastcall TGLForm2D::Nueva1Click(TObject *Sender)
       delete scene;
       scene = NULL;
    }
+  estado = false;
   scene = new Escena(ClientWidth,ClientHeight);
   GLScene();
 }
 //---------------------------------------------------------------------------
-
-
-
 void __fastcall TGLForm2D::Iniciar1Click(TObject *Sender)
 {
 estado = true;        

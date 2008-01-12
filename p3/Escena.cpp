@@ -40,18 +40,26 @@ Escena::Escena(int CW, int CH){
      //   paredes = new Rectangulo(vert_Rectangulo, pos_Rectangulo);
 
 ////////////////////////////////
-        PV * pos_Mando = new PV(10,50);
+        PV * pos_Mando = new PV(250,550);
+        TransformarXY(pos_Mando);
     //    PV** vert_Mando = new PV*();
         list <PV> * vert_Mando = new list <PV>();
 
-        pv = PV (100,-120);
-        vert_Mando ->push_front(PV(100,-120));
-        vert_Mando ->push_front(PV (150,-120));
-        vert_Mando ->push_front(PV (150,-150));
-        vert_Mando ->push_front(PV (100,-150));
+        //pv = PV (100,-120);
+        vert_Mando ->push_front(PV(pos_Mando->getX() - 40,pos_Mando->getY() + 10));
+        vert_Mando ->push_front(PV(pos_Mando->getX() + 40,pos_Mando->getY() + 10));
+        vert_Mando ->push_front(PV(pos_Mando->getX() + 40,pos_Mando->getY() - 10));
+        vert_Mando ->push_front(PV(pos_Mando->getX() - 40,pos_Mando->getY() - 10));
 
         mando = new Mando(vert_Mando, pos_Mando, 10);
         pelota = new Pelota();
+
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        gluOrtho2D(xLeft,xRight,yBot,yTop);
+
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
 }
 
 // Destructora de clase
@@ -93,8 +101,7 @@ void Escena::Resize(int CW, int CH) {
 
 // Dibuja todos los objetos fijos y moviles
 void Escena::Dibuja() {
-    glClear(GL_COLOR_BUFFER_BIT);
-
+    //glClear(GL_COLOR_BUFFER_BIT);
 
     // Dibujamos los obstaculos fijos/moviles
     glColor3f(1.0, 0.0, 1.0);
@@ -128,11 +135,11 @@ void Escena::Dibuja() {
     if (!estado)
       pelota->Pinta();
 
-    // Ejecutar lista de comandos en espera
+/*    // Ejecutar lista de comandos en espera
     glFlush();
 
     // Habilitado uso del doble buffer
-    SwapBuffers(hdc);
+    SwapBuffers(hdc);   */
 }
 
 // Insertamos un obstaculo fijo/movil en la Escena
