@@ -6,7 +6,6 @@
 // Constructora por defecto
 Escena::Escena(int CW, int CH){
         listaDeObstaculos = new list <Obstaculo>();
-//        listaDeObstaculos -> inicia();
         ratioViewPort = 1.0;
         xRight =  CW / 2;
         xLeft  = -xRight;
@@ -43,6 +42,11 @@ Escena::Escena(int CW, int CH){
         vert_Mando ->push_front(PV(pos_Mando->getX() - 40, pos_Mando->getY() - 10));
 
         mando = new Mando(vert_Mando, pos_Mando, 10);
+
+        // Cargamos los obstaculos
+        Obstaculo a;
+        
+
 
         // Cargamos la pelota
         pelota = new Pelota();
@@ -105,15 +109,7 @@ void Escena::Dibuja() {
                  it->Pinta();
          }
     }
-    /*
-    listaDeObstaculos ->inicia();
-    while(!listaDeObstaculos->final()){
-       if (listaDeObstaculos->getActual()->getEsVisible()) {
-         listaDeObstaculos->getActual()->Pinta();
-         listaDeObstaculos->avanza();
-       }
-    }
-    */
+
     // Dibujamos el mando
     glColor3f(0.0, 1.0, 0.0);
     mando->Pinta();
@@ -145,15 +141,11 @@ void Escena::Teclado(WORD& Key) {
 
   // Mueve mando hacia derecha
   if (Key == VK_RIGHT) {
-/*     PV pos_Nueva = PV(mando->getPosicion()->getX() + mando->getVelocidad(), mando->getPosicion()->getY());
-     mando->setPosicion(&pos_Nueva);*/
      mando->Mueve(PV(10,0));
   }
 
   // Mueve mando hacia izquierda
   if (Key == VK_LEFT) {
-/*     PV pos_Nueva = PV(mando->getPosicion()->getX() - mando->getVelocidad(), mando->getPosicion()->getY());
-     mando->setPosicion(&pos_Nueva);*/
      mando->Mueve(PV(-10,0));
   }
 

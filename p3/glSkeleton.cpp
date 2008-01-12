@@ -13,6 +13,7 @@ USEUNIT("Pelota.cpp");
 USEUNIT("Rectangulo.cpp");
 USEUNIT("Escena.cpp");
 USEUNIT("Mando.cpp");
+USEUNIT("Lapiz.cpp");
 //---------------------------------------------------------------------------
 WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
