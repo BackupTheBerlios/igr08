@@ -44,12 +44,19 @@ Escena::Escena(int CW, int CH){
         mando = new Mando(vert_Mando, pos_Mando, 10);
 
         // Cargamos los obstaculos
-        Obstaculo a;
-        PV * pl = new PV(100,100);
-        Lapiz * l = new Lapiz(pl, 0);
+/*        Obstaculo a;
+        PV * centroObj = new PV(100,100);
+        Lapiz * l = new Lapiz();
         list<PV>* listaVertices_Obstaculo = new list<PV>();
-        l->poligonoR1(50,5,listaVertices_Obstaculo);
-        Convexo * c1 = new Convexo(listaVertices_Obstaculo);
+        l->poligonoR2(centroObj, 50,5,listaVertices_Obstaculo);
+        Convexo * c1 = new Convexo(listaVertices_Obstaculo);*/
+
+        Obstaculo a;
+        PV * centroObj = new PV(100,100);
+/*        Lapiz * l = new Lapiz();
+        list<PV>* listaVertices_Obstaculo = new list<PV>();
+        l->poligonoR2(centroObj, 50,5,listaVertices_Obstaculo);*/
+        Obstaculo * c1 = new Convexo(centroObj, 50,5);
         listaDeObstaculos-> push_front(c1);
 
         // Cargamos la pelota
