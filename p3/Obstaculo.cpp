@@ -16,7 +16,7 @@ Obstaculo::Obstaculo(list<PV>* lv) {
 
 // Destructora
 Obstaculo::~Obstaculo() {
-
+        delete vertices;
 }
 
 void Obstaculo::Pinta(){

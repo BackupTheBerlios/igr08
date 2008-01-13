@@ -27,9 +27,10 @@ Escena::Escena(int CW, int CH){
         vert_Rectangulo->push_front(PV (pos_Rectangulo->getX() + 225, pos_Rectangulo->getY() - 300));
         vert_Rectangulo->push_front(PV (pos_Rectangulo->getX() - 225, pos_Rectangulo->getY() - 300));
 
-
         paredes = new Rectangulo(vert_Rectangulo, pos_Rectangulo);
 
+        delete pos_Rectangulo;
+        
         // Cargamos el mando
         PV * pos_Mando = new PV(250,550);
         TransformarXY(pos_Mando);
@@ -51,14 +52,17 @@ Escena::Escena(int CW, int CH){
         l->poligonoR2(centroObj, 50,5,listaVertices_Obstaculo);
         Convexo * c1 = new Convexo(listaVertices_Obstaculo);*/
 
-        Obstaculo a;
-        PV * centroObj = new PV(100,100);
-/*        Lapiz * l = new Lapiz();
-        list<PV>* listaVertices_Obstaculo = new list<PV>();
-        l->poligonoR2(centroObj, 50,5,listaVertices_Obstaculo);*/
-        Obstaculo * c1 = new Convexo(centroObj, 50,5);
+//        Obstaculo a;
+        PV * centroObj1 = new PV(100,100);
+        PV * centroObj2 = new PV(50,50);
+        Obstaculo * c1 = new Convexo(centroObj1, 50,5);
+        Obstaculo * c2 = new Circulo(centroObj2, 50);
         listaDeObstaculos-> push_front(c1);
-
+        listaDeObstaculos-> push_front(c2);
+        delete centroObj1;
+        delete centroObj2;
+   //     delete c1;
+   //     delete c2;
         // Cargamos la pelota
         pelota = new Pelota();
 
@@ -73,7 +77,9 @@ Escena::Escena(int CW, int CH){
 // Destructora de clase
 Escena::~Escena(){
         delete listaDeObstaculos;
+//        delete mando;
         delete pelota;
+//        delete paredes;
 }
 
 // Metodo Resize de la Escena

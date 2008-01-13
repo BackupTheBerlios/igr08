@@ -1,12 +1,12 @@
 //---------------------------------------------------------------------------
-#include "Obstaculo.h"
 #include <list.h>
-//#include "Lista.h"
 #include "Pelota.h"
 #include "Mando.h"
 #include "Rectangulo.h"
 #include "Lapiz.h"
+#include "Obstaculo.h"
 #include "Convexo.h"
+#include "Circulo.h"
 #ifndef EscenaH
 #define EscenaH
 //---------------------------------------------------------------------------

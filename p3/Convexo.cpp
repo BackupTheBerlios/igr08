@@ -12,7 +12,9 @@ Convexo::Convexo(PV* centro, GLfloat radio, int nlados) : Obstaculo(){
         Lapiz * l = new Lapiz();
         list<PV>* listaVertices = new list<PV>();
         l->poligonoR2(centro, radio, nlados, listaVertices);
+        delete vertices;
         vertices = listaVertices;
+        delete l;
 }
 
 // Destructora

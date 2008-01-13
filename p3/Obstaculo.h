@@ -9,7 +9,7 @@ class Obstaculo {
     public:
         Obstaculo();
         Obstaculo(list<PV>*);
-        ~Obstaculo();
+        virtual ~Obstaculo();
 
         virtual void Pinta();
         bool getEsVisible(){return esVisible;}

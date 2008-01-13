@@ -9,14 +9,13 @@ Rectangulo::Rectangulo() : Obstaculo() {
 }
 
 Rectangulo::Rectangulo(list<PV>* v, PV * pos) : Obstaculo() {
-
    vertices = v;
    posicion = pos;
 }
 
 // Destructora
 Rectangulo::~Rectangulo() {
-
+delete vertices;
 }
 
 // Metodo que pinta las paredes
