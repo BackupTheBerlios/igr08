@@ -28,7 +28,7 @@ class Escena {
       GLfloat yTop, yBot;
       int ClientWidth, ClientHeight;
       float ratioViewPort;
-      list <Obstaculo> * listaDeObstaculos;
+      list <Obstaculo*> * listaDeObstaculos;
       bool estado;
 
       Mando * mando;

@@ -21,5 +21,6 @@ Convexo::~Convexo() {
 // Metodo que pinta el poligono convexo
 void Convexo::Pinta() {
 
+
 }
 #pragma package(smart_init)

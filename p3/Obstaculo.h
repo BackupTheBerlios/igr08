@@ -27,11 +27,10 @@ class Obstaculo {
         PV * posicion;
 //       int velocidad;
         bool esVisible;
+
     private:
 
-
         PV** normales;
-
         void calculaNormales();
 
 };

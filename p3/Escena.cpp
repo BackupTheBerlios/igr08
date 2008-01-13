@@ -5,7 +5,7 @@
 //---------------------------------------------------------------------------
 // Constructora por defecto
 Escena::Escena(int CW, int CH){
-        listaDeObstaculos = new list <Obstaculo>();
+        listaDeObstaculos = new list <Obstaculo*>();
         ratioViewPort = 1.0;
         xRight =  CW / 2;
         xLeft  = -xRight;
@@ -50,7 +50,7 @@ Escena::Escena(int CW, int CH){
         list<PV>* listaVertices_Obstaculo = new list<PV>();
         l->poligonoR1(50,5,listaVertices_Obstaculo);
         Convexo * c1 = new Convexo(listaVertices_Obstaculo);
-        listaDeObstaculos-> push_front(*c1);
+        listaDeObstaculos-> push_front(c1);
 
         // Cargamos la pelota
         pelota = new Pelota();
@@ -108,10 +108,12 @@ void Escena::Dibuja() {
     // Dibujamos los obstaculos fijos/moviles
     glColor3f(1.0, 0.0, 1.0);
 
-    list<Obstaculo>::iterator it;
+    list<Obstaculo*>::iterator it;
+    Obstaculo * obsTmp;
     for( it = listaDeObstaculos->begin(); it != listaDeObstaculos->end(); it++ ) {
-         if (it->getEsVisible()){
-                 it->Pinta();
+        obsTmp = *it;
+        if (obsTmp->getEsVisible()){
+                 obsTmp->Pinta();
          }
     }
 
@@ -138,7 +140,7 @@ void Escena::Dibuja() {
 // Insertamos un obstaculo fijo/movil en la Escena
 void Escena::InsertaObstaculo(Obstaculo * objeto) {
 //    listaDeObstaculos->inserta(objeto);
-    listaDeObstaculos->push_front(*objeto);
+    listaDeObstaculos->push_front(objeto);
 }
 
 // Controles de movimiento

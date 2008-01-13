@@ -1,6 +1,6 @@
 object GLForm2D: TGLForm2D
   Left = 516
-  Top = 108
+  Top = 58
   Width = 508
   Height = 650
   Caption = 'Arkanoid'
