@@ -8,14 +8,15 @@ Circulo::Circulo() : Obstaculo() {
 
 }
 
-Circulo::Circulo(PV* centro, GLfloat radio) : Obstaculo(){
+Circulo::Circulo(PV* c, GLfloat r) : Obstaculo(){
         Lapiz * l = new Lapiz();
         list<PV>* listaVertices = new list<PV>();
-        l->poligonoR2(centro, radio, 30, listaVertices);
+        l->poligonoR2(c, r, 30, listaVertices);
         delete vertices;
         vertices = listaVertices;
         delete l;
-
+        centro = c->clon();
+        radio = r;
 }
 
 // Destructora
@@ -32,5 +33,7 @@ void Circulo::Pinta() {
                 }
         glEnd();
 }
+
+bool Circulo::corte(){}
 #pragma package(smart_init)
 

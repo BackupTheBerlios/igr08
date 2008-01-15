@@ -4,11 +4,11 @@
 #include "Mando.h"
 //---------------------------------------------------------------------------
 // Constructora
-Mando::Mando() : Obstaculo() {
+Mando::Mando() : Convexo() {
 
 }
 
-Mando::Mando(list<PV>* v, PV * pos, int vel) : Obstaculo() {
+Mando::Mando(list<PV>* v, PV * pos, int vel) : Convexo() {
 
    vertices = v;
    posicion = pos;
@@ -36,6 +36,11 @@ void Mando::Mueve (PV mov) {
                 it->setX(it->getX()+mov.getX());
                 it->setY(it->getY()+mov.getY());
         }
+}
+
+bool Mando:: corte(){
+// Implemntar Cyrus - Beck
+
 }
 #pragma package(smart_init)
  

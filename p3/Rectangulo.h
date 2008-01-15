@@ -8,7 +8,7 @@ class Rectangulo : public Obstaculo{
     public:
         Rectangulo();
         Rectangulo(list<PV>*, PV *);
-
+        bool corte(){}
         ~Rectangulo();
         void Pinta();
 

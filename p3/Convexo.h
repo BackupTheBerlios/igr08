@@ -12,7 +12,6 @@ class Convexo : public Obstaculo{
         Convexo(PV* centro, GLfloat radio, int nlados);
         ~Convexo();
         void Pinta();
-
     private:
             PV** normales;
 

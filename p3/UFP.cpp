@@ -178,7 +178,6 @@ void __fastcall TGLForm2D::FormMouseDown(TObject *Sender,
     delete p;
     p = NULL;
  }
-
 }
 //---------------------------------------------------------------------------
 

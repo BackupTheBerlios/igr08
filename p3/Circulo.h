@@ -9,11 +9,14 @@ class Circulo : public Obstaculo{
     public:
         Circulo();
         Circulo(PV* centro, GLfloat radio);
-
+        bool corte();
         ~Circulo();
         void Pinta();
 
     private:
+        PV* centro;
+        GLfloat radio;
+
 
 };
 #endif
