@@ -37,6 +37,7 @@ __published:	// IDE-managed Components
         void __fastcall Convexo1Click(TObject *Sender);
         void __fastcall FormMouseDown(TObject *Sender, TMouseButton Button,
           TShiftState Shift, int X, int Y);
+        void __fastcall Timer1Timer(TObject *Sender);
 
 private:	// User declarations
  HDC hdc;

@@ -179,7 +179,11 @@ void Escena::Teclado(WORD& Key) {
   glLoadIdentity();
 
 }
+void Escena::avanza(){
+        pelota->avanza(1);
+}
 
+/*
 // Transforma a corrdenadas de la Escena
 void Escena::TransformarXY(PV * p){
         GLdouble x_Aux;
@@ -190,10 +194,10 @@ void Escena::TransformarXY(PV * p){
 
         p->setX(x_Aux);
         p->setY(-y_Aux);
-}
+}  */
 
 // Escala la coordenada X desde el P.Vista hasta el AVE
-GLdouble Escena::convertirX(int x, int ancho) {
+/*GLdouble Escena::convertirX(int x, int ancho) {
     GLdouble escalaAncho = (GLdouble)ancho/(xRight-xLeft);
    // GLdouble centro =   (xLeft-xRight)/2.0;
    if (xLeft <0)
@@ -212,5 +216,5 @@ GLdouble Escena::convertirY(int y, int alto) {
    else
         return (y / (GLfloat) escalaAlto - yTop);
 
-}
+}  */
 #pragma package(smart_init)

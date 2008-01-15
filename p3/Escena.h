@@ -20,8 +20,9 @@ class Escena {
       void Dibuja();
 
       void InsertaObstaculo(Obstaculo *);
-      void TransformarXY(PV *);
+      void TransformarXY(PV *){}
       void Teclado(WORD&);
+      void avanza();
 
    private:
       GLfloat xRight, xLeft;

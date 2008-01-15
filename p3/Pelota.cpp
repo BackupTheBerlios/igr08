@@ -12,10 +12,11 @@ Pelota::Pelota() {
         delete l;
         centro = new PV(0,0);
         radio = 10;
+        direccion = new PV (2,1);
 }
 
 
-Pelota::Pelota(PV * c, GLfloat r ) {
+/*Pelota::Pelota(PV * c, GLfloat r ) {
         Lapiz * l = new Lapiz();
         list<PV>* listaVertices = new list<PV>();
         l->poligonoR2(c , r, 30, listaVertices);
@@ -24,11 +25,12 @@ Pelota::Pelota(PV * c, GLfloat r ) {
         delete l;
         centro = c->clon();
         radio = r;
-}
+}   */
 
 // Destructora
 Pelota::~Pelota() {
-
+        delete centro;
+        delete direccion;
 }
 
 // Metodo que pinta la pelota
@@ -42,6 +44,10 @@ void Pelota::Pinta() {
 }
 
 void Pelota::avanza(GLdouble t){
-
+        list<PV>::iterator it;
+        for( it = vertices->begin(); it != vertices->end(); it++ ) {
+                it->setX(it->getX() + t * direccion->getX());
+                it->setY(it->getY() + t * direccion->getY());
+        }
 }
 #pragma package(smart_init)

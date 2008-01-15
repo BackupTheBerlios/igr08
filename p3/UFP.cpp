@@ -181,3 +181,14 @@ void __fastcall TGLForm2D::FormMouseDown(TObject *Sender,
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TGLForm2D::Timer1Timer(TObject *Sender)
+{
+Timer1->Enabled = false;
+
+if (scene){
+        this->scene->avanza();
+        }
+Timer1->Enabled = true;
+}
+//---------------------------------------------------------------------------
+
