@@ -20,7 +20,7 @@ delete vertices;
 
 // Metodo que pinta las paredes
 void Rectangulo::Pinta() {
-glBegin(GL_LINE_LOOP);
+glBegin(GL_POLYGON);
    list<PV>::iterator it;
     for( it = vertices->begin(); it != vertices->end(); it++ ) {
          glVertex2d(it->getX(), it->getY());

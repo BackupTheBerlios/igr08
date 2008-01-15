@@ -17,8 +17,8 @@ Escena::Escena(int CW, int CH){
 
 
         // Cargamos las paredes que limitan el espacio del juego
-        PV * pos_Rectangulo = new PV(xRight,yTop);
-        TransformarXY(pos_Rectangulo);
+        PV * pos_Rectangulo = new PV(0,0);
+   //     TransformarXY(pos_Rectangulo);
 
         list <PV> * vert_Rectangulo = new list <PV>();
 
@@ -32,8 +32,8 @@ Escena::Escena(int CW, int CH){
         delete pos_Rectangulo;
         
         // Cargamos el mando
-        PV * pos_Mando = new PV(250,550);
-        TransformarXY(pos_Mando);
+        PV * pos_Mando = new PV(0,-200);
+      //  TransformarXY(pos_Mando);
 
         list <PV> * vert_Mando = new list <PV>();
 
