@@ -20,14 +20,16 @@ Escena::Escena(int CW, int CH){
         PV * pos_Rectangulo = new PV(0,0);
    //     TransformarXY(pos_Rectangulo);
 
-        list <PV> * vert_Rectangulo = new list <PV>();
+   /*     list <PV> * vert_Rectangulo = new list <PV>();
 
         vert_Rectangulo->push_front(PV (pos_Rectangulo->getX() - 225, pos_Rectangulo->getY() + 280));
         vert_Rectangulo->push_front(PV (pos_Rectangulo->getX() + 225, pos_Rectangulo->getY() + 280));
         vert_Rectangulo->push_front(PV (pos_Rectangulo->getX() + 225, pos_Rectangulo->getY() - 300));
         vert_Rectangulo->push_front(PV (pos_Rectangulo->getX() - 225, pos_Rectangulo->getY() - 300));
+     */
+//        paredes = new Rectangulo(vert_Rectangulo, pos_Rectangulo);
+        paredIzq = new Rectangulo(30, 300, new PV(20,30));
 
-        paredes = new Rectangulo(vert_Rectangulo, pos_Rectangulo);
 
         delete pos_Rectangulo;
         
@@ -67,6 +69,13 @@ Escena::Escena(int CW, int CH){
 
 // Destructora de clase
 Escena::~Escena(){
+
+        list<Obstaculo*>::iterator it;
+        Obstaculo * obsTmp;
+        for( it = listaDeObstaculos->begin(); it != listaDeObstaculos->end(); it++ ) {
+                obsTmp = *it;
+                delete obsTmp;
+        }
         delete listaDeObstaculos;
 //        delete mando;
         delete pelota;
@@ -127,7 +136,10 @@ void Escena::Dibuja() {
 
     // Dibujamos las paredes
     glColor3f(1.0, 1.0, 0.0);
-    paredes->Pinta();
+    paredIzq->Pinta();
+    //paredDcha->Pinta();
+    //paredArriba->Pinta();
+    //paredPierde->Pinta();
 
     // Dibujamos la pelota
     glColor3f(1.0, 1.0, 1.0);

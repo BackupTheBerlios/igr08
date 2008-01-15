@@ -33,7 +33,10 @@ class Escena {
 
       Mando * mando;
       Pelota * pelota;
-      Rectangulo * paredes;
+      Rectangulo * paredIzq;
+      Rectangulo * paredDcha;
+      Rectangulo * paredArriba;
+      Rectangulo * paredPierde;
 
       GLdouble convertirX(int,int);
       GLdouble convertirY(int,int);

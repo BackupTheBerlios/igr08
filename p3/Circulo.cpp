@@ -21,7 +21,7 @@ Circulo::Circulo(PV* c, GLfloat r) : Obstaculo(){
 
 // Destructora
 Circulo::~Circulo() {
-        delete vertices;        
+        
 }
 
 // Metodo que pinta circulo
