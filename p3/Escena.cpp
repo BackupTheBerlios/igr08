@@ -28,7 +28,7 @@ Escena::Escena(int CW, int CH){
         vert_Rectangulo->push_front(PV (pos_Rectangulo->getX() - 225, pos_Rectangulo->getY() - 300));
      */
 //        paredes = new Rectangulo(vert_Rectangulo, pos_Rectangulo);
-        paredIzq = new Rectangulo(30, 300, new PV(20,30));
+        paredIzq = new Rectangulo(30, 300, new PV(0,0));
 
 
         delete pos_Rectangulo;
@@ -119,7 +119,7 @@ void Escena::Dibuja() {
     //glClear(GL_COLOR_BUFFER_BIT);
 
     // Dibujamos los obstaculos fijos/moviles
-    glColor3f(1.0, 0.0, 1.0);
+    glColor3f(0.0, 0.0, 1.0);
 
     list<Obstaculo*>::iterator it;
     Obstaculo * obsTmp;
