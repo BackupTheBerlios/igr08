@@ -17,24 +17,12 @@ Escena::Escena(int CW, int CH){
 
 
         // Cargamos las paredes que limitan el espacio del juego
-        PV * pos_Rectangulo = new PV(0,0);
-   //     TransformarXY(pos_Rectangulo);
-
-   /*     list <PV> * vert_Rectangulo = new list <PV>();
-
-        vert_Rectangulo->push_front(PV (pos_Rectangulo->getX() - 225, pos_Rectangulo->getY() + 280));
-        vert_Rectangulo->push_front(PV (pos_Rectangulo->getX() + 225, pos_Rectangulo->getY() + 280));
-        vert_Rectangulo->push_front(PV (pos_Rectangulo->getX() + 225, pos_Rectangulo->getY() - 300));
-        vert_Rectangulo->push_front(PV (pos_Rectangulo->getX() - 225, pos_Rectangulo->getY() - 300));
-     */
-//        paredes = new Rectangulo(vert_Rectangulo, pos_Rectangulo);
         paredIzq = new Rectangulo(30, 580, new PV(-230,290));
         paredDcha= new Rectangulo(30, 580, new PV(200,290));
         paredArriba = new Rectangulo(450, 30, new PV(-230,+290));
         paredPierde = new Rectangulo(450, 30, new PV(-230,-260));
 
 
-        delete pos_Rectangulo;
         
         // Cargamos el mando
         PV * pos_Mando = new PV(0,-200);
@@ -82,7 +70,10 @@ Escena::~Escena(){
         delete listaDeObstaculos;
 //        delete mando;
         delete pelota;
-//        delete paredes;
+        delete paredIzq;
+        delete paredDcha;
+        delete paredArriba;
+        delete paredPierde;
 }
 
 // Metodo Resize de la Escena

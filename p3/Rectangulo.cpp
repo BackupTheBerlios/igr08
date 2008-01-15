@@ -20,7 +20,6 @@ Rectangulo::Rectangulo(int ancho, int alto, PV * esqSupIzq) : Obstaculo() {
         SO = PV(esqSupIzq->getX(), esqSupIzq->getY()-alto);
         SE = PV(esqSupIzq->getX()+ancho, esqSupIzq->getY()-alto);
 
-//        vertices = v;
         vertices->push_front(NO);
         vertices->push_front(NE);
         vertices->push_front(SO);
@@ -30,16 +29,15 @@ Rectangulo::Rectangulo(int ancho, int alto, PV * esqSupIzq) : Obstaculo() {
 
 // Destructora
 Rectangulo::~Rectangulo() {
-delete vertices;
 }
 
 // Metodo que pinta las paredes
 void Rectangulo::Pinta() {
-glBegin(GL_POLYGON);
-   list<PV>::iterator it;
-    for( it = vertices->begin(); it != vertices->end(); it++ ) {
-         glVertex2d(it->getX(), it->getY());
-    }
-glEnd();
+        glBegin(GL_POLYGON);
+                list<PV>::iterator it;
+                for( it = vertices->begin(); it != vertices->end(); it++ ) {
+                        glVertex2d(it->getX(), it->getY());
+                }
+        glEnd();
 }
 #pragma package(smart_init)
