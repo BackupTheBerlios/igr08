@@ -1,10 +1,13 @@
 object GLForm2D: TGLForm2D
-  Left = 516
-  Top = 58
-  Width = 508
-  Height = 650
+  Left = 494
+  Top = 70
+  BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsSingle
   Caption = 'Arkanoid'
+  ClientHeight = 602
+  ClientWidth = 500
   Color = clBtnFace
+  DragMode = dmAutomatic
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11

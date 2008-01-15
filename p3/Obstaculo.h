@@ -30,7 +30,7 @@ class Obstaculo {
 
     private:
 
-        PV** normales;
+
         void calculaNormales();
 
 };

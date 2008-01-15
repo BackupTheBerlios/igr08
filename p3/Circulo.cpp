@@ -14,7 +14,6 @@ Circulo::Circulo(PV* centro, GLfloat radio) : Obstaculo(){
         l->poligonoR2(centro, radio, 30, listaVertices);
         delete vertices;
         vertices = listaVertices;
-        int a = 3;
         delete l;
 
 }
