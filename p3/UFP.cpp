@@ -142,7 +142,8 @@ void __fastcall TGLForm2D::Convexo1Click(TObject *Sender)
         estado = 2;
      }
    }
-}
+  }
+  play = true;
 }
 //---------------------------------------------------------------------------
 // Seleccion de posision e inserccion de obstaculos
@@ -185,10 +186,10 @@ void __fastcall TGLForm2D::Timer1Timer(TObject *Sender)
 {
 Timer1->Enabled = false;
 
-if (scene){
-        this->scene->avanza();
-        GLScene();
-        }
+if (play){
+    this->scene->avanza();
+    GLScene();
+    }
 Timer1->Enabled = true;
 }
 //---------------------------------------------------------------------------

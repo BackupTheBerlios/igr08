@@ -36,11 +36,16 @@ void Mando::Mueve (PV mov) {
                 it->setX(it->getX()+mov.getX());
                 it->setY(it->getY()+mov.getY());
         }
+        posicion->setX(posicion->getX() + mov.getX());
 }
 
 bool Mando:: corte(){
 // Implemntar Cyrus - Beck
 
 }
+
+PV* Mando::getPosicion(){
+   return posicion;
+}
 #pragma package(smart_init)
- 
+

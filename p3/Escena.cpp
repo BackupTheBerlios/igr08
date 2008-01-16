@@ -22,10 +22,10 @@ Escena::Escena(int CW, int CH){
         paredArriba = new Rectangulo(450, 30, new PV(-230,+290));
         paredPierde = new Rectangulo(450, 30, new PV(-230,-260));
   */
-          paredIzq = new Rectangulo(30, 580, new PV(-240,290));
-        paredDcha= new Rectangulo(30, 580, new PV(210,290));
-        paredArriba = new Rectangulo(450, 30, new PV(-230,+290));
-        paredPierde = new Rectangulo(450, 30, new PV(-230,-260));
+        paredIzq = new Rectangulo(20, 580, new PV(-240,290));
+        paredDcha= new Rectangulo(20, 580, new PV(220,290));
+        paredArriba = new Rectangulo(460, 20, new PV(-230,+290));
+        paredPierde = new Rectangulo(460, 20, new PV(-230,-270));
 
         
         // Cargamos el mando
@@ -34,10 +34,10 @@ Escena::Escena(int CW, int CH){
 
         list <PV> * vert_Mando = new list <PV>();
 
-        vert_Mando ->push_front(PV(pos_Mando->getX() - 40, pos_Mando->getY() + 10));
-        vert_Mando ->push_front(PV(pos_Mando->getX() + 40, pos_Mando->getY() + 10));
-        vert_Mando ->push_front(PV(pos_Mando->getX() + 40, pos_Mando->getY() - 10));
-        vert_Mando ->push_front(PV(pos_Mando->getX() - 40, pos_Mando->getY() - 10));
+        vert_Mando ->push_front(PV(pos_Mando->getX() - 40, pos_Mando->getY() + 8));
+        vert_Mando ->push_front(PV(pos_Mando->getX() + 40, pos_Mando->getY() + 8));
+        vert_Mando ->push_front(PV(pos_Mando->getX() + 40, pos_Mando->getY() - 8));
+        vert_Mando ->push_front(PV(pos_Mando->getX() - 40, pos_Mando->getY() - 8));
 
         mando = new Mando(vert_Mando, pos_Mando, 10);
 
@@ -140,7 +140,7 @@ void Escena::Dibuja() {
     paredPierde->Pinta();
 
     // Dibujamos la pelota
-    glColor3f(1.0, 1.0, 1.0);
+    glColor3f(1.0, 0.0, 0.0);
     if (!estado)
       pelota->Pinta();
 
@@ -162,12 +162,14 @@ void Escena::Teclado(WORD& Key) {
 
   // Mueve mando hacia derecha
   if (Key == VK_RIGHT) {
-     mando->Mueve(PV(10,0));
+     if (mando->getPosicion()->getX() < xRight - 70)
+        mando->Mueve(PV(10,0));
   }
 
   // Mueve mando hacia izquierda
   if (Key == VK_LEFT) {
-     mando->Mueve(PV(-10,0));
+    if (mando->getPosicion()->getX() > xLeft + 70)
+       mando->Mueve(PV(-10,0));
   }
 
   // Tecla P -> Pausar el juego

@@ -40,4 +40,15 @@ void Rectangulo::Pinta() {
                 }
         glEnd();
 }
+
+bool Rectangulo::corte() {
+
+  GLdouble minimoAuxiliar;
+  GLdouble minimo = 500;
+  PV* NormalDefini;
+  PV* NormalAuxiliar;
+  bool boolEncontrada = false;
+
+
+}
 #pragma package(smart_init)

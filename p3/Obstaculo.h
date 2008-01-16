@@ -10,7 +10,7 @@ class Obstaculo {
         Obstaculo();
         Obstaculo(list<PV>*);
         virtual ~Obstaculo();
-        virtual bool corte(){}
+        virtual bool corte() {}
 
         virtual void Pinta();
         bool getEsVisible(){return esVisible;}

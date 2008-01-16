@@ -13,6 +13,7 @@ class Mando : public Convexo {
 
         void Pinta();
         void Mueve(PV);
+        PV* getPosicion();
 
     private:
         int velocidad;
