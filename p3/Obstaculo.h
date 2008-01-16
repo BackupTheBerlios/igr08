@@ -32,8 +32,6 @@ class Obstaculo {
     private:
 
 
-        void calculaNormales();
-
 };
 
 #endif

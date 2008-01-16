@@ -13,6 +13,7 @@ class PV {
     public:
         PV () : x(0.0), y(0.0) {}
         PV (GLdouble X, GLdouble Y) : x(X), y(Y) {}
+        PV (PV , PV );
         PV (const PV&);
         PV * clon() const;
 
@@ -26,10 +27,10 @@ class PV {
 
         PV * puntoMedio(PV *);
         GLdouble dot(PV *);
-        PV * perpendicular();
+        PV perpendicular();
         GLdouble distancia(PV *);
-        PV *  operator+(PV);
-        PV *  operator-(PV);
+        PV * operator+(PV);
+        PV * operator-(PV);
         PV *  multiplicar(GLdouble);
         PV *  dividir(GLdouble);
         GLdouble angulo(PV *otro);

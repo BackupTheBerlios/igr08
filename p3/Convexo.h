@@ -13,7 +13,10 @@ class Convexo : public Obstaculo{
         ~Convexo();
         void Pinta();
     private:
-            PV** normales;
+            //PV** normales;
+            list <PV> * normales;
+            void calculaNormales();
+
 
 };
 #endif

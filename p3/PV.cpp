@@ -11,6 +11,11 @@ PV::PV (const PV& p){
      y = p.y;
 }
 
+PV::PV (PV  inicio, PV  fin){
+ x = (inicio - fin)->getX();
+ y = (inicio - fin)->getY();
+}
+
 // Método clon
 PV* PV::clon() const {
      PV* p1 = new PV();
@@ -39,8 +44,8 @@ GLdouble PV::dot(PV *otro){
 }
 
 // Devuelve la perpendicular de un punto dado
-PV * PV::perpendicular(){
-     return new PV(-this->getY(),this->getX());
+PV PV::perpendicular(){
+     return PV(-this->getY(),this->getX());
 }
 
 // Calcula la distancia a otro punto
