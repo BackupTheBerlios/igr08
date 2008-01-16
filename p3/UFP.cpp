@@ -187,6 +187,7 @@ Timer1->Enabled = false;
 
 if (scene){
         this->scene->avanza();
+        GLScene();
         }
 Timer1->Enabled = true;
 }

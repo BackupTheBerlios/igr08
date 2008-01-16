@@ -17,11 +17,15 @@ Escena::Escena(int CW, int CH){
 
 
         // Cargamos las paredes que limitan el espacio del juego
-        paredIzq = new Rectangulo(30, 580, new PV(-230,290));
+/*        paredIzq = new Rectangulo(30, 580, new PV(-230,290));
         paredDcha= new Rectangulo(30, 580, new PV(200,290));
         paredArriba = new Rectangulo(450, 30, new PV(-230,+290));
         paredPierde = new Rectangulo(450, 30, new PV(-230,-260));
-
+  */
+          paredIzq = new Rectangulo(30, 580, new PV(-240,290));
+        paredDcha= new Rectangulo(30, 580, new PV(210,290));
+        paredArriba = new Rectangulo(450, 30, new PV(-230,+290));
+        paredPierde = new Rectangulo(450, 30, new PV(-230,-260));
 
         
         // Cargamos el mando
