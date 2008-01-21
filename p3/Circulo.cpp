@@ -34,6 +34,7 @@ void Circulo::Pinta() {
         glEnd();
 }
 
-bool Circulo::corte(){}
+bool Circulo::corte(){
+}
 #pragma package(smart_init)
 

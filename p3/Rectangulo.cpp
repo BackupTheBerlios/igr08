@@ -41,13 +41,36 @@ void Rectangulo::Pinta() {
         glEnd();
 }
 
-bool Rectangulo::corte() {
+bool Rectangulo::Corte(Pelota* pelota, GLdouble &tIn, PV* &normal) {
 
-  GLdouble minimoAuxiliar;
-  GLdouble minimo = 500;
-  PV* NormalDefini;
-  PV* NormalAuxiliar;
-  bool boolEncontrada = false;
+  tIn = 0;
+  GLdouble tOut = 1;
+  GLdouble tHit, num, den;
+  PV* n;
+  int i = -1;
+  bool acabado = false;
+  while (i < nVertices - 1 && !acabado) {
+    i++;
+    n = normales[i];
+    num = vertices[i]->menos(pelota->getPuntoTangente(n)).productoEscalar(*n);
+    den = n->productoEscalar(*pelota->getSentido());
+    if (fabs(den) > 0.000001f) { // hay tHit
+      tHit = num / den;
+      if (den > 0) {
+        if (tHit < tOut) tOut = tHit;
+      } else {
+        if (tHit >= tIn) {
+          tIn = tHit;
+          normal = n;
+        }
+      }
+      acabado = tIn > tOut; // si se han cruzado, no hay intersección
+    } else { // paralelismo
+      if (num <= 0) acabado = true;
+    }
+  }
+  return !acabado && !((tIn == 0) && (tIn <= tOut) && (tOut < 0.000001f));
+}
 
 
 }

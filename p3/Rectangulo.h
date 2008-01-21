@@ -9,7 +9,7 @@ class Rectangulo : public Obstaculo{
         Rectangulo();
         Rectangulo(list<PV>*, PV *);
         Rectangulo(int ancho, int alto, PV * esqSupIzq);
-        bool corte(){}
+        bool corte(Pelota*, GLdouble, PV*);
         ~Rectangulo();
         void Pinta();
 

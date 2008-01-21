@@ -22,6 +22,8 @@ Obstaculo::~Obstaculo() {
 void Obstaculo::Pinta(){
 
 }
+
+
 #pragma package(smart_init)
 
 

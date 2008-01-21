@@ -3,6 +3,7 @@
 #include <list.h>
 #ifndef ObstaculoH
 #define ObstaculoH
+#include "Pelota.h"
 //---------------------------------------------------------------------------
 class Obstaculo {
 
