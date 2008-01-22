@@ -50,10 +50,10 @@ void Convexo::calculaNormales(){
             // calcular normal
             normal = vectorArista.perpendicular();
             // falta añadir normal a la lista.. ademas cambiar el sentido??
-/*   PV * vn;
-   vn = new PV(normal.getX(), normal.getY());
-   normales->push_front(*vn);*/
-            //            normales->push_front(normal);
+   PV vn;
+   vn = PV(normal.getX(), normal.getY());
+   normales->push_front(vn);
+
          }
       }
 

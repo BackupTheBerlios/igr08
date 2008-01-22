@@ -9,11 +9,11 @@ class Rectangulo : public Obstaculo{
         Rectangulo();
         Rectangulo(list<PV>*, PV *);
         Rectangulo(int ancho, int alto, PV * esqSupIzq);
-        bool corte(Pelota*, GLdouble, PV*);
+        bool Corte(Pelota* , GLdouble &, PV* &);
         ~Rectangulo();
         void Pinta();
 
     private:
-
+        list <PV> * normales;
 };
 #endif

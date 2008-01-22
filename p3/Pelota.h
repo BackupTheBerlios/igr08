@@ -16,6 +16,7 @@ class Pelota{
         void avanza(GLdouble);
 //        bool DetectarObstaculo();
         void rebota();
+        PV * getDireccion(){return direccion;}
 
     private:
         GLdouble radio;

@@ -42,14 +42,48 @@ void Rectangulo::Pinta() {
 }
 
 bool Rectangulo::Corte(Pelota* pelota, GLdouble &tIn, PV* &normal) {
-
+ /* GLfloat epsilon = 0.000001f;
+  int nVertices = vertices->size();
   tIn = 0;
   GLdouble tOut = 1;
   GLdouble tHit, num, den;
-  PV* n;
+  PV  n;
   int i = -1;
   bool acabado = false;
-  while (i < nVertices - 1 && !acabado) {
+
+  list<PV>::iterator itVertices;
+  list<PV>::iterator itNormales;
+  itVertices = vertices->begin();
+  itNormales = normales->begin();
+//  for(  it != vertices->end(); it++ ) {
+ while (i<nVertices -1  && !acabado){
+        itVertices++;
+        itNormales++;
+        n = itNormales;
+        //num  = itVertices; // faltan cosas
+        den = n*pelota->getDireccion();
+        if (fabs (den)>epsilon){ // impacto
+          tHit = num /den;
+          if (den > 0){
+                if (tHit <tOut) {tOut = tHit;}
+                }
+          else {
+                if (tHit >=tIn){
+                        tIn = tHit;
+                        normal = n;
+                        }
+                }
+     acabado = tIn > tOut; // Se han cruzado => no hay intesección
+        }
+        else { // parelelo
+        if (num <= 0) acabado = true;
+        }
+
+  }
+
+    return !acabado && !((tIn == 0) && (tIn <= tOut) && (tOut < epsilon));  */
+
+ /* while (i < nVertices - 1 && !acabado) {
     i++;
     n = normales[i];
     num = vertices[i]->menos(pelota->getPuntoTangente(n)).productoEscalar(*n);
@@ -70,7 +104,7 @@ bool Rectangulo::Corte(Pelota* pelota, GLdouble &tIn, PV* &normal) {
     }
   }
   return !acabado && !((tIn == 0) && (tIn <= tOut) && (tOut < 0.000001f));
-}
+}*/
 
 
 }
