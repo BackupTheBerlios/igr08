@@ -107,16 +107,17 @@ GLfloat epsilon = 0.000001f;
     n = normales[i];
 //    num = vertices[i]->menos(pelota->getPuntoTangente(n)).productoEscalar(*n);
 
-PV * verticeI = vertices[i];
+//PV * verticeI = vertices[i];
 //PV  ptang = pelota->getPuntoTangente(n);
-PV  ptang = PV();
-PV pp = PV();
-//PV tmpVector = verticeI - ptang ;
-PV tmpVector = ptang - pp ;
-num = tmpVector.dot(n);
+//PV * pp =new  PV();
+
+PV * tmpVector = *vertices[i] - pelota->getPuntoTangente(n);
+num = tmpVector->dot(n);
+
+
 
   //  num = (vertices[i]-pelota->getPuntoTangente(n)).dot(n);
-   // num = 1;// hacerlo como arriba ^|^
+
 //    den = n->productoEscalar(*pelota->getSentido());
     den = n->dot(pelota->getDireccion());
     if (fabs(den) > epsilon) { // hay tHit
