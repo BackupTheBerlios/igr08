@@ -17,6 +17,7 @@ class Pelota{
 //        bool DetectarObstaculo();
         void rebota();
         PV * getDireccion(){return direccion;}
+        PV getPuntoTangente(PV* );
 
     private:
         GLdouble radio;

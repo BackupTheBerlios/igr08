@@ -191,7 +191,7 @@ void Escena::avanza(){
 //        paredPierde
       if ( paredDcha ->Corte(this->pelota, tIN, normal)){
            pelota->avanza(tIN);
-           ShowMessage("");
+           ShowMessage("Hay corte");
            }
            else {
                pelota->avanza(1);

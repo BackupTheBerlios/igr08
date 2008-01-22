@@ -53,4 +53,11 @@ void Pelota::avanza(GLdouble t){
                 vertices[i]->setY(vertices[i]->getY() + t * direccion->getY());
         }
 }
+
+PV Pelota::getPuntoTangente(PV* normal)
+{
+ GLdouble coef = radio / normal->modulo();
+ return PV(centro->getX() - coef * normal->getX(), centro->getY() - coef * normal->getY()); 
+}
+
 #pragma package(smart_init)
