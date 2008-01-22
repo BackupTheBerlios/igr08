@@ -22,7 +22,8 @@ class Pelota{
         GLdouble radio;
         PV * centro;
         PV * direccion;
-        list <PV> * vertices;        
+        PV** vertices;
+        int nVertices;        
 
 };
 

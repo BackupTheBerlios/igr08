@@ -8,7 +8,7 @@ class Rectangulo : public Obstaculo{
     public:
         Rectangulo();
         Rectangulo(PV**, int , PV *);
-        Rectangulo(int ancho, int alto, PV * esqSupIzq);
+        Rectangulo(int ancho, int alto, int, PV * esqSupIzq);
         bool Corte(Pelota* , GLdouble &, PV* &);
         ~Rectangulo();
         void Pinta();

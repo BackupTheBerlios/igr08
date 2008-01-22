@@ -22,17 +22,17 @@ Escena::Escena(int CW, int CH){
         paredArriba = new Rectangulo(450, 30, new PV(-230,+290));
         paredPierde = new Rectangulo(450, 30, new PV(-230,-260));
   */
-        paredIzq = new Rectangulo(20, 580, new PV(-240,290));
-        paredDcha= new Rectangulo(20, 580, new PV(220,290));
-        paredArriba = new Rectangulo(460, 20, new PV(-230,+290));
-        paredPierde = new Rectangulo(460, 20, new PV(-230,-270));
+        paredIzq = new Rectangulo(20, 580, 4, new PV(-240,290));
+        paredDcha= new Rectangulo(20, 580, 4, new PV(220,290));
+        paredArriba = new Rectangulo(460, 20, 4, new PV(-230,+290));
+        paredPierde = new Rectangulo(460, 20, 4, new PV(-230,-270));
 
-        
+      /*
         // Cargamos el mando
         PV * pos_Mando = new PV(0,-200);
       //  TransformarXY(pos_Mando);
 
-        PV** vert_Mando = new PV*();
+        PV** vert_Mando = new PV*[4];
 
         vert_Mando[0] = new PV(pos_Mando->getX() - 40, pos_Mando->getY() + 8);
         vert_Mando[1] = new PV(pos_Mando->getX() + 40, pos_Mando->getY() + 8);
@@ -50,9 +50,9 @@ Escena::Escena(int CW, int CH){
         listaDeObstaculos-> push_front(c2);
         delete centroObj1;
         delete centroObj2;
-
+            */
         // Cargamos la pelota
-        pelota = new Pelota();
+    //    pelota = new Pelota();
 
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
@@ -73,7 +73,7 @@ Escena::~Escena(){
         }
         delete listaDeObstaculos;
 //        delete mando;
-        delete pelota;
+//        delete pelota;
         delete paredIzq;
         delete paredDcha;
         delete paredArriba;
@@ -118,7 +118,7 @@ void Escena::Dibuja() {
 
     // Dibujamos los obstaculos fijos/moviles
     glColor3f(0.0, 0.0, 1.0);
-
+           /*
     list<Obstaculo*>::iterator it;
     Obstaculo * obsTmp;
     for( it = listaDeObstaculos->begin(); it != listaDeObstaculos->end(); it++ ) {
@@ -131,7 +131,7 @@ void Escena::Dibuja() {
     // Dibujamos el mando
     glColor3f(0.0, 1.0, 0.0);
     mando->Pinta();
-
+                */
     // Dibujamos las paredes
     glColor3f(1.0, 1.0, 0.0);
     paredIzq->Pinta();
@@ -141,9 +141,9 @@ void Escena::Dibuja() {
 
     // Dibujamos la pelota
     glColor3f(1.0, 0.0, 0.0);
-    if (!estado)
+   /* if (!estado)
       pelota->Pinta();
-
+     */
 /*    // Ejecutar lista de comandos en espera
     glFlush();
 

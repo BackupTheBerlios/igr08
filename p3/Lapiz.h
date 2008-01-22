@@ -24,9 +24,9 @@ class Lapiz {
       void gira (GLdouble incrAng);
       void avanza (GLfloat longitud, bool esVisible, PV*& nuevoPunto/*, Segmento*&*/);
       void poligonoR1 (GLfloat lado, int nlados, PV**  /*, DibujoLineas* dl*/ );
-      void poligonoR2 (PV * centro, GLfloat radio, int nlados, PV** listaVertices/* , DibujoLineas* dl*/);
+  //    void poligonoR2 (PV * centro, GLfloat radio, int nlados, PV** listaVertices/* , DibujoLineas* dl*/);
 
-      void poligonoR2 (PV * centro, GLfloat, int, PV**);
+    void poligonoR2 (PV * centro, GLfloat, int, PV**);
 
    private:
       PV * pos;

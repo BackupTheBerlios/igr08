@@ -16,17 +16,18 @@ vertices[i] = v[i];
    posicion = pos;
 }
 
-Rectangulo::Rectangulo(int ancho, int alto, PV * esqSupIzq) : Obstaculo() {
+Rectangulo::Rectangulo(int ancho, int alto, int size, PV * esqSupIzq) : Obstaculo() {
         PV NO, NE, SO, SE;
         NO = PV(esqSupIzq->getX(), esqSupIzq->getY());
         NE = PV(esqSupIzq->getX()+ancho, esqSupIzq->getY());
         SE = PV(esqSupIzq->getX()+ancho, esqSupIzq->getY()-alto);
         SO = PV(esqSupIzq->getX(), esqSupIzq->getY()-alto);
 
+        vertices = new PV*[4];
         vertices[0] = new PV(esqSupIzq->getX(), esqSupIzq->getY());
-        vertices [1] = new PV(esqSupIzq->getX()+ancho, esqSupIzq->getY());
-        vertices [2] = new PV(esqSupIzq->getX()+ancho, esqSupIzq->getY()-alto);
-        vertices [3] = new PV(esqSupIzq->getX(), esqSupIzq->getY()-alto);
+        vertices[1] = new PV(esqSupIzq->getX()+ancho, esqSupIzq->getY());
+        vertices[2] = new PV(esqSupIzq->getX()+ancho, esqSupIzq->getY()-alto);
+        vertices[3] = new PV(esqSupIzq->getX(), esqSupIzq->getY()-alto);
         posicion = esqSupIzq;
 }
 
