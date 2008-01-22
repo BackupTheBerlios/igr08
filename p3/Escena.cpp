@@ -186,7 +186,17 @@ void Escena::Teclado(WORD& Key) {
 
 }
 void Escena::avanza(){
-        pelota->avanza(1);
+        PV * normal;
+        GLdouble tIN;
+//        paredPierde
+      if ( paredDcha ->Corte(this->pelota, tIN, normal)){
+           pelota->avanza(tIN);
+           ShowMessage("");
+           }
+           else {
+               pelota->avanza(1);
+           }
+
 }
 
 /*

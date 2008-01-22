@@ -14,8 +14,8 @@ class Convexo : public Obstaculo{
         void Pinta();
     private:
             //PV** normales;
-            list <PV> * normales;
-            void calculaNormales();
+
+
 
 
 };

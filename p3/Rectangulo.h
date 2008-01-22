@@ -14,6 +14,6 @@ class Rectangulo : public Obstaculo{
         void Pinta();
 
     private:
-        PV ** normales;
+//        PV ** normales;
 };
 #endif
