@@ -6,13 +6,15 @@
 // Constructora
 Pelota::Pelota() {
         Lapiz * l = new Lapiz();
-        PV** listaVertices = new PV*();
-        l->poligonoR2(new PV(0,0), 10, 30, listaVertices);
+        int numVert = 30;
+        PV** listaVertices = new PV*[numVert];
+        l->poligonoR2(new PV(0,0), 10, numVert, listaVertices);
         vertices = listaVertices;
         delete l;
         centro = new PV(0,0);
         radio = 10;
         direccion = new PV (2,1);
+        nVertices = numVert;
 }
 
 

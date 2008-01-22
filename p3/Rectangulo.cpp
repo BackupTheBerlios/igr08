@@ -13,6 +13,7 @@ for (int i= 0; i<size; i++){
 vertices[i] = v[i];
 }
 //   vertices = v;
+nVertices = size;
    posicion = pos;
 }
 
@@ -29,6 +30,8 @@ Rectangulo::Rectangulo(int ancho, int alto, int size, PV * esqSupIzq) : Obstacul
         vertices[2] = new PV(esqSupIzq->getX()+ancho, esqSupIzq->getY()-alto);
         vertices[3] = new PV(esqSupIzq->getX(), esqSupIzq->getY()-alto);
         posicion = esqSupIzq;
+
+        nVertices = size;
 }
 
 // Destructora

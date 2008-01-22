@@ -13,6 +13,7 @@ Mando::Mando(PV** v, PV * pos, int vel) : Convexo() {
    vertices = v;
    posicion = pos;
    velocidad = vel;
+   nVertices = 4;
 
 
 }

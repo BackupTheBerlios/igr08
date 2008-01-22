@@ -27,7 +27,7 @@ Escena::Escena(int CW, int CH){
         paredArriba = new Rectangulo(460, 20, 4, new PV(-230,+290));
         paredPierde = new Rectangulo(460, 20, 4, new PV(-230,-270));
 
-      /*
+
         // Cargamos el mando
         PV * pos_Mando = new PV(0,-200);
       //  TransformarXY(pos_Mando);
@@ -40,7 +40,7 @@ Escena::Escena(int CW, int CH){
         vert_Mando[3] = new PV(pos_Mando->getX() - 40, pos_Mando->getY() - 8);
 
         mando = new Mando(vert_Mando, pos_Mando, 10);
-
+        /*
         // Cargamos los obstaculos
         PV * centroObj1 = new PV(100,100);
         PV * centroObj2 = new PV(50,50);
@@ -52,7 +52,7 @@ Escena::Escena(int CW, int CH){
         delete centroObj2;
             */
         // Cargamos la pelota
-    //    pelota = new Pelota();
+        pelota = new Pelota();
 
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
@@ -72,8 +72,8 @@ Escena::~Escena(){
                 delete obsTmp;
         }
         delete listaDeObstaculos;
-//        delete mando;
-//        delete pelota;
+        delete mando;
+        delete pelota;
         delete paredIzq;
         delete paredDcha;
         delete paredArriba;
@@ -127,11 +127,11 @@ void Escena::Dibuja() {
                  obsTmp->Pinta();
          }
     }
-
+*/
     // Dibujamos el mando
     glColor3f(0.0, 1.0, 0.0);
     mando->Pinta();
-                */
+
     // Dibujamos las paredes
     glColor3f(1.0, 1.0, 0.0);
     paredIzq->Pinta();
@@ -141,9 +141,9 @@ void Escena::Dibuja() {
 
     // Dibujamos la pelota
     glColor3f(1.0, 0.0, 0.0);
-   /* if (!estado)
+    if (!estado)
       pelota->Pinta();
-     */
+     
 /*    // Ejecutar lista de comandos en espera
     glFlush();
 

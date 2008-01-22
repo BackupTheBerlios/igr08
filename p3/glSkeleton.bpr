@@ -90,11 +90,6 @@ ShowInfoMsgs=0
 LinkDebugVcl=0
 LinkCGLIB=1
 
-[CORBA]
-AddServerUnit=1
-AddClientUnit=1
-PrecompiledHeaders=1
-
 [Language]
 ActiveLang=
 ProjectLang=
