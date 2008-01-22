@@ -8,7 +8,7 @@ class Mando : public Convexo {
     public:
         Mando();
         ~Mando();
-        Mando(list<PV>*, PV *, int);
+        Mando(PV**, PV *, int);
         bool corte();
 
         void Pinta();

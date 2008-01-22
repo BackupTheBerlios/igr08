@@ -1,6 +1,6 @@
 //---------------------------------------------------------------------------
 #include "PV.h"
-#include <list.h>
+//#include <list.h>
 #ifndef ObstaculoH
 #define ObstaculoH
 #include "Pelota.h"
@@ -8,8 +8,9 @@
 class Obstaculo {
 
     public:
+
         Obstaculo();
-        Obstaculo(list<PV>*);
+        Obstaculo(PV** lv);
         virtual ~Obstaculo();
         virtual bool corte() {}
 
@@ -24,11 +25,12 @@ class Obstaculo {
 //        void setVelocidad(int v) { velocidad = v;}
 
     protected:
-        list <PV> * vertices;
+        PV** vertices;
       //  PV** vertices;
         PV * posicion;
 //       int velocidad;
         bool esVisible;
+        int nVertices;
 
     private:
 

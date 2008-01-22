@@ -5,12 +5,12 @@
 //---------------------------------------------------------------------------
 // Constructora por defecto
 Obstaculo::Obstaculo() {
-//   vertices = new PV*();
-   vertices = new list<PV>();
+   vertices = new PV*();
+//   vertices = new list<PV>();
 }
 
 // Constructora con parametros
-Obstaculo::Obstaculo(list<PV>* lv) {
+Obstaculo::Obstaculo(PV** lv) {
         vertices = lv;
 }
 

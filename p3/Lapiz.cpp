@@ -64,7 +64,7 @@ void Lapiz::avanza (GLfloat longitud, bool esVisible, PV*& nuevoPunto/*, Segment
 
 //---------------------------------------------------------------------------
 
-void Lapiz::poligonoR1 (GLfloat lado, int nlados, list<PV>* listaVertices /*, DibujoLineas* dl*/){
+void Lapiz::poligonoR1 (GLfloat lado, int nlados, PV** listaVertices /*, DibujoLineas* dl*/){
         GLdouble alfa = 360.0 / (GLdouble) nlados;
         GLdouble beta = (180.0 - alfa) / 2.0;
         GLdouble gamma = 180 - 2*beta;
@@ -73,8 +73,8 @@ void Lapiz::poligonoR1 (GLfloat lado, int nlados, list<PV>* listaVertices /*, Di
                 this->avanza(lado, true, p);
                 this->gira(gamma);
                 // hacer New para listaVertices
-                listaVertices->push_front(*p);
-                delete p;
+                listaVertices[i]=*p;
+//                delete p;
 /*                Segmento* s;
                 this->avanza(lado, true, s);
                 this->gira(gamma);
@@ -85,7 +85,7 @@ void Lapiz::poligonoR1 (GLfloat lado, int nlados, list<PV>* listaVertices /*, Di
 
 //---------------------------------------------------------------------------
 
-void Lapiz::poligonoR2 (PV * centro, GLfloat radio, int nlados, list<PV>* listaVertices/*, DibujoLineas* dl*/){
+void Lapiz::poligonoR2 (PV * centro, GLfloat radio, int nlados, PV** listaVertices/*, DibujoLineas* dl*/){
         GLdouble alfa = 360.0 / (GLdouble) nlados;
         GLdouble beta = (180.0 - alfa) / 2.0;
      //   GLdouble gamma = 180 - 2*beta;

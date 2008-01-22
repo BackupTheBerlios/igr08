@@ -8,8 +8,11 @@ Rectangulo::Rectangulo() : Obstaculo() {
 
 }
 
-Rectangulo::Rectangulo(list<PV>* v, PV * pos) : Obstaculo() {
-   vertices = v;
+Rectangulo::Rectangulo(PV** v, int size, PV * pos) : Obstaculo() {
+for (int i= 0; i<size; i++){
+vertices[i] = v[i];
+}
+//   vertices = v;
    posicion = pos;
 }
 
@@ -20,10 +23,10 @@ Rectangulo::Rectangulo(int ancho, int alto, PV * esqSupIzq) : Obstaculo() {
         SE = PV(esqSupIzq->getX()+ancho, esqSupIzq->getY()-alto);
         SO = PV(esqSupIzq->getX(), esqSupIzq->getY()-alto);
 
-        vertices->push_front(NO);
-        vertices->push_front(NE);
-        vertices->push_front(SE);
-        vertices->push_front(SO);
+        vertices[0] = new PV(esqSupIzq->getX(), esqSupIzq->getY());
+        vertices [1] = new PV(esqSupIzq->getX()+ancho, esqSupIzq->getY());
+        vertices [2] = new PV(esqSupIzq->getX()+ancho, esqSupIzq->getY()-alto);
+        vertices [3] = new PV(esqSupIzq->getX(), esqSupIzq->getY()-alto);
         posicion = esqSupIzq;
 }
 
@@ -34,9 +37,10 @@ Rectangulo::~Rectangulo() {
 // Metodo que pinta las paredes
 void Rectangulo::Pinta() {
         glBegin(GL_POLYGON);
-                list<PV>::iterator it;
-                for( it = vertices->begin(); it != vertices->end(); it++ ) {
-                        glVertex2d(it->getX(), it->getY());
+                //list<PV>::iterator it;
+                for (int i = 0; i<nVertices; i++){
+//                for( it = vertices->begin(); it != vertices->end(); it++ ) {
+                        glVertex2d(vertices[i]->getX(), vertices[i]->getY());
                 }
         glEnd();
 }

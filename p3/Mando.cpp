@@ -8,7 +8,7 @@ Mando::Mando() : Convexo() {
 
 }
 
-Mando::Mando(list<PV>* v, PV * pos, int vel) : Convexo() {
+Mando::Mando(PV** v, PV * pos, int vel) : Convexo() {
 
    vertices = v;
    posicion = pos;
@@ -24,17 +24,20 @@ Mando::~Mando() {
 //Pintar el mando
 void Mando::Pinta() {
         glBegin(GL_POLYGON);
-            list<PV>::iterator it;
-            for( it = vertices->begin(); it != vertices->end(); it++ ) {
-                glVertex2d(it->getX(), it->getY());
+  //          list<PV>::iterator it;
+            for (int i = 0; i<nVertices; i++){
+//            for( it = vertices->begin(); it != vertices->end(); it++ ) {
+                glVertex2d(vertices[i]->getX(), vertices[i]->getY());
                 }
         glEnd();
 }
 void Mando::Mueve (PV mov) {
-        list<PV>::iterator it;
-        for( it = vertices->begin(); it != vertices->end(); it++ ) {
-                it->setX(it->getX()+mov.getX());
-                it->setY(it->getY()+mov.getY());
+  //      list<PV>::iterator it;
+//        for( it = vertices->begin(); it != vertices->end(); it++ ) {
+
+        for (int i = 0; i<nVertices; i++){
+                vertices[i]->setX(vertices[i]->getX()+mov.getX());
+                vertices[i]->setY(vertices[i]->getY()+mov.getY());
         }
         posicion->setX(posicion->getX() + mov.getX());
 }

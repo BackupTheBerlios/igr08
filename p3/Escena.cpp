@@ -32,12 +32,12 @@ Escena::Escena(int CW, int CH){
         PV * pos_Mando = new PV(0,-200);
       //  TransformarXY(pos_Mando);
 
-        list <PV> * vert_Mando = new list <PV>();
+        PV** vert_Mando = new PV*();
 
-        vert_Mando ->push_front(PV(pos_Mando->getX() - 40, pos_Mando->getY() + 8));
-        vert_Mando ->push_front(PV(pos_Mando->getX() + 40, pos_Mando->getY() + 8));
-        vert_Mando ->push_front(PV(pos_Mando->getX() + 40, pos_Mando->getY() - 8));
-        vert_Mando ->push_front(PV(pos_Mando->getX() - 40, pos_Mando->getY() - 8));
+        vert_Mando[0] = new PV(pos_Mando->getX() - 40, pos_Mando->getY() + 8);
+        vert_Mando[1] = new PV(pos_Mando->getX() + 40, pos_Mando->getY() + 8);
+        vert_Mando[2] = new PV(pos_Mando->getX() + 40, pos_Mando->getY() - 8);
+        vert_Mando[3] = new PV(pos_Mando->getX() - 40, pos_Mando->getY() - 8);
 
         mando = new Mando(vert_Mando, pos_Mando, 10);
 

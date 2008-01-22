@@ -6,11 +6,11 @@
 //---------------------------------------------------------------------------
 // Constructora
 Convexo::Convexo() : Obstaculo() {}
-Convexo::Convexo(list<PV>* listaVertices): Obstaculo(listaVertices) {calculaNormales();}
+Convexo::Convexo(PV** listaVertices): Obstaculo(listaVertices) {calculaNormales();}
 
 Convexo::Convexo(PV* centro, GLfloat radio, int nlados) : Obstaculo(){
         Lapiz * l = new Lapiz();
-        list<PV>* listaVertices = new list<PV>();
+        PV** listaVertices = new PV*();
         l->poligonoR2(centro, radio, nlados, listaVertices);
         delete vertices;
         vertices = listaVertices;
@@ -27,7 +27,9 @@ Convexo::~Convexo() {
 void Convexo::Pinta() {
         glBegin(GL_POLYGON);
             list<PV>::iterator it;
-            for( it = vertices->begin(); it != vertices->end(); it++ ) {
+
+//            for( it = vertices->begin(); it != vertices->end(); it++ ) {
+        for (int i = 0; i<nVertices; i++){
                 glVertex2d(it->getX(), it->getY());
                 }
         glEnd();
@@ -37,7 +39,7 @@ void Convexo::calculaNormales(){
    list<PV>::iterator it;
    PV p0, p1, p2, vectorArista, normal;
       bool vertice0 = true;
-      for( it = vertices->begin(); it != vertices->end(); it++ ) {
+      for( int i; i<nVertices; i++) {
          if (vertice0){
             p1 = PV(it->getX(), it->getY());
             p0 = p1;
