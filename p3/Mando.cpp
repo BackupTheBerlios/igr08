@@ -25,17 +25,12 @@ Mando::~Mando() {
 //Pintar el mando
 void Mando::Pinta() {
         glBegin(GL_POLYGON);
-  //          list<PV>::iterator it;
             for (int i = 0; i<nVertices; i++){
-//            for( it = vertices->begin(); it != vertices->end(); it++ ) {
                 glVertex2d(vertices[i]->getX(), vertices[i]->getY());
                 }
         glEnd();
 }
 void Mando::Mueve (PV mov) {
-  //      list<PV>::iterator it;
-//        for( it = vertices->begin(); it != vertices->end(); it++ ) {
-
         for (int i = 0; i<nVertices; i++){
                 vertices[i]->setX(vertices[i]->getX()+mov.getX());
                 vertices[i]->setY(vertices[i]->getY()+mov.getY());

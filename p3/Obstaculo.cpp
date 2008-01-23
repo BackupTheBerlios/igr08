@@ -6,6 +6,7 @@
 // Constructora por defecto
 Obstaculo::Obstaculo() {
    vertices = new PV*();
+   this->esVisible = true;
 //   vertices = new list<PV>();
 }
 

@@ -73,7 +73,7 @@ void Lapiz::poligonoR1 (GLfloat lado, int nlados, PV** listaVertices /*, DibujoL
                 this->avanza(lado, true, p);
                 this->gira(gamma);
                 // hacer New para listaVertices
-                listaVertices[i] = p;
+                listaVertices[i] = new PV (p->getX(), p->getY());
                 int borrar = 32;
 //                delete p;
 /*                Segmento* s;
@@ -82,6 +82,7 @@ void Lapiz::poligonoR1 (GLfloat lado, int nlados, PV** listaVertices /*, DibujoL
                 dl->inserta(s);
                 delete s;      */
         }
+        int borrar2 = 0;
 }
 
 //---------------------------------------------------------------------------

@@ -5,7 +5,8 @@
 //---------------------------------------------------------------------------
 // Constructora por defecto
 Escena::Escena(int CW, int CH){
-        listaDeObstaculos = new list <Obstaculo*>();
+
+        listaDeObstaculos = new Obstaculo*();
         ratioViewPort = 1.0;
         xRight =  CW / 2;
         xLeft  = -xRight;
@@ -14,7 +15,7 @@ Escena::Escena(int CW, int CH){
         ClientWidth = CW;
         ClientHeight = CH;
         estado = false;
-
+        this->numObstaculos = 0;
 
         // Cargamos las paredes que limitan el espacio del juego
 /*        paredIzq = new Rectangulo(30, 580, new PV(-230,290));
@@ -40,8 +41,17 @@ Escena::Escena(int CW, int CH){
         vert_Mando[3] = new PV(pos_Mando->getX() - 40, pos_Mando->getY() - 8);
 
         mando = new Mando(vert_Mando, pos_Mando, 10);
-        /*
+
         // Cargamos los obstaculos
+
+
+
+
+       listaDeObstaculos[0] = new Circulo(new PV(50,50), 50);
+       listaDeObstaculos[1] = new Convexo(new PV(100,100), 50,5);
+        this->numObstaculos = 2;
+
+        /*
         PV * centroObj1 = new PV(100,100);
         PV * centroObj2 = new PV(50,50);
         Obstaculo * c1 = new Convexo(centroObj1, 50,5);
@@ -65,12 +75,18 @@ Escena::Escena(int CW, int CH){
 // Destructora de clase
 Escena::~Escena(){
 
-        list<Obstaculo*>::iterator it;
+/*        list<Obstaculo*>::iterator it;
         Obstaculo * obsTmp;
         for( it = listaDeObstaculos->begin(); it != listaDeObstaculos->end(); it++ ) {
                 obsTmp = *it;
                 delete obsTmp;
+        }*/
+
+        for (int i= 0; i<numObstaculos; i++){
+                delete listaDeObstaculos[i];
         }
+
+
         delete listaDeObstaculos;
         delete mando;
         delete pelota;
@@ -128,6 +144,13 @@ void Escena::Dibuja() {
          }
     }
 */
+
+
+        for (int i = 0; i < this->numObstaculos; i++){
+                if (listaDeObstaculos[i]->getEsVisible()){
+                        listaDeObstaculos[i]->Pinta();
+                 }
+        }
     // Dibujamos el mando
     glColor3f(0.0, 1.0, 0.0);
     mando->Pinta();
@@ -154,7 +177,7 @@ void Escena::Dibuja() {
 // Insertamos un obstaculo fijo/movil en la Escena
 void Escena::InsertaObstaculo(Obstaculo * objeto) {
 //    listaDeObstaculos->inserta(objeto);
-    listaDeObstaculos->push_front(objeto);
+//    listaDeObstaculos->push_front(objeto);
 }
 
 // Controles de movimiento

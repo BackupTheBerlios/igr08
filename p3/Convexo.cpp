@@ -12,6 +12,7 @@ Convexo::Convexo(PV* centro, GLfloat radio, int nlados) : Obstaculo(){
         Lapiz * l = new Lapiz();
         PV** listaVertices = new PV*();
         l->poligonoR2(centro, radio, nlados, listaVertices);
+        this->nVertices = nlados;
         delete vertices;
         vertices = listaVertices;
         delete l;
@@ -26,11 +27,11 @@ Convexo::~Convexo() {
 // Metodo que pinta el poligono convexo
 void Convexo::Pinta() {
         glBegin(GL_POLYGON);
-            list<PV>::iterator it;
+           // list<PV>::iterator it;
 
 //            for( it = vertices->begin(); it != vertices->end(); it++ ) {
         for (int i = 0; i<nVertices; i++){
-                glVertex2d(it->getX(), it->getY());
+                glVertex2d(this->vertices[i]->getX(), this->vertices[i]->getY());
                 }
         glEnd();
 }
