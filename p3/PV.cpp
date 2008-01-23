@@ -92,6 +92,19 @@ GLdouble PV::modulo(){
      return (sqrt(x*x+y*y));
 }
 
+// Normaliza un PV
+void PV::normaliza() {
+    GLdouble x = this->getX() / sqrt(this->getX() *
+                 this->getX() + this->getY() *
+                 this->getY());
+    
+    GLdouble y = this->getY() / sqrt(this->getX() *
+                 this->getX() + this->getY() *
+                 this->getY());
+    this->setX(x);
+    this->setX(y);
+}
+
 // Angulo con respecto a otro punto
 GLdouble PV::angulo(PV *otro){
       PV * div = *otro-*this;

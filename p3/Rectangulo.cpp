@@ -57,6 +57,7 @@ GLfloat epsilon = 0.000001f;
 
   tIn = 0;
   GLdouble tOut = 1;
+
   GLdouble tHit, num, den;
   PV * n;
   int i = -1;
@@ -66,12 +67,12 @@ GLfloat epsilon = 0.000001f;
    i++;
    n = normales[i];
    PV * verticeI = vertices[i];
-//   PV  ptang = pelota->getPuntoTangente(n);
-      PV  * ptang = pelota->getCentro();
-   PV * tmpVector = *vertices[i] - *pelota->getCentro();
-   num = tmpVector->dot(n);
+   //PV  ptang = pelota->getPuntoTangente(n);
+   //   PV  * ptang = pelota->getCentro();
+   //PV * tmpVector = *vertices[i] - *pelota->getCentro();
+   //num = tmpVector->dot(n);
 
-
+   num = (*vertices[i] - *pelota->getCentro())->dot(n);
    den = n->dot(pelota->getDireccion());
    if (fabs(den) > epsilon) { // hay tHit
       tHit = num / den;

@@ -36,6 +36,8 @@ class PV {
         GLdouble angulo(PV *otro);
         GLdouble modulo();
 
+        void normaliza();
+
         String toString();
 
         PV * unitario();

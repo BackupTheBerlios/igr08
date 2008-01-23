@@ -41,9 +41,8 @@ void Obstaculo::calculaNormales(){
             p1 = p2;
             // calcular normal
             normal = vectorArista.perpendicular();
-            // falta añadir normal a la lista.. ademas cambiar el sentido?? y hacerlo unitario
-            PV vn;
-            vn = PV(normal.getX(), normal.getY());
+            normal.normaliza();
+            PV vn = PV(normal.getX(), normal.getY());
             normales[i-1] = new PV(-normal.getX(), -normal.getY());
          }
       }
