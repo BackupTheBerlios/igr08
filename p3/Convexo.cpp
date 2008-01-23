@@ -27,9 +27,6 @@ Convexo::~Convexo() {
 // Metodo que pinta el poligono convexo
 void Convexo::Pinta() {
         glBegin(GL_POLYGON);
-           // list<PV>::iterator it;
-
-//            for( it = vertices->begin(); it != vertices->end(); it++ ) {
         for (int i = 0; i<nVertices; i++){
                 glVertex2d(this->vertices[i]->getX(), this->vertices[i]->getY());
                 }

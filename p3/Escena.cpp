@@ -134,18 +134,7 @@ void Escena::Dibuja() {
 
     // Dibujamos los obstaculos fijos/moviles
     glColor3f(0.0, 0.0, 1.0);
-           /*
-    list<Obstaculo*>::iterator it;
-    Obstaculo * obsTmp;
-    for( it = listaDeObstaculos->begin(); it != listaDeObstaculos->end(); it++ ) {
-        obsTmp = *it;
-        if (obsTmp->getEsVisible()){
-                 obsTmp->Pinta();
-         }
-    }
-*/
-
-
+           
         for (int i = 0; i < this->numObstaculos; i++){
                 if (listaDeObstaculos[i]->getEsVisible()){
                         listaDeObstaculos[i]->Pinta();

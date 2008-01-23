@@ -31,7 +31,6 @@ void Circulo::Pinta() {
         glBegin(GL_POLYGON);
             for (int i = 0 ; i< nVertices; i++){
                 glVertex2d(vertices[i]->getX(), vertices[i]->getY());
-                int borrar = 0;
                 }
         glEnd();
 }

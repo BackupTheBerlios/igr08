@@ -43,9 +43,7 @@ Rectangulo::~Rectangulo() {
 // Metodo que pinta las paredes
 void Rectangulo::Pinta() {
         glBegin(GL_POLYGON);
-                //list<PV>::iterator it;
                 for (int i = 0; i<nVertices; i++){
-//                for( it = vertices->begin(); it != vertices->end(); it++ ) {
                         glVertex2d(vertices[i]->getX(), vertices[i]->getY());
                 }
         glEnd();

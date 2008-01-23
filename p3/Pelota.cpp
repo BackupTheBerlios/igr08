@@ -38,16 +38,13 @@ Pelota::~Pelota() {
 // Metodo que pinta la pelota
 void Pelota::Pinta() {
         glBegin(GL_POLYGON);
-//            list<PV>::iterator it;
                 for (int i = 0; i<nVertices; i++){
-//            for( it = vertices->begin(); it != vertices->end(); it++ ) {
-                glVertex2d(vertices[i]->getX(), vertices[i]->getY());
+                        glVertex2d(vertices[i]->getX(), vertices[i]->getY());
                 }
         glEnd();
 }
 
 void Pelota::avanza(GLdouble t){
-//        list<PV>::iterator it;
         for (int i = 0; i<nVertices; i++){
                 vertices[i]->setX(vertices[i]->getX() + t * direccion->getX());
                 vertices[i]->setY(vertices[i]->getY() + t * direccion->getY());

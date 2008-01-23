@@ -110,8 +110,8 @@ void __fastcall TGLForm2D::FormKeyDown(TObject *Sender, WORD &Key,
 }
 //---------------------------------------------------------------------------
 // Comienza la partida previa al juego
-// Timer para la animacion
-// Inicia la configuracion de la partida
+// Timer para la animación
+// Inicia la configuración de la partida
 void __fastcall TGLForm2D::Nueva1Click(TObject *Sender)
 {
    if (scene != NULL){

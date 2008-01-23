@@ -47,24 +47,17 @@ void Lapiz::gira (GLdouble incrAng){
 }
 
 // Avanzamos al siguiente punto relativo
-void Lapiz::avanza (GLfloat longitud, bool esVisible, PV*& nuevoPunto/*, Segmento*& s*/){
+void Lapiz::avanza (GLfloat longitud, bool esVisible, PV*& nuevoPunto){
         GLfloat xD = pos -> getX() + longitud * cos (ang);
         GLfloat yD = pos -> getY() + longitud * sin (ang);
-//      PV * p = new PV(xD,yD);
-//      s = new Segmento(pos,p);
         nuevoPunto = new PV(xD,yD);
         lineTo(nuevoPunto,esVisible);
-/*        delete p;
-        p=NULL;*/
+
 }
 
-
-
 //---------------------------------------------------------------------------
 
-//---------------------------------------------------------------------------
-
-void Lapiz::poligonoR1 (GLfloat lado, int nlados, PV** listaVertices /*, DibujoLineas* dl*/){
+void Lapiz::poligonoR1 (GLfloat lado, int nlados, PV** listaVertices){
         GLdouble alfa = 360.0 / (GLdouble) nlados;
         GLdouble beta = (180.0 - alfa) / 2.0;
         GLdouble gamma = 180 - 2*beta;
@@ -72,15 +65,8 @@ void Lapiz::poligonoR1 (GLfloat lado, int nlados, PV** listaVertices /*, DibujoL
                 PV * p;
                 this->avanza(lado, true, p);
                 this->gira(gamma);
-                // hacer New para listaVertices
                 listaVertices[i] = new PV (p->getX(), p->getY());
                 int borrar = 32;
-//                delete p;
-/*                Segmento* s;
-                this->avanza(lado, true, s);
-                this->gira(gamma);
-                dl->inserta(s);
-                delete s;      */
         }
         int borrar2 = 0;
 }
