@@ -18,6 +18,7 @@ class Pelota{
         void rebota();
         PV * getDireccion(){return direccion;}
         PV getPuntoTangente(PV* );
+        PV * getCentro (){return centro;}
 
     private:
         GLdouble radio;

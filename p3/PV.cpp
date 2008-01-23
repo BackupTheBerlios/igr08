@@ -120,3 +120,15 @@ GLdouble PV::angulo(PV *otro){
       return retVal;
 }
 
+
+        PV * PV::unitario(){
+         GLdouble modulo = this->modulo();
+         PV * retVal = new PV(x/modulo, y/modulo);
+         return retVal;
+        }
+
+
+      PV * PV::inversa(){
+         PV * retVal = new PV(-x, -y);
+         return retVal;
+      }

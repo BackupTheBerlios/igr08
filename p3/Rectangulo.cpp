@@ -52,46 +52,6 @@ void Rectangulo::Pinta() {
 }
 
 bool Rectangulo::Corte(Pelota* pelota, GLdouble &tIn, PV* &normal) {
- /* GLfloat epsilon = 0.000001f;
-  int nVertices = vertices->size();
-  tIn = 0;
-  GLdouble tOut = 1;
-  GLdouble tHit, num, den;
-  PV  n;
-  int i = -1;
-  bool acabado = false;
-
-  list<PV>::iterator itVertices;
-  list<PV>::iterator itNormales;
-  itVertices = vertices->begin();
-  itNormales = normales->begin();
-//  for(  it != vertices->end(); it++ ) {
- while (i<nVertices -1  && !acabado){
-        itVertices++;
-        itNormales++;
-        n = itNormales;
-        //num  = itVertices; // faltan cosas
-        den = n*pelota->getDireccion();
-        if (fabs (den)>epsilon){ // impacto
-          tHit = num /den;
-          if (den > 0){
-                if (tHit <tOut) {tOut = tHit;}
-                }
-          else {
-                if (tHit >=tIn){
-                        tIn = tHit;
-                        normal = n;
-                        }
-                }
-     acabado = tIn > tOut; // Se han cruzado => no hay intesección
-        }
-        else { // parelelo
-        if (num <= 0) acabado = true;
-        }
-
-  }
-
-    return !acabado && !((tIn == 0) && (tIn <= tOut) && (tOut < epsilon));  */
 
 GLfloat epsilon = 0.000001f;
 
@@ -102,35 +62,31 @@ GLfloat epsilon = 0.000001f;
   int i = -1;
   bool acabado = false;
   
- while (i < nVertices - 1 && !acabado) {
-    i++;
-    n = normales[i];
-//    num = vertices[i]->menos(pelota->getPuntoTangente(n)).productoEscalar(*n);
-PV * verticeI = vertices[i];
-PV  ptang = pelota->getPuntoTangente(n);
+ while ((i < nVertices - 1) && !acabado) {
+   i++;
+   n = normales[i];
+   PV * verticeI = vertices[i];
+//   PV  ptang = pelota->getPuntoTangente(n);
+      PV  * ptang = pelota->getCentro();
+   PV * tmpVector = *vertices[i] - *pelota->getCentro();
+   num = tmpVector->dot(n);
 
 
-PV * tmpVector = *vertices[i] - pelota->getPuntoTangente(n);
-num = tmpVector->dot(n);
-
-//  num = (vertices[i]-pelota->getPuntoTangente(n)).dot(n);
-//    den = n->productoEscalar(*pelota->getSentido());
-    den = n->dot(pelota->getDireccion());
-    if (fabs(den) > epsilon) { // hay tHit
+   den = n->dot(pelota->getDireccion());
+   if (fabs(den) > epsilon) { // hay tHit
       tHit = num / den;
-      if (den > 0) {
-        if (tHit < tOut) tOut = tHit;
-      } else {
-        if (tHit >= tIn) {
-          tIn = tHit;
-          normal = n;
-        }
-      }
-      acabado = tIn > tOut; // si se han cruzado, no hay intersección
-    } else { // paralelismo
+      if (den > 0) {  // Salida
+         tOut = min (tOut, tHit);
+         }
+      else{
+         tIn = max (tIn, tHit);
+         acabado = tIn > tOut; // si se han cruzado, no hay intersección
+         }
+   }
+   else { // paralelismo
       if (num <= 0) acabado = true;
-    }
-  }
+         }
+}
   return !acabado && !((tIn == 0) && (tIn <= tOut) && (tOut < epsilon));
 }
 

@@ -38,6 +38,9 @@ class PV {
 
         String toString();
 
+        PV * unitario();
+        PV * inversa();
+
     private:
         GLdouble x;
         GLdouble y;

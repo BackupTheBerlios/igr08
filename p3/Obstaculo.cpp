@@ -44,14 +44,16 @@ void Obstaculo::calculaNormales(){
             // falta añadir normal a la lista.. ademas cambiar el sentido?? y hacerlo unitario
             PV vn;
             vn = PV(normal.getX(), normal.getY());
-            normales[i-1] = new PV(normal.getX(), normal.getY());
+            normales[i-1] = new PV(-normal.getX(), -normal.getY());
          }
       }
 
    vectorArista = PV(p0, p2);
    // calcular normal
    normal = vectorArista.perpendicular();
-   normales[i-1] = new PV(normal.getX(), normal.getY());
+   PV * normalUnitaria = normal.unitario();
+   PV * normalUniInversa = normalUnitaria->inversa();
+   normales[i-1] = new PV(normalUniInversa->getX(), normalUniInversa->getY());
    //mismo que arriba
    //   normales->push_front(normal);
  /*  PV * vn;
