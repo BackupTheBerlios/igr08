@@ -62,20 +62,21 @@ PV Pelota::getPuntoTangente(PV* normal)
  return PV(centro->getX() - coef * normal->getX(), centro->getY() - coef * normal->getY()); 
 }
 
-
+  /*
 void Pelota::rebota(PV* n){
 
-
-/*direccion->setX(-direccion->getX());
+}
+ direccion->setX(-direccion->getX());
 direccion->setY(-direccion->getY());
   */
-
-      GLdouble factor = (-2)* direccion->dot(n);
-//      PV* aux= new PV (n);
-      PV * aux = n->multiplicar(factor);
-//aux->escalar(factor);
-//      direccion->suma(aux);
-      direccion = *direccion+*aux;
-      delete aux;
+void Pelota::rebota(PV* n){
+     // GLdouble factor = (-2)* direccion->dot(n);
+      //PV * aux = n->multiplicar(factor);
+     // direccion = *direccion+*aux;
+     // delete aux;
+     PV* aux  = n - n->dot(2 * n->dot(n)/n->dot(n));
+     n = *aux;
+     delete aux;
 }
 #pragma package(smart_init)
+
