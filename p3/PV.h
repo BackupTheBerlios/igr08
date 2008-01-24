@@ -26,6 +26,8 @@ class PV {
         void setY(GLdouble Y){y=Y;}
 
         PV * puntoMedio(PV *);
+
+        PV * escalar(GLdouble);
         GLdouble dot(PV *);
         PV perpendicular();
         GLdouble distancia(PV *);

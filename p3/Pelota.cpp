@@ -12,7 +12,7 @@ Pelota::Pelota() {
         l->poligonoR2(new PV(100,0), radio, numVert, listaVertices);
         vertices = listaVertices;
         delete l;
-        centro = new PV(200,0);
+        centro = new PV(100,0);
         direccion = new PV (4,2);
         nVertices = numVert;
 }
@@ -50,10 +50,11 @@ centro->setX(centro->getX() + t * direccion->getX());
 centro->setY(centro->getY() + t * direccion->getY());
 
 
-        for (int i = 0; i<nVertices; i++){
-                vertices[i]->setX(vertices[i]->getX() + t * direccion->getX());
-                vertices[i]->setY(vertices[i]->getY() + t * direccion->getY());
-        }
+for (int i = 0; i<nVertices; i++){
+     vertices[i]->setX(vertices[i]->getX() + t * direccion->getX());
+     vertices[i]->setY(vertices[i]->getY() + t * direccion->getY());
+}
+
 }
 
 PV Pelota::getPuntoTangente(PV* normal)
@@ -74,9 +75,17 @@ void Pelota::rebota(PV* n){
       //PV * aux = n->multiplicar(factor);
      // direccion = *direccion+*aux;
      // delete aux;
-     PV* aux  = n - n->dot(2 * n->dot(n)/n->dot(n));
-     n = *aux;
-     delete aux;
+     //PV* aux  = *n - *n->escalar(2 * n->dot(n)/n->dot(n));
+
+     direccion = *centro - *n->escalar(2 * centro->dot(n)/n->dot(n));
+     direccion = direccion->unitario();
+     int col = 1;
+     //direccion->setX(direccion->getX() + n->getX());
+     //direccion->setY(direccion->getY() + n->getY());
+
+    // u.resta( n.escalar( 2 * u.dot(n) / n.dot(n) ) );
+    // n = aux;
+    // delete aux;
 }
 #pragma package(smart_init)
 

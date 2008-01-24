@@ -38,6 +38,14 @@ PV * PV::puntoMedio(PV *otro){
     return retVal;
 }
 
+// Producto escalar
+PV * PV::escalar(GLdouble num) {
+     GLdouble x = this->getX() * num;
+     GLdouble y = this->getY() * num;
+     PV * escalar = new PV(x,y);
+     return escalar;
+}
+
 // Calcula el prodcuto escalar de dos puntos
 GLdouble PV::dot(PV *otro){
      return (this->getX()* otro->getX()) + (this->getY()* otro->getY());
