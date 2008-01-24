@@ -6,7 +6,8 @@
 // Constructora por defecto
 Escena::Escena(int CW, int CH){
 
-        listaDeObstaculos = new Obstaculo*();
+//        listaDeObstaculos = new Obstaculo*();
+        listaDeObstaculos = new Obstaculo*[60];
         ratioViewPort = 1.0;
         xRight =  CW / 2;
         xLeft  = -xRight;
@@ -45,18 +46,28 @@ Escena::Escena(int CW, int CH){
         // Cargamos los obstaculos
 
 
+        listaDeObstaculos[0] = new Circulo(new PV(-200,100), 20);
+        listaDeObstaculos[1] = new Circulo(new PV(-200,150), 20);
+        listaDeObstaculos[2] = new Circulo(new PV(-100,100), 20);
+        listaDeObstaculos[3] = new Circulo(new PV(-100,150), 20);
+        listaDeObstaculos[4] = new Circulo(new PV(0,100), 20);
+        listaDeObstaculos[5] = new Circulo(new PV(0,150), 20);
+        listaDeObstaculos[6] = new Circulo(new PV(100,100), 20);
+        listaDeObstaculos[7] = new Circulo(new PV(100,150), 20);
+        listaDeObstaculos[8] = new Circulo(new PV(200,100), 20);
+        listaDeObstaculos[9] = new Circulo(new PV(200,150), 20);
+
+        listaDeObstaculos[10] = new Convexo(new PV(-150,100), 20,5);
+        listaDeObstaculos[11] = new Convexo(new PV(-150,150), 20,5);
+        listaDeObstaculos[12] = new Convexo(new PV(-50,100), 20,5);
+        listaDeObstaculos[13] = new Convexo(new PV(-50,150), 20,5);
+        listaDeObstaculos[14] = new Convexo(new PV(50,100), 20,5);
+        listaDeObstaculos[15] = new Convexo(new PV(50,150), 20,5);
+        listaDeObstaculos[16] = new Convexo(new PV(150,100), 20,5);
+        listaDeObstaculos[17] = new Convexo(new PV(150,150), 20,5);
 
 
-        listaDeObstaculos[0] = new Circulo(new PV(50,50), 20);
-        listaDeObstaculos[1] = new Convexo(new PV(100,100), 20,5);
-        /*listaDeObstaculos[2] = new Circulo(new PV(70,50), 20);
-        listaDeObstaculos[3] = new Convexo(new PV(120,100), 20,5);
-        listaDeObstaculos[4] = new Circulo(new PV(90,50), 20);
-        listaDeObstaculos[5] = new Convexo(new PV(140,100), 20,5);
-
-          */
-
-        this->numObstaculos = 2;
+        this->numObstaculos = 18;
 
         /*
         PV * centroObj1 = new PV(100,100);

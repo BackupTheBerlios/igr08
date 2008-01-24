@@ -10,9 +10,11 @@ Convexo::Convexo(PV** listaVertices): Obstaculo(listaVertices) {calculaNormales(
 
 Convexo::Convexo(PV* centro, GLfloat radio, int nlados) : Obstaculo(){
         Lapiz * l = new Lapiz();
-        PV** listaVertices = new PV*();
+        nVertices = nlados;
+        PV** listaVertices = new PV*[nVertices];
+//        PV** listaVertices = new PV*();
         l->poligonoR2(centro, radio, nlados, listaVertices);
-        this->nVertices = nlados;
+
         delete vertices;
         vertices = listaVertices;
         delete l;
