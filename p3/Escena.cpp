@@ -47,8 +47,15 @@ Escena::Escena(int CW, int CH){
 
 
 
-       listaDeObstaculos[0] = new Circulo(new PV(50,50), 50);
-       listaDeObstaculos[1] = new Convexo(new PV(100,100), 50,5);
+        listaDeObstaculos[0] = new Circulo(new PV(50,50), 20);
+        listaDeObstaculos[1] = new Convexo(new PV(100,100), 20,5);
+        /*listaDeObstaculos[2] = new Circulo(new PV(70,50), 20);
+        listaDeObstaculos[3] = new Convexo(new PV(120,100), 20,5);
+        listaDeObstaculos[4] = new Circulo(new PV(90,50), 20);
+        listaDeObstaculos[5] = new Convexo(new PV(140,100), 20,5);
+
+          */
+
         this->numObstaculos = 2;
 
         /*

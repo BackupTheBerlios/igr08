@@ -9,10 +9,10 @@ Pelota::Pelota() {
         radio = 10;
         int numVert = 30;
         PV** listaVertices = new PV*[numVert];
-        l->poligonoR2(new PV(100,0), radio, numVert, listaVertices);
+        l->poligonoR2(new PV(200,0), radio, numVert, listaVertices);
         vertices = listaVertices;
         delete l;
-        centro = new PV(100,0);
+        centro = new PV(200,0);
         direccion = new PV (4,2);
         nVertices = numVert;
 }
