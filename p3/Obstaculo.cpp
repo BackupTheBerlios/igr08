@@ -25,6 +25,16 @@ void Obstaculo::Pinta(){
 }
 
 void Obstaculo::calculaNormales(){
+  normales = new PV*[nVertices];
+  for (int i = 0; i < nVertices; i++) {
+    PV* unPunto = vertices[i];
+    PV* otroPunto = vertices[(i+1)%nVertices];
+    PV* normal = new PV(unPunto->getY() - otroPunto->getY(), otroPunto->getX() - unPunto->getX());
+    normal->normaliza();
+    normales[i] = normal;
+  }
+  return;
+
 //   list<PV>::iterator it;
    normales = new PV*[nVertices];
    PV p0, p1, p2, vectorArista, normal;

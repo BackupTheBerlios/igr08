@@ -102,7 +102,7 @@ void PV::normaliza() {
                  this->getX() + this->getY() *
                  this->getY());
     this->setX(x);
-    this->setX(y);
+    this->setY(y);
 }
 
 // Angulo con respecto a otro punto

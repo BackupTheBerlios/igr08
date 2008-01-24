@@ -45,6 +45,11 @@ void Pelota::Pinta() {
 }
 
 void Pelota::avanza(GLdouble t){
+
+centro->setX(centro->getX() + t * direccion->getX());
+centro->setY(centro->getY() + t * direccion->getY());
+
+
         for (int i = 0; i<nVertices; i++){
                 vertices[i]->setX(vertices[i]->getX() + t * direccion->getX());
                 vertices[i]->setY(vertices[i]->getY() + t * direccion->getY());
