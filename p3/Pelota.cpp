@@ -9,7 +9,7 @@ Pelota::Pelota() {
         radio = 10;
         int numVert = 30;
         PV** listaVertices = new PV*[numVert];
-        l->poligonoR2(new PV(200,0), radio, numVert, listaVertices);
+        l->poligonoR2(new PV(100,0), radio, numVert, listaVertices);
         vertices = listaVertices;
         delete l;
         centro = new PV(200,0);
@@ -63,10 +63,19 @@ PV Pelota::getPuntoTangente(PV* normal)
 }
 
 
-void Pelota::rebota(){
-direccion->setX(-direccion->getX());
+void Pelota::rebota(PV* n){
+
+
+/*direccion->setX(-direccion->getX());
 direccion->setY(-direccion->getY());
+  */
 
-
+      GLdouble factor = (-2)* direccion->dot(n);
+//      PV* aux= new PV (n);
+      PV * aux = n->multiplicar(factor);
+//aux->escalar(factor);
+//      direccion->suma(aux);
+      direccion = *direccion+*aux;
+      delete aux;
 }
 #pragma package(smart_init)

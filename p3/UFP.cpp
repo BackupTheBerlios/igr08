@@ -20,7 +20,7 @@ void __fastcall TGLForm2D::FormCreate(TObject *Sender)
     	ShowMessage(":-)~ hrc == NULL");
     if(wglMakeCurrent(hdc, hrc) == false)
     	ShowMessage("Could not MakeCurrent");
-    //Cor de fondo de la ventana
+    //Color de fondo de la ventana
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
     estado = 0;

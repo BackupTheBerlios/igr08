@@ -87,6 +87,7 @@ GLfloat epsilon = 0.000001f;
         if (num <= 0) acabado = true;
         }
 }
+  normal = n;
   return !acabado && !((tIn == 0) && (tIn <= tOut) && (tOut < epsilon));
 }
 

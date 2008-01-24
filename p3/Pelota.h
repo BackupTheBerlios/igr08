@@ -15,7 +15,8 @@ class Pelota{
         void Pinta();
         void avanza(GLdouble);
 //        bool DetectarObstaculo();
-        void rebota();
+//        void rebota();
+        void rebota(PV* n);
         PV * getDireccion(){return direccion;}
         PV getPuntoTangente(PV* );
         PV * getCentro (){return centro;}
