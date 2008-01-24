@@ -67,7 +67,8 @@ GLfloat epsilon = 0.000001f;
    PV * verticeI = vertices[i];
    PV  ptang = pelota->getPuntoTangente(n);
    //   PV  * ptang = pelota->getCentro();
-   PV * tmpVector = *vertices[i] - *pelota->getCentro();
+//   PV * tmpVector = *vertices[i] - *pelota->getCentro();
+   PV * tmpVector = *vertices[i] - pelota->getPuntoTangente(n);
    num = tmpVector->dot(n);
 
   // num = (*vertices[i] - *pelota->getCentro())->dot(n);
@@ -83,8 +84,8 @@ GLfloat epsilon = 0.000001f;
          }
    }
    else { // paralelismo
-      if (num <= 0) acabado = true;
-         }
+        if (num <= 0) acabado = true;
+        }
 }
   return !acabado && !((tIn == 0) && (tIn <= tOut) && (tOut < epsilon));
 }

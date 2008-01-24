@@ -62,4 +62,11 @@ PV Pelota::getPuntoTangente(PV* normal)
  return PV(centro->getX() - coef * normal->getX(), centro->getY() - coef * normal->getY()); 
 }
 
+
+void Pelota::rebota(){
+direccion->setX(-direccion->getX());
+direccion->setY(-direccion->getY());
+
+
+}
 #pragma package(smart_init)

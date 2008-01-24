@@ -202,8 +202,9 @@ void Escena::avanza(){
         GLdouble tIN;
 //        paredPierde
       if (paredDcha ->Corte(this->pelota, tIN, normal)){
-           pelota->avanza(tIN);
-           ShowMessage("Hay corte");
+            pelota->avanza(tIN);
+            pelota->rebota(); // no funciona
+//           ShowMessage("Hay corte");
            }
            else {
                pelota->avanza(1);
