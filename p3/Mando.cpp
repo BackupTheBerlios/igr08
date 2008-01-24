@@ -38,7 +38,7 @@ void Mando::Mueve (PV mov) {
         posicion->setX(posicion->getX() + mov.getX());
 }
 
-bool Mando:: corte(){
+bool Mando::corte(Pelota* pelota, GLdouble &tIn, PV* &normal){ 
 // Implemntar Cyrus - Beck
 
 }

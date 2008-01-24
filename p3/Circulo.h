@@ -13,11 +13,15 @@ class Circulo : public Obstaculo{
         ~Circulo();
         void Pinta();
 
+
         bool corte(Pelota* pelota, GLdouble &tIn, PV* &normal);
+ 
 
     private:
         PV* centro;
         GLfloat radio;
+/* ??????  */
+        PV * unaNormal;
 
 
 };

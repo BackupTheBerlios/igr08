@@ -19,6 +19,7 @@ class Pelota{
         PV * getDireccion(){return direccion;}
         PV getPuntoTangente(PV* );
         PV * getCentro (){return centro;}
+        GLdouble getRadio(){return radio;}
 
     private:
         GLdouble radio;

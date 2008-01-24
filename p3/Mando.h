@@ -9,7 +9,7 @@ class Mando : public Convexo {
         Mando();
         ~Mando();
         Mando(PV**, PV *, int);
-        bool corte();
+        bool corte(Pelota* pelota, GLdouble &tIn, PV* &normal); 
 
         void Pinta();
         void Mueve(PV);
