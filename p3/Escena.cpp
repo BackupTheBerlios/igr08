@@ -69,16 +69,7 @@ Escena::Escena(int CW, int CH){
 
         this->numObstaculos = 18;
 
-        /*
-        PV * centroObj1 = new PV(100,100);
-        PV * centroObj2 = new PV(50,50);
-        Obstaculo * c1 = new Convexo(centroObj1, 50,5);
-        Obstaculo * c2 = new Circulo(centroObj2, 50);
-        listaDeObstaculos-> push_front(c1);
-        listaDeObstaculos-> push_front(c2);
-        delete centroObj1;
-        delete centroObj2;
-            */
+
         // Cargamos la pelota
         pelota = new Pelota();
 
@@ -92,19 +83,9 @@ Escena::Escena(int CW, int CH){
 
 // Destructora de clase
 Escena::~Escena(){
-
-/*        list<Obstaculo*>::iterator it;
-        Obstaculo * obsTmp;
-        for( it = listaDeObstaculos->begin(); it != listaDeObstaculos->end(); it++ ) {
-                obsTmp = *it;
-                delete obsTmp;
-        }*/
-
         for (int i= 0; i<numObstaculos; i++){
                 delete listaDeObstaculos[i];
         }
-
-
         delete listaDeObstaculos;
         delete mando;
         delete pelota;
@@ -152,7 +133,7 @@ void Escena::Dibuja() {
 
     // Dibujamos los obstaculos fijos/moviles
     glColor3f(0.0, 0.0, 1.0);
-           
+
         for (int i = 0; i < this->numObstaculos; i++){
                 if (listaDeObstaculos[i]->getEsVisible()){
                         listaDeObstaculos[i]->Pinta();
@@ -173,7 +154,7 @@ void Escena::Dibuja() {
     glColor3f(1.0, 0.0, 0.0);
     if (!estado)
       pelota->Pinta();
-     
+
 /*    // Ejecutar lista de comandos en espera
     glFlush();
 
