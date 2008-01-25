@@ -51,46 +51,45 @@ void Rectangulo::Pinta() {
 
 bool Rectangulo::Corte(Pelota* pelota, GLdouble &tIn, PV* &normal) {
 
-GLfloat epsilon = 0.000001f;
+  GLfloat epsilon = 0.000001f;
 
   tIn = 0;
   GLdouble tOut = 1;
+  GLdouble tHit;
+  GLdouble num, den;
 
-  GLdouble tHit, num, den;
   PV * n;
   int i = -1;
-  bool acabado = false;
-  
- while ((i < nVertices - 1) && !acabado) {
-   i++;
-   n = normales[i];
-   PV * verticeI = vertices[i];
-   PV  ptang = pelota->getPuntoTangente(n);
-   //   PV  * ptang = pelota->getCentro();
-//   PV * tmpVector = *vertices[i] - *pelota->getCentro();
-   PV * tmpVector = *vertices[i] - pelota->getPuntoTangente(n);
-   num = tmpVector->dot(n);
+  bool enc = false;
 
-  // num = (*vertices[i] - *pelota->getCentro())->dot(n);
-   den = n->dot(pelota->getDireccion());
-   if (fabs(den) > epsilon) { // hay tHit
+
+  while (i < nVertices - 1 && !enc) {
+    i++;
+    n = normales[i];
+
+    PV ptang = pelota->getPuntoTangente(n);
+    PV * tmpVector = *vertices[i] - pelota->getPuntoTangente(n);
+
+    num = tmpVector->dot(n);
+    den = n->dot(pelota->getDireccion());
+
+    if (fabs(den) > epsilon) { // hay tHit
       tHit = num / den;
-      if (den > 0) {  // Salida
-         tOut = min (tOut, tHit);
-         }
-      else{
-         tIn = max (tIn, tHit);
-         acabado = tIn > tOut; // si se han cruzado, no hay intersección
-         }
-   }
-   else { // paralelismo
-        if (num <= 0) acabado = true;
+      if (den > 0) {
+        if (tHit < tOut) tOut = tHit;
+      } else {
+        if (tHit >= tIn) {
+          tIn = tHit;
+          normal = n;
         }
+      }
+      enc = tIn > tOut; // si se han cruzado, no hay intersección
+    } else { // paralelismo
+      if (num <= 0) enc = true;
+    }
+  }
+  return !enc && !((tIn == 0) && (tIn <= tOut) && (tOut < epsilon));
 }
-  normal = n;
-  return !acabado && !((tIn == 0) && (tIn <= tOut) && (tOut < epsilon));
-}
-
 
 
 #pragma package(smart_init)

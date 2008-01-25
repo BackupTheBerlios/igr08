@@ -187,7 +187,17 @@ void __fastcall TGLForm2D::Timer1Timer(TObject *Sender)
 Timer1->Enabled = false;
 
 if (play){
-    this->scene->avanza();
+    scene->avanza();
+    if (!scene->getJuego()) {
+       String numero = IntToStr(scene->getNumVidas());
+       ShowMessage("Te quedan "+ numero + " vidas");
+       if (scene->getNumVidas() > 0)
+          scene->setJuego();
+       else {
+         ShowMessage("Fin del juego");
+         play = false;
+       }
+    }
     GLScene();
     }
 Timer1->Enabled = true;

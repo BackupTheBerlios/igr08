@@ -9,11 +9,11 @@ Pelota::Pelota() {
         radio = 10;
         int numVert = 30;
         PV** listaVertices = new PV*[numVert];
-        l->poligonoR2(new PV(100,0), radio, numVert, listaVertices);
+        l->poligonoR2(new PV(0,-180), radio, numVert, listaVertices);
         vertices = listaVertices;
         delete l;
-        centro = new PV(100,0);
-        direccion = new PV (4,2);
+        centro = new PV(0,-180);
+        direccion = new PV (2,4);
         nVertices = numVert;
 }
 
@@ -63,29 +63,11 @@ PV Pelota::getPuntoTangente(PV* normal)
  return PV(centro->getX() - coef * normal->getX(), centro->getY() - coef * normal->getY()); 
 }
 
-  /*
 void Pelota::rebota(PV* n){
-
-}
- direccion->setX(-direccion->getX());
-direccion->setY(-direccion->getY());
-  */
-void Pelota::rebota(PV* n){
-     // GLdouble factor = (-2)* direccion->dot(n);
-      //PV * aux = n->multiplicar(factor);
-     // direccion = *direccion+*aux;
-     // delete aux;
-     //PV* aux  = *n - *n->escalar(2 * n->dot(n)/n->dot(n));
-
-     direccion = *centro - *n->escalar(2 * centro->dot(n)/n->dot(n));
-     direccion = direccion->unitario();
-     int col = 1;
-     //direccion->setX(direccion->getX() + n->getX());
-     //direccion->setY(direccion->getY() + n->getY());
-
-    // u.resta( n.escalar( 2 * u.dot(n) / n.dot(n) ) );
-    // n = aux;
-    // delete aux;
+     GLdouble factor = (-2)* direccion->dot(n);
+     PV * aux = n->multiplicar(factor);
+     direccion = *direccion+*aux;
+     delete aux;
 }
 #pragma package(smart_init)
 

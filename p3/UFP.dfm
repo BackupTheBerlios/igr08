@@ -24,7 +24,7 @@ object GLForm2D: TGLForm2D
   PixelsPerInch = 96
   TextHeight = 13
   object Timer1: TTimer
-    Interval = 100
+    Interval = 10
     OnTimer = Timer1Timer
     Left = 24
   end

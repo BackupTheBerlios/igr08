@@ -23,6 +23,10 @@ class Escena {
       void Teclado(WORD&);
       void avanza();
 
+      bool getJuego();
+      void setJuego();
+      int getNumVidas();
+
    private:
       GLfloat xRight, xLeft;
       GLfloat yTop, yBot;
@@ -30,6 +34,7 @@ class Escena {
       float ratioViewPort;
       Obstaculo** listaDeObstaculos;
       bool estado;
+      int numVidas;
       int numObstaculos;
 
       Mando * mando;

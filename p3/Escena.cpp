@@ -16,6 +16,7 @@ Escena::Escena(int CW, int CH){
         ClientWidth = CW;
         ClientHeight = CH;
         estado = false;
+        numVidas = 4;
         this->numObstaculos = 0;
 
         // Cargamos las paredes que limitan el espacio del juego
@@ -152,7 +153,7 @@ void Escena::Dibuja() {
 
     // Dibujamos la pelota
     glColor3f(1.0, 0.0, 0.0);
-    if (!estado)
+   // if (estado)
       pelota->Pinta();
 
 /*    // Ejecutar lista de comandos en espera
@@ -197,18 +198,39 @@ void Escena::Teclado(WORD& Key) {
 
 }
 void Escena::avanza(){
-        PV * normal;
-        GLdouble tIN;
-//        paredPierde
-      if (paredDcha ->Corte(this->pelota, tIN, normal)){
-            pelota->avanza(tIN);
-            pelota->rebota(normal); // no funciona
-          // ShowMessage("Hay corte");
-           }
-           else {
-               pelota->avanza(1);
-           }
+     PV * normal;
+     GLdouble tIN;
 
+     estado = true;
+     
+      if (paredDcha->Corte(this->pelota, tIN, normal) ||
+          paredIzq->Corte(this->pelota, tIN, normal) ||
+          paredArriba->Corte(this->pelota, tIN, normal) ||
+          mando->Corte(this->pelota, tIN, normal)) {
+            pelota->avanza(tIN);
+            pelota->rebota(normal);
+           }
+      else if (paredPierde->Corte(this->pelota, tIN, normal)) {
+            estado = false;
+            numVidas--;
+             }
+           else {
+            pelota->avanza(1);
+           }
+}
+
+bool Escena::getJuego(){
+   return estado;
+}
+
+void Escena::setJuego(){
+   delete pelota;
+   pelota = new Pelota();
+   estado = true;
+}
+
+int Escena::getNumVidas() {
+   return numVidas;
 }
 
 /*

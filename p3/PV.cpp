@@ -102,15 +102,15 @@ GLdouble PV::modulo(){
 
 // Normaliza un PV
 void PV::normaliza() {
-    GLdouble x = this->getX() / sqrt(this->getX() *
+    GLfloat x = this->getX() / sqrt(this->getX() *
                  this->getX() + this->getY() *
                  this->getY());
-    
-    GLdouble y = this->getY() / sqrt(this->getX() *
-                 this->getX() + this->getY() *
-                 this->getY());
-    this->setX(x);
-    this->setY(y);
+
+    GLfloat y = this->getY() / sqrt(this->getX() *
+                this->getX() + this->getY() *
+                this->getY());
+    this->setX((int)x);
+    this->setY((int)y);
 }
 
 // Angulo con respecto a otro punto
