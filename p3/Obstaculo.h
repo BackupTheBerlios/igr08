@@ -13,7 +13,7 @@ class Obstaculo {
         Obstaculo(PV** lv);
         virtual ~Obstaculo();
 //        virtual bool corte() {}
-        virtual bool corte(Pelota* pelota, GLdouble &tIn, PV* &normal){}
+        virtual bool Corte(Pelota* pelota, GLdouble &tIn, PV* &normal){}
 
         virtual void Pinta();
         bool getEsVisible(){return esVisible;}

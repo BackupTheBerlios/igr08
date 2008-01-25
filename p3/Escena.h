@@ -27,6 +27,8 @@ class Escena {
       void setJuego();
       int getNumVidas();
 
+      bool haChocadoConObstaculos(GLdouble &, PV* &);
+
    private:
       GLfloat xRight, xLeft;
       GLfloat yTop, yBot;
@@ -35,6 +37,7 @@ class Escena {
       Obstaculo** listaDeObstaculos;
       bool estado;
       int numVidas;
+      int puntos;
       int numObstaculos;
 
       Mando * mando;

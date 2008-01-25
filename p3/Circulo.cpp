@@ -37,7 +37,7 @@ void Circulo::Pinta() {
 
 
 //---------------------------------------------------------------------------
-bool Circulo::corte(Pelota* pelota, GLdouble &tIn, PV* &normal) {
+bool Circulo::Corte(Pelota* pelota, GLdouble &tIn, PV* &normal) {
   PV * pc =  new PV(*centro->operator -(*pelota->getCentro()));
   PV *pc_borrar = new PV(centro->getX() - pelota->getCentro()->getX(), centro->getY() - pelota->getCentro()->getY());
   PV *s = pelota->getDireccion();

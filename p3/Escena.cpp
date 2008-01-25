@@ -17,6 +17,7 @@ Escena::Escena(int CW, int CH){
         ClientHeight = CH;
         estado = false;
         numVidas = 4;
+        puntos = 0;
         this->numObstaculos = 0;
 
         // Cargamos las paredes que limitan el espacio del juego
@@ -206,7 +207,8 @@ void Escena::avanza(){
       if (paredDcha->Corte(this->pelota, tIN, normal) ||
           paredIzq->Corte(this->pelota, tIN, normal) ||
           paredArriba->Corte(this->pelota, tIN, normal) ||
-          mando->Corte(this->pelota, tIN, normal)) {
+          mando->Corte(this->pelota, tIN, normal) ||
+          haChocadoConObstaculos(tIN, normal)) {
             pelota->avanza(tIN);
             pelota->rebota(normal);
            }
@@ -231,6 +233,24 @@ void Escena::setJuego(){
 
 int Escena::getNumVidas() {
    return numVidas;
+}
+
+
+bool Escena::haChocadoConObstaculos(GLdouble &tIN, PV* &normal) {
+
+   int i = 0;
+   bool enc = false;
+   /* FALTA ARREGLAR ALGO, CREO Q FALLA EN CIRCULO
+   while (i<numObstaculos && !enc) {
+      if (listaDeObstaculos[i]->getEsVisible()) {
+         if (listaDeObstaculos[i]->Corte(this->pelota, tIN, normal)) {
+            puntos += 10;
+            enc = true;
+         }
+      }
+      i++;
+   }   */
+   return enc;
 }
 
 /*
