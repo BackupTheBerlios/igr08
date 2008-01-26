@@ -19,6 +19,10 @@ Convexo::Convexo(PV* centro, GLfloat radio, int nlados) : Obstaculo(){
         vertices = listaVertices;
         delete l;
         calculaNormales();
+        for (int i = 0; i < nVertices; i++) {
+            normales[i] = normales[i]->inversa();
+        }
+        int borrar = 0;
 }
 
 // Destructora
@@ -28,9 +32,25 @@ Convexo::~Convexo() {
 
 // Metodo que pinta el poligono convexo
 void Convexo::Pinta() {
+   glColor3f(0.0, 0.0, 1.0);
         glBegin(GL_POLYGON);
         for (int i = 0; i<nVertices; i++){
                 glVertex2d(this->vertices[i]->getX(), this->vertices[i]->getY());
+                }
+        glEnd();
+  ///////////////////////////////////
+  PV** puntosMedios = new PV*[nVertices];
+  for (int i = 0; i < nVertices; i++) {
+    PV* unPunto = vertices[i];
+    PV* otroPunto = vertices[(i+1)%nVertices];
+    PV* puntoMedio = new PV((unPunto->getX() + otroPunto->getX())/2, (unPunto->getY() + otroPunto->getY())/2);
+    puntosMedios[i] = puntoMedio;
+  }
+       glColor3f(1.0, 1.0, 1.0);
+        glBegin(GL_LINES);
+        for (int i = 0; i<nVertices; i++){
+                glVertex2d(puntosMedios[i]->getX(), puntosMedios[i]->getY());
+                glVertex2d(puntosMedios[i]->getX()+(normales[i]->getX()*20), puntosMedios[i]->getY()+(normales[i]->getY()*20));
                 }
         glEnd();
 }

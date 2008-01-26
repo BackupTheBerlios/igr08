@@ -47,6 +47,22 @@ void Rectangulo::Pinta() {
                         glVertex2d(vertices[i]->getX(), vertices[i]->getY());
                 }
         glEnd();
+
+///////////////////////////////////
+  PV** puntosMedios = new PV*[nVertices];
+  for (int i = 0; i < nVertices; i++) {
+    PV* unPunto = vertices[i];
+    PV* otroPunto = vertices[(i+1)%nVertices];
+    PV* puntoMedio = new PV((unPunto->getX() + otroPunto->getX())/2, (unPunto->getY() + otroPunto->getY())/2);
+    puntosMedios[i] = puntoMedio;
+  }
+       glColor3f(1.0, 1.0, 1.0);
+        glBegin(GL_LINES);
+        for (int i = 0; i<nVertices; i++){
+                glVertex2d(puntosMedios[i]->getX(), puntosMedios[i]->getY());
+                glVertex2d(puntosMedios[i]->getX()+(normales[i]->getX()*20), puntosMedios[i]->getY()+(normales[i]->getY()*20));
+                }
+        glEnd();
 }
 
 bool Rectangulo::Corte(Pelota* pelota, GLdouble &tIn, PV* &normal) {
