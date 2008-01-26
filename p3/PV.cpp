@@ -106,11 +106,20 @@ void PV::normaliza() {
                  this->getX() + this->getY() *
                  this->getY());
 
+        x = this->getX() / this->modulo();
+
     GLfloat y = this->getY() / sqrt(this->getX() *
                 this->getX() + this->getY() *
                 this->getY());
-    this->setX((int)x);
-    this->setY((int)y);
+
+    y = this->getY() / this->modulo();
+
+    this->setX(x);
+    this->setY(y);
+
+
+  /*  this->setX((int)x);
+    this->setY((int)y);*/
 }
 
 // Angulo con respecto a otro punto
