@@ -33,33 +33,24 @@ object Form1: TForm1
     Height = 13
     Caption = 'Vidas restantes'
   end
-  object Puntos: TEdit
-    Left = 72
-    Top = 96
-    Width = 153
-    Height = 65
-    BorderStyle = bsNone
-    Color = clBtnFace
+  object Puntos: TLabel
+    Left = 64
+    Top = 104
+    Width = 137
+    Height = 75
+    Caption = '0'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlue
     Font.Height = -67
     Font.Name = 'Times New Roman'
     Font.Style = [fsBold, fsItalic]
     ParentFont = False
-    ParentShowHint = False
-    ShowHint = False
-    TabOrder = 0
-    Text = '0'
   end
-  object Vidas: TEdit
-    Left = 96
+  object Vidas: TLabel
+    Left = 112
     Top = 24
-    Width = 121
-    Height = 21
-    BorderStyle = bsNone
-    Color = clBtnFace
-    ReadOnly = True
-    TabOrder = 1
-    Text = '3'
+    Width = 6
+    Height = 13
+    Caption = '3'
   end
 end

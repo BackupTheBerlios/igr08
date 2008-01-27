@@ -15,10 +15,10 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 }
 //---------------------------------------------------------------------------
 void TForm1::setPuntos(int p){
-        Puntos->Text = p;
+        Puntos->Caption = p;
 }
 
 void TForm1::setVidas(int v){
-        Vidas->Text = v;
+        Vidas->Caption = v;
 }
 

@@ -17,7 +17,8 @@ Escena::Escena(int CW, int CH){
         ClientHeight = CH;
         estado = false;
         numVidas = 3;
-        Form1->Vidas->Text = numVidas;
+        Form1->setVidas(numVidas);
+//        Form1->Vidas->Text = numVidas;
         puntos = 0;
         this->numObstaculos = 0;
 

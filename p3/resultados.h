@@ -13,8 +13,8 @@ class TForm1 : public TForm
 __published:	// IDE-managed Components
         TLabel *LabelPuntos;
         TLabel *LabelVidas;
-        TEdit *Puntos;
-        TEdit *Vidas;
+        TLabel *Puntos;
+        TLabel *Vidas;
 private:	// User declarations
 public:		// User declarations
         __fastcall TForm1(TComponent* Owner);
