@@ -203,9 +203,8 @@ void Escena::Teclado(WORD& Key) {
 void Escena::avanza(){
      PV * normal;
      GLdouble tIN;
-
      estado = true;
-     
+
       if (paredDcha->Corte(this->pelota, tIN, normal) ||
           paredIzq->Corte(this->pelota, tIN, normal) ||
           paredArriba->Corte(this->pelota, tIN, normal) ||
@@ -214,7 +213,7 @@ void Escena::avanza(){
             pelota->avanza(tIN);
             pelota->rebota(normal);
             if (numObstaculosVivos == 0){
-                ShowMessage("Has ganado");
+               ShowMessage("Has ganado");
                 pelota->stop();
             }
            }

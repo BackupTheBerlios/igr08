@@ -123,7 +123,9 @@ void __fastcall TGLForm2D::Nueva1Click(TObject *Sender)
   estado = 1;
   scene = new Escena(ClientWidth,ClientHeight);
   GLScene();
-        Form1->Visible= true;
+  Form1->Visible= true;
+  Form1->setPuntos(0);
+  Form1->setVidas(3);
 }
 //---------------------------------------------------------------------------
 void __fastcall TGLForm2D::Iniciar1Click(TObject *Sender)
