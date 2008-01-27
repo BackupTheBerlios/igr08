@@ -14,18 +14,18 @@ object Form1: TForm1
   PixelsPerInch = 96
   TextHeight = 13
   object LabelPuntos: TLabel
-    Left = 48
+    Left = 64
     Top = 24
     Width = 33
     Height = 13
     Caption = 'Puntos'
   end
   object LabelVidas: TLabel
-    Left = 48
+    Left = 24
     Top = 48
-    Width = 26
+    Width = 72
     Height = 13
-    Caption = 'Vidas'
+    Caption = 'Vidas restantes'
   end
   object Puntos: TEdit
     Left = 104
@@ -33,7 +33,7 @@ object Form1: TForm1
     Width = 121
     Height = 21
     TabOrder = 0
-    Text = 'Puntos'
+    Text = '0'
   end
   object Vidas: TEdit
     Left = 104
@@ -41,6 +41,6 @@ object Form1: TForm1
     Width = 121
     Height = 21
     TabOrder = 1
-    Text = 'Vidas'
+    Text = '4'
   end
 end

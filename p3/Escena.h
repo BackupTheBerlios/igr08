@@ -6,6 +6,7 @@
 #include "Obstaculo.h"
 #include "Convexo.h"
 #include "Circulo.h"
+#include "resultados.h"
 #ifndef EscenaH
 #define EscenaH
 //---------------------------------------------------------------------------
@@ -39,6 +40,7 @@ class Escena {
       int numVidas;
       int puntos;
       int numObstaculos;
+      int numObstaculosVivos;
 
       Mando * mando;
       Pelota * pelota;

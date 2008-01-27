@@ -69,6 +69,7 @@ Escena::Escena(int CW, int CH){
         listaDeObstaculos[7] = new Convexo(new PV(150,150), 20,5);
 
         this->numObstaculos = 8;
+        this->numObstaculosVivos = numObstaculos;
 
 
         // Cargamos la pelota
@@ -210,6 +211,10 @@ void Escena::avanza(){
           haChocadoConObstaculos(tIN, normal)) {
             pelota->avanza(tIN);
             pelota->rebota(normal);
+            if (numObstaculosVivos == 0){
+                ShowMessage("Has ganado");
+                pelota->stop();
+            }
            }
       else if (paredPierde->Corte(this->pelota, tIN, normal)) {
             estado = false;
@@ -245,6 +250,8 @@ bool Escena::haChocadoConObstaculos(GLdouble &tIN, PV* &normal) {
          if (listaDeObstaculos[i]->Corte(this->pelota, tIN, normal)) {
             puntos += 10;
             listaDeObstaculos[i]->setEsVisible(false);
+            this->numObstaculosVivos--;
+            Form1->setPuntos(puntos);
             enc = true;
          }
       }

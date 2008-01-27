@@ -191,8 +191,8 @@ Timer1->Enabled = false;
 if (play){
     scene->avanza();
     if (!scene->getJuego()) {
-       String numero = IntToStr(scene->getNumVidas());
-       ShowMessage("Te quedan "+ numero + " vidas");
+      /* String numero = IntToStr(scene->getNumVidas());
+       ShowMessage("Te quedan "+ numero + " vidas");*/
        Form1->setVidas(scene->getNumVidas());
        if (scene->getNumVidas() > 0)
           scene->setJuego();

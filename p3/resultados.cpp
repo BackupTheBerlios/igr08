@@ -21,3 +21,4 @@ void TForm1::setPuntos(int p){
 void TForm1::setVidas(int v){
         Vidas->Text = v;
 }
+

@@ -17,6 +17,7 @@ class Pelota{
 //        bool DetectarObstaculo();
 //        void rebota();
         void rebota(PV* n);
+        void stop(){delete direccion; direccion = new PV (0,0);}
         PV * getDireccion(){return direccion;}
         PV getPuntoTangente(PV* );
         PV * getCentro (){return centro;}
