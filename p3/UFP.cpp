@@ -27,6 +27,7 @@ void __fastcall TGLForm2D::FormCreate(TObject *Sender)
     play = false;
     scene = NULL;
 
+
     // Inicializar mando etc.
 }
 //---------------------------------------------------------------------------
@@ -122,6 +123,7 @@ void __fastcall TGLForm2D::Nueva1Click(TObject *Sender)
   estado = 1;
   scene = new Escena(ClientWidth,ClientHeight);
   GLScene();
+        Form1->Visible= true;
 }
 //---------------------------------------------------------------------------
 void __fastcall TGLForm2D::Iniciar1Click(TObject *Sender)
@@ -191,6 +193,7 @@ if (play){
     if (!scene->getJuego()) {
        String numero = IntToStr(scene->getNumVidas());
        ShowMessage("Te quedan "+ numero + " vidas");
+       Form1->setVidas(scene->getNumVidas());
        if (scene->getNumVidas() > 0)
           scene->setJuego();
        else {

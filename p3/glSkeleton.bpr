@@ -5,12 +5,13 @@
     <VERSION value="BCB.05.03"/>
     <PROJECT value="glSkeleton.exe"/>
     <OBJFILES value="glSkeleton.obj UFP.obj PV.obj Conversiones.obj Obstaculo.obj Convexo.obj 
-      Circulo.obj Pelota.obj Rectangulo.obj Escena.obj Mando.obj Lapiz.obj"/>
+      Circulo.obj Pelota.obj Rectangulo.obj Escena.obj Mando.obj Lapiz.obj 
+      resultados.obj"/>
     <RESFILES value="glSkeleton.res"/>
     <IDLFILES value=""/>
     <IDLGENFILES value=""/>
     <DEFFILE value=""/>
-    <RESDEPEN value="$(RESFILES) UFP.dfm"/>
+    <RESDEPEN value="$(RESFILES) UFP.dfm resultados.dfm"/>
     <LIBFILES value=""/>
     <LIBRARIES value=""/>
     <SPARELIBS value="Vcl50.lib"/>

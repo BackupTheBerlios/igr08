@@ -13,6 +13,7 @@
 #include <gl\glu.h>
 #include "Escena.h"
 #include "PV.h"
+#include "resultados.h"
 //---------------------------------------------------------------------------
 class TGLForm2D : public TForm  {
 
