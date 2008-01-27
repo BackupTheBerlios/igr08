@@ -49,7 +49,7 @@ Escena::Escena(int CW, int CH){
 
         // Cargamos los obstaculos
 
-  /*
+
         listaDeObstaculos[0] = new Circulo(new PV(-200,100), 20);
         listaDeObstaculos[1] = new Circulo(new PV(-200,150), 20);
         listaDeObstaculos[2] = new Circulo(new PV(-100,100), 20);
@@ -60,17 +60,17 @@ Escena::Escena(int CW, int CH){
         listaDeObstaculos[7] = new Circulo(new PV(100,150), 20);
         listaDeObstaculos[8] = new Circulo(new PV(200,100), 20);
         listaDeObstaculos[9] = new Circulo(new PV(200,150), 20);
-*/
-        listaDeObstaculos[0] = new Convexo(new PV(-150,100), 20,5);
-        listaDeObstaculos[1] = new Convexo(new PV(-150,150), 20,5);
-        listaDeObstaculos[2] = new Convexo(new PV(-50,100), 20,5);
-        listaDeObstaculos[3] = new Convexo(new PV(-50,150), 20,5);
-        listaDeObstaculos[4] = new Convexo(new PV(50,100), 20,5);
-        listaDeObstaculos[5] = new Convexo(new PV(50,150), 20,5);
-        listaDeObstaculos[6] = new Convexo(new PV(150,100), 20,5);
-        listaDeObstaculos[7] = new Convexo(new PV(150,150), 20,5);
 
-        this->numObstaculos = 8;
+        listaDeObstaculos[10] = new Convexo(new PV(-150,100), 20,5);
+        listaDeObstaculos[11] = new Convexo(new PV(-150,150), 20,5);
+        listaDeObstaculos[12] = new Convexo(new PV(-50,100), 20,5);
+        listaDeObstaculos[13] = new Convexo(new PV(-50,150), 20,5);
+        listaDeObstaculos[14] = new Convexo(new PV(50,100), 20,5);
+        listaDeObstaculos[15] = new Convexo(new PV(50,150), 20,5);
+        listaDeObstaculos[16] = new Convexo(new PV(150,100), 20,5);
+        listaDeObstaculos[17] = new Convexo(new PV(150,150), 20,5);
+
+        this->numObstaculos = 18;
         this->numObstaculosVivos = numObstaculos;
 
 

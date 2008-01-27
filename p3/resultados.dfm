@@ -1,9 +1,11 @@
 object Form1: TForm1
-  Left = 195
-  Top = 144
-  Width = 307
-  Height = 239
+  Left = 199
+  Top = 149
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsDialog
   Caption = 'Form1'
+  ClientHeight = 205
+  ClientWidth = 299
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,6 +13,7 @@ object Form1: TForm1
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  Visible = True
   PixelsPerInch = 96
   TextHeight = 13
   object LabelPuntos: TLabel
@@ -36,7 +39,7 @@ object Form1: TForm1
   object Puntos: TLabel
     Left = 64
     Top = 104
-    Width = 137
+    Width = 34
     Height = 75
     Caption = '0'
     Font.Charset = DEFAULT_CHARSET

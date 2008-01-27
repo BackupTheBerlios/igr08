@@ -18,6 +18,7 @@ Circulo::Circulo(PV* c, GLfloat r) : Obstaculo(){
         delete l;
         centro = c->clon();
         radio = r;
+        unaNormal = new PV(0,1);
 
 }
 

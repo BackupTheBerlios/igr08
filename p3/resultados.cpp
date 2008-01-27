@@ -22,3 +22,4 @@ void TForm1::setVidas(int v){
         Vidas->Caption = v;
 }
 
+
