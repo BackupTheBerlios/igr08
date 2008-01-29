@@ -28,7 +28,7 @@ private:	// User declarations
         int * puntuaciones;
         int cont;
         char * cadena;
-        //fstream fichero;
+        //fstream entrada;
 
 public:		// User declarations
         __fastcall TForm1(TComponent* Owner);

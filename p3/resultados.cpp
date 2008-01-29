@@ -45,7 +45,7 @@ bool TForm1::superaPuntuaciones(int puntos){
 void TForm1::registrarPuntuacion(String nombre, int puntitos) {
 
      ofstream salida;
-     salida.open("records.txt",ios::app);
+     salida.open("records.txt",ofstream::app);
      //strcat(cadena,nombre);
      //strcat(cadena," ");
 
@@ -61,19 +61,19 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
         char * linea = new char();
         cadena = new char();
 
-        ifstream fichero;
-        fichero.open("records.txt", ios::in);
+        ifstream entrada;
+        entrada.open("records.txt", ifstream::in);
         int i=0;
 
         puntuaciones = new int[100];
         cont = 0;
 
-        if (fichero.is_open()) {
+        if (entrada.is_open()) {
 
-            fichero > linea;
-            while (!fichero.eof()) {
+            entrada > linea;
+            while (!entrada.eof()) {
 
-                fichero >> linea;
+                entrada >> linea;
                 strcat(cadena,linea);
                 if (i%2==1)
                   strcat(cadena,"\n");
@@ -90,8 +90,7 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
 
         Label2->SetTextBuf(cadena);
         }
-
-        fichero.close();
+        entrada.close();
 }
 //---------------------------------------------------------------------------
 
