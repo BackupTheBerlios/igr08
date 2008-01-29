@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 212
-  Top = 174
+  Left = 204
+  Top = 135
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   Caption = 'Form1'
@@ -84,7 +84,7 @@ object Form1: TForm1
     Height = 13
     Caption = 'Label2'
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clFuchsia
+    Font.Color = clTeal
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
