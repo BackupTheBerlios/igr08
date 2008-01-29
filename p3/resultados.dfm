@@ -38,7 +38,7 @@ object Form1: TForm1
     Caption = 'Vidas restantes'
   end
   object Puntos: TLabel
-    Left = 64
+    Left = 40
     Top = 104
     Width = 34
     Height = 75
@@ -88,5 +88,12 @@ object Form1: TForm1
     Font.Name = 'MS Sans Serif'
     Font.Style = [fsBold]
     ParentFont = False
+  end
+  object Label3: TLabel
+    Left = 168
+    Top = 112
+    Width = 32
+    Height = 13
+    Caption = 'Label3'
   end
 end

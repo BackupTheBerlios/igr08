@@ -17,7 +17,6 @@ __published:	// IDE-managed Components
         TLabel *Vidas;
         TLabel *Label1;
         TLabel *Label2;
-        TLabel *Label3;
         void __fastcall FormCreate(TObject *Sender);
 
 private:	// User declarations
