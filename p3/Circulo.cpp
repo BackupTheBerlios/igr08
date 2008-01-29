@@ -53,10 +53,8 @@ bool Circulo::Corte(Pelota* pelota, GLdouble &tIn, PV* &normal) {
     GLdouble d1 = fabs(a) * s->modulo() - d2;
     tIn = d1 / s->modulo();
     PV *puntoContacto = new PV(pelota->getCentro()->getX() + tIn * pelota->getDireccion()->getX(),pelota->getCentro()->getY() + tIn * pelota->getDireccion()->getY());
-//    PV unaNormalTemp = puntoContacto->menos(*centro);
     PV * unaNormalTemp = *puntoContacto-*centro;
     GLdouble mod = unaNormalTemp->modulo();
-   // falta definir la variable unaNormal ...
     if (unaNormal != NULL)
       delete unaNormal;
     unaNormal = new PV(unaNormalTemp->getX() / mod, unaNormalTemp->getY() / mod);
