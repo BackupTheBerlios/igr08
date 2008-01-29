@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 199
-  Top = 149
+  Left = 233
+  Top = 128
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   Caption = 'Form1'
@@ -14,6 +14,7 @@ object Form1: TForm1
   Font.Style = []
   OldCreateOrder = False
   Visible = True
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object LabelPuntos: TLabel
@@ -52,8 +53,40 @@ object Form1: TForm1
   object Vidas: TLabel
     Left = 112
     Top = 24
-    Width = 6
-    Height = 13
+    Width = 9
+    Height = 16
     Caption = '3'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label1: TLabel
+    Left = 136
+    Top = 24
+    Width = 153
+    Height = 13
+    Caption = 'PUNTACIONES RECORDS'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold, fsUnderline]
+    ParentFont = False
+  end
+  object Label2: TLabel
+    Left = 168
+    Top = 56
+    Width = 39
+    Height = 13
+    Caption = 'Label2'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clFuchsia
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = [fsBold]
+    ParentFont = False
   end
 end
