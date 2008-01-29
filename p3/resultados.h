@@ -7,6 +7,8 @@
 #include <Controls.hpp>
 #include <StdCtrls.hpp>
 #include <fstream.h>
+#include <iostream>
+using namespace std;
 #include <Forms.hpp>
 //---------------------------------------------------------------------------
 class TForm1 : public TForm

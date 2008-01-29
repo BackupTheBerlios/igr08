@@ -2,7 +2,6 @@
 
 #include <vcl.h>
 #pragma hdrstop
-#include <fstream.h>
 #include "resultados.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -45,7 +44,7 @@ bool TForm1::superaPuntuaciones(int puntos){
 
 void TForm1::registrarPuntuacion(String nombre, int puntitos) {
 
-     //fstream salida;
+     ofstream salida;
      salida.open("records.txt",ios::app);
      //strcat(cadena,nombre);
      //strcat(cadena," ");
