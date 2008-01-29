@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 233
-  Top = 128
+  Left = 212
+  Top = 174
   BorderIcons = [biSystemMenu]
   BorderStyle = bsDialog
   Caption = 'Form1'
@@ -15,6 +15,7 @@ object Form1: TForm1
   OldCreateOrder = False
   Visible = True
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
   object LabelPuntos: TLabel

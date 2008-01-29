@@ -23,43 +23,18 @@ void TForm1::setVidas(int v){
 }
 
 bool TForm1::superaPuntuaciones(int puntos){
- /*
-     char * lineaInt = new char();
-     puntuaciones = new int[100];
-     cont = 0;
 
-     ifstream ent;
-     ent.open("records.txt", ios::in);
-     int i=0;
-
-     if (ent.is_open()) {
-
-        ent > lineaInt;
-        while (!ent.eof()) {
-
-           ent >> lineaInt;
-           if (i%2==1 && i>1) {
-              puntuaciones[cont]=StrToInt(lineaInt);
-              cont++;
-           }
-           i++;
-       }
-    }
-    ent.close();
-
-                  */
-
-    int maximo;
+    int maximo = -1000;
 
     if (cont > 1) {
-      for (int j=1; j<cont; j++) {
-         if (puntuaciones[j] >= puntuaciones[j-1])
+      for (int j=0; j<cont-1; j++) {
+         if (puntuaciones[j] >= maximo)
             maximo = puntuaciones[j];
-         else
-            maximo = puntuaciones[j-1];
       }
     }
     else maximo = puntuaciones[0];
+
+    ShowMessage(maximo);
 
     if (puntos > maximo)
           return true;
@@ -68,32 +43,45 @@ bool TForm1::superaPuntuaciones(int puntos){
 
 }
 
+void TForm1::registrarPuntuacion(String nombre, int puntitos) {
+
+     //fstream salida;
+     salida.open("records.txt",ios::app);
+     //strcat(cadena,nombre);
+     //strcat(cadena," ");
+
+     //fichero << cadena << endl;
+     salida << puntitos << " " << puntitos << endl;
+
+     salida.close();
+
+}
 
 void __fastcall TForm1::FormCreate(TObject *Sender)
 {
         char * linea = new char();
-        char * cadena = new char();
+        cadena = new char();
 
-        ifstream entrada;
-        entrada.open("records.txt", ios::in);
+        ifstream fichero;
+        fichero.open("records.txt", ios::in);
         int i=0;
 
         puntuaciones = new int[100];
         cont = 0;
 
-        if (entrada.is_open()) {
+        if (fichero.is_open()) {
 
-            entrada > linea;
-            while (!entrada.eof()) {
+            fichero > linea;
+            while (!fichero.eof()) {
 
-                entrada >> linea;
+                fichero >> linea;
                 strcat(cadena,linea);
                 if (i%2==1)
                   strcat(cadena,"\n");
                 else
                   strcat(cadena," ");
 
-                if (i%2==1 && i>1) {
+                if (i%2==1) {
                     puntuaciones[cont]=StrToInt(linea);
                     cont++;
                 }
@@ -104,7 +92,13 @@ void __fastcall TForm1::FormCreate(TObject *Sender)
         Label2->SetTextBuf(cadena);
         }
 
-        entrada.close();
+        fichero.close();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::FormDestroy(TObject *Sender)
+{
+ //fichero.close();
 }
 //---------------------------------------------------------------------------
 

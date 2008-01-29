@@ -203,7 +203,11 @@ if (play){
          play = false;
 
          if (Form1->superaPuntuaciones(scene->getPuntos())) {
-            ShowMessage("superas con" + scene->getPuntos());
+            Application->MessageBox("Has conseguido un nuevo Record","Enorabuena",MB_OK);
+            //ShowMessage("Has conseguido un nuevo Record: " + scene->getPuntos());
+            String nombre;
+            if (InputQuery("Solicitando datos del Jugador","Nombre:",nombre))
+               Form1->registrarPuntuacion(nombre,scene->getPuntos());
          }
        }
     }

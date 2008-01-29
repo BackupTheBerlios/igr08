@@ -1,6 +1,6 @@
 object GLForm2D: TGLForm2D
-  Left = 508
-  Top = 21
+  Left = 419
+  Top = 130
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'Arkanoid'

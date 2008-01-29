@@ -19,7 +19,7 @@ Escena::Escena(int CW, int CH){
         numVidas = 3;
         Form1->setVidas(numVidas);
 //        Form1->Vidas->Text = numVidas;
-        puntos = 0;
+        puntos = 150;
         this->numObstaculos = 0;
 
         // Cargamos las paredes que limitan el espacio del juego
