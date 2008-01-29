@@ -89,11 +89,4 @@ object Form1: TForm1
     Font.Style = [fsBold]
     ParentFont = False
   end
-  object Label3: TLabel
-    Left = 168
-    Top = 112
-    Width = 32
-    Height = 13
-    Caption = 'Label3'
-  end
 end

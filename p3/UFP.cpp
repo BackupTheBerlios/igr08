@@ -201,6 +201,10 @@ if (play){
        else {
          ShowMessage("Fin del juego");
          play = false;
+
+         if (Form1->superaPuntuaciones(scene->getPuntos())) {
+            ShowMessage("superas con" + scene->getPuntos());
+         }
        }
     }
     GLScene();

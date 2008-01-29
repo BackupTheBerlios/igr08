@@ -27,6 +27,7 @@ class Escena {
       bool getJuego();
       void setJuego();
       int getNumVidas();
+      int getPuntos();
 
       bool haChocadoConObstaculos(GLdouble &, PV* &);
 

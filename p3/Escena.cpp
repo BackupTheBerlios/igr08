@@ -261,6 +261,10 @@ bool Escena::haChocadoConObstaculos(GLdouble &tIN, PV* &normal) {
    return enc;
 }
 
+int Escena::getPuntos() {
+   return puntos;
+}
+
 /*
 // Transforma a corrdenadas de la Escena
 void Escena::TransformarXY(PV * p){
