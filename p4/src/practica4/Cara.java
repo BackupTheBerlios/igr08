@@ -26,7 +26,7 @@ public class Cara {
 	    nz = vertices.get(i).getX()-(vertices.get(i + 1 % N).getX());
 	    nz = nz * vertices.get(i).getY()+(vertices.get(i + 1 % N).getY());
 	}
-	normales.add(new PuntoVector3D(nx, ny, nz));
-		
+	PuntoVector3D tmp = new PuntoVector3D(nx, ny, nz);
+	normales.add(tmp.normaliza());		
     }
 }
