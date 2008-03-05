@@ -1,16 +1,5 @@
-/*
- * PV3D.java
- *
- * Created on 5 de marzo de 2008, 12:49
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
- */
 package practica4;
 
-/**
- * @author usuario_local
- */
 import java.io.Serializable;
 
 public class PuntoVector3D implements Serializable {
