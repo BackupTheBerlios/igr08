@@ -11,11 +11,30 @@ public class Principal extends JFrame {
     
     // Atributos
     private Container panel;
-    private GLPanel canvas;
     
+    private GLJPanel canvas;
+    private GL3D escena;
+       
     // Constructora
     public Principal() {
         
+        // Titulo de la ventana y tamaño
+	setTitle("Práctica 4");
+        setSize(new Dimension(400,400));
+        super.setResizable(false);
+        
+        // Contenedor del editor
+        panel = this.getContentPane();
+        panel.setBackground(Color.black);
+        panel.setLayout(null);
+        
+        
+        // Creamos el canvas de dibujo
+        canvas = new GLJPanel();
+        escena = new GL3D();
+        canvas.addGLEventListener(escena);
+        canvas.setBounds(0,0,400,400);
+        panel.add(canvas);
         
     }
     

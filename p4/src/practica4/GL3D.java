@@ -7,14 +7,14 @@ import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 import com.sun.opengl.util.Animator;
 
-public class GLPanel implements GLEventListener {
+public class GL3D implements GLEventListener {
     
     private double xLeft, xRight, yTop, yBot, xCentro, yCentro;
     private double RatioViewPort;
     private GLU glu;
     private GLContext context;
     
-    public GLPanel(){
+    public GL3D(){
         glu= new GLU();
         xRight=100.0; xLeft=-xRight;
         yTop=100.0; yBot=-xRight;
