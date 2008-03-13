@@ -45,7 +45,28 @@ public class Malla {
 	    u += incrU;
 	}
     }
+    
+    public void dibuja(GL gl) {
+        for (int i=0; i<caras.size(); i++) {
+            gl.glBegin(gl.GL_LINE_LOOP);
+                for (int j=0; j<caras.get(i).getNumVertices(); j++) {
+                     
+                    int iN=caras.get(i).getIndiceNormal(j);
+                    int iV=caras.get(i).getIndiceVertice(j);
+                     
+                    gl.glNormal3f(normales.get(iN).getX(),
+                                  normales.get(iN).getY(),
+                                  normales.get(iN).getZ());
+                       
+                    gl.glVertex3f(vertices.get(iV).getX(),
+                                  vertices.get(iV).getY(),
+                                  vertices.get(iV).getZ());
+                }
+            gl.glEnd();
+    }
+}
 
+/*
     public void dibuja(GL gl) {
 	for (int i = 0; i<numCaras; i++){
 	    gl.glBegin(GL.GL_POLYGON);
@@ -58,7 +79,7 @@ public class Malla {
 	    gl.glEnd();
 	}
     }
-    
+    */
     
     public void SetNormales() {
 	// Metodo de Newel
@@ -74,7 +95,7 @@ public class Malla {
 	    nz = vertices.get(i).getX() - (vertices.get(i + 1 % N).getX());
 	    nz = nz * vertices.get(i).getY() + (vertices.get(i + 1 % N).getY());
 	}
-	PuntoVector3D tmp = new PuntoVector3D(nx, ny, nz);
+	PuntoVector3D tmp = new PuntoVector3D((float)nx, (float)ny, (float)nz, 1);
 	normales.add(tmp.normaliza());
     }
 }

@@ -5,80 +5,89 @@ import java.util.ArrayList;
 
 
 public class PuntoVector3D implements Serializable {
-//	---------------------------------------------------------------------------
+
+    // Atributos
+    float x, y, z;
+    int pv;          // PV=1 (punto) / PV=0 (vector)
     
-//Atributos
-    double x;
-    double y;
-    double z;
-    int PV; // 1 para puntos , 0 para vectores
     
-//Constructoras
+    // Constructora por defecto
     public PuntoVector3D() {
-        x = 0.0;
-        y = 0.0;
-        z = 0.0;
+        this.x = (float) 0.0;
+        this.y = (float) 0.0;
+        this.z = (float) 0.0;
+        this.pv = 1;
     }
     
-    
-    public PuntoVector3D(double valorX, double valorY, double valorZ) {
-        x = valorX;
-        y = valorY;
-        z = valorZ;
+    // Constructora con parámetros 1
+    public PuntoVector3D(float x, float y, float z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.pv = 1;
+    }
+
+    // Constructora con parámetros 2
+    public PuntoVector3D(float x, float y, float z, int pv) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.pv = pv;
     }
     
-    public PuntoVector3D(double valorX, double valorY, double valorZ, int PV) {
-        x = valorX;
-        y = valorY;
-        z = valorZ;
-        this.PV = PV;
-    }
-    
-    public String toString() {
-        String aux;
-        aux = Double.toString(x);
-        aux += ",";
-        aux += Double.toString(y);
-        aux += ",";
-        aux += Double.toString(z);
+    // Método Clon
+    public PuntoVector3D clonar() {
+        PuntoVector3D aux = new PuntoVector3D(x, y, z, pv);
         return aux;
     }
     
-    public double getX() {
+    // Imprime puntoVector3D
+    public String toString() {
+        return "[" + String.valueOf(x) + "," + String.valueOf(y) + "," + String.valueOf(z) + "," + String.valueOf(pv) + "]"; 
+    }
+    
+    
+    // Getters & Setters
+    public float getX() {
         return x;
     }
     
-    public double getY() {
+    public float getY() {
         return y;
     }
     
-    public double getZ() {
+    public float getZ() {
         return z;
     }
     
-    public void setX(double x1) {
-        x = x1;
+    public void setX(float x) {
+        this.x = x;
     }
     
-    public void setY(double y1) {
-        y = y1;
+    public void setY(float y) {
+        this.y = y;
     }
     
-    public void setZ(double z1) {
-        z = z1;
+    public void setZ(float z) {
+        this.z = z;
     }
     
-    public void setXYZ(double x1, double y1, double z1) {
-        x = x1;
-        y = y1;
-        z = z1;
+    public void setXYZ(float x, float y, float z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
     }
     
-    public PuntoVector3D clonar() {
-        PuntoVector3D aux = new PuntoVector3D(x, y, z);
-        return aux;
+    public int getPV() {
+        return pv;
+    }
+  
+    public void setPV(int pv) {
+        this.pv = pv;
     }
     
+    
+    // Operaciones con puntos y vectores
     public void suma(PuntoVector3D PV0) {
         x = x + PV0.getX();
         y = y + PV0.getY();
@@ -91,13 +100,13 @@ public class PuntoVector3D implements Serializable {
         z = z - PV0.getZ();
     }
     
-    public void escala(double k) {
+    public void escala(float k) {
         x = k * x;
         y = k * y;
         z = k * z;
     }
     
-    public double prodEsc(PuntoVector3D PV0) {
+    public float prodEsc(PuntoVector3D PV0) {
         return (x * PV0.getX() + y * PV0.getY() + z * PV0.getZ());
     }
     
@@ -105,29 +114,24 @@ public class PuntoVector3D implements Serializable {
         return new PuntoVector3D(-y, x, -z); //??
     }
     
-    public double modulo() {
-        return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));
+    public float modulo() {
+        return (float) Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2) + Math.pow(z, 2));
     }
     
-    /**
-     * Devuelve la distancia que separa dos puntos
-     * @param otroPunto
-     * @return
-     */
-    public double distancia(PuntoVector3D otroPunto) {
+    public float distancia(PuntoVector3D otroPunto) {
         PuntoVector3D aux = otroPunto.clonar();
         aux.resta(this);
         return aux.modulo();
     }
     
     public PuntoVector3D normaliza() {
-        double mod = this.modulo();
+        float mod = this.modulo();
         PuntoVector3D retVal = new PuntoVector3D(x / mod, y / mod, z / mod);
         return retVal;
     }
     
     
-    public ArrayList<PuntoVector3D> calculaPuntos(PuntoVector3D p, double angRad){
+    public ArrayList<PuntoVector3D> calculaPuntos(PuntoVector3D p, float angRad){
         ArrayList<PuntoVector3D> retVal = new ArrayList<PuntoVector3D>();
         int nlados = (int)(2 * Math.PI / angRad);
         for (int i = 1; i <= nlados; i++) {
@@ -136,8 +140,8 @@ public class PuntoVector3D implements Serializable {
         return retVal;
     }
     
-    private PuntoVector3D giraPunto(PuntoVector3D p, double angRad){
-        PuntoVector3D retVal = new PuntoVector3D(p.getX()*Math.sin(angRad),0,p.getX()*Math.cos(angRad),1);
+    private PuntoVector3D giraPunto(PuntoVector3D p, float angRad){
+        PuntoVector3D retVal = new PuntoVector3D((float)(p.getX()*Math.sin(angRad)), 0, (float)(p.getX()*Math.cos(angRad)), 1);
         return retVal;
     }
 }
