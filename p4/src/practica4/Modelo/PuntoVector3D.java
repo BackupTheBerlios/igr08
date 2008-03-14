@@ -135,13 +135,18 @@ public class PuntoVector3D implements Serializable {
         ArrayList<PuntoVector3D> retVal = new ArrayList<PuntoVector3D>();
         int nlados = (int)(2 * Math.PI / angRad);
         for (int i = 1; i <= nlados; i++) {
-            retVal.add(giraPunto(p,i*angRad));
+            retVal.add(giraPunto1(p,i*angRad));
         }
         return retVal;
     }
     
-    private PuntoVector3D giraPunto(PuntoVector3D p, float angRad){
-        PuntoVector3D retVal = new PuntoVector3D((float)(p.getX()*Math.sin(angRad)), 0, (float)(p.getX()*Math.cos(angRad)), 1);
+    private PuntoVector3D giraPunto1(PuntoVector3D p, float angRad){
+        PuntoVector3D retVal = new PuntoVector3D((float)(p.getX()*Math.sin(angRad)), p.getY(), (float)(p.getX()*Math.cos(angRad)), 1);
+        return retVal;
+    }
+    
+    public PuntoVector3D giraPunto(double angRad){
+        PuntoVector3D retVal = new PuntoVector3D((float)(this.getX()*Math.sin(angRad)), this.getY(), (float)(this.getX()*Math.cos(angRad)), 1);
         return retVal;
     }
 }
