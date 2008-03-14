@@ -190,6 +190,13 @@ public class GL3D implements GLEventListener {
          this.perfil = (ArrayList<PuntoVector3D>) puntosPerfil.clone();
     }
     
+    public boolean getGenerado() {
+        return generado;
+    }
+    
+    public void setGenerado(boolean bool) {
+        generado = bool;
+    }
     
     // Métodos que actualiza datos de la escena
     public void actualizarDatos(int tipoMalla, ArrayList<PuntoVector3D> puntosPerfil) {

@@ -9,6 +9,7 @@ import com.sun.opengl.util.*;
 
 import practica4.Controlador.GL3D;
 import practica4.Modelo.PuntoVector3D;
+import practica4.Modelo.MallaPorRevolucion;
 import practica4.util.Calculos;
 import java.util.ArrayList;
 
@@ -26,7 +27,6 @@ public class Principal extends JFrame {
     private JMenu malla;
     private JMenuItem revolucion;
     private JMenuItem extrusion;
-    private JMenuItem splinesRev;
     private JMenu sobre;
     private JMenuItem autores;
     
@@ -40,6 +40,8 @@ public class Principal extends JFrame {
     private final Animator animacion;
     
     private ArrayList<PuntoVector3D> perfil;
+    private MallaPorRevolucion mallaRevolucion;
+    
         
     // Constructora
     public Principal() {
@@ -62,7 +64,6 @@ public class Principal extends JFrame {
         malla = new JMenu("Malla por");
 	revolucion = new JMenuItem("Revolución");
 	extrusion = new JMenuItem("Extrusión");
-        splinesRev = new JMenuItem("Splines y Revolución");
         sobre = new JMenu("Sobre..");
         autores = new JMenuItem("Autores");
         
@@ -73,7 +74,6 @@ public class Principal extends JFrame {
         menu.add(malla);
 	malla.add(revolucion);
 	malla.add(extrusion);
-        malla.add(splinesRev);
         
         menu.add(sobre);
         sobre.add(autores);
@@ -128,7 +128,7 @@ public class Principal extends JFrame {
         
         // Entrada de datos desactivada
         entradaDatos = false;
-
+        
         // Acción por defecto al cerrar la ventana
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
@@ -184,7 +184,18 @@ public class Principal extends JFrame {
                      entradaDatos = false;
                  }
              }
-        });         
+        });
+        
+        // Evento Oyente para el boton "Generar Malla"         
+        botonGenerarMalla.addActionListener (new ActionListener() {
+             public void actionPerformed(ActionEvent e) {
+                 
+                mallaRevolucion = new MallaPorRevolucion(perfil);
+                 
+                escena.setGenerado(true);
+                entradaDatos = false;
+             }
+        });  
         
         // Añadimos un evento para la acción de salida
         addWindowListener(new WindowAdapter() {

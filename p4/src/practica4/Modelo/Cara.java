@@ -4,20 +4,18 @@ import java.util.ArrayList;
 
 public class Cara {
 
+    private ArrayList<PuntoVector3D> indicesVertices; 
     private ArrayList<VerticeNormal> indicesVerticesNormales;
     private int numVertices;
 
     public Cara() {
+        indicesVertices = new ArrayList<PuntoVector3D>();
 	indicesVerticesNormales = new ArrayList<VerticeNormal>();
-	numVertices = 0;
+        numVertices = 0;
     }
 
     public int getNumVertices() {
-	return numVertices;
-    }
-
-    public void setNumVertices(int num) {
-	numVertices = num;
+	return indicesVertices.size();
     }
 
     public int getIndiceVertice(int i) {
