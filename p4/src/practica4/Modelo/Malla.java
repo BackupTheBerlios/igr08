@@ -5,11 +5,11 @@ import javax.media.opengl.GL;
 
 public class Malla {
 
-    private int numVertices,  numNormales,  numCaras;
+    protected int numVertices,  numNormales,  numCaras;
 
-    private ArrayList<PuntoVector3D> vertices;  // ??
-    private ArrayList<PuntoVector3D> normales;  // ??
-    private ArrayList<Cara> caras;
+    protected ArrayList<PuntoVector3D> vertices;  // ??
+    protected ArrayList<PuntoVector3D> normales;  // ??
+    protected ArrayList<Cara> caras;
     
     
     public Malla() {
@@ -65,21 +65,6 @@ public class Malla {
             gl.glEnd();
     }
 }
-
-/*
-    public void dibuja(GL gl) {
-	for (int i = 0; i<numCaras; i++){
-	    gl.glBegin(GL.GL_POLYGON);
-	    for (int j = 0; j < caras.get(i).getNumVertices(); j++) {
-		int iV = caras.get(i).getIndiceVertice(j);
-		int iN = caras.get(i).getIndiceNormal(j);
-		gl.glVertex3d(vertices.get(iV).getX(), vertices.get(iV).getY(), vertices.get(iV).getZ());
-		gl.glVertex3d(normales.get(iV).getX(), normales.get(iV).getY(), normales.get(iV).getZ());
-	    }
-	    gl.glEnd();
-	}
-    }
-    */
     
     public void SetNormales() {
 	// Metodo de Newel

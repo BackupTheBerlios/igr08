@@ -4,13 +4,13 @@ import java.util.ArrayList;
 
 public class Cara {
 
-    private ArrayList<PuntoVector3D> indicesVertices; 
-    private ArrayList<VerticeNormal> indicesVerticesNormales;
+    private ArrayList<Integer> indicesVertices; 
+    private ArrayList<Integer> indicesVerticesNormales;
     private int numVertices;
 
     public Cara() {
-        indicesVertices = new ArrayList<PuntoVector3D>();
-	indicesVerticesNormales = new ArrayList<VerticeNormal>();
+        indicesVertices = new ArrayList<Integer>();
+	indicesVerticesNormales = new ArrayList<Integer>();
         numVertices = 0;
     }
 
@@ -19,14 +19,14 @@ public class Cara {
     }
 
     public int getIndiceVertice(int i) {
-	return indicesVerticesNormales.get(i).getIndiceVertice();
+	return indicesVerticesNormales.get(i);
     }
 
     public int getIndiceNormal(int i) {
-	return indicesVerticesNormales.get(i).getIndiceNormal();
+	return indicesVerticesNormales.get(i);
     }
 
-    public void setIndiceVerticeNormal(int indiceVertice, int indiceNormal) {
-	this.indicesVerticesNormales.add(new VerticeNormal(indiceVertice, indiceNormal));
+    public void setIndiceVerticeNormal(int indice) {
+	this.indicesVerticesNormales.add(indice);
     }
 }

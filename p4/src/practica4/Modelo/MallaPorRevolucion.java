@@ -27,6 +27,14 @@ public class MallaPorRevolucion extends Malla {
     
         public void MallaPorRevolucion1(ArrayList<PuntoVector3D> perfil) {
 	    PuntoVector3D actualI, actualI1, giraI, giraI1;
+	 /** inicializar..
+	  * coger puntos
+	  */
+	    actualI = (PuntoVector3D) perfil.get(0);
+	    actualI1 = (PuntoVector3D) perfil.get(1);
+	    this.vertices.add(actualI);
+	    this.vertices.add(actualI1);
+	    
 	    for (int i = 0; i < perfil.size()-1; i++) {
 		actualI = (PuntoVector3D) perfil.get(i);
 		actualI1 = (PuntoVector3D) perfil.get(i);
@@ -34,6 +42,13 @@ public class MallaPorRevolucion extends Malla {
 		giraI1 = actualI1.giraPunto(0.5);
 		
 		// unir
+		this.vertices.add(actualI);
+		this.vertices.add(actualI1);
+		this.vertices.add(giraI);
+		this.vertices.add(giraI1);
+		Cara c = new Cara();
+		// c.set...
+		this.caras.add(c);
 		
 		
 	    }
@@ -41,3 +56,4 @@ public class MallaPorRevolucion extends Malla {
 	}
     
 }
+
