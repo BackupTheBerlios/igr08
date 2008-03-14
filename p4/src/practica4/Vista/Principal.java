@@ -8,6 +8,9 @@ import javax.media.opengl.*;
 import com.sun.opengl.util.*;
 
 import practica4.Controlador.GL3D;
+import practica4.Modelo.PuntoVector3D;
+import practica4.util.Calculos;
+import java.util.ArrayList;
 
 public class Principal extends JFrame {
 
@@ -17,57 +20,126 @@ public class Principal extends JFrame {
     private GL3D escena;
 
     private JMenuBar menu;
-    private JMenu opciones;
+    private JMenu archivo;
+    private JMenuItem nuevo;
+    private JMenuItem salir;
+    private JMenu malla;
     private JMenuItem revolucion;
     private JMenuItem extrusion;
+    private JMenuItem splinesRev;
     private JMenu sobre;
     private JMenuItem autores;
     
+    private JButton botonDefinirPuntos;
+    private JButton botonGenerarMalla;
+    private JButton botonAplicarSplines;
+    
+    private int tipoMalla;
+    private boolean entradaDatos;
+    
     private final Animator animacion;
+    
+    private ArrayList<PuntoVector3D> perfil;
         
     // Constructora
     public Principal() {
 
 	// Titulo de la ventana y tamaño
 	setTitle("Práctica 4");
-	setSize(new Dimension(400, 400));
+	setSize(new Dimension(400, 475));
 	super.setResizable(false);
 
 	// Contenedor del editor
 	panel = this.getContentPane();
-	panel.setBackground(Color.black);
+	panel.setBackground(Color.blue);
 	panel.setLayout(null);
 
         // Generamos el menu
 	menu = new JMenuBar();
-        opciones = new JMenu("Opciones");
-	revolucion = new JMenuItem("Malla por Revolución");
-	extrusion = new JMenuItem("Malla por Extrusión");
+        archivo = new JMenu("Archivo");
+        nuevo = new JMenuItem("Nuevo");
+        salir = new JMenuItem("Salir");
+        malla = new JMenu("Malla por");
+	revolucion = new JMenuItem("Revolución");
+	extrusion = new JMenuItem("Extrusión");
+        splinesRev = new JMenuItem("Splines y Revolución");
         sobre = new JMenu("Sobre..");
         autores = new JMenuItem("Autores");
         
-        menu.add(opciones);
-	opciones.add(revolucion);
-	opciones.add(extrusion);
+        menu.add(archivo);
+        archivo.add(nuevo);
+        archivo.add(salir);
+        
+        menu.add(malla);
+	malla.add(revolucion);
+	malla.add(extrusion);
+        malla.add(splinesRev);
+        
         menu.add(sobre);
         sobre.add(autores);
         
         setJMenuBar(menu);
         
-	// Creamos el canvas de dibujo
+        // Creamos los botones
+        botonDefinirPuntos = new JButton("Definir Perfil");
+        botonDefinirPuntos.setBounds(0, 400, 130, 25);
+        botonDefinirPuntos.setVisible(true);
+        panel.add(botonDefinirPuntos);
+        
+        botonAplicarSplines = new JButton("Aplicar BSplines");
+        botonAplicarSplines.setBounds(130, 400, 140, 25);
+        botonAplicarSplines.setVisible(true);
+        panel.add(botonAplicarSplines);
+        
+        botonGenerarMalla = new JButton("Generar Malla");
+        botonGenerarMalla.setBounds(270, 400, 130, 25);
+        botonGenerarMalla.setVisible(true);
+        panel.add(botonGenerarMalla);
+       
+        // Definimos el tipo de malla actual a representar
+        this.tipoMalla = 0;
+        
+        // Definimos un perfil por defecto
+        this.perfil = new ArrayList<PuntoVector3D>();
+        this.perfil.add(new PuntoVector3D(250, 330, 0, 1)); 
+        this.perfil.add(new PuntoVector3D(250, 300, 0, 1)); 
+        this.perfil.add(new PuntoVector3D(230, 270, 0, 1));
+        this.perfil.add(new PuntoVector3D(200, 240, 0, 1));  
+        this.perfil.add(new PuntoVector3D(200, 210, 0, 1));  
+        this.perfil.add(new PuntoVector3D(200, 180, 0, 1));
+        this.perfil.add(new PuntoVector3D(200, 150, 0, 1));  
+        this.perfil.add(new PuntoVector3D(230, 120, 0, 1)); 
+
+        // Creamos el canvas de dibujo
 	canvas = new GLJPanel();
-	escena = new GL3D();
+	escena = new GL3D(400,400);
 	canvas.addGLEventListener(escena);
 	canvas.setBounds(0, 0, 400, 400);
+        canvas.addMouseListener(new ManejadorRaton());
 	panel.add(canvas);
+
+        // Transformamos el perfil a coordenadas de la escena
+        this.perfil = escena.transformarPerfil(this.perfil);
+        escena.setPerfil(this.perfil);
         
         // Animación de la escena
         animacion = new Animator(canvas);
         animacion.start();
         
+        // Entrada de datos desactivada
+        entradaDatos = false;
+
         // Acción por defecto al cerrar la ventana
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
+        
+        // Evento Oyente para la barra de menu "nuevo"         
+        nuevo.addActionListener (new ActionListener() {
+             public void actionPerformed(ActionEvent e) {
+                 perfil= new ArrayList<PuntoVector3D>();
+                 escena.actualizarDatos(tipoMalla, perfil);
+             }
+        });   
+        
         // Evento Oyente para la barra de menu "Autores"         
         autores.addActionListener (new ActionListener() {
              public void actionPerformed(ActionEvent e) {   
@@ -79,7 +151,8 @@ public class Principal extends JFrame {
         // Evento Oyente para la barra de menu "Malla por Revolución"
         revolucion.addActionListener (new ActionListener() {
              public void actionPerformed(ActionEvent e) {
-                escena.setTipo(0);
+                 tipoMalla = 0;
+                 escena.actualizarDatos(tipoMalla, perfil);
              }
         });   
         
@@ -88,7 +161,30 @@ public class Principal extends JFrame {
              public void actionPerformed(ActionEvent e) {
                 escena.setTipo(1);
              }
-        });   
+        }); 
+        
+        // Evento Oyente para el boton "Definir Perfil"         
+        botonDefinirPuntos.addActionListener (new ActionListener() {
+             public void actionPerformed(ActionEvent e) {
+                 perfil = new ArrayList<PuntoVector3D>();
+                 escena.setPerfil(perfil);
+                 entradaDatos = true;
+             }
+        });  
+        
+        // Evento Oyente para el boton "Alicar Splines"         
+        botonAplicarSplines.addActionListener (new ActionListener() {
+             public void actionPerformed(ActionEvent e) {
+                 
+                 String dato = JOptionPane.showInputDialog(null, "Numero de puntos de control. Rango[" + perfil.size() + "...N]",
+                                                           "Datos de Entrada", 1);
+                 if (dato != null) {
+                     perfil = new Calculos().calculaPuntosBSplines(perfil, Integer.parseInt(dato));
+                     escena.setPerfil(perfil);
+                     entradaDatos = false;
+                 }
+             }
+        });         
         
         // Añadimos un evento para la acción de salida
         addWindowListener(new WindowAdapter() {
@@ -103,6 +199,21 @@ public class Principal extends JFrame {
         });
     }
 
+    // Eventos del Ratón
+    public class ManejadorRaton extends MouseAdapter {
+	
+	public void mousePressed(MouseEvent evento) {
+            if (entradaDatos) {
+                perfil.add(escena.convertirPuntoToPixel(new PuntoVector3D(evento.getX(),400 - evento.getY(), 0, 1)));
+                escena.setPerfil(perfil);
+            }
+        }
+        
+	public void mouseReleased(MouseEvent evento) {}
+        public void mouseClicked(MouseEvent evento) {}
+    }
+			
+    
     // Métood Main
     public static void main(String[] args) {
 	Principal p4 = new Principal();

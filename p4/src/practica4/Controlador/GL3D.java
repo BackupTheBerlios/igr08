@@ -7,6 +7,9 @@ import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 import com.sun.opengl.util.Animator;
 
+import java.util.ArrayList;
+import practica4.Modelo.PuntoVector3D;
+
 public class GL3D implements GLEventListener {
     
     private double xLeft, xRight, yTop, yBot, xCentro, yCentro;
@@ -14,21 +17,30 @@ public class GL3D implements GLEventListener {
     private GLU glu;
     private GLContext context;
     
-    private int tipo;
+    private int anchura;
+    private int altura;
     
-    public GL3D(){
-        glu= new GLU();
+    private ArrayList<PuntoVector3D> perfil;
+    private boolean generado;
+    private int tipo;
+       
+    public GL3D(int anchura, int altura){
+        this.glu = new GLU();
         
-        xRight = 200; 
-        xLeft =- xRight;
-        yTop = 200; 
-        yBot =- xRight;
-        xCentro= (xRight+xLeft)/2.0; 
-        yCentro= (yTop+yBot)/2.0;    
+        this.anchura = anchura;
+        this.altura = altura;
         
-        RatioViewPort= 1.0;
+        this.xRight = anchura / 2.0; 
+        this.xLeft =- xRight;
+        this.yTop = altura / 2.0; 
+        this.yBot =- xRight;
+        this.xCentro= (xRight+xLeft)/2.0; 
+        this.yCentro= (yTop+yBot)/2.0;    
         
-        tipo = 0;
+        this.RatioViewPort= 1.0;
+        
+        this.tipo = 0;
+        this.generado = false;
     }
     
     public void display(GLAutoDrawable drw) {
@@ -36,12 +48,16 @@ public class GL3D implements GLEventListener {
         
         gl.glClear(GL.GL_COLOR_BUFFER_BIT);
         
-        // Tipo de Escena a dibujar
-        switch(tipo) {
-            case 0: dibujaMallaPorRevolucion(gl); break;
-            case 1: dibujaMallaPorExtrusion(gl); break;
-        }
-        
+        if (generado)
+            // Tipo de Escena a dibujar
+            switch(tipo) {
+                case 0: dibujaMallaPorRevolucion(gl); break;
+                case 1: dibujaMallaPorExtrusion(gl); break;
+                case 2: dibujaMallaPorRevolucion(gl); break;
+            }
+        else
+            dibujarPuntos(gl);
+            
         gl.glFlush();
     }
     
@@ -93,6 +109,10 @@ public class GL3D implements GLEventListener {
         gl.glLoadIdentity();
         display(drw);
     }
+
+    public GLContext getContext() {
+        return context;
+    }
     
     public void zoom(GLAutoDrawable drw, double factor){
         double newAncho= (xRight-xLeft)*factor;
@@ -108,7 +128,20 @@ public class GL3D implements GLEventListener {
         gl.glLoadIdentity();
         glu.gluOrtho2D(xLeft,xRight, yBot,yTop);
         
-        //display(drw);
+    }
+    
+    // Método que dibuja los puntos de control del perfil
+    public void dibujarPuntos(GL gl) {
+        
+        gl.glColor3f(1.0f, 1.0f, 1.0f); 
+        gl.glPointSize(2.0f);
+        
+        gl.glBegin(GL.GL_POINTS);
+ 
+            for(int i = 0; i < perfil.size(); i++) 
+                gl.glVertex3f(perfil.get(i).getX(), perfil.get(i).getY(), perfil.get(i).getZ()); 
+  
+	gl.glEnd();        
     }
     
     // Método que dibuja Malla por Revolucion
@@ -148,4 +181,54 @@ public class GL3D implements GLEventListener {
     public void setTipo(int t) {
         this.tipo = t;
     }
+    
+    public ArrayList<PuntoVector3D> getPerfil() {
+        return perfil; 
+    }
+    
+    public void setPerfil(ArrayList<PuntoVector3D> puntosPerfil) {
+         this.perfil = (ArrayList<PuntoVector3D>) puntosPerfil.clone();
+    }
+    
+    
+    // Métodos que actualiza datos de la escena
+    public void actualizarDatos(int tipoMalla, ArrayList<PuntoVector3D> puntosPerfil) {
+        this.tipo = tipoMalla;
+        this.perfil = (ArrayList<PuntoVector3D>) puntosPerfil.clone();
+    }
+    
+    // Escala un punto desde el puerto de vista hasta el area visible de la escena
+    public PuntoVector3D convertirPuntoToPixel(PuntoVector3D punto) {
+        
+        PuntoVector3D pixel = new PuntoVector3D();;
+        
+        float escalaAncho = (float)(anchura/(xRight-xLeft));
+        if (xLeft < 0) 
+            pixel.setX((float) (punto.getX() / escalaAncho + xLeft));
+        else 
+            pixel.setX((float) (punto.getX()/ escalaAncho -  xLeft));
+
+        float escalaAlto = (float)(altura/(yTop-yBot));
+        if (yTop < 0)
+            pixel.setY((float) (punto.getY() / escalaAlto +  yTop));
+        else
+            pixel.setY((float) (punto.getY() / escalaAlto - yTop));
+
+        pixel.setZ(punto.getZ());
+        pixel.setPV(punto.getPV());
+        
+        return pixel;
+    }
+    
+    // Método que convierte las coordenadas del perfil a coordenadas del Area Visible de la Escena
+    public ArrayList<PuntoVector3D> transformarPerfil(ArrayList<PuntoVector3D> perfilDado) {
+        
+        ArrayList<PuntoVector3D> retVal = new ArrayList<PuntoVector3D>();
+        
+        for (int i=0; i<perfilDado.size(); i++)
+            retVal.add(convertirPuntoToPixel(perfilDado.get(i)));
+        
+        return retVal;
+    }
+   
 }

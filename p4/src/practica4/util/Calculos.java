@@ -29,7 +29,7 @@ public class Calculos {
 }
     
     // Metodo B-Splines
-    public ArrayList<PuntoVector3D> calculaPuntosBSplines(ArrayList<PuntoVector3D> perfil, int numPuntos) {
+    public ArrayList<PuntoVector3D> calculaPuntosBSplines(ArrayList<PuntoVector3D> perfil, int numPuntosControl) {
 
         ArrayList<PuntoVector3D> retVal = new ArrayList<PuntoVector3D>();
         int numPuntosIniciales = perfil.size();
@@ -38,12 +38,10 @@ public class Calculos {
         float ti, tj;
         float xd, yd, zd;
         float v, incr;
-        PuntoVector3D puntoActual;
-        PuntoVector3D puntoNuevo;
         
         ti = (float) 2.0;
         tj = numPuntosIniciales + 1;
-        incr = (float) ((tj - 2) / numPuntos);
+        incr = (float) ((tj - 2) / numPuntosControl);
         
         while (ti<tj) {
 
