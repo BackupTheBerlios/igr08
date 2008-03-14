@@ -20,8 +20,8 @@ public class Malla {
 
     public void defineMalla() {
 
-	int nU = 0;
-	int nV = 0;
+	int nU = vertices.size();
+	int nV = normales.size();
 	double uMin = 0, uMax = 0;
 	double vMin = 0, vMax = 0;
 	numVertices = nU * nV;
@@ -97,5 +97,10 @@ public class Malla {
 	}
 	PuntoVector3D tmp = new PuntoVector3D((float)nx, (float)ny, (float)nz, 1);
 	normales.add(tmp.normaliza());
+    }
+    
+    // Añade un nuevo vertice 
+    public void addVertice(PuntoVector3D punto) {
+        vertices.add(punto);
     }
 }
