@@ -2,6 +2,7 @@ package practica4.Vista;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Iterator;
 import javax.swing.*;
 
 import javax.media.opengl.*;
@@ -179,7 +180,14 @@ public class Principal extends JFrame {
                  String dato = JOptionPane.showInputDialog(null, "Numero de puntos de control. Rango[" + perfil.size() + "...N]",
                                                            "Datos de Entrada", 1);
                  if (dato != null) {
-                     perfil = new Calculos().calculaPuntosBSplines(perfil, Integer.parseInt(dato));
+                     int num = Integer.parseInt(dato);
+                     perfil = new Calculos().calculaPuntosBSplines(perfil, num);
+                     if (perfil.size() > num) {
+                         ArrayList<PuntoVector3D> perfilAux = new ArrayList<PuntoVector3D>();
+                         for (int i=0; i<num-2; i++)
+                             perfilAux.add(perfil.get(i));
+                         perfil = (ArrayList<PuntoVector3D>) perfilAux.clone();
+                     }
                      escena.setPerfil(perfil);
                      entradaDatos = false;
                  }
