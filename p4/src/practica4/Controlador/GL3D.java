@@ -8,6 +8,7 @@ import javax.media.opengl.GLEventListener;
 import com.sun.opengl.util.Animator;
 
 import java.util.ArrayList;
+import practica4.Modelo.MallaPorRevolucion;
 import practica4.Modelo.PuntoVector3D;
 
 public class GL3D implements GLEventListener {
@@ -23,6 +24,8 @@ public class GL3D implements GLEventListener {
     private ArrayList<PuntoVector3D> perfil;
     private boolean generado;
     private int tipo;
+    
+    private MallaPorRevolucion mallaPorRevolucion;
        
     public GL3D(int anchura, int altura){
         this.glu = new GLU();
@@ -41,6 +44,7 @@ public class GL3D implements GLEventListener {
         
         this.tipo = 0;
         this.generado = false;
+        this.mallaPorRevolucion = null;
     }
     
     public void display(GLAutoDrawable drw) {
@@ -146,7 +150,9 @@ public class GL3D implements GLEventListener {
     
     // Método que dibuja Malla por Revolucion
     public void dibujaMallaPorRevolucion(GL gl) {
-		
+	
+        mallaPorRevolucion.dibujaMallaPorRevolucion(gl);
+        /*
         //gl.glTranslatef(-1.5f, 0.0f, -6.0f);
 
 	gl.glBegin(GL.GL_TRIANGLES);		    
@@ -156,7 +162,8 @@ public class GL3D implements GLEventListener {
             gl.glVertex3f(-50.0f, -50.0f, 0.0f);
             gl.glColor3f(0.0f, 0.0f, 1.0f);    
             gl.glVertex3f(50.0f, -50.0f, 0.0f); 
-	gl.glEnd();        
+	gl.glEnd();
+         */        
     }
     
     // Método que dibuja Malla por Extrusión
@@ -199,9 +206,14 @@ public class GL3D implements GLEventListener {
     }
     
     // Métodos que actualiza datos de la escena
-    public void actualizarDatos(int tipoMalla, ArrayList<PuntoVector3D> puntosPerfil) {
+    public void actualizarPerfil(int tipoMalla, ArrayList<PuntoVector3D> puntosPerfil) {
         this.tipo = tipoMalla;
         this.perfil = (ArrayList<PuntoVector3D>) puntosPerfil.clone();
+    }
+    
+    public void actualizarMalla(int tipoMalla, MallaPorRevolucion mallaPorRevolucion) {
+        this.tipo = tipoMalla;
+        this.mallaPorRevolucion = mallaPorRevolucion;
     }
     
     // Escala un punto desde el puerto de vista hasta el area visible de la escena

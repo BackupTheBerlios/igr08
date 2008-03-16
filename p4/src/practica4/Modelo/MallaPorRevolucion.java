@@ -1,6 +1,7 @@
 package practica4.Modelo;
 
 import java.util.ArrayList;
+import javax.media.opengl.GL;
 
 public class MallaPorRevolucion extends Malla {
     
@@ -9,7 +10,7 @@ public class MallaPorRevolucion extends Malla {
     
     // Constructora por defecto
     public MallaPorRevolucion() {}
-    
+    /*
     // Constructora por parámetros
     public MallaPorRevolucion(ArrayList<PuntoVector3D> perfil) {
         
@@ -24,9 +25,10 @@ public class MallaPorRevolucion extends Malla {
         }
 
     }
+    */
+    public MallaPorRevolucion(ArrayList<PuntoVector3D> perfil) {
     
-        public void MallaPorRevolucion1(ArrayList<PuntoVector3D> perfil) {
-	    PuntoVector3D actualI, actualI1, giraI, giraI1;
+         PuntoVector3D actualI, actualI1, giraI, giraI1;
 	 /** inicializar..
 	  * coger puntos
 	  */
@@ -47,13 +49,17 @@ public class MallaPorRevolucion extends Malla {
 		this.vertices.add(giraI);
 		this.vertices.add(giraI1);
 		Cara c = new Cara();
-		// c.set...
+		c.setIndiceVerticeNormal(i);
 		this.caras.add(c);
 		
 		
 	    }
 
 	}
+    
+    public void dibujaMallaPorRevolucion(GL gl) {
+        this.dibuja(gl);
+    }
     
 }
 

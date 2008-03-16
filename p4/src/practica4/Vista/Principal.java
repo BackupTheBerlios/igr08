@@ -137,7 +137,7 @@ public class Principal extends JFrame {
         nuevo.addActionListener (new ActionListener() {
              public void actionPerformed(ActionEvent e) {
                  perfil= new ArrayList<PuntoVector3D>();
-                 escena.actualizarDatos(tipoMalla, perfil);
+                 escena.actualizarPerfil(tipoMalla, perfil);
              }
         });   
         
@@ -153,7 +153,7 @@ public class Principal extends JFrame {
         revolucion.addActionListener (new ActionListener() {
              public void actionPerformed(ActionEvent e) {
                  tipoMalla = 0;
-                 escena.actualizarDatos(tipoMalla, perfil);
+                 escena.actualizarPerfil(tipoMalla, perfil);
              }
         });   
         
@@ -200,6 +200,7 @@ public class Principal extends JFrame {
                  
                 mallaRevolucion = new MallaPorRevolucion(perfil);
                  
+                escena.actualizarMalla(tipoMalla, mallaRevolucion);
                 escena.setGenerado(true);
                 entradaDatos = false;
              }
