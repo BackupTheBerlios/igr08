@@ -5,7 +5,6 @@ import javax.media.opengl.glu.*;
 import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
-import com.sun.opengl.util.Animator;
 
 import java.util.ArrayList;
 import practica4.Modelo.MallaPorRevolucion;
@@ -219,7 +218,7 @@ public class GL3D implements GLEventListener {
     // Escala un punto desde el puerto de vista hasta el area visible de la escena
     public PuntoVector3D convertirPuntoToPixel(PuntoVector3D punto) {
         
-        PuntoVector3D pixel = new PuntoVector3D();;
+        PuntoVector3D pixel = new PuntoVector3D();
         
         float escalaAncho = (float)(anchura/(xRight-xLeft));
         if (xLeft < 0) 

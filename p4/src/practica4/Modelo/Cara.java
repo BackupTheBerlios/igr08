@@ -29,4 +29,8 @@ public class Cara {
     public void setIndiceVerticeNormal(int indice) {
 	this.indicesVerticesNormales.add(indice);
     }
+    
+    public void setIndiceVertice(int indice) {
+	this.indicesVertices.add(indice);
+    }
 }

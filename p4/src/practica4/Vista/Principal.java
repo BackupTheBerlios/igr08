@@ -2,7 +2,6 @@ package practica4.Vista;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Iterator;
 import javax.swing.*;
 
 import javax.media.opengl.*;
@@ -208,7 +207,8 @@ public class Principal extends JFrame {
         
         // Añadimos un evento para la acción de salida
         addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
+            @Override
+	    public void windowClosing(WindowEvent e) {
                 new Thread(new Runnable() {
                      public void run() {
                         animacion.stop();
@@ -222,15 +222,17 @@ public class Principal extends JFrame {
     // Eventos del Ratón
     public class ManejadorRaton extends MouseAdapter {
 	
+	@Override
 	public void mousePressed(MouseEvent evento) {
             if (entradaDatos) {
                 perfil.add(escena.convertirPuntoToPixel(new PuntoVector3D(evento.getX(),400 - evento.getY(), 0, 1)));
                 escena.setPerfil(perfil);
             }
         }
-        
+        @Override
 	public void mouseReleased(MouseEvent evento) {}
-        public void mouseClicked(MouseEvent evento) {}
+        @Override
+	public void mouseClicked(MouseEvent evento) {}
     }
 			
     
