@@ -133,7 +133,7 @@ public class PuntoVector3D implements Serializable {
     
     public ArrayList<PuntoVector3D> calculaPuntos(PuntoVector3D p, float angRad){
         ArrayList<PuntoVector3D> retVal = new ArrayList<PuntoVector3D>();
-        int nlados = (int)(2 * Math.PI / angRad);
+        int nlados = getNumVerticesDeRevolucion(angRad);
         for (int i = 1; i <= nlados; i++) {
             retVal.add(giraPunto1(p,i*angRad));
         }
@@ -148,6 +148,10 @@ public class PuntoVector3D implements Serializable {
     public PuntoVector3D giraPunto(double angRad){
         PuntoVector3D retVal = new PuntoVector3D((float)(this.getX()*Math.sin(angRad)), this.getY(), (float)(this.getX()*Math.cos(angRad)), 1);
         return retVal;
+    }
+    
+    public int getNumVerticesDeRevolucion(float angRad) {
+        return ((int)(2 * Math.PI / angRad));
     }
 }
 

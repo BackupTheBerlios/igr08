@@ -7,7 +7,7 @@ public class MallaPorRevolucion extends Malla {
 
     // Atributos
     private ArrayList<ArrayList<PuntoVector3D>> aros;
-
+    
     // Constructora por defecto
     public MallaPorRevolucion() {
     }
@@ -67,6 +67,72 @@ public class MallaPorRevolucion extends Malla {
 	    }
 	}
     }
+    
+    public MallaPorRevolucion(ArrayList<PuntoVector3D> perfil, float anguloRad) {
+              
+        int numVertices = new PuntoVector3D().getNumVerticesDeRevolucion(anguloRad);
+        for (int i=0; i<perfil.size(); i++) {
+            for (int j=1; j<numVertices; j++) {
+                
+            }
+        }
+    }
+    
+    /********************************************************************
+    MallaPorRevolucion::MallaPorRevolucion(GLint numeroVerticesPerfil, PuntoVector3D** perfil, GLdouble radianes)
+{
+  // Para empezar es necesario saber cuantas veces moveremos el perfil alrededor
+  // del eje y. Lo calculamos dividiendo 2*PI entre la distancia en radianes
+  // dada como parámetro y redondeando a la baja.
+  int copiasDelPerfil = floor(2 * M_PI / radianes);
+  // Ahora sabemos que tendremos tantos VERTICES como tenga el perfil
+  // multiplicado por el número de veces que vaya a aparecer:
+  numeroVertices = numeroVerticesPerfil * copiasDelPerfil;
+  // A continuación, el número de caras (que coincidirá con el número de
+  // normales al usar el método de Newell) será el número de vertices del
+  // perfil menos uno por el número de veces que aparecerá el perfil.
+  numeroCaras = (numeroVerticesPerfil - 1) * copiasDelPerfil;
+  numeroNormales = numeroCaras;
+  // Ya sabemos las dimensiones que tendrán los arrays dinámicos. Los creamos.
+  vertice = new PuntoVector3D*[numeroVertices];
+  normal = new PuntoVector3D*[numeroNormales];
+  cara = new Cara*[numeroCaras];
+  // Llega el momento de empezar a crear los objetos. Primero los vértices.
+  GLdouble angulo, x, y, z;
+  for (int i=0; i<copiasDelPerfil; i++) {
+    for (int j=0; j<numeroVerticesPerfil; j++) {
+      angulo = (double)i * radianes;
+      x = perfil[j]->getX() * cos(angulo);
+      y = perfil[j]->getY();
+      z = perfil[j]->getX() * sin(angulo);
+      vertice[i*numeroVerticesPerfil + j] = new PuntoVector3D(x, y, z);
+    }
+  }
+  // Creamos a continuación las caras.
+  for (int i=0; i<copiasDelPerfil; i++) {
+    for (int j=1; j<numeroVerticesPerfil; j++) {
+      // vertices implicados en la cara:
+      //        vertice[i*numeroVerticesPerfil + j]
+      //        vertice[i*numeroVerticesPerfil + j - 1]
+      //        vertice[((i+1)%copiasDelPerfil)*numeroVerticesPerfil + j - 1]
+      //        vertice[((i+1)%copiasDelPerfil)*numeroVerticesPerfil + j]
+      int indiceCara = i * (numeroVerticesPerfil - 1) + j - 1;
+      int numeroVerticesCara = 4;
+      VerticeNormal** vn = new VerticeNormal*[numeroVerticesCara];
+      vn[0] = new VerticeNormal(i*numeroVerticesPerfil + j, indiceCara);
+      vn[1] = new VerticeNormal(i*numeroVerticesPerfil + j - 1, indiceCara);
+      vn[2] = new VerticeNormal(((i+1)%copiasDelPerfil)*numeroVerticesPerfil + j - 1, indiceCara);
+      vn[3] = new VerticeNormal(((i+1)%copiasDelPerfil)*numeroVerticesPerfil + j, indiceCara);
+      cara[indiceCara] = new Cara(numeroVerticesCara, vn);
+      normal[indiceCara] = aplicarNewell(indiceCara);
+    }
+  }
+  // Por último y para terminar, borramos el perfil, que ya no nos hace falta.
+  for (int i=0; i<numeroVerticesPerfil; i++)
+    delete perfil[i];
+  delete[] perfil;
+}
+ */
 
     public void dibujaMallaPorRevolucion(GL gl) {
 	this.dibuja(gl);
