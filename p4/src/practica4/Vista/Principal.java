@@ -197,7 +197,7 @@ public class Principal extends JFrame {
         botonGenerarMalla.addActionListener (new ActionListener() {
              public void actionPerformed(ActionEvent e) {
                  
-                mallaRevolucion = new MallaPorRevolucion(perfil);
+                mallaRevolucion = new MallaPorRevolucion(perfil,0.5f);
                  
                 escena.actualizarMalla(tipoMalla, mallaRevolucion);
                 escena.setGenerado(true);
