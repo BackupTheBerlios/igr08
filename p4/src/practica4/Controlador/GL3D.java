@@ -79,8 +79,8 @@ public class GL3D implements GLEventListener {
         gl.glLoadIdentity();
         
         //glu.gluOrtho2D(xLeft, xRight, yBot, yTop);
-        //glu.gluPerspective(45.0f, h, 1.0, 20.0);
-        gl.glOrtho(xLeft, xRight, yBot,  yTop, 1.0f, 10.0f);  
+        //glu.gluPerspective(45.0, xRight, 1.0, 20.0);
+        gl.glOrtho(xLeft, xRight, yBot,  yTop, -1.0f, 10.0f);  
         
         gl.glMatrixMode(GL.GL_MODELVIEW);
         gl.glLoadIdentity();
@@ -106,7 +106,7 @@ public class GL3D implements GLEventListener {
         GL gl = drw.getGL();
         gl.glMatrixMode(GL.GL_PROJECTION);
         gl.glLoadIdentity();
-        glu.gluOrtho2D(xLeft,xRight, yBot,yTop);
+        gl.glOrtho(xLeft, xRight, yBot,  yTop, -1.0f, 10.0f);  
         
         gl.glMatrixMode(GL.GL_MODELVIEW);
         gl.glLoadIdentity();
@@ -142,7 +142,7 @@ public class GL3D implements GLEventListener {
         gl.glBegin(GL.GL_POINTS);
  
             for(int i = 0; i < perfil.size(); i++) 
-                gl.glVertex3f(perfil.get(i).getX(), perfil.get(i).getY(), perfil.get(i).getZ()); 
+                gl.glVertex3f((float)perfil.get(i).getX(), (float)perfil.get(i).getY(), (float)perfil.get(i).getZ()); 
   
 	gl.glEnd();        
     }
@@ -220,15 +220,15 @@ public class GL3D implements GLEventListener {
         
         PuntoVector3D pixel = new PuntoVector3D();
         
-        float escalaAncho = (float)(anchura/(xRight-xLeft));
+        double escalaAncho = (double)(anchura/(xRight-xLeft));
         if (xLeft < 0) 
-            pixel.setX((float) (punto.getX() / escalaAncho + xLeft));
+            pixel.setX((double) (punto.getX() / escalaAncho + xLeft));
         else 
-            pixel.setX((float) (punto.getX()/ escalaAncho -  xLeft));
+            pixel.setX((double) (punto.getX()/ escalaAncho -  xLeft));
 
-        float escalaAlto = (float)(altura/(yTop-yBot));
+        double escalaAlto = (double)(altura/(yTop-yBot));
         if (yTop < 0)
-            pixel.setY((float) (punto.getY() / escalaAlto +  yTop));
+            pixel.setY((double) (punto.getY() / escalaAlto +  yTop));
         else
             pixel.setY((float) (punto.getY() / escalaAlto - yTop));
 

@@ -2,30 +2,33 @@ package practica4.Modelo;
 
 public class VerticeNormal {
 
-    int indiceVertice;
-    int indiceNormal;
+    // Atributos privados
+    private int indiceVertice;
+    private int indiceNormal;
 
-    public VerticeNormal() {
-    }
+    // Constructora por defecto
+    public VerticeNormal() {}
     
-    public VerticeNormal(int indiceVert, int indiceNorm) {
-	indiceNormal = indiceNorm;
-	indiceVertice = indiceVert;	
+    // Constructora por parámetros
+    public VerticeNormal(int indiceV, int indiceN) {
+	this.indiceVertice = indiceV;
+        this.indiceNormal = indiceN;	
     }
-
+   
+    // Getters & Setters 
     public int getIndiceVertice() {
 	return indiceVertice;
     }
 
+    public void setIndiceVertice(int i) {
+	this.indiceVertice = i;
+    }
+    
     public int getIndiceNormal() {
 	return indiceNormal;
     }
 
-    public void setIndiceVertice(int i) {
-	indiceVertice = i;
-    }
-
     public void setIndiceNormal(int i) {
-	indiceNormal = i;
+	this.indiceNormal = i;
     }
 }

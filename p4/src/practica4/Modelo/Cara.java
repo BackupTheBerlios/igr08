@@ -4,18 +4,17 @@ import java.util.ArrayList;
 
 public class Cara {
 
-    private ArrayList<Integer> indicesVertices; 
+    // Atributos privados
     private ArrayList<VerticeNormal> indicesVerticesNormales;
-    private int numVertices;
-
+    
+    // Constructora por defecto
     public Cara() {
-        indicesVertices = new ArrayList<Integer>();
-	indicesVerticesNormales = new ArrayList<VerticeNormal>();
-        numVertices = 0;
+        indicesVerticesNormales = new ArrayList<VerticeNormal>();
     }
-
+    
+    // Getters & Setters
     public int getNumVertices() {
-	return indicesVertices.size();
+	return indicesVerticesNormales.size();
     }
 
     public int getIndiceVertice(int i) {
@@ -30,7 +29,11 @@ public class Cara {
 	this.indicesVerticesNormales.add(indiceVN);
     }
     
-    public void setIndiceVertice(int indice) {
-	this.indicesVertices.add(indice);
+    public ArrayList<VerticeNormal> getIndiceVerticeNormal() {
+        return indicesVerticesNormales;
+    }
+
+    void setIndiceVerticeNormal(ArrayList p) {
+        indicesVerticesNormales = (ArrayList<VerticeNormal>) p.clone();
     }
 }

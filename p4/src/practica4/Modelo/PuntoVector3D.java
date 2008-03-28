@@ -7,20 +7,15 @@ import java.util.ArrayList;
 public class PuntoVector3D implements Serializable {
 
     // Atributos
-    float x, y, z;
+    double x, y, z;
     int pv;          // PV=1 (punto) / PV=0 (vector)
     
     
     // Constructora por defecto
-    public PuntoVector3D() {
-        this.x = (float) 0.0;
-        this.y = (float) 0.0;
-        this.z = (float) 0.0;
-        this.pv = 1;
-    }
+    public PuntoVector3D() {}
     
     // Constructora con parámetros 1
-    public PuntoVector3D(float x, float y, float z) {
+    public PuntoVector3D(double x, double y, double z) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -28,7 +23,7 @@ public class PuntoVector3D implements Serializable {
     }
 
     // Constructora con parámetros 2
-    public PuntoVector3D(float x, float y, float z, int pv) {
+    public PuntoVector3D(double x, double y, double z, int pv) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -48,31 +43,31 @@ public class PuntoVector3D implements Serializable {
     
     
     // Getters & Setters
-    public float getX() {
+    public double getX() {
         return x;
     }
     
-    public float getY() {
+    public double getY() {
         return y;
     }
     
-    public float getZ() {
+    public double getZ() {
         return z;
     }
     
-    public void setX(float x) {
+    public void setX(double x) {
         this.x = x;
     }
     
-    public void setY(float y) {
+    public void setY(double y) {
         this.y = y;
     }
     
-    public void setZ(float z) {
+    public void setZ(double z) {
         this.z = z;
     }
     
-    public void setXYZ(float x, float y, float z) {
+    public void setXYZ(double x, double y, double z) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -89,24 +84,24 @@ public class PuntoVector3D implements Serializable {
     
     // Operaciones con puntos y vectores
     public void suma(PuntoVector3D PV0) {
-        x = x + PV0.getX();
-        y = y + PV0.getY();
-        z = z + PV0.getZ();
+        this.x = x + PV0.getX();
+        this.y = y + PV0.getY();
+        this.z = z + PV0.getZ();
     }
     
     public void resta(PuntoVector3D PV0) {
-        x = x - PV0.getX();
-        y = y - PV0.getY();
-        z = z - PV0.getZ();
+        this.x = x - PV0.getX();
+        this.y = y - PV0.getY();
+        this.z = z - PV0.getZ();
     }
     
     public void escala(float k) {
-        x = k * x;
-        y = k * y;
-        z = k * z;
+        this.x = k * x;
+        this.y = k * y;
+        this.z = k * z;
     }
     
-    public float prodEsc(PuntoVector3D PV0) {
+    public double prodEsc(PuntoVector3D PV0) {
         return (x * PV0.getX() + y * PV0.getY() + z * PV0.getZ());
     }
     
@@ -146,12 +141,14 @@ public class PuntoVector3D implements Serializable {
     }
     
     public PuntoVector3D giraPunto(double angRad){
-        PuntoVector3D retVal = new PuntoVector3D((float)(this.getX()*Math.sin(angRad)), this.getY(), (float)(this.getX()*Math.cos(angRad)), 1);
+        PuntoVector3D retVal = new PuntoVector3D((double)(this.getX()*Math.cos(angRad)), 
+                                                 (double) this.getY(), 
+                                                 (double)(this.getX()*Math.sin(angRad)), 1);
         return retVal;
     }
     
-    public int getNumVerticesDeRevolucion(float angRad) {
-        return ((int)(2 * Math.PI / angRad));
+    public int getNumVerticesDeRevolucion(double angRad) {
+        return (int)Math.floor(2 * Math.PI / angRad);
     }
 }
 
