@@ -53,13 +53,11 @@ public class Lapiz {
 	double alfa = 360.0 / (double) nlados;
 	double beta = (180.0 - alfa) / 2.0;
 	double gamma = 180 - 2 * beta;
-	retVal.add(this.pos);
+	// retVal.add(this.pos); // el primer punto es equivalente al ultimo
 	for (int i = 0; i < nlados; i++) {
-	    //Segmento s = new Segmento();
 	    PuntoVector3D unPunto = this.avanza(lado);
 	    retVal.add(unPunto);
 	    this.gira(gamma);
-	    
 	}
 	return retVal;
     }
@@ -68,9 +66,7 @@ public class Lapiz {
 	ArrayList<PuntoVector3D> retVal;
 	double alfa = 360.0 / (double) nlados;
 	double beta = (180.0 - alfa) / 2.0;
-	//   GLdouble gamma = 180 - 2*beta;
 	double theta = 180 - 2 * beta;
-//        GLfloat cose =   cos(g2r(beta));
 	this.pos.setX(centro.getX() + (Math.cos(Conversiones.g2r(beta)) * radio));
 	this.pos.setY(centro.getY() - (Math.sin(Conversiones.g2r(beta)) * radio));
 	this.ang = Conversiones.g2r(theta);
