@@ -56,11 +56,11 @@ public class MallaPorRevolucion extends Malla {
                 
                 // unir
                 c = new Cara();
-                c.setIndiceVertice(j + 1);
+               /* c.setIndiceVertice(j + 1);
                 c.setIndiceVertice(j + 2);
                 c.setIndiceVertice(j + 4);  //<----
                 c.setIndiceVertice(j + 3);
-                
+                */
                 this.caras.add(c);
                 actualI = actualI1;
                 giraI = giraI1;
@@ -76,12 +76,21 @@ public class MallaPorRevolucion extends Malla {
             vertices.add(new PuntoVector3D());
         }
         
-        for (int i=0; i<perfil.size(); i++) {
+        /*for (int i=0; i<perfil.size(); i++) {
             for (int j=0; j<numVerticesAro; j++) {
                 //vertices.add(i*perfil.size() + j, perfil.get(j).giraPunto(anguloRad));
                 vertices.set(i*perfil.size() + j, perfil.get(j).giraPunto(anguloRad));
             }
+        }*/
+	
+	for (int i=0; i<numVerticesAro; i++) {
+            for (int j=0; j<perfil.size(); j++) {
+                int pos = i*perfil.size() + j;
+		PuntoVector3D elPunto = perfil.get(j).giraPunto(anguloRad);
+		vertices.set(pos, elPunto);
+            }
         }
+
         for (int i=0; i<numVerticesAro; i++) {
             for (int j=1; j<perfil.size(); j++) {
                 indCara = i * (perfil.size() - 1) + j - 1;
@@ -152,7 +161,7 @@ public class MallaPorRevolucion extends Malla {
      */
     
     public void dibujaMallaPorRevolucion(GL gl) {
-        this.dibuja(gl);
+        this.dibuja(gl, 0);
     }
 }
 

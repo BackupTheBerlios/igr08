@@ -45,23 +45,27 @@ public class Malla {
         }
     }
     
-    public void SetNormales() {
-        // Metodo de Newel
-        double nx = 0, ny = 0, nz = 0;
-
-        for (int i = 0; i < vertices.size(); i++) {
-            nx = vertices.get(i).getY() - (vertices.get((i + 1) % vertices.size()).getY());
-            nx = nx * vertices.get(i).getZ() + (vertices.get((i + 1) % vertices.size()).getZ());
-            
-            ny = vertices.get(i).getZ() - (vertices.get((i + 1) % vertices.size()).getZ());
-            ny = ny * vertices.get(i).getX() + (vertices.get((i + 1) % vertices.size()).getX());
-            
-            nz = vertices.get(i).getX() - (vertices.get((i + 1) % vertices.size()).getX());
-            nz = nz * vertices.get(i).getY() + (vertices.get((i + 1) % vertices.size()).getY());
-
-        }
-        normales.add(new PuntoVector3D((float)nx, (float)ny, (float)nz, 1).normaliza());
-    }
+//    public void SetNormales() {
+//        // Metodo de Newel
+//        double nx = 0, ny = 0, nz = 0, nxi = 0, nyi = 0, nzi = 0;
+//	
+//	// vertices de la cara
+//        for (int i = 0; i < vertices.size(); i++) {
+//            nxi = vertices.get(i).getY() - (vertices.get((i + 1) % vertices.size()).getY());
+//            nxi = nx * vertices.get(i).getZ() + (vertices.get((i + 1) % vertices.size()).getZ());
+//            nx+=nxi;
+//	    
+//            nyi = vertices.get(i).getZ() - (vertices.get((i + 1) % vertices.size()).getZ());
+//            nyi = ny * vertices.get(i).getX() + (vertices.get((i + 1) % vertices.size()).getX());
+//            ny+=nyi;
+//	    
+//            nzi = vertices.get(i).getX() - (vertices.get((i + 1) % vertices.size()).getX());
+//            nzi = nz * vertices.get(i).getY() + (vertices.get((i + 1) % vertices.size()).getY());
+//	    nz+=nzi;
+//	    
+//        }
+//        normales.add(new PuntoVector3D((float)nx, (float)ny, (float)nz, 1).normaliza());
+//    }
     
     // Añade un nuevo vertice
     public void addVertice(PuntoVector3D punto) {
