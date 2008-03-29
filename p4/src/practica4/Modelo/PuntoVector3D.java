@@ -5,11 +5,9 @@ import java.util.ArrayList;
 
 
 public class PuntoVector3D implements Serializable {
-
     // Atributos
     double x, y, z;
     int pv;          // PV=1 (punto) / PV=0 (vector)
-    
     
     // Constructora por defecto
     public PuntoVector3D() {}
@@ -40,7 +38,6 @@ public class PuntoVector3D implements Serializable {
     public String toString() {
         return "[" + String.valueOf(x) + "," + String.valueOf(y) + "," + String.valueOf(z) + "," + String.valueOf(pv) + "]"; 
     }
-    
     
     // Getters & Setters
     public double getX() {
