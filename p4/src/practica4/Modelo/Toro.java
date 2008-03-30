@@ -84,7 +84,7 @@ public class Toro extends Malla {
     }
 
     PuntoVector3D[] crearPoligonoRegular(int numLados, float radio, PuntoVector3D centro) {
-	
+
 	//Ángulos en radianes
 	double anguloAlfa = 2 * Math.PI / numLados;
 	int numVertices = 0;
@@ -108,6 +108,28 @@ public class Toro extends Malla {
 	    numVertices++;
 	}
 	return poligono;
+    }
+
+    void traduceUnVertice(PuntoVector3D vertice) {
+	double auxX = (vertice.getX() * matrizFrenet[0] +
+		vertice.getY() * matrizFrenet[1] +
+		vertice.getZ() * matrizFrenet[2] +
+		+matrizFrenet[3]);
+	double auxY = (vertice.getX() * matrizFrenet[4] +
+		vertice.getY() * matrizFrenet[5] +
+		vertice.getZ() * matrizFrenet[6] +
+		matrizFrenet[7]);
+	double auxZ = (vertice.getX() * matrizFrenet[8] +
+		vertice.getY() * matrizFrenet[9] +
+		vertice.getZ() * matrizFrenet[10] +
+		matrizFrenet[11]);
+
+	int Punto_Vector = 1;
+	//Se cambian los valores con el nuevo marco
+	vertice.setX(auxX);
+	vertice.setY(auxY);
+	vertice.setZ(auxZ);
+	vertice.setPV(Punto_Vector);
     }
 
     public void dibuja(GL gl) {
