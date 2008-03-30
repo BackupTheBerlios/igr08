@@ -9,6 +9,7 @@ import javax.media.opengl.GLEventListener;
 import java.util.ArrayList;
 import practica4.Modelo.MallaPorRevolucion;
 import practica4.Modelo.PuntoVector3D;
+import practica4.Modelo.Toro;
 
 public class GL3D implements GLEventListener {
     
@@ -25,6 +26,8 @@ public class GL3D implements GLEventListener {
     private int tipo;
     
     private MallaPorRevolucion mallaPorRevolucion;
+    private Toro mallaPorExtrusion;
+    
        
     public GL3D(int anchura, int altura){
         this.glu = new GLU();
@@ -171,12 +174,13 @@ public class GL3D implements GLEventListener {
         gl.glColor3f(0.5f, 0.5f, 1.0f);    
         //gl.glTranslatef(3.0f, 0.0f, 0.0f);
 	
-        gl.glBegin(GL.GL_QUADS);
+	 this.mallaPorExtrusion.dibuja(gl);
+        /*gl.glBegin(GL.GL_QUADS);
             gl.glVertex3f(-50.0f, 50.0f, 0.0f);  
             gl.glVertex3f(50.0f, 50.0f, 0.0f);  
             gl.glVertex3f(50.0f, -50.0f, 0.0f);  
             gl.glVertex3f(-50.0f, -50.0f, 0.0f); 
-	gl.glEnd();       
+	gl.glEnd();       */
     }
     
     // Getters & Stters
@@ -210,9 +214,14 @@ public class GL3D implements GLEventListener {
         this.perfil = (ArrayList<PuntoVector3D>) puntosPerfil.clone();
     }
     
-    public void actualizarMalla(int tipoMalla, MallaPorRevolucion mallaPorRevolucion) {
+    public void actualizarMallaRev(int tipoMalla, MallaPorRevolucion mallaPorRevolucion) {
         this.tipo = tipoMalla;
         this.mallaPorRevolucion = mallaPorRevolucion;
+    }
+    
+     public void actualizarMallaExt(int tipoMalla, Toro mallaPorExtrusion) {
+        this.tipo = tipoMalla;
+        this.mallaPorExtrusion = mallaPorExtrusion;
     }
     
     // Escala un punto desde el puerto de vista hasta el area visible de la escena

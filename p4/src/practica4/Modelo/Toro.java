@@ -32,7 +32,9 @@ public class Toro extends Malla {
 
 	for (int i = 0; i < circunferencia_1.size(); i++) {
 	    PuntoVector3D unPunto = circunferencia_1.get(i);
+	    PuntoVector3D otroPunto = circunferencia_1.get((i+1)%circunferencia_1.size());
 	    gl.glVertex3d(unPunto.getX(), unPunto.getY(), unPunto.getZ());
+	    gl.glVertex3d(otroPunto.getX(), otroPunto.getY(), otroPunto.getZ());
 	}
 	gl.glEnd();
     }
