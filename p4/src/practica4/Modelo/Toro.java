@@ -23,8 +23,10 @@ public class Toro extends Malla {
 	nQ = ladosToro;
 
 	Lapiz l = new Lapiz();
-	circunferencia_1 = l.poligonoR2(new PuntoVector3D(), rad1, ladosPoligono);
-	circunferencia_2 = l.poligonoR2(new PuntoVector3D(), rad2, ladosToro);
+	PuntoVector3D ejeXY = new PuntoVector3D(1.0f,1.0f,0.0f);
+	PuntoVector3D ejeYZ = new PuntoVector3D(0.0f,1.0f,1.0f);
+	circunferencia_1 = l.poligonoR2(new PuntoVector3D(), rad1, ladosPoligono, ejeXY);
+	circunferencia_2 = l.poligonoR2(new PuntoVector3D(), rad2, ladosToro, ejeYZ);
     }
 
     public void dibuja(GL gl) {

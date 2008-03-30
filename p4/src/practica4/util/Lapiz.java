@@ -38,31 +38,37 @@ public class Lapiz {
     }
 
 // Avanzamos al siguiente punto relativo
-    public PuntoVector3D avanza(double longitud) {
+    public PuntoVector3D avanza(double longitud, PuntoVector3D eje) {
 
-	double xD = pos.getX() + longitud * Math.cos(ang);
-	double yD = (float) pos.getY() + longitud * Math.sin(ang);
-	PuntoVector3D p = new PuntoVector3D((float) xD, (float) yD, 0);
-//	s = new Segmento(pos, p);
+	float  xD = (float) pos.getX() + (float) longitud * (float) Math.cos(ang);
+	float  yD = (float) pos.getY() + (float) longitud * (float) Math.sin(ang);
+	PuntoVector3D p = new PuntoVector3D();
+	if (eje.getX() == 0) {
+	    p = new PuntoVector3D(0,  xD,  yD);
+	} else if (eje.getY() == 0) {
+	    p = new PuntoVector3D(xD, 0, yD);
+	} else if (eje.getZ() == 0) {
+	    p = new PuntoVector3D(xD, yD, 0);
+	} 
 	lineTo(p);
 	return p;
     }
 
-    public ArrayList<PuntoVector3D> poligonoR1(double lado, int nlados) {
+    public ArrayList<PuntoVector3D> poligonoR1(double lado, int nlados, PuntoVector3D eje) {
 	ArrayList<PuntoVector3D> retVal = new ArrayList<PuntoVector3D>();
 	double alfa = 360.0 / (double) nlados;
 	double beta = (180.0 - alfa) / 2.0;
 	double gamma = 180 - 2 * beta;
 	// retVal.add(this.pos); // el primer punto es equivalente al ultimo
 	for (int i = 0; i < nlados; i++) {
-	    PuntoVector3D unPunto = this.avanza(lado);
+	    PuntoVector3D unPunto = this.avanza(lado, eje);
 	    retVal.add(unPunto);
 	    this.gira(gamma);
 	}
 	return retVal;
     }
 
-    public ArrayList<PuntoVector3D> poligonoR2(PuntoVector3D centro, float radio, int nlados) {
+    public ArrayList<PuntoVector3D> poligonoR2(PuntoVector3D centro, float radio, int nlados, PuntoVector3D eje) {
 	ArrayList<PuntoVector3D> retVal;
 	double alfa = 360.0 / (double) nlados;
 	double beta = (180.0 - alfa) / 2.0;
@@ -72,7 +78,7 @@ public class Lapiz {
 	this.ang = Conversiones.g2r(theta);
 
 	double lado = Math.cos(Conversiones.g2r(beta)) * radio * 2;
-	retVal = poligonoR1(lado, nlados);
+	retVal = poligonoR1(lado, nlados, eje);
 	return retVal;
     }
 }
