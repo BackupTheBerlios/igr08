@@ -86,7 +86,7 @@ public class Malla {
     }
 
     normalPlano = new PuntoVector3D(normX,normY,normZ,0);
-    normalPlano.normaliza();
+    normalPlano = normalPlano.normaliza();
     return normalPlano;
 }
     

@@ -15,8 +15,8 @@ public class Toro extends Malla {
     private int nP,  nQ; // nP: nº de lados del polígono de la seccion del toro
     // nQ = nº de capas del toro
     private float r1,  r2; // r1: radio del toro; r2: radio de la seccion del toro
-    private ArrayList<PuntoVector3D> circunferencia_1 = new ArrayList<PuntoVector3D>();
-    private ArrayList<PuntoVector3D> circunferencia_2 = new ArrayList<PuntoVector3D>();
+  //  private ArrayList<PuntoVector3D> circunferencia_1 = new ArrayList<PuntoVector3D>();
+   // private ArrayList<PuntoVector3D> circunferencia_2 = new ArrayList<PuntoVector3D>();
     private double[] matrizFrenet = new double[16];
     //---------------------------------------
     float radio;  //radio = radio del tubo
@@ -28,10 +28,10 @@ public class Toro extends Malla {
 	nQ = ladosToro;
 
 	Lapiz l = new Lapiz();
-	PuntoVector3D ejeXY = new PuntoVector3D(1.0f, 1.0f, 0.0f);
-	PuntoVector3D ejeYZ = new PuntoVector3D(0.0f, 1.0f, 1.0f);
-	circunferencia_1 = l.poligonoR2(new PuntoVector3D(), rad1, ladosPoligono, ejeXY);
-	circunferencia_2 = l.poligonoR2(new PuntoVector3D(), rad2, ladosToro, ejeYZ);
+//	PuntoVector3D ejeXY = new PuntoVector3D(1.0f, 1.0f, 0.0f);
+//	PuntoVector3D ejeYZ = new PuntoVector3D(0.0f, 1.0f, 1.0f);
+//	circunferencia_1 = l.poligonoR2(new PuntoVector3D(), rad1, ladosPoligono, ejeXY);
+//	circunferencia_2 = l.poligonoR2(new PuntoVector3D(), rad2, ladosToro, ejeYZ);
     }
 
     public Toro(int nP, float radio, int nQ) {
@@ -53,12 +53,13 @@ public class Toro extends Malla {
 	    //Se guardan en malla los vértices, luego ya se crearán normales y caras.
 	    for (int i = 0; i < nP; i++) {
 		this.vertices.add(poligonoConcreto.get(i));
+		int a = 0;
 	    }
 	}
 
 
 	//Creamos las normales de las caras
-	for (int k = 0; k < (nQ - 1); k++) {   //Rango hasta n-1, pues se consulta en el bucle (k+1)
+	for (int k = 0; k < (nQ - 1); k++) {   //Rango hasta nQ-1, pues se consulta en el bucle (k+1)
 	    for (int i = 0; i < nP; i++) {
 		PuntoVector3D normal;
 		int sig;
@@ -160,9 +161,9 @@ public class Toro extends Malla {
 	double anguloAlfa = 2 * Math.PI / numLados;
 	double coordenadaZ = centro.getZ();
 
-	PuntoVector3D punto0 = new PuntoVector3D(centro.getX() + radio, centro.getY(), coordenadaZ, 1);
+	/*PuntoVector3D punto0 = new PuntoVector3D(centro.getX() + radio, centro.getY(), coordenadaZ, 1);
 
-	poligono.add(punto0);
+	poligono.add(punto0);*/
 
 	PuntoVector3D puntoNuevo;
 
@@ -173,27 +174,7 @@ public class Toro extends Malla {
 	return poligono;
     }
 
-    private void traduceUnVertice(PuntoVector3D vertice) {
-	double auxX = (vertice.getX() * matrizFrenet[0] +
-		vertice.getY() * matrizFrenet[1] +
-		vertice.getZ() * matrizFrenet[2] +
-		+matrizFrenet[3]);
-	double auxY = (vertice.getX() * matrizFrenet[4] +
-		vertice.getY() * matrizFrenet[5] +
-		vertice.getZ() * matrizFrenet[6] +
-		matrizFrenet[7]);
-	double auxZ = (vertice.getX() * matrizFrenet[8] +
-		vertice.getY() * matrizFrenet[9] +
-		vertice.getZ() * matrizFrenet[10] +
-		matrizFrenet[11]);
 
-	int Punto_Vector = 1;
-	//Se cambian los valores con el nuevo marco
-	vertice.setX(auxX);
-	vertice.setY(auxY);
-	vertice.setZ(auxZ);
-	vertice.setPV(Punto_Vector);
-    }
 
     private void traduceVertices(ArrayList<PuntoVector3D> poligono) {
 	for (int i = 0; i < nP; i++) {
@@ -220,17 +201,5 @@ public class Toro extends Malla {
 	    poligono.set(i, p);
 	}
 
-    }
-
-    public void dibuja(GL gl) {
-	gl.glBegin(gl.GL_LINES);
-
-	for (int i = 0; i < circunferencia_1.size(); i++) {
-	    PuntoVector3D unPunto = circunferencia_1.get(i);
-	    PuntoVector3D otroPunto = circunferencia_1.get((i + 1) % circunferencia_1.size());
-	    gl.glVertex3d(unPunto.getX(), unPunto.getY(), unPunto.getZ());
-	    gl.glVertex3d(otroPunto.getX(), otroPunto.getY(), otroPunto.getZ());
-	}
-	gl.glEnd();
     }
 }

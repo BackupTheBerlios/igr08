@@ -174,7 +174,7 @@ public class GL3D implements GLEventListener {
         gl.glColor3f(0.5f, 0.5f, 1.0f);    
         //gl.glTranslatef(3.0f, 0.0f, 0.0f);
 	
-	 this.mallaPorExtrusion.dibuja(gl, 1);
+	 this.mallaPorExtrusion.dibuja(gl, 0);
         /*gl.glBegin(GL.GL_QUADS);
             gl.glVertex3f(-50.0f, 50.0f, 0.0f);  
             gl.glVertex3f(50.0f, 50.0f, 0.0f);  
