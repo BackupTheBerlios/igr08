@@ -3,7 +3,7 @@ package practica4.Modelo;
 import java.util.ArrayList;
 import practica4.util.Lapiz;
 
-public class Toro extends Malla {
+public class Espiral extends Malla {
 
     /**
      * Ecuaciones parametricas de una circunferencia
@@ -18,22 +18,30 @@ public class Toro extends Malla {
     //---------------------------------------
     float radio;  //radio = radio del tubo
 
-    public Toro(float rad1, float rad2, int ladosToro, int ladosPoligono) {
+    public Espiral(float rad1, float rad2, int ladosToro, int ladosPoligono) {
 	r1 = rad1;
 	r2 = rad2;
 	nP = ladosPoligono;
 	nQ = ladosToro;
+
+	Lapiz l = new Lapiz();
+//	PuntoVector3D ejeXY = new PuntoVector3D(1.0f, 1.0f, 0.0f);
+//	PuntoVector3D ejeYZ = new PuntoVector3D(0.0f, 1.0f, 1.0f);
+//	circunferencia_1 = l.poligonoR2(new PuntoVector3D(), rad1, ladosPoligono, ejeXY);
+//	circunferencia_2 = l.poligonoR2(new PuntoVector3D(), rad2, ladosToro, ejeYZ);
     }
 
-    public Toro(int nP, float radio, int nQ) {
+    public Espiral(int nP, float radio, int nQ) {
 	super();
 	this.nP = nP;
 	this.radio = radio;
 	this.nQ = nQ;
 	ArrayList<PuntoVector3D> poligonoConcreto;
 	PuntoVector3D origenComunLocal = new PuntoVector3D(0, 1, 0, 1);
+	int t = 0;
 
-	for (int t = 0; t < (nQ * 6) + 0; t = t + 6) {
+
+	for (t = 0; t < (nQ * 6) + 0; t = t + 6) {
 	    crearMarcoFrenet(t);
 
 	    poligonoConcreto = crearPoligonoRegular(nP, radio, origenComunLocal);
@@ -42,6 +50,7 @@ public class Toro extends Malla {
 	    //Se guardan en malla los vértices, luego ya se crearán normales y caras.
 	    for (int i = 0; i < nP; i++) {
 		this.vertices.add(poligonoConcreto.get(i));
+		int a = 0;
 	    }
 	}
 
@@ -50,12 +59,12 @@ public class Toro extends Malla {
 	for (int k = 0; k < (nQ - 1); k++) {   //Rango hasta nQ-1, pues se consulta en el bucle (k+1)
 	    for (int i = 0; i < nP; i++) {
 		PuntoVector3D normal;
-
+		int sig;
 		ArrayList<PuntoVector3D> verticesCara = new ArrayList<PuntoVector3D>();
 
 		verticesCara.add(vertices.get((k * nP) + i));
 
-		int sig = (i + 1) % nP;
+		sig = (i + 1) % nP;
 
 		verticesCara.add(vertices.get((k * nP) + sig));
 
@@ -149,8 +158,13 @@ public class Toro extends Malla {
 	double anguloAlfa = 2 * Math.PI / numLados;
 	double coordenadaZ = centro.getZ();
 
+	/*PuntoVector3D punto0 = new PuntoVector3D(centro.getX() + radio, centro.getY(), coordenadaZ, 1);
+	poligono.add(punto0);*/
+
+	PuntoVector3D puntoNuevo;
+
 	for (int i = 1; i <= numLados; i++) {
-	    PuntoVector3D puntoNuevo = new PuntoVector3D(centro.getX() + radio * Math.cos(anguloAlfa * i), centro.getY() + radio * Math.sin(anguloAlfa * i), coordenadaZ, 1);
+	    puntoNuevo = new PuntoVector3D(centro.getX() + radio * Math.cos(anguloAlfa * i), centro.getY() + radio * Math.sin(anguloAlfa * i), coordenadaZ, 1);
 	    poligono.add(puntoNuevo);
 	}
 	return poligono;
@@ -159,17 +173,17 @@ public class Toro extends Malla {
     private void traduceVertices(ArrayList<PuntoVector3D> poligono) {
 	for (int i = 0; i < nP; i++) {
 
-	    double X = (poligono.get(i).getX() * matrizFrenet[0] +
+	    double auxX = (poligono.get(i).getX() * matrizFrenet[0] +
 		    poligono.get(i).getY() * matrizFrenet[1] +
 		    poligono.get(i).getZ() * matrizFrenet[2] +
 		    +matrizFrenet[3]);
 
-	    double Y = (poligono.get(i).getX() * matrizFrenet[4] +
+	    double auxY = (poligono.get(i).getX() * matrizFrenet[4] +
 		    poligono.get(i).getY() * matrizFrenet[5] +
 		    poligono.get(i).getZ() * matrizFrenet[6] +
 		    matrizFrenet[7]);
 
-	    double Z = (poligono.get(i).getX() * matrizFrenet[8] +
+	    double auxZ = (poligono.get(i).getX() * matrizFrenet[8] +
 		    poligono.get(i).getY() * matrizFrenet[9] +
 		    poligono.get(i).getZ() * matrizFrenet[10] +
 		    matrizFrenet[11]);
@@ -177,7 +191,7 @@ public class Toro extends Malla {
 	    int Punto_Vector = 1;
 
 	    //Se cambian los valores con el nuevo marco
-	    PuntoVector3D p = new PuntoVector3D( X, Y, Z, Punto_Vector);
+	    PuntoVector3D p = new PuntoVector3D(auxX, auxY, auxZ, Punto_Vector);
 	    poligono.set(i, p);
 	}
 

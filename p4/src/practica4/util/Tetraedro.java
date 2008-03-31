@@ -10,9 +10,9 @@ public class Tetraedro extends Malla {
     public Tetraedro() {
         
         PuntoVector3D v0 = new  PuntoVector3D(0,0,0);
-        PuntoVector3D v1 = new  PuntoVector3D(50,0,0);
-        PuntoVector3D v2 = new  PuntoVector3D(0,50,0);
-        PuntoVector3D v3 = new  PuntoVector3D(0,0,50);
+        PuntoVector3D v1 = new  PuntoVector3D(80,0,0);
+        PuntoVector3D v2 = new  PuntoVector3D(0,80,0);
+        PuntoVector3D v3 = new  PuntoVector3D(0,0,80);
         
         this.vertices.add(v0);
         this.vertices.add(v1);

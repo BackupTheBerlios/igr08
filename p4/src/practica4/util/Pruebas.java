@@ -2,7 +2,7 @@ package practica4.util;
 
 import java.util.ArrayList;
 import practica4.Modelo.PuntoVector3D;
-import practica4.Modelo.Toro;
+import practica4.Modelo.Espiral;
 
 public class Pruebas {
 

@@ -13,6 +13,7 @@ import practica4.Modelo.MallaPorRevolucion;
 import practica4.Modelo.Malla;
 import practica4.util.Calculos;
 import java.util.ArrayList;
+import practica4.Modelo.Espiral;
 import practica4.Modelo.Toro;
 import practica4.util.Tetraedro;
 
@@ -40,7 +41,7 @@ public class Principal extends JFrame {
     private final Animator animacion;
     private ArrayList<PuntoVector3D> perfil;
     private MallaPorRevolucion mallaRevolucion;
-    private Toro mallaExtrusion;
+    private Espiral mallaExtrusion;
     private Malla mallaActual;
     
     // Constructora
@@ -223,14 +224,16 @@ public class Principal extends JFrame {
             
             public void actionPerformed(ActionEvent e) {
                 
-//		mallaExtrusion = new Toro(4, 28.0f, 66);
-//                escena.actualizarMallaExt(1, mallaExtrusion);
-                
-                
-                
-                mallaActual = new Tetraedro();
+		
+		/*mallaActual = new Toro(40, 28.0f, 66);
+                escena.actualizarMalla(1, mallaActual);*/
+		mallaExtrusion = new Espiral(40, 28.0f, 66);
+                escena.actualizarMallaExt(1, mallaExtrusion);
+
+		
+		/*   mallaActual = new Tetraedro();
                 escena.actualizarMalla(3, mallaActual);
-                
+               */ 
                 escena.setGenerado(true);
                 entradaDatos = false;
             }

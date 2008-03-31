@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import practica4.Modelo.Malla;
 import practica4.Modelo.MallaPorRevolucion;
 import practica4.Modelo.PuntoVector3D;
-import practica4.Modelo.Toro;
+import practica4.Modelo.Espiral;
 
 public class GL3D implements GLEventListener {
     
@@ -27,7 +27,7 @@ public class GL3D implements GLEventListener {
     private int tipo;
     
     private MallaPorRevolucion mallaPorRevolucion;
-    private Toro mallaPorExtrusion;
+    private Espiral mallaPorExtrusion;
     private Malla mallaActual;
     
        
@@ -113,7 +113,7 @@ public class GL3D implements GLEventListener {
         GL gl = drw.getGL();
         gl.glMatrixMode(GL.GL_PROJECTION);
         gl.glLoadIdentity();
-        gl.glOrtho(xLeft, xRight, yBot,  yTop, -1.0f, 10.0f);  
+        gl.glOrtho(xLeft, xRight, yBot,  yTop, -1000.0f, 1000.0f);  
         
         gl.glMatrixMode(GL.GL_MODELVIEW);
         gl.glLoadIdentity();
@@ -223,7 +223,7 @@ public class GL3D implements GLEventListener {
         this.mallaPorRevolucion = mallaPorRevolucion;
     }
     
-     public void actualizarMallaExt(int tipoMalla, Toro mallaPorExtrusion) {
+     public void actualizarMallaExt(int tipoMalla, Espiral mallaPorExtrusion) {
         this.tipo = tipoMalla;
         this.mallaPorExtrusion = mallaPorExtrusion;
     }
