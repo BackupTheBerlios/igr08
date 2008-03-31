@@ -15,15 +15,6 @@ public class Toro extends Malla {
     private float r1,  r2; // r1: radio del toro; r2: radio de la seccion del toro
     private double[] matrizFrenet = new double[16];
     //---------------------------------------
- //   float radio;  //radio = radio del tubo
-
-    public Toro(float rad1, float rad2, int ladosToro, int ladosPoligono) {
-	r1 = rad1;
-	r2 = rad2;
-	nP = ladosPoligono;
-	nQ = ladosToro;
-    }
-
     public Toro(int nP, int nQ, float r1, float r2) {
 	super();
 	this.nP = nP;
@@ -37,7 +28,7 @@ public class Toro extends Malla {
 	    crearMarcoFrenet(t);
 
 	    poligonoConcreto = crearPoligonoRegular(nP, r2, origenComunLocal);
-	    traduceVertices(poligonoConcreto); //matrizFrenet no se le pasa por parámetro porque es global
+	     cambiaCoordenadas(poligonoConcreto); //matrizFrenet no se le pasa por parámetro porque es global
 
 	    //Se guardan en malla los vértices, luego ya se crearán normales y caras.
 	    for (int i = 0; i < nP; i++) {
@@ -47,31 +38,29 @@ public class Toro extends Malla {
 
 
 	//Creamos las normales de las caras
-	for (int k = 0; k < (nQ - 1); k++) {   //Rango hasta nQ-1, pues se consulta en el bucle (k+1)
-	    for (int i = 0; i < nP; i++) {
-		PuntoVector3D normal;
-
+	for (int i = 0; i < (nQ - 1); i++) {
+	    for (int j = 0; j < nP; j++) {
+		
 		ArrayList<PuntoVector3D> verticesCara = new ArrayList<PuntoVector3D>();
 
-		verticesCara.add(vertices.get((k * nP) + i));
+		verticesCara.add(vertices.get((i * nP) + j));
 
-		int sig = (i + 1) % nP;
+		int sig = (j + 1) % nP;
 
-		verticesCara.add(vertices.get((k * nP) + sig));
+		verticesCara.add(vertices.get((i * nP) + sig));
 
-		verticesCara.add(vertices.get(((k + 1) * nP) + sig));
+		verticesCara.add(vertices.get(((i + 1) * nP) + sig));
 
-		verticesCara.add(vertices.get(((k + 1) * nP) + i));
+		verticesCara.add(vertices.get(((i + 1) * nP) + j));
 
-		normal = this.metodoNewell(verticesCara, 4);
-		// añadir la normal
+		PuntoVector3D normal = this.metodoNewell(verticesCara, 4);
 		normales.add(normal);
 
 		Cara unaCara = new Cara();
-		VerticeNormal VN0 = new VerticeNormal((k * nP) + i, k * nP + i);
-		VerticeNormal VN1 = new VerticeNormal((k * nP) + sig, k * nP + i);
-		VerticeNormal VN2 = new VerticeNormal(((k + 1) * nP) + sig, k * nP + i);
-		VerticeNormal VN3 = new VerticeNormal(((k + 1) * nP) + i, k * nP + i);
+		VerticeNormal VN0 = new VerticeNormal((i * nP) + j, i * nP + j);
+		VerticeNormal VN1 = new VerticeNormal((i * nP) + sig, i * nP + j);
+		VerticeNormal VN2 = new VerticeNormal(((i + 1) * nP) + sig, i * nP + j);
+		VerticeNormal VN3 = new VerticeNormal(((i + 1) * nP) + j, i * nP + j);
 
 		unaCara.setIndiceVerticeNormal(VN0);
 		unaCara.setIndiceVerticeNormal(VN1);
@@ -79,25 +68,16 @@ public class Toro extends Malla {
 		unaCara.setIndiceVerticeNormal(VN3);
 
 		this.caras.add(unaCara);
-
 	    }
 	}
-
     }
 
     private void crearMarcoFrenet(int t) {
 	/**
-	 * son los vectores para una espiral. Cambiarlos por los de una circunferencia
-	 */
-	/**
-	 * x = r · cos (t)
-	 * y = r · sin (t)
-	 * 
-	 * r1
+	 * x = r1 · cos (t)
+	 * y = r1 · sin (t)
 	 **/
-	  
-	//Crear vectores adecuados y normalizarlos.
-	//El vector de la trayectoria
+	//El vector trayectoria
 	PuntoVector3D ct = new PuntoVector3D(r1 * Math.cos(t),
 		0,
 		r1 * Math.sin(t),
@@ -163,7 +143,7 @@ public class Toro extends Malla {
 	return poligono;
     }
 
-    private void traduceVertices(ArrayList<PuntoVector3D> poligono) {
+    private void cambiaCoordenadas(ArrayList<PuntoVector3D> poligono) {
 	for (int i = 0; i < nP; i++) {
 
 	    double X = (poligono.get(i).getX() * matrizFrenet[0] +
@@ -181,12 +161,9 @@ public class Toro extends Malla {
 		    poligono.get(i).getZ() * matrizFrenet[10] +
 		    matrizFrenet[11]);
 
-	    int Punto_Vector = 1;
-
 	    //Se cambian los valores con el nuevo marco
-	    PuntoVector3D p = new PuntoVector3D( X, Y, Z, Punto_Vector);
+	    PuntoVector3D p = new PuntoVector3D(X, Y, Z, 1);
 	    poligono.set(i, p);
 	}
-
     }
 }
