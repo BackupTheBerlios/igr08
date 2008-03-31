@@ -1,7 +1,6 @@
 package practica4.Modelo;
 
 import java.util.ArrayList;
-import practica4.util.Lapiz;
 
 public class Toro extends Malla {
 
@@ -16,7 +15,7 @@ public class Toro extends Malla {
     private float r1,  r2; // r1: radio del toro; r2: radio de la seccion del toro
     private double[] matrizFrenet = new double[16];
     //---------------------------------------
-    float radio;  //radio = radio del tubo
+ //   float radio;  //radio = radio del tubo
 
     public Toro(float rad1, float rad2, int ladosToro, int ladosPoligono) {
 	r1 = rad1;
@@ -25,18 +24,19 @@ public class Toro extends Malla {
 	nQ = ladosToro;
     }
 
-    public Toro(int nP, float radio, int nQ) {
+    public Toro(int nP, int nQ, float r1, float r2) {
 	super();
 	this.nP = nP;
-	this.radio = radio;
 	this.nQ = nQ;
+	this.r1 = r1;
+	this.r2 = r2;
 	ArrayList<PuntoVector3D> poligonoConcreto;
 	PuntoVector3D origenComunLocal = new PuntoVector3D(0, 1, 0, 1);
 
 	for (int t = 0; t < (nQ * 6) + 0; t = t + 6) {
 	    crearMarcoFrenet(t);
 
-	    poligonoConcreto = crearPoligonoRegular(nP, radio, origenComunLocal);
+	    poligonoConcreto = crearPoligonoRegular(nP, r2, origenComunLocal);
 	    traduceVertices(poligonoConcreto); //matrizFrenet no se le pasa por parámetro porque es global
 
 	    //Se guardan en malla los vértices, luego ya se crearán normales y caras.
@@ -89,28 +89,35 @@ public class Toro extends Malla {
 	/**
 	 * son los vectores para una espiral. Cambiarlos por los de una circunferencia
 	 */
+	/**
+	 * x = r · cos (t)
+	 * y = r · sin (t)
+	 * 
+	 * r1
+	 **/
+	  
 	//Crear vectores adecuados y normalizarlos.
 	//El vector de la trayectoria
-	PuntoVector3D ct = new PuntoVector3D(Math.cos(t) + t * Math.sin(t),
+	PuntoVector3D ct = new PuntoVector3D(r1 * Math.cos(t),
 		0,
-		Math.sin(t) - t * Math.cos(t),
+		r1 * Math.sin(t),
 		1);
 
 	//El vector derivada de la trayectoria
-	PuntoVector3D tt = new PuntoVector3D(t * Math.cos(t),
+	PuntoVector3D tt = new PuntoVector3D(-r1 * Math.sin(t),
 		0,
-		t * Math.sin(t),
+		r1 * Math.cos(t),
 		0);
 	// El vector binormal
 	PuntoVector3D bt = new PuntoVector3D(0,
 		-(1),
 		0,
-		0);
+		0);///???
 
 	//El producto vectorial de bt y tt
-	PuntoVector3D nt = new PuntoVector3D(-t * (Math.sin(t)),
+	PuntoVector3D nt = new PuntoVector3D(-r1 * (Math.cos(t)),
 		0,
-		t * (Math.cos(t)),
+		-r1 * (Math.sin(t)),
 		0);
 
 	tt = tt.normaliza();

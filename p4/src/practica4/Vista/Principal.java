@@ -225,10 +225,11 @@ public class Principal extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 
 		
-		/*mallaActual = new Toro(40, 28.0f, 66);
-                escena.actualizarMalla(1, mallaActual);*/
-		mallaExtrusion = new Espiral(40, 28.0f, 66);
-                escena.actualizarMallaExt(1, mallaExtrusion);
+		mallaActual = new Toro(10, 50, 150.0f, 20.0f);
+                escena.actualizarMalla(3, mallaActual);
+		
+		/*mallaExtrusion = new Espiral(40, 28.0f, 66);
+                escena.actualizarMallaExt(1, mallaExtrusion);*/
 
 		
 		/*   mallaActual = new Tetraedro();
