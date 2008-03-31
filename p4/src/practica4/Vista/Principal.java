@@ -43,19 +43,20 @@ public class Principal extends JFrame {
     private MallaPorRevolucion mallaRevolucion;
     private Espiral mallaExtrusion;
     private Malla mallaActual;
+    private JPanel panelBotones;
     
     // Constructora
     public Principal() {
         
         // Titulo de la ventana y tamaño
         setTitle("Práctica 4");
-        setSize(new Dimension(400, 475));
+        setSize(new Dimension(425, 500));
         super.setResizable(false);
         
         // Contenedor del editor
         panel = this.getContentPane();
         panel.setBackground(Color.blue);
-        panel.setLayout(null);
+        panel.setLayout(new BorderLayout());
         
         // Generamos el menu
         menu = new JMenuBar();
@@ -82,25 +83,29 @@ public class Principal extends JFrame {
         setJMenuBar(menu);
         
         // Creamos los botones
-        botonDefinirPuntos = new JButton("Definir Perfil");
-        botonDefinirPuntos.setBounds(0, 400, 100, 25);
-        botonDefinirPuntos.setVisible(true);
-        panel.add(botonDefinirPuntos);
+	this.panelBotones = new JPanel();
+	panelBotones.setLayout(new FlowLayout());
+	panel.add(panelBotones, BorderLayout.SOUTH);
         
-        botonAplicarSplines = new JButton("Aplicar BSplines");
-        botonAplicarSplines.setBounds(100, 400, 100, 25);
+	botonDefinirPuntos = new JButton("Definir Perfil");
+        //botonDefinirPuntos.setBounds(0, 400, 100, 25);
+        botonDefinirPuntos.setVisible(true);
+        panelBotones.add(botonDefinirPuntos);
+        
+        botonAplicarSplines = new JButton("BSplines");
+   //     botonAplicarSplines.setBounds(100, 400, 100, 25);
         botonAplicarSplines.setVisible(true);
-        panel.add(botonAplicarSplines);
+        panelBotones.add(botonAplicarSplines);
         
         botonGenerarMallaRevolucion = new JButton("Revolución");
-        botonGenerarMallaRevolucion.setBounds(200, 400, 100, 25);
+    //    botonGenerarMallaRevolucion.setBounds(200, 400, 100, 25);
         botonGenerarMallaRevolucion.setVisible(true);
-        panel.add(botonGenerarMallaRevolucion);
+        panelBotones.add(botonGenerarMallaRevolucion);
         
         botonGenerarMallaExtrusion = new JButton("Extrusión");
-        botonGenerarMallaExtrusion.setBounds(300, 400, 100, 25);
+      //  botonGenerarMallaExtrusion.setBounds(300, 400, 100, 25);
         botonGenerarMallaExtrusion.setVisible(true);
-        panel.add(botonGenerarMallaExtrusion);
+        panelBotones.add(botonGenerarMallaExtrusion);
         
         // Definimos el tipo de malla actual a representar
         this.tipoMalla = 0;
@@ -118,11 +123,11 @@ public class Principal extends JFrame {
         
         // Creamos el canvas de dibujo
         canvas = new GLJPanel();
-        escena = new GL3D(400, 400);
+        escena = new GL3D(425, 425);
         canvas.addGLEventListener(escena);
-        canvas.setBounds(0, 0, 400, 400);
+        //canvas.setBounds(0, 0, 400, 400);
         canvas.addMouseListener(new ManejadorRaton());
-        panel.add(canvas);
+        panel.add(canvas,BorderLayout.CENTER);
         
         // Transformamos el perfil a coordenadas de la escena
         this.perfil = escena.transformarPerfil(this.perfil);
@@ -221,12 +226,12 @@ public class Principal extends JFrame {
         
         // Evento Oyente para el boton "Malla Extrusión"
         botonGenerarMallaExtrusion.addActionListener(new ActionListener() {
-            
             public void actionPerformed(ActionEvent e) {
                 
 		
 		mallaActual = new Toro(10, 50, 150.0f, 20.0f);
                 escena.actualizarMalla(3, mallaActual);
+//		Principal.getFrames()[0].setSize(500, 500);
 		
 		/*mallaExtrusion = new Espiral(40, 28.0f, 66);
                 escena.actualizarMallaExt(1, mallaExtrusion);*/
