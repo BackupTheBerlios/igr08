@@ -124,8 +124,8 @@ public class Toro extends Malla {
 		t * (Math.cos(t)),
 		0);
 
-	tt.normaliza();
-	nt.normaliza();
+	tt = tt.normaliza();
+	nt = nt.normaliza();
 
 	//Creamos la matriz de cambio de coordenadas locales en globales.
 
