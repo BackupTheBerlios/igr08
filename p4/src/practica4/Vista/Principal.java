@@ -221,7 +221,7 @@ public class Principal extends JFrame {
 	    public void actionPerformed(ActionEvent e) {
 
 		//mallaExtrusion = new Toro(50.0f, 10.0f, 20, 10);
-		mallaExtrusion = new Toro(10, 50.0f, 10);
+		mallaExtrusion = new Toro(14, 28.0f, 66);
 
 		escena.actualizarMallaExt(1, mallaExtrusion);
 		escena.setGenerado(true);

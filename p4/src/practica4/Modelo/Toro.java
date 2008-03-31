@@ -19,8 +19,6 @@ public class Toro extends Malla {
     private ArrayList<PuntoVector3D> circunferencia_2 = new ArrayList<PuntoVector3D>();
     private double[] matrizFrenet = new double[16];
     //---------------------------------------
-    int nCentros;
-    PuntoVector3D[] listaCentros; //Centros de los poligonos, que se utilizarán despues para mover el marco local.
     float radio;  //radio = radio del tubo
 
     public Toro(float rad1, float rad2, int ladosToro, int ladosPoligono) {
@@ -41,33 +39,13 @@ public class Toro extends Malla {
 	this.nP = nP;
 	this.radio = radio;
 	this.nQ = nQ;
-
-
-	listaCentros = new PuntoVector3D[MAX];
-
-	nCentros = 0;
 	ArrayList<PuntoVector3D> poligonoConcreto;
 	PuntoVector3D origenComunLocal = new PuntoVector3D(0, 1, 0, 1);
 	int t = 0;
 
-	PuntoVector3D centroOrigen;
-	PuntoVector3D centroDestino = new PuntoVector3D();
-	boolean primeraVez = true;
 
 	for (t = 0; t < (nQ * 6) + 0; t = t + 6) {
 	    crearMarcoFrenet(t);
-	    if (primeraVez) {
-		primeraVez = false;
-		PuntoVector3D centroCircunf = new PuntoVector3D(origenComunLocal.getX(), origenComunLocal.getY(), origenComunLocal.getZ(), origenComunLocal.getPV());
-		centroDestino = new PuntoVector3D(centroCircunf.getX(), centroCircunf.getY(), centroCircunf.getZ(), 1);
-	    }
-
-	    //Crear secuencia de centros en la espiral para los polígonos.
-	    PuntoVector3D centroCircunf = new PuntoVector3D(origenComunLocal.getX(), origenComunLocal.getY(), origenComunLocal.getZ(), origenComunLocal.getPV());
-	    centroOrigen = new PuntoVector3D(centroDestino.getX(), centroDestino.getY(), centroDestino.getZ(), 1);
-	    traduceUnVertice(centroCircunf);
-	    centroDestino = new PuntoVector3D(centroCircunf.getX(), centroCircunf.getY(), centroCircunf.getZ(), 1);
-	    // this.creaCentrosEntre(centroOrigen, centroDestino);
 
 	    poligonoConcreto = crearPoligonoRegular(nP, radio, origenComunLocal);
 	    traduceVertices(poligonoConcreto); //matrizFrenet no se le pasa por parámetro porque es global
@@ -78,23 +56,17 @@ public class Toro extends Malla {
 	    }
 	}
 
-	int h = 9 + 9;
 
 	//Creamos las normales de las caras
 	for (int k = 0; k < (nQ - 1); k++) {   //Rango hasta n-1, pues se consulta en el bucle (k+1)
 	    for (int i = 0; i < nP; i++) {
 		PuntoVector3D normal;
 		int sig;
-		ArrayList<PuntoVector3D>verticesCara = new ArrayList<PuntoVector3D>();
+		ArrayList<PuntoVector3D> verticesCara = new ArrayList<PuntoVector3D>();
 
 		verticesCara.add(vertices.get((k * nP) + i));
 
-		//Realmente no sería necesario if en este caso, hecho por mayor claridad
-		if ((i + 1) % nP == 0) {
-		    sig = 0;
-		} else {
-		    sig = i + 1;
-		}
+		sig = (i + 1) % nP;
 
 		verticesCara.add(vertices.get((k * nP) + sig));
 
