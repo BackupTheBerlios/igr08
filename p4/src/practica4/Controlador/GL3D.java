@@ -9,10 +9,8 @@ import javax.media.opengl.GLEventListener;
 
 import java.util.ArrayList;
 import practica4.Modelo.Malla;
-import practica4.Modelo.MallaPorRevolucion;
 import practica4.Modelo.PuntoVector3D;
-import practica4.Modelo.Espiral;
-import practica4.Modelo.Toro;
+
 
 public class GL3D implements GLEventListener {
 
