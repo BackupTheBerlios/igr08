@@ -9,6 +9,7 @@ public class Malla {
     protected ArrayList<PuntoVector3D> vertices;
     protected ArrayList<PuntoVector3D> normales;
     protected ArrayList<Cara> caras;
+    private int tipoMalla;
     
     private boolean normalesActivadas;
     
@@ -22,11 +23,11 @@ public class Malla {
     }
     
     // Método que permite dibujar la malla
-    public void dibuja(GL gl, int tipo) {
+    public void dibuja(GL gl) {
         
         for (int i=0; i<caras.size(); i++) {
             
-            switch (tipo) {
+            switch (tipoMalla) {
                 
                 case 0: gl.glBegin(gl.GL_POINTS);    break;
                 case 1: gl.glBegin(gl.GL_LINE_LOOP); break;
@@ -87,5 +88,9 @@ public class Malla {
     
     public void setNormales(boolean valor) {
         normalesActivadas = valor;
+    }
+    
+       public void setTipoMalla(int tipo) {
+        tipoMalla = tipo;
     }
 }

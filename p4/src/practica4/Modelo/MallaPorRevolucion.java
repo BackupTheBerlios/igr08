@@ -8,7 +8,7 @@ public class MallaPorRevolucion extends Malla {
     // Atributos
     //private ArrayList<ArrayList<PuntoVector3D>> aros;
     //private final int nVCara = 4;
-    private int tipoMalla;
+    
     
     // Constructora por defecto
     public MallaPorRevolucion() {}
@@ -63,11 +63,9 @@ public class MallaPorRevolucion extends Malla {
     }
     
     public void dibujaMallaPorRevolucion(GL gl) {
-        this.dibuja(gl, tipoMalla);
+        this.dibuja(gl);
     }
     
-    public void setTipoMalla(int tipo) {
-        tipoMalla = tipo;
-    }
+ 
 }
 

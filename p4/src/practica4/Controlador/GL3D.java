@@ -68,7 +68,7 @@ public class GL3D implements GLEventListener {
 		    dibujaMallaPorRevolucion(gl);
 		    break;
 		case 3:
-		    mallaActual.dibuja(gl, 0);
+		    mallaActual.dibuja(gl);
 		    break;
 	    }
 	} else {
@@ -222,7 +222,7 @@ public class GL3D implements GLEventListener {
 	gl.glColor3f(0.5f, 0.5f, 1.0f);
 	//gl.glTranslatef(3.0f, 0.0f, 0.0f);
 
-	this.mallaPorExtrusion.dibuja(gl, 0);
+	this.mallaPorExtrusion.dibuja(gl);
 
     }
 
