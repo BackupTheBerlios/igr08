@@ -213,7 +213,8 @@ public class GL3D implements GLEventListener {
     // Método que dibuja Malla por Revolucion
     public void dibujaMallaPorRevolucion(GL gl) {
 
-	mallaPorRevolucion.dibujaMallaPorRevolucion(gl);
+	this.mallaActual.dibuja(gl);
+	//mallaPorRevolucion.dibujaMallaPorRevolucion(gl);
     }
 
     // Método que dibuja Malla por Extrusión
@@ -222,7 +223,7 @@ public class GL3D implements GLEventListener {
 	gl.glColor3f(0.5f, 0.5f, 1.0f);
 	//gl.glTranslatef(3.0f, 0.0f, 0.0f);
 
-	this.mallaPorExtrusion.dibuja(gl);
+	this.mallaActual.dibuja(gl);
 
     }
 
