@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import practica4.Modelo.Malla;
 import practica4.Modelo.PuntoVector3D;
 
-
 public class GL3D implements GLEventListener {
 
     private double xLeft,  xRight,  yTop,  yBot,  xCentro,  yCentro;
@@ -23,7 +22,7 @@ public class GL3D implements GLEventListener {
     private ArrayList<PuntoVector3D> perfil;
     private boolean generado;
     private int tipo;
-   // private MallaPorRevolucion mallaPorRevolucion;
+    // private MallaPorRevolucion mallaPorRevolucion;
     //private Toro mallaPorExtrusion;
     private Malla mallaActual;
     double eyeX, eyeY, eyeZ, lookX, lookY, lookZ, upX, upY, upZ; // cámara
@@ -54,27 +53,28 @@ public class GL3D implements GLEventListener {
 	GL gl = drw.getGL();
 
 	gl.glClear(GL.GL_COLOR_BUFFER_BIT);
-	
-        if (generado) // Tipo de Escena a dibujar
+
+	if (generado) // Tipo de Escena a dibujar
 	{
-	    switch (tipo) {
-		case 0:
-		    dibujarPuntos(gl);
-		    break;
-		case 1:
-		    dibujaMallaPorExtrusion(gl);
-		    break;
-		case 2:
-		    dibujaMallaPorRevolucion(gl);
-		    break;
-		case 3:
-		    mallaActual.dibuja(gl);
-		    break;
-	    }
+	    this.mallaActual.dibuja(gl);
+	/* switch (tipo) {
+	case 0:
+	dibujarPuntos(gl);
+	break;
+	case 1:
+	dibujaMallaPorExtrusion(gl);
+	break;
+	case 2:
+	dibujaMallaPorRevolucion(gl);
+	break;
+	case 3:
+	mallaActual.dibuja(gl);
+	break;
+	}*/
 	} else {
 	    dibujarPuntos(gl);
 	}
-        
+
 	gl.glFlush();
     }
 
@@ -111,12 +111,12 @@ public class GL3D implements GLEventListener {
 	gl.glMaterialf(gl.GL_FRONT, gl.GL_SHININESS, 0.1f);
 	//gl.glEnable(gl.GL_DEPTH_TEST);
 	gl.glEnable(gl.GL_NORMALIZE);
-        gl.glFrontFace(gl.GL_CCW);
-        //gl.glFrontFace(gl.GL_CW);
-        gl.glEnable(gl.GL_FRONT_FACE);
-       //gl.glEnable(gl.GL_CULL_FACE);
+	gl.glFrontFace(gl.GL_CCW);
+	//gl.glFrontFace(gl.GL_CW);
+	gl.glEnable(gl.GL_FRONT_FACE);
+	//gl.glEnable(gl.GL_CULL_FACE);
 	gl.glShadeModel(gl.GL_SMOOTH);   //defecto
-        
+
 	// cámara
 	eyeX = 2.0;
 	eyeY = 2.0;
@@ -211,31 +211,26 @@ public class GL3D implements GLEventListener {
     }
 
     // Método que dibuja Malla por Revolucion
-    public void dibujaMallaPorRevolucion(GL gl) {
-
-	this.mallaActual.dibuja(gl);
-	//mallaPorRevolucion.dibujaMallaPorRevolucion(gl);
-    }
+    /*public void dibujaMallaPorRevolucion(GL gl) {
+    this.mallaActual.dibuja(gl);
+    //mallaPorRevolucion.dibujaMallaPorRevolucion(gl);
+    }*/
 
     // Método que dibuja Malla por Extrusión
-    public void dibujaMallaPorExtrusion(GL gl) {
-
-	gl.glColor3f(0.5f, 0.5f, 1.0f);
-	//gl.glTranslatef(3.0f, 0.0f, 0.0f);
-
-	this.mallaActual.dibuja(gl);
-
-    }
+    /*public void dibujaMallaPorExtrusion(GL gl) {
+    gl.glColor3f(0.5f, 0.5f, 1.0f);
+    //gl.glTranslatef(3.0f, 0.0f, 0.0f);
+    this.mallaActual.dibuja(gl);
+    }*/
 
     // Getters & Stters
-    public int getTipo() {
-	return tipo;
-    }
+    /*public int getTipo() {
+    return tipo;
+    }*/
 
-    public void setTipo(int t) {
-	this.tipo = t;
-    }
-
+    /*public void setTipo(int t) {
+    this.tipo = t;
+    }*/
     public ArrayList<PuntoVector3D> getPerfil() {
 	return perfil;
     }
@@ -258,17 +253,15 @@ public class GL3D implements GLEventListener {
 	this.perfil = (ArrayList<PuntoVector3D>) puntosPerfil.clone();
     }
 
-  /*  public void actualizarMallaRev(int tipoMalla, MallaPorRevolucion mallaPorRevolucion) {
-	this.tipo = tipoMalla;
-	this.mallaActual = mallaPorRevolucion;
-	//this.mallaPorRevolucion = mallaPorRevolucion;
+    /*  public void actualizarMallaRev(int tipoMalla, MallaPorRevolucion mallaPorRevolucion) {
+    this.tipo = tipoMalla;
+    this.mallaActual = mallaPorRevolucion;
+    //this.mallaPorRevolucion = mallaPorRevolucion;
     }
-
     public void actualizarMallaExt(int tipoMalla, Toro mallaPorExtrusion) {
-	this.tipo = tipoMalla;
-	this.mallaActual = mallaPorExtrusion;
+    this.tipo = tipoMalla;
+    this.mallaActual = mallaPorExtrusion;
     }*/
-
     public void actualizarMalla(int tipoMalla, Malla laMalla) {
 	this.tipo = tipoMalla;
 	this.mallaActual = laMalla;

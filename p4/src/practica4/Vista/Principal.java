@@ -26,7 +26,7 @@ public class Principal extends JFrame {
     private JMenu archivo;
     private JMenuItem nuevo;
     private JMenuItem salir;
-    private JMenu malla;
+    //private JMenu malla;
    // private JMenuItem revolucion;
    // private JMenuItem extrusion;
     private JMenu sobre;
@@ -63,7 +63,7 @@ public class Principal extends JFrame {
 	archivo = new JMenu("Archivo");
 	nuevo = new JMenuItem("Nuevo");
 	salir = new JMenuItem("Salir");
-	malla = new JMenu("Malla por");
+	//malla = new JMenu("Malla por");
 	//revolucion = new JMenuItem("Revolución");
 	//extrusion = new JMenuItem("Extrusión");
 	sobre = new JMenu("Sobre..");
@@ -73,7 +73,7 @@ public class Principal extends JFrame {
 	archivo.add(nuevo);
 	archivo.add(salir);
 
-	menu.add(malla);
+	//menu.add(malla);
 	//malla.add(revolucion);
 	//malla.add(extrusion);
 
