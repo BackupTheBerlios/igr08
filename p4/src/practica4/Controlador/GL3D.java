@@ -114,7 +114,7 @@ public class GL3D implements GLEventListener {
 	//gl.glEnable(gl.GL_DEPTH_TEST);
 	gl.glEnable(gl.GL_NORMALIZE);
 	gl.glShadeModel(gl.GL_SMOOTH);   //defecto
-
+        
 	// cámara
 	eyeX = 2.0;
 	eyeY = 2.0;
@@ -139,7 +139,7 @@ public class GL3D implements GLEventListener {
 
 	//glu.gluOrtho2D(xLeft, xRight, yBot, yTop);
 	//glu.gluPerspective(45.0, xRight, 1.0, 20.0);
-	gl.glOrtho(xLeft, xRight, yBot, yTop, -1.0f, 10.0f);
+	gl.glOrtho(xLeft, xRight, yBot, yTop, -100.0f, 100.0f);
 
 
 	gl.glMatrixMode(GL.GL_MODELVIEW);
