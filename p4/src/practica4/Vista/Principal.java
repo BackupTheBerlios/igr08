@@ -27,8 +27,8 @@ public class Principal extends JFrame {
     private JMenuItem nuevo;
     private JMenuItem salir;
     private JMenu malla;
-    private JMenuItem revolucion;
-    private JMenuItem extrusion;
+   // private JMenuItem revolucion;
+   // private JMenuItem extrusion;
     private JMenu sobre;
     private JMenuItem autores;
     private JButton botonDefinirPuntos;
@@ -64,8 +64,8 @@ public class Principal extends JFrame {
 	nuevo = new JMenuItem("Nuevo");
 	salir = new JMenuItem("Salir");
 	malla = new JMenu("Malla por");
-	revolucion = new JMenuItem("Revolución");
-	extrusion = new JMenuItem("Extrusión");
+	//revolucion = new JMenuItem("Revolución");
+	//extrusion = new JMenuItem("Extrusión");
 	sobre = new JMenu("Sobre..");
 	autores = new JMenuItem("Autores");
 
@@ -74,8 +74,8 @@ public class Principal extends JFrame {
 	archivo.add(salir);
 
 	menu.add(malla);
-	malla.add(revolucion);
-	malla.add(extrusion);
+	//malla.add(revolucion);
+	//malla.add(extrusion);
 
 	menu.add(sobre);
 	sobre.add(autores);
@@ -107,7 +107,7 @@ public class Principal extends JFrame {
 	botonCambiarModo.setVisible(true);
 	panelBotones.add(botonCambiarModo);
 
-	botonDibujarNormales = new JButton("Ver Normales");
+	botonDibujarNormales = new JButton("Activa Normales");
 	botonDibujarNormales.setVisible(true);
 	panelBotones.add(botonDibujarNormales);
 
@@ -165,21 +165,23 @@ public class Principal extends JFrame {
 	});
 
 	// Evento Oyente para la barra de menu "Malla por Revolución"
-	revolucion.addActionListener(new ActionListener() {
+	/*revolucion.addActionListener(new ActionListener() {
 
 	    public void actionPerformed(ActionEvent e) {
 		tipoMalla = 0;
 		escena.actualizarPerfil(tipoMalla, perfil);
 	    }
-	});
+	});*/
 
 	// Evento Oyente para la barra de menu "Malla por Extrusión"
-	extrusion.addActionListener(new ActionListener() {
+	/*extrusion.addActionListener(new ActionListener() {
 
 	    public void actionPerformed(ActionEvent e) {
-		escena.setTipo(1);
+		tipoMalla = 1;
+		escena.actualizarPerfil(tipoMalla, perfil);
+		//escena.setTipo(1);
 	    }
-	});
+	});*/
 
 	// Evento Oyente para el boton "Definir Perfil"
 	botonDefinirPuntos.addActionListener(new ActionListener() {
@@ -289,12 +291,12 @@ public class Principal extends JFrame {
 
 	    public void actionPerformed(ActionEvent e) {
 
-		if (botonDibujarNormales.getText().equals("Ver Normales")) {
-		    botonDibujarNormales.setText("Ocultar Normales");
+		if (botonDibujarNormales.getText().equals("Activa Normales")) {
+		    botonDibujarNormales.setText("DesactivaNormales");
 		    //mallaRevolucion.setNormales(true);
 		    mallaActual.setNormales(true);
 		} else {
-		    botonDibujarNormales.setText("Ver Normales");
+		    botonDibujarNormales.setText("Activa Normales");
 		    //mallaRevolucion.setNormales(false);
 		    mallaActual.setNormales(false);
 		}
