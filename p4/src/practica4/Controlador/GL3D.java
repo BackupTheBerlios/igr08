@@ -264,7 +264,7 @@ public class GL3D implements GLEventListener {
 	//this.mallaPorRevolucion = mallaPorRevolucion;
     }
 
-    public void actualizarMallaExt(int tipoMalla, Espiral mallaPorExtrusion) {
+    public void actualizarMallaExt(int tipoMalla, Toro mallaPorExtrusion) {
 	this.tipo = tipoMalla;
 	this.mallaActual = mallaPorExtrusion;
     }*/
