@@ -227,7 +227,7 @@ public class Principal extends JFrame {
                 if (datoAng != null) {
                     
                       Object[] opciones = {"3", "4"};
-                      int eleccion = JOptionPane.showOptionDialog(null,"Número de Vértices de la cara: ", "Datos de Entrada", 
+                      int eleccion = JOptionPane.showOptionDialog(null,"Número de Vértices por cara: ", "Datos de Entrada", 
                                                                   JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, opciones, opciones[0]);
                           
                       int numVerticesCara = Integer.parseInt((String)opciones[eleccion]);
