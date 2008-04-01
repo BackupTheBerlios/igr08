@@ -219,9 +219,8 @@ public class Principal extends JFrame {
 
 	    public void actionPerformed(ActionEvent e) {
 
-		String datoAng = "0,15";
-		String datoNumVertices = "4";
-		datoAng = JOptionPane.showInputDialog(null, "Ángulo Rotatorio: ", "Datos de Entrada", 1);
+		//String datoNumVertices = "4";
+		String datoAng = JOptionPane.showInputDialog("Ángulo de rotación: ", "0.15");
 		if (datoAng != null) {
 
 		    Object[] opciones = {"3", "4"};
@@ -238,7 +237,6 @@ public class Principal extends JFrame {
 		      escena.actualizarMalla(2, mallaActual);
 		    escena.setGenerado(true);
 		    entradaDatos = false;
-
 		}
 	    }
 	});

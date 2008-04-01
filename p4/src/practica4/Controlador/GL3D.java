@@ -12,6 +12,7 @@ import practica4.Modelo.Malla;
 import practica4.Modelo.MallaPorRevolucion;
 import practica4.Modelo.PuntoVector3D;
 import practica4.Modelo.Espiral;
+import practica4.Modelo.Toro;
 
 public class GL3D implements GLEventListener {
 
@@ -24,8 +25,8 @@ public class GL3D implements GLEventListener {
     private ArrayList<PuntoVector3D> perfil;
     private boolean generado;
     private int tipo;
-    private MallaPorRevolucion mallaPorRevolucion;
-    private Espiral mallaPorExtrusion;
+   // private MallaPorRevolucion mallaPorRevolucion;
+    //private Toro mallaPorExtrusion;
     private Malla mallaActual;
     double eyeX, eyeY, eyeZ, lookX, lookY, lookZ, upX, upY, upZ; // cámara
     float[] PosicionLuz0 = new float[4];
@@ -47,7 +48,8 @@ public class GL3D implements GLEventListener {
 
 	this.tipo = 0;
 	this.generado = false;
-	this.mallaPorRevolucion = null;
+	//this.mallaPorRevolucion = null;
+	this.mallaActual = null;
     }
 
     public void display(GLAutoDrawable drw) {
@@ -258,15 +260,16 @@ public class GL3D implements GLEventListener {
 	this.perfil = (ArrayList<PuntoVector3D>) puntosPerfil.clone();
     }
 
-    public void actualizarMallaRev(int tipoMalla, MallaPorRevolucion mallaPorRevolucion) {
+  /*  public void actualizarMallaRev(int tipoMalla, MallaPorRevolucion mallaPorRevolucion) {
 	this.tipo = tipoMalla;
-	this.mallaPorRevolucion = mallaPorRevolucion;
+	this.mallaActual = mallaPorRevolucion;
+	//this.mallaPorRevolucion = mallaPorRevolucion;
     }
 
     public void actualizarMallaExt(int tipoMalla, Espiral mallaPorExtrusion) {
 	this.tipo = tipoMalla;
-	this.mallaPorExtrusion = mallaPorExtrusion;
-    }
+	this.mallaActual = mallaPorExtrusion;
+    }*/
 
     public void actualizarMalla(int tipoMalla, Malla laMalla) {
 	this.tipo = tipoMalla;
