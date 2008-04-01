@@ -247,7 +247,6 @@ public class Principal extends JFrame {
                 float r2 = Float.parseFloat(Sr2);
 
                 mallaActual = new Toro(nP, nQ, r1, r2);
-//                mallaActual = new Toro(10, 50, 150.0f, 20.0f);
                 escena.actualizarMalla(3, mallaActual);
 //		Principal.getFrames()[0].setSize(500, 500);
 

@@ -27,24 +27,23 @@ public class Toro extends Malla {
         this.nQ = nQ;
         this.r1 = r1;
         this.r2 = r2;
-        ArrayList<PuntoVector3D> poligonoConcreto;
-        PuntoVector3D origenComunLocal = new PuntoVector3D(0, 1, 0, 1);
+        PuntoVector3D centro = new PuntoVector3D();
 
-        for (int i = 0; i < nQ; i++) {
+        for (int i = 0; i < nQ; i++) { // para cada capa...
             double t = (2.0 * Math.PI / (double) nQ) * (double) i;
             creaMarcoFrenet(t);
 
-            poligonoConcreto = creaPoligonoRegular(nP, r2, origenComunLocal);
-            cambiaCoordenadas(poligonoConcreto); //matrizFrenet no se le pasa por parámetro porque es global
+            ArrayList<PuntoVector3D> unAro = creaPoligonoRegular(nP, r2, centro);
+            cambiaCoordenadas(unAro); //matrizFrenet no se le pasa por parámetro porque es global
 
             //Guardamos los vertices de la malla.
             for (int j = 0; j < nP; j++) {
-                this.vertices.add(poligonoConcreto.get(j));
+                this.vertices.add(unAro.get(j));
             }
         }
 
         //Creamos las normales de las caras
-        for (int i = 0; i < (nQ); i++) {  // Para cada capa...
+        for (int i = 0; i < nQ; i++) {  // Para cada capa...
             for (int j = 0; j < nP; j++) {    // Para cada punto...
 
                 ArrayList<PuntoVector3D> verticesCara = new ArrayList<PuntoVector3D>();
