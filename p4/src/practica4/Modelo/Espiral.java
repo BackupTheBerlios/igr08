@@ -72,7 +72,7 @@ public class Espiral extends Malla {
 
 		verticesCara.add(vertices.get(((k + 1) * nP) + i));
 
-		normal = this.metodoNewell(verticesCara, 4);
+		normal = this.metodoNewell(verticesCara);
 		// añadir la normal
 		normales.add(normal);
 

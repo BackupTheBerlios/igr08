@@ -9,12 +9,18 @@ public class Toro extends Malla {
      *	x = r · cos (t)
      *	y = r · sin (t)
      */
-    public static int MAX = 1000;
     private int nP,  nQ; // nP: nº de lados del polígono de la seccion del toro
     // nQ = nº de capas del toro
     private float r1,  r2; // r1: radio del toro; r2: radio de la seccion del toro
     private double[] matrizFrenet = new double[16];
 
+    /**
+     * <p> Construye un toroide cuyos parametros son:</p>
+     * @param nP: Número de lados que aproximan la sección del toroide
+     * @param nQ: Número de capas del toroide
+     * @param r1: Radio del toro. Radio "grande"
+     * @param r2: Radio de la sección del toro. Radio "pequeño"
+     */
     public Toro(int nP, int nQ, float r1, float r2) {
         super();
         this.nP = nP;
@@ -24,42 +30,43 @@ public class Toro extends Malla {
         ArrayList<PuntoVector3D> poligonoConcreto;
         PuntoVector3D origenComunLocal = new PuntoVector3D(0, 1, 0, 1);
 
-        for (int t = 0; t < (nQ * 6) + 0; t = t + 6) {
-            crearMarcoFrenet(t);
+        for (int i = 0; i < nQ; i++) {
+            double t = (2.0 * Math.PI / (double) nQ) * (double) i;
+            creaMarcoFrenet(t);
 
-            poligonoConcreto = crearPoligonoRegular(nP, r2, origenComunLocal);
+            poligonoConcreto = creaPoligonoRegular(nP, r2, origenComunLocal);
             cambiaCoordenadas(poligonoConcreto); //matrizFrenet no se le pasa por parámetro porque es global
 
             //Guardamos los vertices de la malla.
-            for (int i = 0; i < nP; i++) {
-                this.vertices.add(poligonoConcreto.get(i));
+            for (int j = 0; j < nP; j++) {
+                this.vertices.add(poligonoConcreto.get(j));
             }
         }
 
         //Creamos las normales de las caras
-        for (int i = 0; i < (nQ - 1); i++) {  // Para "cada" capa...
-            for (int j = 0; j < nP; j++) {    // Para cada arista...
+        for (int i = 0; i < (nQ); i++) {  // Para cada capa...
+            for (int j = 0; j < nP; j++) {    // Para cada punto...
 
                 ArrayList<PuntoVector3D> verticesCara = new ArrayList<PuntoVector3D>();
-
                 verticesCara.add(vertices.get((i * nP) + j));
 
-                int sig = (j + 1) % nP;
+                int sigVert = (j + 1) % nP;
+                int sigCapa = (i + 1) % nQ;
 
-                verticesCara.add(vertices.get((i * nP) + sig));
+                verticesCara.add(vertices.get((i * nP) + sigVert));
 
-                verticesCara.add(vertices.get(((i + 1) * nP) + sig));
+                verticesCara.add(vertices.get((sigCapa * nP) + sigVert));
 
-                verticesCara.add(vertices.get(((i + 1) * nP) + j));
+                verticesCara.add(vertices.get((sigCapa * nP) + j));
 
-                PuntoVector3D normal = this.metodoNewell(verticesCara, 4);
+                PuntoVector3D normal = this.metodoNewell(verticesCara);
                 normales.add(normal);
 
                 Cara unaCara = new Cara();
                 VerticeNormal VN0 = new VerticeNormal((i * nP) + j, i * nP + j);
-                VerticeNormal VN1 = new VerticeNormal((i * nP) + sig, i * nP + j);
-                VerticeNormal VN2 = new VerticeNormal(((i + 1) * nP) + sig, i * nP + j);
-                VerticeNormal VN3 = new VerticeNormal(((i + 1) * nP) + j, i * nP + j);
+                VerticeNormal VN1 = new VerticeNormal((i * nP) + sigVert, i * nP + j);
+                VerticeNormal VN2 = new VerticeNormal((sigCapa * nP) + sigVert, i * nP + j);
+                VerticeNormal VN3 = new VerticeNormal((sigCapa * nP) + j, i * nP + j);
 
                 unaCara.setIndiceVerticeNormal(VN0);
                 unaCara.setIndiceVerticeNormal(VN1);
@@ -71,7 +78,7 @@ public class Toro extends Malla {
         }
     }
 
-    private void crearMarcoFrenet(int t) {
+    private void creaMarcoFrenet(double t) {
         /**
          * x = r1 · cos (t)
          * y = r1 · sin (t)
@@ -100,7 +107,7 @@ public class Toro extends Malla {
                 0,
                 -1,
                 0);///???
-	/*PuntoVector3D bt = new PuntoVector3D(0,
+       	/*PuntoVector3D bt = new PuntoVector3D(0,
         -(1),
         0,
         0);///???*/
@@ -145,7 +152,7 @@ public class Toro extends Malla {
         matrizFrenet[15] = ct.getPV();
     }
 
-    ArrayList<PuntoVector3D> crearPoligonoRegular(int numLados, float radio, PuntoVector3D centro) {
+    ArrayList<PuntoVector3D> creaPoligonoRegular(int numLados, float radio, PuntoVector3D centro) {
         ArrayList<PuntoVector3D> poligono = new ArrayList<PuntoVector3D>();
         //Ángulos en radianes
         double anguloAlfa = 2 * Math.PI / numLados;
