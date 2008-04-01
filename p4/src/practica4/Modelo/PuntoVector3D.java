@@ -144,6 +144,15 @@ public class PuntoVector3D implements Serializable {
 		(double) (this.getX() * Math.sin(angRad)), 1);
 	return retVal;
     }
+    
+    public PuntoVector3D giraPunto(double angRad, int iveces) {
+        double angulo = iveces * angRad;
+	PuntoVector3D retVal = new PuntoVector3D((double) (this.getX() * Math.cos(angulo)),
+                                                 (double) this.getY(),
+                                                 (double) (this.getX() * Math.sin(angulo)), 1);
+	return retVal;
+    }
+    
 
     public int getNumVerticesDeRevolucion(double angRad) {
 	return (int) Math.floor(2 * Math.PI / angRad);

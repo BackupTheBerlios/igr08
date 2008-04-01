@@ -31,10 +31,14 @@ public class Principal extends JFrame {
     private JMenuItem extrusion;
     private JMenu sobre;
     private JMenuItem autores;
+    
     private JButton botonDefinirPuntos;
     private JButton botonGenerarMallaRevolucion;
     private JButton botonGenerarMallaExtrusion;
     private JButton botonAplicarSplines;
+    private JButton botonCambiarModo;
+    private JButton botonDibujarNormales;
+    
     private int tipoMalla;
     private boolean entradaDatos;
     private final Animator animacion;
@@ -81,30 +85,34 @@ public class Principal extends JFrame {
         setJMenuBar(menu);
 
         // Creamos los botones
-        this.panelBotones = new JPanel();
-        panelBotones.setLayout(new FlowLayout());
-        panel.add(panelBotones, BorderLayout.SOUTH);
-
-        botonDefinirPuntos = new JButton("Definir Perfil");
-        //botonDefinirPuntos.setBounds(0, 400, 100, 25);
+	this.panelBotones = new JPanel();
+	panelBotones.setLayout(new GridLayout(3,3));
+	panel.add(panelBotones, BorderLayout.SOUTH);
+        
+	botonDefinirPuntos = new JButton("Definir Perfil");
         botonDefinirPuntos.setVisible(true);
         panelBotones.add(botonDefinirPuntos);
 
         botonAplicarSplines = new JButton("BSplines");
-        //     botonAplicarSplines.setBounds(100, 400, 100, 25);
         botonAplicarSplines.setVisible(true);
         panelBotones.add(botonAplicarSplines);
 
         botonGenerarMallaRevolucion = new JButton("Revolución");
-        //    botonGenerarMallaRevolucion.setBounds(200, 400, 100, 25);
         botonGenerarMallaRevolucion.setVisible(true);
         panelBotones.add(botonGenerarMallaRevolucion);
 
         botonGenerarMallaExtrusion = new JButton("Extrusión");
-        //  botonGenerarMallaExtrusion.setBounds(300, 400, 100, 25);
         botonGenerarMallaExtrusion.setVisible(true);
         panelBotones.add(botonGenerarMallaExtrusion);
-
+        
+        botonCambiarModo = new JButton("Cambiar Modo");
+        botonCambiarModo.setVisible(true);
+        panelBotones.add(botonCambiarModo);
+        
+        botonDibujarNormales = new JButton("Ver Normales");
+        botonDibujarNormales.setVisible(true);
+        panelBotones.add(botonDibujarNormales);
+        
         // Definimos el tipo de malla actual a representar
         this.tipoMalla = 0;
 
@@ -117,13 +125,12 @@ public class Principal extends JFrame {
         this.perfil.add(new PuntoVector3D(200, 210, 0, 1));
         this.perfil.add(new PuntoVector3D(200, 180, 0, 1));
         this.perfil.add(new PuntoVector3D(200, 150, 0, 1));
-        this.perfil.add(new PuntoVector3D(230, 120, 0, 1));
-
+        this.perfil.add(new PuntoVector3D(230, 120, 0, 1)); 
+        
         // Creamos el canvas de dibujo
         canvas = new GLJPanel();
         escena = new GL3D(425, 425);
         canvas.addGLEventListener(escena);
-        //canvas.setBounds(0, 0, 400, 400);
         canvas.addMouseListener(new ManejadorRaton());
         panel.add(canvas, BorderLayout.CENTER);
 
@@ -213,12 +220,26 @@ public class Principal extends JFrame {
         botonGenerarMallaRevolucion.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-
-                mallaRevolucion = new MallaPorRevolucion(perfil, 0.5f);
-
-                escena.actualizarMallaRev(tipoMalla, mallaRevolucion);
-                escena.setGenerado(true);
-                entradaDatos = false;
+                
+                String datoAng = "0,15";
+                String datoNumVertices = "4";
+                datoAng = JOptionPane.showInputDialog(null,"Ángulo Rotatorio: ","Datos de Entrada", 1);
+                if (datoAng != null) {
+                    
+                      Object[] opciones = {"3", "4"};
+                      int eleccion = JOptionPane.showOptionDialog(null,"Número de Vértices de la cara: ", "Datos de Entrada", 
+                                                                  JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, opciones, opciones[0]);
+                          
+                      int numVerticesCara = Integer.parseInt((String)opciones[eleccion]);
+                      double anguloRadianes = Double.parseDouble(datoAng);
+                      
+                      mallaRevolucion = new MallaPorRevolucion(perfil, numVerticesCara, anguloRadianes);
+                      
+                      escena.actualizarMallaRev(2, mallaRevolucion);
+                      escena.setGenerado(true);
+                      entradaDatos = false;
+                    
+                }
             }
         });
 
@@ -257,6 +278,40 @@ public class Principal extends JFrame {
                 entradaDatos = false;
             }
         });
+        
+        // Evento Oyente para el botón "Cambiar Modo"
+        botonCambiarModo.addActionListener(new ActionListener() {
+            
+            public void actionPerformed(ActionEvent e) {
+                   
+                Object[] opciones = {"Puntos", "Líneas", "Sólidos"};
+                int eleccion = JOptionPane.showOptionDialog(null,"Cambiar Modo de Representación a: ", "Datos de Entrada", 
+                                                                  JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, opciones, opciones[0]);
+                
+                mallaRevolucion.setTipoMalla(eleccion);
+
+            }
+        });    
+        
+        // Evento Oyente para el botón "Dibujar Normales"
+        botonDibujarNormales.addActionListener(new ActionListener() {
+            
+            public void actionPerformed(ActionEvent e) {
+                
+                if (botonDibujarNormales.getLabel().equals("Ver Normales")) {
+                    botonDibujarNormales.setLabel("Ocultar Normales");
+                    mallaRevolucion.setNormales(true);
+                }                    
+                else {
+                    botonDibujarNormales.setLabel("Ver Normales");
+                    mallaRevolucion.setNormales(false);
+                }
+                    
+                    
+ 
+            }
+        });    
+        
         // Añadimos un evento para la acción de salida
         addWindowListener(new WindowAdapter() {
 

@@ -54,12 +54,12 @@ public class GL3D implements GLEventListener {
 	GL gl = drw.getGL();
 
 	gl.glClear(GL.GL_COLOR_BUFFER_BIT);
-
-	if (generado) // Tipo de Escena a dibujar
+	
+        if (generado) // Tipo de Escena a dibujar
 	{
 	    switch (tipo) {
 		case 0:
-		    dibujaMallaPorRevolucion(gl);
+		    dibujarPuntos(gl);
 		    break;
 		case 1:
 		    dibujaMallaPorExtrusion(gl);
@@ -74,7 +74,7 @@ public class GL3D implements GLEventListener {
 	} else {
 	    dibujarPuntos(gl);
 	}
-
+        
 	gl.glFlush();
     }
 
@@ -84,9 +84,7 @@ public class GL3D implements GLEventListener {
     public void init(GLAutoDrawable drw) {
 	GL gl = drw.getGL();
 	GLU glu = new GLU();
-	/**
-	 * 
-	 */
+
 	gl.glClearColor(0.6f, 0.7f, 0.8f, 1.0f);
 	gl.glEnable(gl.GL_LIGHTING);
 	gl.glEnable(gl.GL_LIGHT0);
@@ -113,6 +111,10 @@ public class GL3D implements GLEventListener {
 	gl.glMaterialf(gl.GL_FRONT, gl.GL_SHININESS, 0.1f);
 	//gl.glEnable(gl.GL_DEPTH_TEST);
 	gl.glEnable(gl.GL_NORMALIZE);
+        gl.glFrontFace(gl.GL_CCW);
+        //gl.glFrontFace(gl.GL_CW);
+        gl.glEnable(gl.GL_FRONT_FACE);
+       //gl.glEnable(gl.GL_CULL_FACE);
 	gl.glShadeModel(gl.GL_SMOOTH);   //defecto
         
 	// cámara
@@ -212,17 +214,6 @@ public class GL3D implements GLEventListener {
     public void dibujaMallaPorRevolucion(GL gl) {
 
 	mallaPorRevolucion.dibujaMallaPorRevolucion(gl);
-    /*
-    //gl.glTranslatef(-1.5f, 0.0f, -6.0f);
-    gl.glBegin(GL.GL_TRIANGLES);		    
-    gl.glColor3f(1.0f, 0.0f, 0.0f);   
-    gl.glVertex3f(0.0f, 50.0f, 0.0f);  
-    gl.glColor3f(0.0f, 1.0f, 0.0f);   
-    gl.glVertex3f(-50.0f, -50.0f, 0.0f);
-    gl.glColor3f(0.0f, 0.0f, 1.0f);    
-    gl.glVertex3f(50.0f, -50.0f, 0.0f); 
-    gl.glEnd();
-     */
     }
 
     // Método que dibuja Malla por Extrusión
@@ -232,12 +223,7 @@ public class GL3D implements GLEventListener {
 	//gl.glTranslatef(3.0f, 0.0f, 0.0f);
 
 	this.mallaPorExtrusion.dibuja(gl, 0);
-    /*gl.glBegin(GL.GL_QUADS);
-    gl.glVertex3f(-50.0f, 50.0f, 0.0f);  
-    gl.glVertex3f(50.0f, 50.0f, 0.0f);  
-    gl.glVertex3f(50.0f, -50.0f, 0.0f);  
-    gl.glVertex3f(-50.0f, -50.0f, 0.0f); 
-    gl.glEnd();       */
+
     }
 
     // Getters & Stters

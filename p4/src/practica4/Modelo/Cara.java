@@ -36,6 +36,7 @@ public class Cara {
     void setIndiceVerticeNormal(ArrayList p) {
 	indicesVerticesNormales = (ArrayList<VerticeNormal>) p.clone();
     }
+    
 
     public PuntoVector3D SetNormal(ArrayList<PuntoVector3D> vertices, ArrayList<PuntoVector3D> normales) {
 	PuntoVector3D normal = new PuntoVector3D();
