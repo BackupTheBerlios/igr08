@@ -284,6 +284,7 @@ public class Principal extends JFrame {
 
 	    }
 	});
+      
 
 	// Evento Oyente para el botón "Dibujar Normales"
 	botonDibujarNormales.addActionListener(new ActionListener() {
