@@ -18,7 +18,7 @@ public class Malla {
 	normales = new ArrayList<PuntoVector3D>();
 	caras = new ArrayList<Cara>();
 
-	normalesActivadas = true;
+	normalesActivadas = false;
     }
 
     // Método que permite dibujar la malla
@@ -60,7 +60,12 @@ public class Malla {
 
 	//    }
 	/////////////////////////////////////////////
-	gl.glRotated(0.5, 0.5, 0.5, 0.5);  /////////////---->borrar
+	gl.glRotated(0.5, 0.5, 0.5, 0.5);
+        try {
+            Thread.sleep(10);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
     /////////////////////////////////////////////
     }
 

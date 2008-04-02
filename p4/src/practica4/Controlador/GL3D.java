@@ -57,20 +57,7 @@ public class GL3D implements GLEventListener {
 	if (generado) // Tipo de Escena a dibujar
 	{
 	    this.mallaActual.dibuja(gl);
-	/* switch (tipo) {
-	case 0:
-	dibujarPuntos(gl);
-	break;
-	case 1:
-	dibujaMallaPorExtrusion(gl);
-	break;
-	case 2:
-	dibujaMallaPorRevolucion(gl);
-	break;
-	case 3:
-	mallaActual.dibuja(gl);
-	break;
-	}*/
+
 	} else {
 	    dibujarPuntos(gl);
 	}
