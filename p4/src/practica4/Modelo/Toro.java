@@ -34,7 +34,7 @@ public class Toro extends Malla {
             creaMarcoFrenet(t);
 
             ArrayList<PuntoVector3D> unAro = creaPoligonoRegular(nP, r2, centro);
-            cambiaCoordenadas(unAro); //matrizFrenet no se le pasa por parámetro porque es global
+            cambiaCoordenadas(unAro);
 
             //Guardamos los vertices de la malla.
             for (int j = 0; j < nP; j++) {
@@ -87,40 +87,25 @@ public class Toro extends Malla {
                 r1 * Math.sin(t),
                 0,
                 1);
-        /*PuntoVector3D ct = new PuntoVector3D(r1 * Math.cos(t),
-        0,
-        r1 * Math.sin(t),
-        1);*/
-
+        
         //El vector derivada de la trayectoria
         PuntoVector3D tt = new PuntoVector3D(-r1 * Math.sin(t),
                 r1 * Math.cos(t),
                 0,
                 0);
-        /*PuntoVector3D tt = new PuntoVector3D(-r1 * Math.sin(t),
-        0,
-        r1 * Math.cos(t),
-        0);*/
+      
         // El vector binormal
         PuntoVector3D bt = new PuntoVector3D(0,
                 0,
                 -1,
-                0);///???
-       	/*PuntoVector3D bt = new PuntoVector3D(0,
-        -(1),
-        0,
-        0);///???*/
-
+                0);
+       	
         //El producto vectorial de bt y tt
         PuntoVector3D nt = new PuntoVector3D(-r1 * (Math.cos(t)),
                 -r1 * (Math.sin(t)),
                 0,
                 0);
-        /*PuntoVector3D nt = new PuntoVector3D(-r1 * (Math.cos(t)),
-        0,
-        -r1 * (Math.sin(t)),
-        0);*/
-
+       
         tt = tt.normaliza();
         nt = nt.normaliza();
 

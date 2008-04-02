@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import javax.media.opengl.GL;
 
 public class MallaPorRevolucion extends Malla {
-    
-    // Atributos
-    //private ArrayList<ArrayList<PuntoVector3D>> aros;
-    //private final int nVCara = 4;
+
     // Constructora por defecto
     public MallaPorRevolucion() {
     }
