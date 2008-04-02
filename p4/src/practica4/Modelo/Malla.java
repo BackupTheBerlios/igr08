@@ -46,8 +46,8 @@ public class Malla {
 
 		if (normalesActivadas) {
 		    gl.glNormal3f((float) normales.get(iN).getX(),
-			    (float) normales.get(iN).getY(),
-			    (float) normales.get(iN).getZ());
+			         (float) normales.get(iN).getY(),
+			         (float) normales.get(iN).getZ());
 		}
 
 		gl.glVertex3f((float) vertices.get(iV).getX(),

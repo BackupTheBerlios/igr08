@@ -52,7 +52,7 @@ public class GL3D implements GLEventListener {
     public void display(GLAutoDrawable drw) {
 	GL gl = drw.getGL();
 
-	gl.glClear(GL.GL_COLOR_BUFFER_BIT);
+	gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_COLOR_BUFFER_BIT);
 
 	if (generado) // Tipo de Escena a dibujar
 	{
@@ -98,9 +98,9 @@ public class GL3D implements GLEventListener {
 	gl.glMaterialf(gl.GL_FRONT, gl.GL_SHININESS, 0.1f);
 	//gl.glEnable(gl.GL_DEPTH_TEST);
 	gl.glEnable(gl.GL_NORMALIZE);
-	gl.glFrontFace(gl.GL_CCW);
+	//gl.glFrontFace(gl.GL_CCW);
 	//gl.glFrontFace(gl.GL_CW);
-	gl.glEnable(gl.GL_FRONT_FACE);
+	//gl.glEnable(gl.GL_FRONT_FACE);
 	//gl.glEnable(gl.GL_CULL_FACE);
 	gl.glShadeModel(gl.GL_SMOOTH);   //defecto
 
