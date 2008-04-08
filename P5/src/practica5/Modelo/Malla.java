@@ -21,7 +21,7 @@ public class Malla {
 	normalesActivadas = false;
     }
 
-    // M�todo que permite dibujar la malla
+    // Método que permite dibujar la malla
     public void dibuja(GL gl) {
 
 	for (int i = 0; i < caras.size(); i++) {
