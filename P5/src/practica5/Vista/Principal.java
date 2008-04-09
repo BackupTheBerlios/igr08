@@ -24,9 +24,6 @@ public class Principal extends JFrame {
     private JMenu archivo;
     private JMenuItem nuevo;
     private JMenuItem salir;
-    //private JMenu malla;
-    // private JMenuItem revolucion;
-    // private JMenuItem extrusion;
     private JMenu sobre;
     private JMenuItem autores;
     private JButton botonDefinirPuntos;
@@ -45,8 +42,8 @@ public class Principal extends JFrame {
     // Constructora
     public Principal() {
         
-        // Titulo de la ventana y tama帽o
-        setTitle("Pr谩ctica 4");
+        // Titulo de la ventana y tama駉
+        setTitle("Pr醕tica 5");
         setSize(new Dimension(425, 500));
         super.setResizable(false);
         
@@ -60,7 +57,7 @@ public class Principal extends JFrame {
         archivo = new JMenu("Archivo");
         nuevo = new JMenuItem("Nuevo");
         salir = new JMenuItem("Salir");
-        sobre = new JMenu("Sobre..");
+        sobre = new JMenu("Sobre...");
         autores = new JMenuItem("Autores");
         
         menu.add(archivo);
@@ -85,11 +82,11 @@ public class Principal extends JFrame {
         botonAplicarSplines.setVisible(true);
         panelBotones.add(botonAplicarSplines);
         
-        botonGenerarMallaRevolucion = new JButton("Revoluci贸n");
+        botonGenerarMallaRevolucion = new JButton("Revoluci髇");
         botonGenerarMallaRevolucion.setVisible(true);
         panelBotones.add(botonGenerarMallaRevolucion);
         
-        botonGenerarMallaExtrusion = new JButton("Extrusi贸n");
+        botonGenerarMallaExtrusion = new JButton("Extrusi髇");
         botonGenerarMallaExtrusion.setVisible(true);
         panelBotones.add(botonGenerarMallaExtrusion);
         
@@ -149,7 +146,7 @@ public class Principal extends JFrame {
         autores.addActionListener(new ActionListener() {
             
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Iv谩n Romero\nPedro S谩nchez", "Autores",
+                JOptionPane.showMessageDialog(null, "Iv醤 Romero\nPedro S醤chez", "Autores",
                         JOptionPane.INFORMATION_MESSAGE);
             }
         });
@@ -193,11 +190,11 @@ public class Principal extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 
                 //String datoNumVertices = "4";
-                String datoAng = JOptionPane.showInputDialog("脕ngulo de rotaci贸n: ", "0.15");
+                String datoAng = JOptionPane.showInputDialog("羘gulo de rotaci髇: ", "0.15");
                 if (datoAng != null) {
                     
                     Object[] opciones = {"3", "4"};
-                    int eleccion = JOptionPane.showOptionDialog(null, "N煤mero de V茅rtices de la cara: ", "Datos de Entrada",
+                    int eleccion = JOptionPane.showOptionDialog(null, "N鷐ero de V閞tices de la cara: ", "Datos de Entrada",
                             JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, opciones, opciones[0]);
                     
                     int numVerticesCara = Integer.parseInt((String) opciones[eleccion]);
@@ -219,8 +216,8 @@ public class Principal extends JFrame {
             
             public void actionPerformed(ActionEvent e) {
                 
-                String SnP = JOptionPane.showInputDialog("N煤mero de lados que aproximan la secci贸n del toroide", "10");
-                String SnQ = JOptionPane.showInputDialog("N煤mero de capas del toroide", "50");
+                String SnP = JOptionPane.showInputDialog("N鷐ero de lados que aproximan la secci髇 del toroide", "10");
+                String SnQ = JOptionPane.showInputDialog("N鷐ero de capas del toroide", "50");
                 String Sr1 = JOptionPane.showInputDialog("Radio del toro", "150");
                 String Sr2 = JOptionPane.showInputDialog("Radio de la secci贸n del toro", "20");
                 
@@ -242,8 +239,8 @@ public class Principal extends JFrame {
             
             public void actionPerformed(ActionEvent e) {
                 
-                Object[] opciones = {"Puntos", "L铆neas", "S贸lidos"};
-                int eleccion = JOptionPane.showOptionDialog(null, "Cambiar Modo de Representaci贸n a: ", "Datos de Entrada",
+                Object[] opciones = {"Puntos", "L韓eas", "S髄idos"};
+                int eleccion = JOptionPane.showOptionDialog(null, "Cambiar Modo de Representaci髇 a: ", "Datos de Entrada",
                         JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, opciones, opciones[0]);
                 
                 mallaActual.setTipoMalla(eleccion);
