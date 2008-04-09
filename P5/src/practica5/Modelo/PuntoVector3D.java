@@ -12,7 +12,7 @@ public class PuntoVector3D implements Serializable {
     public PuntoVector3D() {
     }
 
-    // Constructora con par�metros 1
+    // Constructora con parametros 1
     public PuntoVector3D(double x, double y, double z) {
 	this.x = x;
 	this.y = y;
@@ -20,7 +20,7 @@ public class PuntoVector3D implements Serializable {
 	this.pv = 1;
     }
 
-    // Constructora con par�metros 2
+    // Constructora con parametros 2
     public PuntoVector3D(double x, double y, double z, int pv) {
 	this.x = x;
 	this.y = y;
@@ -28,7 +28,7 @@ public class PuntoVector3D implements Serializable {
 	this.pv = pv;
     }
 
-    // M�todo Clon
+    // Metodo Clon
     public PuntoVector3D clonar() {
 	PuntoVector3D aux = new PuntoVector3D(x, y, z, pv);
 	return aux;

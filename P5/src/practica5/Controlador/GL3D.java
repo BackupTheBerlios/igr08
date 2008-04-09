@@ -22,10 +22,8 @@ public class GL3D implements GLEventListener {
     private ArrayList<PuntoVector3D> perfil;
     private boolean generado;
     private int tipo;
-    // private MallaPorRevolucion mallaPorRevolucion;
-    //private Toro mallaPorExtrusion;
     private Malla mallaActual;
-    double eyeX, eyeY, eyeZ, lookX, lookY, lookZ, upX, upY, upZ; // c�mara
+    double eyeX, eyeY, eyeZ, lookX, lookY, lookZ, upX, upY, upZ; // camara
     float[] PosicionLuz0 = new float[4];
     
     public GL3D(int anchura, int altura) {
@@ -45,7 +43,6 @@ public class GL3D implements GLEventListener {
         
         this.tipo = 0;
         this.generado = false;
-        //this.mallaPorRevolucion = null;
         this.mallaActual = null;
     }
     

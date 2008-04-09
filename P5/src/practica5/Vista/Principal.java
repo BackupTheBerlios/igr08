@@ -123,14 +123,14 @@ public class Principal extends JFrame {
         this.perfil = escena.transformarPerfil(this.perfil);
         escena.setPerfil(this.perfil);
         
-        // Animación de la escena
+        // Animacion de la escena
         animacion = new Animator(canvas);
         animacion.start();
         
         // Entrada de datos desactivada
         entradaDatos = false;
         
-        // Acción por defecto al cerrar la ventana
+        // Accion por defecto al cerrar la ventana
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
         // Evento Oyente para la barra de menu "nuevo"
