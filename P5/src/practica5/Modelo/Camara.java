@@ -1,5 +1,7 @@
 package practica5.Modelo;
 
+import javax.media.opengl.GL;
+import javax.media.opengl.glu.GLU;
 import practica5.util.Conversiones;
 
 public class Camara {
@@ -9,24 +11,53 @@ public class Camara {
     private float l, r, b, t, N, F;
     private float[] m= new float[16];
     
-    /*eye = new PuntoVector3D(0,0,0);
-      look = new PuntoVector3D(0,0,-1);
-      up = new PuntoVector3D(0,1,0);
-     */
-    public Camara() {
+    private GL gl;
+    private GLU glu;
+    
+    
+    
+    public Camara(GL gl) {
+        this.gl = gl;
+        this.glu = new GLU();
         
+        eye = new PuntoVector3D(0,0,0);
+        look = new PuntoVector3D(0,0,-1);
+        up = new PuntoVector3D(0,1,0);
     }
     
     private void setView(PuntoVector3D eye, PuntoVector3D look, PuntoVector3D up){
+        this.eye = eye;
+        this.look = look;
+        this.up = up;
+        //n = eye-look    normalizar
+        //u = up x n    normalizar
+        //v = n x u;
+        n = eye.menos(look);
+        n = n.normaliza();
+        
+        u = up.cross(n);
+        u = u.normaliza();
+        
+        v = n.cross(u);
+        
+        gl.glMatrixMode(gl.GL_MODELVIEW);
+        gl.glLoadIdentity();
+        
+        glu.gluLookAt(eye.getX(),eye.getY(),eye.getZ(),look.getX(),look.getY(),look.getZ(),up.getX(),up.getY(),up.getZ());
         
     }
     
     private void setProjection(){
-        
+        gl.glMatrixMode(gl.GL_PROJECTION);
+        gl.glLoadIdentity();
+        //gl.glOrtho(l,r,b,t,-1,1);
+        double anguloVision = 10;
+        double proporcion = 1;
+        glu.gluPerspective(anguloVision, proporcion, N, F);
     }
     
     private void setModelViewMatrix(){
-      
+        
     }
     
     public void roll(double angulo){
@@ -39,7 +70,7 @@ public class Camara {
     }
     
     public void desliza(PuntoVector3D del){
-    //******
+        //******
         
         setModelViewMatrix();
     }
