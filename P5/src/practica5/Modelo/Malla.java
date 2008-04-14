@@ -3,7 +3,7 @@ package practica5.Modelo;
 import java.util.ArrayList;
 import javax.media.opengl.GL;
 
-public class Malla {
+public class Malla extends Objeto3D{
 
     // Atributos protegidos
     protected ArrayList<PuntoVector3D> vertices;
