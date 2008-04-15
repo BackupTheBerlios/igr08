@@ -28,6 +28,5 @@ public class TAfin {
         gl.glScaled(X, Y, Z);
         gl.glGetDoublev(gl.GL_MODELVIEW_MATRIX, matriz, 0);
     }
-    
 }
 

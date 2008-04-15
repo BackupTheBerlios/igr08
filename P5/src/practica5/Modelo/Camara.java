@@ -9,11 +9,10 @@ public class Camara {
     private PuntoVector3D eye, look, up;
     private PuntoVector3D u, v, n;
     private float l, r, b, t, N, F;
-    private float[] m= new float[16];
+    private double[] m= new double[16];
     
     private GL gl;
     private GLU glu;
-    
     
     
     public Camara(GL gl) {
@@ -29,9 +28,6 @@ public class Camara {
         this.eye = eye;
         this.look = look;
         this.up = up;
-        //n = eye-look    normalizar
-        //u = up x n    normalizar
-        //v = n x u;
         n = eye.menos(look);
         n = n.normaliza();
         
@@ -44,7 +40,6 @@ public class Camara {
         gl.glLoadIdentity();
         
         glu.gluLookAt(eye.getX(),eye.getY(),eye.getZ(),look.getX(),look.getY(),look.getZ(),up.getX(),up.getY(),up.getZ());
-        
     }
     
     private void setProjection(){
@@ -57,7 +52,31 @@ public class Camara {
     }
     
     private void setModelViewMatrix(){
-        
+        double x , y , z;
+        x = -eye.prodEsc(u);
+        y = -eye.prodEsc(v);
+        z = -eye.prodEsc(n);
+        PuntoVector3D d = new PuntoVector3D(x, y, z);
+        // 1ª Fila
+        m[0] = u.x;
+        m[1] = u.y;
+        m[2] = u.z;
+        m[3] = d.x;
+        // 2ª Fila
+        m[4] = v.x;
+        m[5] = v.y;
+        m[6] = v.z;
+        m[7] = d.y;
+        // 3ª Fila
+        m[8] = n.x;
+        m[9] = n.y;
+        m[10] = n.z;
+        m[11] = d.z;
+        // 4ª Fila
+        m[12] = 0;
+        m[13] = 0;
+        m[14] = 0;
+        m[15] = 1;
     }
     
     public void roll(double angulo){
