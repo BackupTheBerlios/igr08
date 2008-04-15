@@ -244,10 +244,8 @@ public class Principal extends JFrame {
                         JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, opciones, opciones[0]);
                 
                 mallaActual.setTipoMalla(eleccion);
-                
             }
         });
-        
         
         // Evento Oyente para el botón "Dibujar Normales"
         botonDibujarNormales.addActionListener(new ActionListener() {
