@@ -2,10 +2,14 @@ package practica5.Modelo;
 
 import java.util.ArrayList;
 
-public class ObjetoCompuesto3D  extends Objeto3D{
-    private ArrayList<Objeto3D> hijos;
+public class ObjetoCompuesto3D extends Objeto3D{
     
-    public ObjetoCompuesto3D() {
-    }
+    // Atributos protegigos
+    protected ArrayList<Objeto3D> hijos;
+    
+    // Constructora
+    public ObjetoCompuesto3D() {}
+    
+    // Operaciones 
     
 }
