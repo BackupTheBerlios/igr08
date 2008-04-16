@@ -14,22 +14,30 @@ import practica5.Modelo.Basic.Malla;
 import practica5.Modelo.Basic.PuntoVector3D;
 
 public class GL3D implements GLEventListener {
-    public static int P_ORT = 0;
-    private double xLeft,  xRight,  yTop,  yBot,  xCentro,  yCentro;
-    private double RatioViewPort;
+    
+    // Variables Constantes
+    public static int ORTOGONAL = 0;
+    public static int PROYECCION = 1;
+    
+    // Atributos privado
     private GLU glu;
     private GLContext context;
+    
+    private double xLeft, xRight;
+    private double yTop, yBot;
+    private double xCentro, yCentro;
+    
     private int anchura;
     private int altura;
-    private ArrayList<PuntoVector3D> perfil;
+    
+    private Camara camara;
+    private double RatioViewPort;
     private boolean generado;
-    private int tipo;
-    private Malla mallaActual;
-    double eyeX, eyeY, eyeZ, lookX, lookY, lookZ, upX, upY, upZ; // camara
-    float[] PosicionLuz0 = new float[4];
-    //Camara camara = new Camara(gl);
+    
+    private static float[] POS_LUZ_0 = {25.0f, 25.0f, 0.0f, 1.0f};
     
     public GL3D(int anchura, int altura) {
+
         this.glu = new GLU();
         
         this.anchura = anchura;
@@ -43,10 +51,8 @@ public class GL3D implements GLEventListener {
         this.yCentro = (yTop + yBot) / 2.0;
         
         this.RatioViewPort = 1.0;
-        
-        this.tipo = 0;
         this.generado = false;
-        this.mallaActual = null;
+        
     }
     
     public void display(GLAutoDrawable drw) {
@@ -54,45 +60,23 @@ public class GL3D implements GLEventListener {
         
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_COLOR_BUFFER_BIT);
         
-        if (generado) // Tipo de Escena a dibujar
-        {
-            this.mallaActual.dibuja(gl);
-            
-        } else {
-            dibujarPuntos(gl);
+        if (generado) {
+            //this.mallaActual.dibuja(gl);
         }
         
         gl.glFlush();
     }
     
-    public void displayChanged(GLAutoDrawable arg0, boolean arg1, boolean arg2) {
-    }
+    public void displayChanged(GLAutoDrawable arg0, boolean arg1, boolean arg2) {}
     
     public void init(GLAutoDrawable drw) {
         GL gl = drw.getGL();
         GLU glu = new GLU();
         
-        gl.glClearColor(0.6f, 0.7f, 0.8f, 1.0f);
-        gl.glEnable(gl.GL_LIGHTING);
-        gl.glEnable(gl.GL_LIGHT0);
-        // luz0
-        gl.glEnable(gl.GL_LIGHT0);
-        float LuzDifusa[] = {1.0f, 1.0f, 1.0f, 1.0f};
-        FloatBuffer LuzDifusa1 = FloatBuffer.wrap(LuzDifusa);
+        //gl.glClearColor(0.6f, 0.7f, 0.8f, 1.0f);
         
-        gl.glLightfv(gl.GL_LIGHT0, gl.GL_DIFFUSE, LuzDifusa1);
-        
-        
-        float LuzAmbiente[] = {0.5f, 0.5f, 0.5f, 1.0f};
-        FloatBuffer LuzAmbiente1 = FloatBuffer.wrap(LuzAmbiente);
-        gl.glLightfv(gl.GL_LIGHT0, gl.GL_AMBIENT, LuzAmbiente1);
-        PosicionLuz0[0] = 25.0f;
-        PosicionLuz0[1] = 25.0f;
-        PosicionLuz0[2] = 0.0f;
-        PosicionLuz0[3] = 1.0f;
-        
-        FloatBuffer PosicionLuz01 = FloatBuffer.wrap(PosicionLuz0);
-        gl.glLightfv(gl.GL_LIGHT0, gl.GL_POSITION, PosicionLuz01);
+        this.camara = new Camara(gl);
+        this.activarLuces(gl);
         
         gl.glEnable(gl.GL_COLOR_MATERIAL);
         gl.glMaterialf(gl.GL_FRONT, gl.GL_SHININESS, 0.1f);
@@ -104,23 +88,13 @@ public class GL3D implements GLEventListener {
         //gl.glEnable(gl.GL_CULL_FACE);
         gl.glShadeModel(gl.GL_SMOOTH);   //defecto
         
-        // c�mara
-        eyeX = 2.0;
-        eyeY = 2.0;
-        eyeZ = 2.0;
-        lookX = 0.0;
-        lookY = 0.0;
-        lookZ = 0.0;
-        upX = 0;
-        upY = 1;
-        upZ = 0;
         gl.glMatrixMode(gl.GL_MODELVIEW);
         gl.glLoadIdentity();
-        glu.gluLookAt(eyeX, eyeY, eyeZ, lookX, lookY, lookZ, upX, upY, upZ);
+        glu.gluLookAt(camara.getEye().getX(), camara.getEye().getY(), camara.getEye().getZ(), 
+                      camara.getLook().getX(), camara.getLook().getY(), camara.getLook().getZ(),
+                      camara.getUp().getX(), camara.getUp().getY(), camara.getUp().getZ());
         
-        /**
-         *
-         */
+ 
         gl.glClearColor(0, 0, 0, 0);
         
         gl.glMatrixMode(GL.GL_PROJECTION);
@@ -190,22 +164,31 @@ public class GL3D implements GLEventListener {
         
         gl.glBegin(GL.GL_POINTS);
         
-        for (int i = 0; i < perfil.size(); i++) {
-            gl.glVertex3f((float) perfil.get(i).getX(), (float) perfil.get(i).getY(), (float) perfil.get(i).getZ());
-        }
-        
         gl.glEnd();
     }
     
-    
-    public ArrayList<PuntoVector3D> getPerfil() {
-        return perfil;
+    // Activamos las luces del entorno
+    public void activarLuces(GL gl) {
+     
+        // Activamos Luz en OpenGL
+        gl.glEnable(gl.GL_LIGHTING);
+        gl.glEnable(gl.GL_LIGHT0);
+        
+        // Luz 0
+        gl.glEnable(gl.GL_LIGHT0);
+        float LuzDifusa[] = {1.0f, 1.0f, 1.0f, 1.0f};
+        FloatBuffer LuzDifusa1 = FloatBuffer.wrap(LuzDifusa); 
+        gl.glLightfv(gl.GL_LIGHT0, gl.GL_DIFFUSE, LuzDifusa1);
+        
+        // Luz Ambiental
+        float LuzAmbiente[] = {0.5f, 0.5f, 0.5f, 1.0f};
+        FloatBuffer LuzAmbiente1 = FloatBuffer.wrap(LuzAmbiente);
+        gl.glLightfv(gl.GL_LIGHT0, gl.GL_AMBIENT, LuzAmbiente1);
+        FloatBuffer PosicionLuz01 = FloatBuffer.wrap(POS_LUZ_0);
+        gl.glLightfv(gl.GL_LIGHT0, gl.GL_POSITION, PosicionLuz01);      
     }
     
-    public void setPerfil(ArrayList<PuntoVector3D> puntosPerfil) {
-        this.perfil = (ArrayList<PuntoVector3D>) puntosPerfil.clone();
-    }
-    
+    // Getters & Setters
     public boolean getGenerado() {
         return generado;
     }
@@ -214,16 +197,14 @@ public class GL3D implements GLEventListener {
         generado = bool;
     }
     
-    // M�todos que actualiza datos de la escena
-    public void actualizarPerfil(int tipoMalla, ArrayList<PuntoVector3D> puntosPerfil) {
-        this.tipo = tipoMalla;
-        this.perfil = (ArrayList<PuntoVector3D>) puntosPerfil.clone();
+    public Camara getCamara() {
+        return this.camara;
     }
     
-    public void actualizarMalla(int tipoMalla, Malla laMalla) {
-        this.tipo = tipoMalla;
-        this.mallaActual = laMalla;
-    }
+    public void setCamara(Camara c) {
+        this.camara = c;
+    } 
+    
     
     // Escala un punto desde el puerto de vista hasta el area visible de la escena
     public PuntoVector3D convertirPuntoToPixel(PuntoVector3D punto) {

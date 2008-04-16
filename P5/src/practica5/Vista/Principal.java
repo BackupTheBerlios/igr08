@@ -7,6 +7,7 @@ import javax.media.opengl.*;
 import com.sun.opengl.util.*;
 
 import practica5.Controlador.GL3D;
+import practica5.Modelo.Basic.Camara;
 import practica5.Modelo.Basic.PuntoVector3D;
 import practica5.Modelo.Basic.MallaPorRevolucion;
 import practica5.Modelo.Basic.Malla;
@@ -30,12 +31,15 @@ public class Principal extends JFrame implements  KeyListener{
     private JButton botonCambiarModo;
     private JButton botonDibujarNormales;
     
-    private int tipoMalla;
-    private boolean entradaDatos;
-    private final Animator animacion;
-    private ArrayList<PuntoVector3D> perfil;
-    private Malla mallaActual;
     private JPanel panelBotones;
+    
+    //private int tipoMalla;
+    //private boolean entradaDatos;
+    //private final Animator animacion;
+    //private ArrayList<PuntoVector3D> perfil;
+    //private Malla mallaActual;
+    
+    private Camara camara;
     
     // Constructora
     public Principal() {
@@ -81,10 +85,10 @@ public class Principal extends JFrame implements  KeyListener{
         panelBotones.add(botonDibujarNormales);
         
         // Definimos el tipo de malla actual a representar
-        this.tipoMalla = 0;
+        //this.tipoMalla = 0;
         
         // Definimos un perfil por defecto
-        this.perfil = new ArrayList<PuntoVector3D>();
+        /*this.perfil = new ArrayList<PuntoVector3D>();
         this.perfil.add(new PuntoVector3D(250, 330, 0, 1));
         this.perfil.add(new PuntoVector3D(250, 300, 0, 1));
         this.perfil.add(new PuntoVector3D(230, 270, 0, 1));
@@ -93,24 +97,26 @@ public class Principal extends JFrame implements  KeyListener{
         this.perfil.add(new PuntoVector3D(200, 180, 0, 1));
         this.perfil.add(new PuntoVector3D(200, 150, 0, 1));
         this.perfil.add(new PuntoVector3D(230, 120, 0, 1));
+        */
+        
         
         // Creamos el canvas de dibujo
         canvas = new GLJPanel();
-        escena = new GL3D(425, 425);
+        escena = new GL3D(800, 600);
         canvas.addGLEventListener(escena);
         canvas.addMouseListener(new ManejadorRaton());
         panel.add(canvas, BorderLayout.CENTER);
         
         // Transformamos el perfil a coordenadas de la escena
-        this.perfil = escena.transformarPerfil(this.perfil);
-        escena.setPerfil(this.perfil);
+        //this.perfil = escena.transformarPerfil(this.perfil);
+        //escena.setPerfil(this.perfil);
         
         // Animacion de la escena
-        animacion = new Animator(canvas);
-        animacion.start();
+        //animacion = new Animator(canvas);
+        //animacion.start();
         
         // Entrada de datos desactivada
-        entradaDatos = false;
+       // entradaDatos = false;
         
         // Accion por defecto al cerrar la ventana
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -119,8 +125,7 @@ public class Principal extends JFrame implements  KeyListener{
         nuevo.addActionListener(new ActionListener() {
             
             public void actionPerformed(ActionEvent e) {
-                perfil = new ArrayList<PuntoVector3D>();
-                escena.actualizarPerfil(tipoMalla, perfil);
+
             }
         });
         
@@ -142,7 +147,6 @@ public class Principal extends JFrame implements  KeyListener{
                 int eleccion = JOptionPane.showOptionDialog(null, "Cambiar Modo de Representación a: ", "Datos de Entrada",
                         JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, opciones, opciones[0]);
                 
-                mallaActual.setTipoMalla(eleccion);
             }
         });
         
@@ -153,10 +157,8 @@ public class Principal extends JFrame implements  KeyListener{
                 
                 if (botonDibujarNormales.getText().equals("Activa Normales")) {
                     botonDibujarNormales.setText("DesactivaNormales");
-                    mallaActual.setNormales(true);
                 } else {
                     botonDibujarNormales.setText("Activa Normales");
-                    mallaActual.setNormales(false);
                 }
             }
         });
@@ -169,7 +171,7 @@ public class Principal extends JFrame implements  KeyListener{
                 new Thread(new Runnable() {
                     
                     public void run() {
-                        animacion.stop();
+                        //animacion.stop();
                         System.exit(0);
                     }
                 }).start();
@@ -182,10 +184,9 @@ public class Principal extends JFrame implements  KeyListener{
         
         @Override
         public void mousePressed(MouseEvent evento) {
-            if (entradaDatos) {
-                perfil.add(escena.convertirPuntoToPixel(new PuntoVector3D(evento.getX(), 400 - evento.getY(), 0, 1)));
-                escena.setPerfil(perfil);
-            }
+
+               // perfil.add(escena.convertirPuntoToPixel(new PuntoVector3D(evento.getX(), 400 - evento.getY(), 0, 1)));
+                //escena.setPerfil(perfil);
         }
         
         @Override

@@ -6,6 +6,7 @@ import practica5.util.Conversiones;
 
 public class Camara {
     
+    // Atributos privados
     private PuntoVector3D eye, look, up;
     private PuntoVector3D u, v, n;
     private float l, r, b, t, N, F;
@@ -140,4 +141,30 @@ public class Camara {
         
         setModelViewMatrix();
     }
+    
+    // Getters & Setters
+    public PuntoVector3D getEye() {
+        return eye;
+    }
+    
+    public void setEye(PuntoVector3D ojo) {
+        this.eye = ojo;
+    }
+
+    public PuntoVector3D getLook() {
+        return look;
+    }
+    
+    public void setLook(PuntoVector3D vista) {
+        this.look = vista;
+    }
+    
+    public PuntoVector3D getUp() {
+        return eye;
+    }
+    
+    public void setUp(PuntoVector3D normal) {
+        this.up = normal;
+    }
+    
 }
