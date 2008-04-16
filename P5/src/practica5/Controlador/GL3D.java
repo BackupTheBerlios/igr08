@@ -8,6 +8,7 @@ import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 
 import java.util.ArrayList;
+import practica5.Modelo.Camara;
 import practica5.Modelo.Malla;
 import practica5.Modelo.PuntoVector3D;
 
@@ -25,6 +26,7 @@ public class GL3D implements GLEventListener {
     private Malla mallaActual;
     double eyeX, eyeY, eyeZ, lookX, lookY, lookZ, upX, upY, upZ; // camara
     float[] PosicionLuz0 = new float[4];
+    //Camara camara = new Camara(gl);
     
     public GL3D(int anchura, int altura) {
         this.glu = new GLU();

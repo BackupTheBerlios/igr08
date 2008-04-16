@@ -14,7 +14,7 @@ import practica5.util.Calculos;
 import java.util.ArrayList;
 import practica5.Modelo.Toro;
 
-public class Principal extends JFrame {
+public class Principal extends JFrame implements  KeyListener{
     
     // Atributos
     private Container panel;
@@ -26,7 +26,7 @@ public class Principal extends JFrame {
     private JMenuItem salir;
     private JMenu sobre;
     private JMenuItem autores;
-
+    
     private JButton botonCambiarModo;
     private JButton botonDibujarNormales;
     
@@ -71,7 +71,7 @@ public class Principal extends JFrame {
         this.panelBotones = new JPanel();
         panelBotones.setLayout(new GridLayout(1, 2));
         panel.add(panelBotones, BorderLayout.SOUTH);
-                       
+        
         botonCambiarModo = new JButton("Cambiar Modo");
         botonCambiarModo.setVisible(true);
         panelBotones.add(botonCambiarModo);
@@ -132,8 +132,8 @@ public class Principal extends JFrame {
                         JOptionPane.INFORMATION_MESSAGE);
             }
         });
-
-        // Evento Oyente para el bot贸n "Cambiar Modo"
+        
+        // Evento Oyente para el boton "Cambiar Modo"
         botonCambiarModo.addActionListener(new ActionListener() {
             
             public void actionPerformed(ActionEvent e) {
@@ -146,7 +146,7 @@ public class Principal extends JFrame {
             }
         });
         
-        // Evento Oyente para el bot贸n "Dibujar Normales"
+        // Evento Oyente para el boton "Dibujar Normales"
         botonDibujarNormales.addActionListener(new ActionListener() {
             
             public void actionPerformed(ActionEvent e) {
@@ -158,13 +158,10 @@ public class Principal extends JFrame {
                     botonDibujarNormales.setText("Activa Normales");
                     mallaActual.setNormales(false);
                 }
-                
-                
-                
             }
         });
         
-        // A帽adimos un evento para la acci贸n de salida
+        // A馻dimos un evento para la accion de salida
         addWindowListener(new WindowAdapter() {
             
             @Override
@@ -180,7 +177,7 @@ public class Principal extends JFrame {
         });
     }
     
-    // Eventos del Rat贸n
+    // Eventos del Raton
     public class ManejadorRaton extends MouseAdapter {
         
         @Override
@@ -204,5 +201,15 @@ public class Principal extends JFrame {
     public static void main(String[] args) {
         Principal p4 = new Principal();
         p4.setVisible(true);
+    }
+
+    public void keyTyped(KeyEvent e) {
+    }
+
+    public void keyPressed(KeyEvent e) {
+        JOptionPane.showMessageDialog(null, "aa");
+    }
+
+    public void keyReleased(KeyEvent e) {
     }
 }

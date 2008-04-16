@@ -24,6 +24,15 @@ public class Camara {
         up = new PuntoVector3D(0,1,0);
     }
     
+    public Camara(GL gl, PuntoVector3D eye, PuntoVector3D look, PuntoVector3D up) {
+        this.gl = gl;
+        this.glu = new GLU();
+        
+        this.eye = eye;
+        this.look = look;
+        this.up = up;
+    }
+    
     private void setView(PuntoVector3D eye, PuntoVector3D look, PuntoVector3D up){
         this.eye = eye;
         this.look = look;
@@ -124,8 +133,10 @@ public class Camara {
         setModelViewMatrix();
     }
     
-    public void desliza(PuntoVector3D del){
-        //******
+    public void desliza(PuntoVector3D des){
+        eye.x+= des.x+des.y+des.z;
+        eye.y+= des.x+des.y+des.z;
+        eye.z+= des.x+des.y+des.z;
         
         setModelViewMatrix();
     }
