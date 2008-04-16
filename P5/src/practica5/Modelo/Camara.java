@@ -83,8 +83,44 @@ public class Camara {
         double cs = Math.cos(Conversiones.g2r(angulo));
         double sn = Math.sin(Conversiones.g2r(angulo));
         PuntoVector3D t = u.clonar();
-        u = new PuntoVector3D(cs*t.getX()-sn*v.getX(),cs*t.getY()-sn*v.getY(),cs*t.getZ()-sn*v.getZ());
-        v = new PuntoVector3D(sn*t.getX()+cs*v.getX(),sn*t.getY()+cs*v.getY(),sn*t.getZ()+cs*v.getZ());
+        u = new PuntoVector3D(
+                cs*t.getX()-sn*v.getX(),
+                cs*t.getY()-sn*v.getY(),
+                cs*t.getZ()-sn*v.getZ());
+        v = new PuntoVector3D(
+                sn*t.getX()+cs*v.getX(),
+                sn*t.getY()+cs*v.getY(),
+                sn*t.getZ()+cs*v.getZ());
+        setModelViewMatrix();
+    }
+    
+    public void pitch(double angulo){
+        double cs = Math.cos(Conversiones.g2r(angulo));
+        double sn = Math.sin(Conversiones.g2r(angulo));
+        PuntoVector3D t = n.clonar();
+        n = new PuntoVector3D(
+                cs*t.getX()-sn*v.getX(),
+                cs*t.getY()-sn*v.getY(),
+                cs*t.getZ()-sn*v.getZ());
+        v = new PuntoVector3D(
+                sn*t.getX()+cs*v.getX(),
+                sn*t.getY()+cs*v.getY(),
+                sn*t.getZ()+cs*v.getZ());
+        setModelViewMatrix();
+    }
+    
+    public void yaw(double angulo){
+        double cs = Math.cos(Conversiones.g2r(angulo));
+        double sn = Math.sin(Conversiones.g2r(angulo));
+        PuntoVector3D t = u.clonar();
+        u = new PuntoVector3D(
+                cs*t.getX()-sn*v.getX(),
+                cs*t.getY()-sn*v.getY(),
+                cs*t.getZ()-sn*v.getZ());
+        n = new PuntoVector3D(
+                sn*t.getX()+cs*v.getX(),
+                sn*t.getY()+cs*v.getY(),
+                sn*t.getZ()+cs*v.getZ());
         setModelViewMatrix();
     }
     
