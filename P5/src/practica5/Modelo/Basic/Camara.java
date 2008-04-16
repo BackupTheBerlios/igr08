@@ -1,4 +1,4 @@
-package practica5.Modelo;
+package practica5.Modelo.Basic;
 
 import javax.media.opengl.GL;
 import javax.media.opengl.glu.GLU;

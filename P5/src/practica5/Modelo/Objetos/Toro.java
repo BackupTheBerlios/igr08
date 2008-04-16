@@ -1,6 +1,7 @@
-package practica5.Modelo;
+package practica5.Modelo.Objetos;
 
 import java.util.ArrayList;
+import practica5.Modelo.Basic.*;
 
 public class Toro extends Malla {
     

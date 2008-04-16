@@ -1,4 +1,4 @@
-package practica5.Modelo;
+package practica5.Modelo.Basic;
 
 import java.io.Serializable;
 import java.util.ArrayList;

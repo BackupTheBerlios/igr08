@@ -1,9 +1,9 @@
 package practica5.util;
 
-import practica5.Modelo.Cara;
-import practica5.Modelo.Malla;
-import practica5.Modelo.PuntoVector3D;
-import practica5.Modelo.VerticeNormal;
+import practica5.Modelo.Basic.Cara;
+import practica5.Modelo.Basic.Malla;
+import practica5.Modelo.Basic.PuntoVector3D;
+import practica5.Modelo.Basic.VerticeNormal;
 
 public class Tetraedro extends Malla {
     

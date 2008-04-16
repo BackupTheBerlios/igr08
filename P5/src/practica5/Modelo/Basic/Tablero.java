@@ -1,4 +1,4 @@
-package practica5.Modelo;
+package practica5.Modelo.Basic;
 
 public class Tablero extends Malla{
     private double X, Y, Z;

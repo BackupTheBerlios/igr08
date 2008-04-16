@@ -1,6 +1,6 @@
 package practica5.util;
 
-import practica5.Modelo.PuntoVector3D;
+import practica5.Modelo.Basic.PuntoVector3D;
 
 public class Segmento {
 

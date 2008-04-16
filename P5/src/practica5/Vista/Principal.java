@@ -7,12 +7,12 @@ import javax.media.opengl.*;
 import com.sun.opengl.util.*;
 
 import practica5.Controlador.GL3D;
-import practica5.Modelo.PuntoVector3D;
-import practica5.Modelo.MallaPorRevolucion;
-import practica5.Modelo.Malla;
+import practica5.Modelo.Basic.PuntoVector3D;
+import practica5.Modelo.Basic.MallaPorRevolucion;
+import practica5.Modelo.Basic.Malla;
 import practica5.util.Calculos;
 import java.util.ArrayList;
-import practica5.Modelo.Toro;
+import practica5.Modelo.Objetos.Toro;
 
 public class Principal extends JFrame implements  KeyListener{
     

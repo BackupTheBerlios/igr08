@@ -8,12 +8,13 @@ import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 
 import java.util.ArrayList;
-import practica5.Modelo.Camara;
-import practica5.Modelo.Malla;
-import practica5.Modelo.PuntoVector3D;
+import javax.swing.JOptionPane;
+import practica5.Modelo.Basic.Camara;
+import practica5.Modelo.Basic.Malla;
+import practica5.Modelo.Basic.PuntoVector3D;
 
 public class GL3D implements GLEventListener {
-    
+    public static int P_ORT = 0;
     private double xLeft,  xRight,  yTop,  yBot,  xCentro,  yCentro;
     private double RatioViewPort;
     private GLU glu;

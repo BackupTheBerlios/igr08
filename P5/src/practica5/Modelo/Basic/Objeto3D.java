@@ -5,16 +5,14 @@
  *    - Color: Color del objeto en cuestión.
  *    - matriz: Matriz de traformación afín aplicado al objeto.
  */
-
-package practica5.Modelo;
+package practica5.Modelo.Basic;
 
 public class Objeto3D {
     
-    // Atributos protegidos
+    // Atributos privados
     private int id;
     private Color color;
     private TAfin matriz;
-    private PuntoVector3D pos;
     
     // Constructora
     public Objeto3D() {}
@@ -23,14 +21,6 @@ public class Objeto3D {
     public void dibuja() {};
     
     // Getters & Setters
-    public PuntoVector3D getPos() {
-        return pos;
-    }
-
-    public void setPos(PuntoVector3D pos) {
-        this.pos = pos;
-    }
-
     public int getId() {
         return id;
     }
