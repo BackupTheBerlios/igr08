@@ -15,7 +15,7 @@ import practica5.util.Calculos;
 import java.util.ArrayList;
 import practica5.Modelo.Objetos.Toro;
 
-public class Principal extends JFrame implements  KeyListener{
+public class Principal extends JFrame implements KeyListener{
     
     // Atributos
     private Container panel;
@@ -65,10 +65,8 @@ public class Principal extends JFrame implements  KeyListener{
         menu.add(archivo);
         archivo.add(nuevo);
         archivo.add(salir);
-        
         menu.add(sobre);
-        sobre.add(autores);
-        
+        sobre.add(autores);  
         setJMenuBar(menu);
         
         // Creamos los botones
@@ -83,28 +81,13 @@ public class Principal extends JFrame implements  KeyListener{
         botonDibujarNormales = new JButton("Activa Normales");
         botonDibujarNormales.setVisible(true);
         panelBotones.add(botonDibujarNormales);
-        
-        // Definimos el tipo de malla actual a representar
-        //this.tipoMalla = 0;
-        
-        // Definimos un perfil por defecto
-        /*this.perfil = new ArrayList<PuntoVector3D>();
-        this.perfil.add(new PuntoVector3D(250, 330, 0, 1));
-        this.perfil.add(new PuntoVector3D(250, 300, 0, 1));
-        this.perfil.add(new PuntoVector3D(230, 270, 0, 1));
-        this.perfil.add(new PuntoVector3D(200, 240, 0, 1));
-        this.perfil.add(new PuntoVector3D(200, 210, 0, 1));
-        this.perfil.add(new PuntoVector3D(200, 180, 0, 1));
-        this.perfil.add(new PuntoVector3D(200, 150, 0, 1));
-        this.perfil.add(new PuntoVector3D(230, 120, 0, 1));
-        */
-        
-        
+
         // Creamos el canvas de dibujo
         canvas = new GLJPanel();
         escena = new GL3D(800, 600);
         canvas.addGLEventListener(escena);
         canvas.addMouseListener(new ManejadorRaton());
+        canvas.addKeyListener(new ManejadorTeclado());
         panel.add(canvas, BorderLayout.CENTER);
         
         // Transformamos el perfil a coordenadas de la escena
@@ -114,10 +97,7 @@ public class Principal extends JFrame implements  KeyListener{
         // Animacion de la escena
         //animacion = new Animator(canvas);
         //animacion.start();
-        
-        // Entrada de datos desactivada
-       // entradaDatos = false;
-        
+                
         // Accion por defecto al cerrar la ventana
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
@@ -180,35 +160,40 @@ public class Principal extends JFrame implements  KeyListener{
     }
     
     // Eventos del Raton
-    public class ManejadorRaton extends MouseAdapter {
-        
-        @Override
-        public void mousePressed(MouseEvent evento) {
-
-               // perfil.add(escena.convertirPuntoToPixel(new PuntoVector3D(evento.getX(), 400 - evento.getY(), 0, 1)));
-                //escena.setPerfil(perfil);
-        }
-        
-        @Override
-        public void mouseReleased(MouseEvent evento) {
-        }
-        
-        @Override
-        public void mouseClicked(MouseEvent evento) {
-        }
+    public class ManejadorRaton extends MouseAdapter { 
+        public void mousePressed(MouseEvent evento) {}
+        public void mouseReleased(MouseEvent evento) {}
+        public void mouseClicked(MouseEvent evento) {}
     }
     
-    // MÃ©tood Main
+    // Eventos con el teclado
+    public class ManejadorTeclado extends KeyAdapter { 
+        public void keyPressed(KeyEvent evento) {
+            if (evento.getKeyCode() == KeyEvent.VK_R) 
+                camara.roll(10.0);
+            
+            if (evento.getKeyCode() == KeyEvent.VK_P) 
+                camara.pitch(10.0);
+            
+            if (evento.getKeyCode() == KeyEvent.VK_Y) 
+                camara.yaw(10.0);
+            
+        }
+        
+        public void keyTyped(KeyEvent evento) {}
+        public void keyReleased(KeyEvent evento) {}
+    }    
+    
+    // Método Main
     public static void main(String[] args) {
-        Principal p4 = new Principal();
-        p4.setVisible(true);
+        Principal p5 = new Principal();
+        p5.setVisible(true);
     }
 
     public void keyTyped(KeyEvent e) {
     }
 
     public void keyPressed(KeyEvent e) {
-        JOptionPane.showMessageDialog(null, "aa");
     }
 
     public void keyReleased(KeyEvent e) {
