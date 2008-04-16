@@ -26,7 +26,7 @@ public class Cilindro extends ObjetoCuadrico{
         this.numLados = nLados;
         this.numAros = nAros;
         
-        glu.gluQuadricDrawStyle(glu.gluNewQuadric(), glu.GLU_FILL);
+        this.glu.gluQuadricDrawStyle(glu.gluNewQuadric(), glu.GLU_FILL);
         
         this.setColor(1.0, 1.0, 1.0);
     }
