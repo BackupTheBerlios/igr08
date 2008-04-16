@@ -19,6 +19,7 @@ public class Malla extends Objeto3D {
 	caras = new ArrayList<Cara>();
 
 	normalesActivadas = false;
+        tipoMalla = 1;
     }
 
     // Método que permite dibujar la malla
@@ -58,15 +59,15 @@ public class Malla extends Objeto3D {
 
 	}
 
-	//    }
-	/////////////////////////////////////////////
+/*	//    }
+	
 	gl.glRotated(0.5, 0.5, 0.5, 0.5);
         try {
             Thread.sleep(10);
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
-    /////////////////////////////////////////////
+    ///////////////////////////////////////////// */
     }
 
     public PuntoVector3D metodoNewell(ArrayList<PuntoVector3D> v) {

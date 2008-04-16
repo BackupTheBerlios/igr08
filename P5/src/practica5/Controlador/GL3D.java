@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import practica5.Modelo.Basic.Camara;
 import practica5.Modelo.Basic.Malla;
+import practica5.Modelo.Objetos.Toro;
 import practica5.Modelo.Basic.PuntoVector3D;
 
 public class GL3D implements GLEventListener {
@@ -37,7 +38,7 @@ public class GL3D implements GLEventListener {
     private static float[] POS_LUZ_0 = {25.0f, 25.0f, 0.0f, 1.0f};
     
     public GL3D(int anchura, int altura) {
-
+        
         this.glu = new GLU();
         
         this.anchura = anchura;
@@ -60,6 +61,9 @@ public class GL3D implements GLEventListener {
         
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_COLOR_BUFFER_BIT);
         
+        gl.glColor3d(100.0, 100.0, 250.0);
+        pruebas(gl);
+        
         if (generado) {
             //this.mallaActual.dibuja(gl);
         }
@@ -77,24 +81,15 @@ public class GL3D implements GLEventListener {
         
         this.camara = new Camara(gl);
         this.activarLuces(gl);
-        
-        gl.glEnable(gl.GL_COLOR_MATERIAL);
-        gl.glMaterialf(gl.GL_FRONT, gl.GL_SHININESS, 0.1f);
-        //gl.glEnable(gl.GL_DEPTH_TEST);
-        gl.glEnable(gl.GL_NORMALIZE);
-        //gl.glFrontFace(gl.GL_CCW);
-        //gl.glFrontFace(gl.GL_CW);
-        //gl.glEnable(gl.GL_FRONT_FACE);
-        //gl.glEnable(gl.GL_CULL_FACE);
-        gl.glShadeModel(gl.GL_SMOOTH);   //defecto
+        this.activarOpcionesOpenGL(gl);
         
         gl.glMatrixMode(gl.GL_MODELVIEW);
         gl.glLoadIdentity();
-        glu.gluLookAt(camara.getEye().getX(), camara.getEye().getY(), camara.getEye().getZ(), 
+        glu.gluLookAt(camara.getEye().getX(), camara.getEye().getY(), camara.getEye().getZ(),
                       camara.getLook().getX(), camara.getLook().getY(), camara.getLook().getZ(),
                       camara.getUp().getX(), camara.getUp().getY(), camara.getUp().getZ());
         
- 
+        
         gl.glClearColor(0, 0, 0, 0);
         
         gl.glMatrixMode(GL.GL_PROJECTION);
@@ -139,23 +134,7 @@ public class GL3D implements GLEventListener {
     public GLContext getContext() {
         return context;
     }
-    
-    public void zoom(GLAutoDrawable drw, double factor) {
-        double newAncho = (xRight - xLeft) * factor;
-        double newAlto = (yTop - yBot) * factor;
-        xRight = xCentro + newAncho / 2.0;
-        xLeft = xCentro - newAncho / 2.0;
-        yTop = yCentro + newAlto / 2.0;
-        yBot = yCentro - newAlto / 2.0;
         
-        GL gl = drw.getGL();
-        
-        gl.glMatrixMode(GL.GL_PROJECTION);
-        gl.glLoadIdentity();
-        glu.gluOrtho2D(xLeft, xRight, yBot, yTop);
-        
-    }
-    
     // M�todo que dibuja los puntos de control del perfil
     public void dibujarPuntos(GL gl) {
         
@@ -169,7 +148,7 @@ public class GL3D implements GLEventListener {
     
     // Activamos las luces del entorno
     public void activarLuces(GL gl) {
-     
+        
         // Activamos Luz en OpenGL
         gl.glEnable(gl.GL_LIGHTING);
         gl.glEnable(gl.GL_LIGHT0);
@@ -177,7 +156,7 @@ public class GL3D implements GLEventListener {
         // Luz 0
         gl.glEnable(gl.GL_LIGHT0);
         float LuzDifusa[] = {1.0f, 1.0f, 1.0f, 1.0f};
-        FloatBuffer LuzDifusa1 = FloatBuffer.wrap(LuzDifusa); 
+        FloatBuffer LuzDifusa1 = FloatBuffer.wrap(LuzDifusa);
         gl.glLightfv(gl.GL_LIGHT0, gl.GL_DIFFUSE, LuzDifusa1);
         
         // Luz Ambiental
@@ -185,7 +164,21 @@ public class GL3D implements GLEventListener {
         FloatBuffer LuzAmbiente1 = FloatBuffer.wrap(LuzAmbiente);
         gl.glLightfv(gl.GL_LIGHT0, gl.GL_AMBIENT, LuzAmbiente1);
         FloatBuffer PosicionLuz01 = FloatBuffer.wrap(POS_LUZ_0);
-        gl.glLightfv(gl.GL_LIGHT0, gl.GL_POSITION, PosicionLuz01);      
+        gl.glLightfv(gl.GL_LIGHT0, gl.GL_POSITION, PosicionLuz01);
+    }
+    
+    // Activamos opciones internas de OpenGL
+    public void activarOpcionesOpenGL(GL gl) {
+       
+        gl.glEnable(gl.GL_COLOR_MATERIAL);
+        gl.glMaterialf(gl.GL_FRONT, gl.GL_SHININESS, 0.1f);
+        //gl.glEnable(gl.GL_DEPTH_TEST);
+        gl.glEnable(gl.GL_NORMALIZE);
+        //gl.glFrontFace(gl.GL_CCW);
+        //gl.glFrontFace(gl.GL_CW);
+        //gl.glEnable(gl.GL_FRONT_FACE);
+        //gl.glEnable(gl.GL_CULL_FACE);
+        gl.glShadeModel(gl.GL_SMOOTH);   //defecto
     }
     
     // Getters & Setters
@@ -203,7 +196,7 @@ public class GL3D implements GLEventListener {
     
     public void setCamara(Camara c) {
         this.camara = c;
-    } 
+    }
     
     
     // Escala un punto desde el puerto de vista hasta el area visible de la escena
@@ -242,4 +235,11 @@ public class GL3D implements GLEventListener {
         
         return retVal;
     }
+    
+    // PRUEBA
+    public void pruebas(GL gl) {
+        Malla mallaToro = new Toro(25,36,180.5f,90.0f);
+        mallaToro.dibuja(gl);
+    }
+    
 }

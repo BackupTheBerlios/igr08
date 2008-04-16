@@ -15,7 +15,7 @@ import practica5.util.Calculos;
 import java.util.ArrayList;
 import practica5.Modelo.Objetos.Toro;
 
-public class Principal extends JFrame implements KeyListener{
+public class Principal extends JFrame {
     
     // Atributos
     private Container panel;
@@ -35,7 +35,7 @@ public class Principal extends JFrame implements KeyListener{
     
     //private int tipoMalla;
     //private boolean entradaDatos;
-    //private final Animator animacion;
+    private final Animator animacion;
     //private ArrayList<PuntoVector3D> perfil;
     //private Malla mallaActual;
     
@@ -89,14 +89,21 @@ public class Principal extends JFrame implements KeyListener{
         canvas.addMouseListener(new ManejadorRaton());
         canvas.addKeyListener(new ManejadorTeclado());
         panel.add(canvas, BorderLayout.CENTER);
+               
         
+        // Ponemos el oyente en los distintos elementos
+        canvas.addKeyListener(new ManejadorTeclado());
+        panel.addKeyListener(new ManejadorTeclado());
+        botonCambiarModo.addKeyListener(new ManejadorTeclado());
+        botonDibujarNormales.addKeyListener(new ManejadorTeclado());
+                       
         // Transformamos el perfil a coordenadas de la escena
         //this.perfil = escena.transformarPerfil(this.perfil);
         //escena.setPerfil(this.perfil);
         
         // Animacion de la escena
-        //animacion = new Animator(canvas);
-        //animacion.start();
+        animacion = new Animator(canvas);
+        animacion.start();
                 
         // Accion por defecto al cerrar la ventana
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -169,6 +176,10 @@ public class Principal extends JFrame implements KeyListener{
     // Eventos con el teclado
     public class ManejadorTeclado extends KeyAdapter { 
         public void keyPressed(KeyEvent evento) {
+            
+            camara = escena.getCamara();
+            
+            // Movimientos de Giro
             if (evento.getKeyCode() == KeyEvent.VK_R) 
                 camara.roll(10.0);
             
@@ -177,6 +188,30 @@ public class Principal extends JFrame implements KeyListener{
             
             if (evento.getKeyCode() == KeyEvent.VK_Y) 
                 camara.yaw(10.0);
+            
+            // Movimientos de Deslizamiento
+            if (evento.getKeyCode() == KeyEvent.VK_UP) 
+                camara.desliza(new PuntoVector3D(0.0, 10.0, 0.0, 1));
+           
+            if (evento.getKeyCode() == KeyEvent.VK_DOWN) 
+                camara.desliza(new PuntoVector3D(0.0, -10.0, 0.0, 1));
+            
+            if (evento.getKeyCode() == KeyEvent.VK_LEFT) 
+                camara.desliza(new PuntoVector3D(-10.0, 0.0, 1.0, 1));
+            
+            if (evento.getKeyCode() == KeyEvent.VK_RIGHT) 
+                camara.desliza(new PuntoVector3D(10.0, 0.0, 1.0, 1));
+            
+            if (evento.getKeyCode() == KeyEvent.VK_A) 
+                camara.desliza(new PuntoVector3D(0.0, 0.0, -10.0, 1));
+            
+            if (evento.getKeyCode() == KeyEvent.VK_Z) 
+                camara.desliza(new PuntoVector3D(0.0, 0.0, 10.0, 1));
+            
+            escena.setCamara(camara);
+            
+            JOptionPane.showMessageDialog(null, "Tecla pulsada", "xdiosss", 0);
+            //panel.repaint();
             
         }
         
@@ -190,12 +225,4 @@ public class Principal extends JFrame implements KeyListener{
         p5.setVisible(true);
     }
 
-    public void keyTyped(KeyEvent e) {
-    }
-
-    public void keyPressed(KeyEvent e) {
-    }
-
-    public void keyReleased(KeyEvent e) {
-    }
 }
