@@ -8,12 +8,13 @@ public class Color {
     private double Blue;
 
     // Constructora
-    public Color(double Red, double Green, double Blue ) {
+    public Color(double Red, double Green, double Blue) {
         this.Red = Red;
         this.Green = Green;
         this.Blue = Blue;
     }
-
+    
+    // Getters & Setters
     public double getRed() {
         return Red;
     }

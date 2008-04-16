@@ -36,6 +36,10 @@ public class Objeto3D {
     public void setColor(Color color) {
         this.color = color;
     }
+    
+    public void setColor(double Red, double Green, double Blue) {
+        this.color = new Color(Red, Green, Blue);    
+    }
 
     public TAfin getMatriz() {
         return matriz;
