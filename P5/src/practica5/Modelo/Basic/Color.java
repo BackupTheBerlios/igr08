@@ -2,10 +2,12 @@ package practica5.Modelo.Basic;
 
 public class Color {
     
+    // Atributos privados
     private double Red;
     private double Green;
     private double Blue;
-    
+
+    // Constructora
     public Color(double Red, double Green, double Blue ) {
         this.Red = Red;
         this.Green = Green;

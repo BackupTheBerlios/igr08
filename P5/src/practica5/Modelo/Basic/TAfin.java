@@ -32,5 +32,14 @@ public class TAfin {
         gl.glScaled(X, Y, Z);
         gl.glGetDoublev(gl.GL_MODELVIEW_MATRIX, matriz, 0);
     }
+    
+    // Getters & Setters
+    public double[] getMatriz() {
+        return matriz;
+    }
+    
+    public void setMatriz(double[] m) {
+        this.matriz = m;
+    }
 }
 

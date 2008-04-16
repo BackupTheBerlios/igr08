@@ -1,10 +1,10 @@
 /* Clase Objeto3D
  * De cada objeto almacenaremos los siguientes campos:
  *    - Id: Identifica al objeto en cuestión que queremos modificar
- *    - Pos: Posición del objeto en la escena (Sistema de Coordenadas Global)
  *    - Color: Color del objeto en cuestión.
  *    - matriz: Matriz de traformación afín aplicado al objeto.
  */
+
 package practica5.Modelo.Basic;
 
 public class Objeto3D {

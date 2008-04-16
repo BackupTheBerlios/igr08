@@ -35,6 +35,10 @@ public class ObjetoCompuesto3D extends Objeto3D{
         hijos.add(objeto3d);
     }
     
+    public void setColor(Color c) {
+        this.setColor(c);
+    }
+    
     // Método dibujar
     public void dibuja(GL gl) {
         
