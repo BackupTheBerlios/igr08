@@ -18,10 +18,15 @@ public class Camara {
 	this.gl = gl;
 	this.glu = new GLU();
 
-	eye = new PuntoVector3D(0, 0, 0);
+	eye = new PuntoVector3D(400.0, 400.0, 400.0, 0);
+	look = new PuntoVector3D(0.0, 0.0, 0.0, 0);
+	up = new PuntoVector3D(0.0, 1.0, 0.0, 0);
+
+
+	/*eye = new PuntoVector3D(0, 0, 0);
 	look = new PuntoVector3D(0, 0, -1);
 	up = new PuntoVector3D(0, 1, 0);
-
+*/
 	setView(eye, look, up);
 	setModelViewMatrix();
 	setProjection();
@@ -61,7 +66,7 @@ public class Camara {
 	z = -eye.prodEsc(n);
 	PuntoVector3D d = new PuntoVector3D(x, y, z);
 	// 1 Fila
-	m[0] = u.x;
+	/*m[0] = u.x;
 	m[1] = u.y;
 	m[2] = u.z;
 	m[3] = d.x;
@@ -79,10 +84,27 @@ public class Camara {
 	m[12] = 0;
 	m[13] = 0;
 	m[14] = 0;
+	m[15] = 1;*/
+
+	m[0] = u.x;
+	m[1] = v.x;
+	m[2] = n.x;
+	m[3] = 0;
+	m[4] = u.y;
+	m[5] = v.y;
+	m[6] = n.y;
+	m[7] = 0;
+	m[8] = u.y;
+	m[9] = v.y;
+	m[10] = n.y;
+	m[11] = 0;
+	m[12] = -eye.prodEsc(u);
+	m[13] = -eye.prodEsc(v);
+	m[14] = -eye.prodEsc(n);
 	m[15] = 1;
 
-	gl.glMatrixMode(gl.GL_MODELVIEW);
-	gl.glLoadMatrixd(m, 0);
+	this.gl.glMatrixMode(gl.GL_MODELVIEW);
+	this.gl.glLoadMatrixd(m, 0);
 
     }
 

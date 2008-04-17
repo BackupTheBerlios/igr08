@@ -15,10 +15,10 @@ import practica5.Modelo.Basic.PuntoVector3D;
 
 public class GL3D implements GLEventListener {
 
-    // Variables Constantes
+    // Constantes
     public static int ORTOGONAL = 0;
     public static int PROYECCION = 1;
-    // Atributos privado
+    // Atributos privados
     private GLU glu;
     private GLContext context;
     private double xLeft,  xRight;
@@ -28,11 +28,9 @@ public class GL3D implements GLEventListener {
     private int altura;
     private Camara camara;
     private double RatioViewPort;
-    private boolean generado;
-    private int tipo;
-    private Malla mallaActual;
-    double eyeX, eyeY, eyeZ, lookX, lookY, lookZ, upX, upY, upZ; // cï¿½mara
-    float[] PosicionLuz0 = new float[4];
+    private Malla mallaToro = new Toro(25, 36, 180.5f, 90.0f);
+    private double eyeX, eyeY, eyeZ, lookX, lookY, lookZ, upX, upY, upZ; // camara
+    private float[] PosicionLuz0 = new float[4];
 
     public GL3D(int anchura, int altura) {
 
@@ -49,23 +47,19 @@ public class GL3D implements GLEventListener {
 	this.yCentro = (yTop + yBot) / 2.0;
 
 	this.RatioViewPort = 1.0;
-	this.generado = false;
-
     }
 
     public void display(GLAutoDrawable drw) {
 	GL gl = drw.getGL();
 	try{
-	Thread.sleep(100);
+	//Thread.sleep(100);
 	} catch (Exception e){}
 	gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_COLOR_BUFFER_BIT);
 
 	gl.glColor3d(100.0, 100.0, 250.0);
-	pruebas(gl);
-
-	if (generado) {
-	//this.mallaActual.dibuja(gl);
-	}
+	//pruebas(gl);
+	//camara.yaw(10);
+	mallaToro.dibuja(gl);
 
 	gl.glFlush();
     }
@@ -105,22 +99,22 @@ public class GL3D implements GLEventListener {
 	//gl.glEnable(gl.GL_CULL_FACE);
 	gl.glShadeModel(gl.GL_SMOOTH);   //defecto
 
-	// cÃ¡mara
-	eyeX = 2.0;
+	// camara
+	eyeX = -202.0;
 	eyeY = 2.0;
 	eyeZ = 2.0;
 	lookX = 0.0;
 	lookY = 0.0;
-	lookZ = 0.0;
+	lookZ = 10.0;
 	upX = 0;
 	upY = 1;
 	upZ = 0;
-	gl.glMatrixMode(gl.GL_MODELVIEW);
-	gl.glLoadIdentity();
-	glu.gluLookAt(camara.getEye().getX(), camara.getEye().getY(), camara.getEye().getZ(),
+	//gl.glMatrixMode(gl.GL_MODELVIEW);
+	//gl.glLoadIdentity();
+	/*glu.gluLookAt(camara.getEye().getX(), camara.getEye().getY(), camara.getEye().getZ(),
 		camara.getLook().getX(), camara.getLook().getY(), camara.getLook().getZ(),
 		camara.getUp().getX(), camara.getUp().getY(), camara.getUp().getZ());
-
+*/
 
 	gl.glClearColor(0, 0, 0, 0);
 
@@ -134,7 +128,6 @@ public class GL3D implements GLEventListener {
 
 	gl.glMatrixMode(GL.GL_MODELVIEW);
 	gl.glLoadIdentity();
-
     }
 
     public void reshape(GLAutoDrawable drw, int x, int y, int width, int height) {
@@ -165,17 +158,6 @@ public class GL3D implements GLEventListener {
 
     public GLContext getContext() {
 	return context;
-    }
-
-    // Mï¿½todo que dibuja los puntos de control del perfil
-    public void dibujarPuntos(GL gl) {
-
-	gl.glColor3f(1.0f, 1.0f, 1.0f);
-	gl.glPointSize(2.0f);
-
-	gl.glBegin(GL.GL_POINTS);
-
-	gl.glEnd();
     }
 
     // Activamos las luces del entorno
@@ -213,21 +195,6 @@ public class GL3D implements GLEventListener {
 	gl.glShadeModel(gl.GL_SMOOTH);   //defecto
     }
 
-    // Getters & Setters
-    public boolean getGenerado() {
-	return generado;
-    }
-
-    public void setGenerado(boolean bool) {
-	generado = bool;
-    }
-
-    // MÃ©todos que actualiza datos de la escena
-    public void actualizarPerfil(int tipoMalla, ArrayList<PuntoVector3D> puntosPerfil) {
-	this.tipo = tipoMalla;
-	//this.perfil = (ArrayList<PuntoVector3D>) puntosPerfil.clone();
-    }
-
     public void setCamara(Camara c) {
 	this.camara = c;
     }
@@ -236,44 +203,7 @@ public class GL3D implements GLEventListener {
 	return this.camara;
     }
 
-    // Escala un punto desde el puerto de vista hasta el area visible de la escena
-    public PuntoVector3D convertirPuntoToPixel(PuntoVector3D punto) {
-
-	PuntoVector3D pixel = new PuntoVector3D();
-
-	double escalaAncho = (double) (anchura / (xRight - xLeft));
-	if (xLeft < 0) {
-	    pixel.setX((double) (punto.getX() / escalaAncho + xLeft));
-	} else {
-	    pixel.setX((double) (punto.getX() / escalaAncho - xLeft));
-	}
-
-	double escalaAlto = (double) (altura / (yTop - yBot));
-	if (yTop < 0) {
-	    pixel.setY((double) (punto.getY() / escalaAlto + yTop));
-	} else {
-	    pixel.setY((float) (punto.getY() / escalaAlto - yTop));
-	}
-
-	pixel.setZ(punto.getZ());
-	pixel.setPV(punto.getPV());
-
-	return pixel;
-    }
-
-    // MÃ©todo que convierte las coordenadas del perfil a coordenadas del Area Visible de la Escena
-    public ArrayList<PuntoVector3D> transformarPerfil(ArrayList<PuntoVector3D> perfilDado) {
-
-	ArrayList<PuntoVector3D> retVal = new ArrayList<PuntoVector3D>();
-
-	for (int i = 0; i < perfilDado.size(); i++) {
-	    retVal.add(convertirPuntoToPixel(perfilDado.get(i)));
-	}
-
-	return retVal;
-    }
-
-    // PRUEBA
+     // PRUEBA
     public void pruebas(GL gl) {
 	Malla mallaToro = new Toro(25, 36, 180.5f, 90.0f);
 	mallaToro.dibuja(gl);
