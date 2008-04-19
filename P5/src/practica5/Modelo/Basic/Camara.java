@@ -59,7 +59,7 @@ public class Camara {
 	glu.gluPerspective(anguloVision, proporcion, N, F);
     }
 
-    private void setModelViewMatrix() {
+    public void setModelViewMatrix() {
 	double x, y, z;
 	x = -eye.prodEsc(u);
 	y = -eye.prodEsc(v);

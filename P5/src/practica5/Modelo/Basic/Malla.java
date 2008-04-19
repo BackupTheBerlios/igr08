@@ -5,12 +5,16 @@ import javax.media.opengl.GL;
 
 public class Malla extends Objeto3D {
 
+    public final int GL_POINTS = 0;
+    public final int GL_LINES = 1;
+    public final int GL_POLYGON = 2;
     // Atributos protegidos
     protected ArrayList<PuntoVector3D> vertices;
     protected ArrayList<PuntoVector3D> normales;
     protected ArrayList<Cara> caras;
     private int tipoMalla;
     private boolean normalesActivadas;
+    private int color;
 
     // Constructora por defecto
     public Malla() {
@@ -19,23 +23,33 @@ public class Malla extends Objeto3D {
 	caras = new ArrayList<Cara>();
 
 	normalesActivadas = false;
-        tipoMalla = 1;
+	tipoMalla = GL_LINES;
     }
 
+    public void setColor(int color) {
+	this.color = color;
+
+    }
     // Método que permite dibujar la malla
     public void dibuja(GL gl) {
+	if (color == 0) {
+	    gl.glColor3f(1, 0.5f, 0.5f);
+	} else if (color == 1) {
+	    gl.glColor3f(0.5f, 1, 0.5f);
+	} else {
+	    gl.glColor3f(0.5f, 1, 1);
+	}
 
 	for (int i = 0; i < caras.size(); i++) {
 
 	    switch (tipoMalla) {
-
-		case 0:
+		case GL_POINTS:
 		    gl.glBegin(gl.GL_POINTS);
 		    break;
-		case 1:
+		case GL_LINES:
 		    gl.glBegin(gl.GL_LINE_LOOP);
 		    break;
-		case 2:
+		case GL_POLYGON:
 		    gl.glBegin(gl.GL_POLYGON);
 		    break;
 	    }
@@ -47,8 +61,8 @@ public class Malla extends Objeto3D {
 
 		if (normalesActivadas) {
 		    gl.glNormal3f((float) normales.get(iN).getX(),
-			         (float) normales.get(iN).getY(),
-			         (float) normales.get(iN).getZ());
+			    (float) normales.get(iN).getY(),
+			    (float) normales.get(iN).getZ());
 		}
 
 		gl.glVertex3f((float) vertices.get(iV).getX(),
@@ -59,14 +73,13 @@ public class Malla extends Objeto3D {
 
 	}
 
-/*	//    }
-	
-	gl.glRotated(0.5, 0.5, 0.5, 0.5);
-        try {
-            Thread.sleep(10);
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-        }
+    /*	//    }
+    gl.glRotated(0.5, 0.5, 0.5, 0.5);
+    try {
+    Thread.sleep(10);
+    } catch (InterruptedException ex) {
+    ex.printStackTrace();
+    }
     ///////////////////////////////////////////// */
     }
 
@@ -93,7 +106,7 @@ public class Malla extends Objeto3D {
 	return normalPlano;
     }
 
-    // A�ade un nuevo vertice
+    // Añade un nuevo vertice
     public void addVertice(PuntoVector3D punto) {
 	vertices.add(punto);
     }

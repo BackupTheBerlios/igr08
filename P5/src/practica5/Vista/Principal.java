@@ -12,6 +12,8 @@ import practica5.Modelo.Basic.PuntoVector3D;
 
 public class Principal extends JFrame {
 
+    private static final String ETIQUETA_ACTIVA_NOMALES= "Activa Normales";
+    private static final String ETIQUETA_DESACTIVA_NOMALES= "Desactiva Normales";
     // Atributos
     private Container panel;
     private GLJPanel canvas;
@@ -27,7 +29,7 @@ public class Principal extends JFrame {
     private JPanel panelBotones;
     //private int tipoMalla;
     //private boolean entradaDatos;
-    private final Animator animacion;
+    //  private final Animator animacion;
     //private ArrayList<PuntoVector3D> perfil;
     //private Malla mallaActual;
     private Camara camara;
@@ -69,7 +71,7 @@ public class Principal extends JFrame {
 	botonCambiarModo.setVisible(true);
 	panelBotones.add(botonCambiarModo);
 
-	botonDibujarNormales = new JButton("Activa Normales");
+	botonDibujarNormales = new JButton(ETIQUETA_ACTIVA_NOMALES);
 	botonDibujarNormales.setVisible(true);
 	panelBotones.add(botonDibujarNormales);
 
@@ -81,21 +83,15 @@ public class Principal extends JFrame {
 	canvas.addKeyListener(new ManejadorTeclado());
 	panel.add(canvas, BorderLayout.CENTER);
 
-
 	// Ponemos el oyente en los distintos elementos
 	canvas.addKeyListener(new ManejadorTeclado());
 	panel.addKeyListener(new ManejadorTeclado());
 	botonCambiarModo.addKeyListener(new ManejadorTeclado());
 	botonDibujarNormales.addKeyListener(new ManejadorTeclado());
 
-	// Transformamos el perfil a coordenadas de la escena
-	//this.perfil = escena.transformarPerfil(this.perfil);
-	//escena.setPerfil(this.perfil);
-
 	// Animacion de la escena
-	animacion = new Animator(canvas);
-	animacion.start();
-
+	//animacion = new Animator(canvas);
+	//animacion.start();
 
 	// Accion por defecto al cerrar la ventana
 	this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -104,7 +100,6 @@ public class Principal extends JFrame {
 	nuevo.addActionListener(new ActionListener() {
 
 	    public void actionPerformed(ActionEvent e) {
-
 	    }
 	});
 
@@ -112,7 +107,7 @@ public class Principal extends JFrame {
 	autores.addActionListener(new ActionListener() {
 
 	    public void actionPerformed(ActionEvent e) {
-		JOptionPane.showMessageDialog(null, "Ivan Romero\nPedro Sanchez", "Autores",
+		JOptionPane.showMessageDialog(panel, "Ivan Romero\nPedro Sanchez", "Autores",
 			JOptionPane.INFORMATION_MESSAGE);
 	    }
 	});
@@ -121,10 +116,24 @@ public class Principal extends JFrame {
 	botonCambiarModo.addActionListener(new ActionListener() {
 
 	    public void actionPerformed(ActionEvent e) {
-
 		Object[] opciones = {"Puntos", "Lineas", "Solidos"};
-		int eleccion = JOptionPane.showOptionDialog(null, "Cambiar Modo de Representacion a: ", "Datos de Entrada",
+		int eleccion = JOptionPane.showOptionDialog(panel, "Cambiar Modo de Representacion a: ", "Datos de Entrada",
 			JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, opciones, opciones[0]);
+		switch (eleccion) {
+		    case 0:
+			escena.getMalla().setTipoMalla(escena.getMalla().GL_POINTS);
+			break;
+		    case 1:
+			escena.getMalla().setTipoMalla(escena.getMalla().GL_LINES);
+			break;
+		    case 2:
+			escena.getMalla().setTipoMalla(escena.getMalla().GL_POLYGON);
+			break;
+		    default:
+			escena.getMalla().setTipoMalla(escena.getMalla().GL_LINES);
+			break;
+		}
+		canvas.repaint();
 	    }
 	});
 
@@ -133,15 +142,15 @@ public class Principal extends JFrame {
 
 	    public void actionPerformed(ActionEvent e) {
 
-		if (botonDibujarNormales.getText().equals("Activa Normales")) {
-		    botonDibujarNormales.setText("DesactivaNormales");
+		if (botonDibujarNormales.getText().equals(ETIQUETA_ACTIVA_NOMALES)) {
+		    botonDibujarNormales.setText(ETIQUETA_DESACTIVA_NOMALES);
 		} else {
-		    botonDibujarNormales.setText("Activa Normales");
+		    botonDibujarNormales.setText(ETIQUETA_ACTIVA_NOMALES);
 		}
 	    }
 	});
 
-	// A�adimos un evento para la accion de salida
+	// Añadimos un evento para la accion de salida
 	addWindowListener(new WindowAdapter() {
 
 	    @Override
@@ -176,55 +185,47 @@ public class Principal extends JFrame {
 	public void keyPressed(KeyEvent evento) {
 
 	    camara = escena.getCamara();
-
-	    if (evento.getKeyCode() == KeyEvent.VK_SPACE) {
-	    System.out.println("Pruebas");
-		escena.getCamara().yaw(10);
+	    switch (evento.getKeyCode()) {
+		// Giros	   
+		case KeyEvent.VK_R:
+		    camara.roll(10);
+		    escena.getMalla().setColor(0);
+		    break;
+		case KeyEvent.VK_P:
+		    camara.pitch(10);
+		    escena.getMalla().setColor(1);
+		    break;
+		case KeyEvent.VK_Y:
+		    camara.yaw(10);
+		    escena.getMalla().setColor(2);
+		    break;
+		// Traslaciones
+		case KeyEvent.VK_UP:
+		    camara.desliza(new PuntoVector3D(0, 10, 0, 1));
+		    break;
+		case KeyEvent.VK_DOWN:
+		    camara.desliza(new PuntoVector3D(0, -10, 0, 1));
+		    break;
+		case KeyEvent.VK_LEFT:
+		    camara.desliza(new PuntoVector3D(-10, 0, 1, 1));
+		    break;
+		case KeyEvent.VK_RIGHT:
+		    camara.desliza(new PuntoVector3D(10, 0, 1, 1));
+		    break;
+		case KeyEvent.VK_A:
+		    camara.desliza(new PuntoVector3D(0, 0, -10, 1));
+		    break;
+		case KeyEvent.VK_Z:
+		    camara.desliza(new PuntoVector3D(50, 50, 100, 1));
+		    break;
+		default:
+		    System.out.print("Ignorada ");
+		    break;
 	    }
-	    
-	    // Movimientos de Giro
-	    if (evento.getKeyCode() == KeyEvent.VK_R) {
-		camara.roll(10);
-	    }
-	    
-	    if (evento.getKeyCode() == KeyEvent.VK_P) {
-		camara.pitch(10);
-	    }
-
-	    if (evento.getKeyCode() == KeyEvent.VK_Y) {
-		camara.yaw(10);
-	    }
-
-	    // Movimientos de Deslizamiento
-	    if (evento.getKeyCode() == KeyEvent.VK_UP) {
-		camara.desliza(new PuntoVector3D(0, 10, 0, 1));
-	    }
-
-	    if (evento.getKeyCode() == KeyEvent.VK_DOWN) {
-		camara.desliza(new PuntoVector3D(0, -10, 0, 1));
-	    }
-
-	    if (evento.getKeyCode() == KeyEvent.VK_LEFT) {
-		camara.desliza(new PuntoVector3D(-10, 0, 1, 1));
-	    }
-
-	    if (evento.getKeyCode() == KeyEvent.VK_RIGHT) {
-		camara.desliza(new PuntoVector3D(10, 0, 1, 1));
-	    }
-
-	    if (evento.getKeyCode() == KeyEvent.VK_A) {
-		camara.desliza(new PuntoVector3D(0, 0, -10, 1));
-	    }
-
-	    if (evento.getKeyCode() == KeyEvent.VK_Z) {
-		camara.desliza(new PuntoVector3D(50, 50, 100, 1));
-	    }
-
+	    canvas.repaint();
+	    camara.setModelViewMatrix();
 	    escena.setCamara(camara);
-
 	    System.out.println("tecla: " + evento.getKeyChar());
-	//panel.repaint();
-
 	}
 
 	public void keyTyped(KeyEvent evento) {
