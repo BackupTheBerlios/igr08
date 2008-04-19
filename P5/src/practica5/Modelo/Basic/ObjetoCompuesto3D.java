@@ -31,7 +31,7 @@ public class ObjetoCompuesto3D extends Objeto3D{
         return hijos;
     }
     
-    public void setHijos(Objeto3D objeto3d) {
+    public void addHijos(Objeto3D objeto3d) {
         hijos.add(objeto3d);
     }
     
@@ -39,9 +39,9 @@ public class ObjetoCompuesto3D extends Objeto3D{
         this.setColor(c);
     }
     
-    // Método dibujar
+    // Metodo dibujar
     public void dibuja(GL gl) {
-        
+        super.dibuja(gl);
         // Activamos la matriz de Modelado/Vista
         gl.glMatrixMode(gl.GL_MODELVIEW);
     
@@ -53,7 +53,7 @@ public class ObjetoCompuesto3D extends Objeto3D{
         
         // Dibujamos cada uno de los objetos
         for (int elem=0; elem<hijos.size(); elem++) 
-            hijos.get(elem).dibuja();
+            hijos.get(elem).dibuja(gl);
          
         // Volvemos al estado anterior
         gl.glPopMatrix();

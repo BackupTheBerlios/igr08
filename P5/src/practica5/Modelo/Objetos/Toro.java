@@ -20,7 +20,7 @@ public class Toro extends Malla {
      * @param nP: Numero de lados que aproximan la secciï¿½n del toroide
      * @param nQ: Numero de capas del toroide
      * @param r1: Radio del toro. Radio "grande"
-     * @param r2: Radio de la secciï¿½n del toro. Radio "pequeño"
+     * @param r2: Radio de la secciï¿½n del toro. Radio "pequeÃ±o"
      */
     public Toro(int nP, int nQ, float r1, float r2) {
         super();

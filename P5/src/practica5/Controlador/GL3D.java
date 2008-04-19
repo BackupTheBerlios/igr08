@@ -9,13 +9,14 @@ import javax.media.opengl.GLEventListener;
 
 import practica5.Modelo.Basic.Camara;
 import practica5.Modelo.Basic.Malla;
+import practica5.Modelo.Basic.Objeto3D;
 import practica5.Modelo.Objetos.Toro;
 
 public class GL3D implements GLEventListener {
 
     // Constantes
-    public static int ORTOGONAL = 0;
-    public static int PROYECCION = 1;
+    public static final int PROY_ORTOGONAL = 0;
+    public static final int PROY_PERSPECTIVA = 1;
     // Atributos privados
     private GLU glu;
     private GLContext context;
@@ -26,9 +27,10 @@ public class GL3D implements GLEventListener {
     private int altura;
     private Camara camara;
     private double RatioViewPort;
-    private Malla mallaToro = new Toro(25, 36, 180.5f, 90.0f);
   //  private double eyeX, eyeY, eyeZ, lookX, lookY, lookZ, upX, upY, upZ; // camara
     private float[] PosicionLuz0 = new float[4];
+
+    private Objeto3D mallaToro = new Toro(25, 36, 180.5f, 90.0f);
 
     public GL3D(int anchura, int altura) {
 	this.glu = new GLU();
@@ -40,6 +42,7 @@ public class GL3D implements GLEventListener {
     }
 
     public void display(GLAutoDrawable drw) {
+	
 	GL gl = drw.getGL();
 	try{
 	//Thread.sleep(100);
@@ -164,7 +167,7 @@ public class GL3D implements GLEventListener {
 	gl.glShadeModel(gl.GL_SMOOTH);   //defecto
     }
     
-    public Malla getMalla(){
+    public Objeto3D getObjeto3D(){
 	return mallaToro;
     }
     public void setCamara(Camara c) {

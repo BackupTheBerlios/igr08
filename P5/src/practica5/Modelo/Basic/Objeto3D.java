@@ -1,52 +1,62 @@
-/* Clase Objeto3D
+/** Clase Objeto3D
  * De cada objeto almacenaremos los siguientes campos:
- *    - Id: Identifica al objeto en cuestión que queremos modificar
- *    - Color: Color del objeto en cuestión.
- *    - matriz: Matriz de traformación afín aplicado al objeto.
+ *    - Id: Identifica al objeto en cuestion que queremos modificar
+ *    - Color: Color del objeto en cuestion.
+ *    - matriz: Matriz de traformacion afin aplicado al objeto.
  */
-
 package practica5.Modelo.Basic;
 
+import javax.media.opengl.GL;
+
 public class Objeto3D {
-    
+
     // Atributos privados
     private int id;
     private Color color;
     private TAfin matriz;
-    
+    protected int tipoMalla;
+
     // Constructora
-    public Objeto3D() {}
-    
-    // Método virtual
-    public void dibuja() {};
-    
+    public Objeto3D() {
+	color = new Color(1, 1, 1);
+	tipoMalla = Malla.GL_LINES;
+    }
+
+    // Metodo virtual
+    public void dibuja(GL gl) {
+	gl.glColor3d(color.getRed(), color.getGreen(), color.getBlue());
+    }
+
     // Getters & Setters
     public int getId() {
-        return id;
+	return id;
     }
 
     public void setId(int id) {
-        this.id = id;
+	this.id = id;
     }
 
     public Color getColor() {
-        return color;
+	return color;
     }
 
     public void setColor(Color color) {
-        this.color = color;
+	this.color = color;
     }
-    
-    public void setColor(double Red, double Green, double Blue) {
-        this.color = new Color(Red, Green, Blue);    
+
+    public void setColor3d(double Red, double Green, double Blue) {
+	this.color = new Color(Red, Green, Blue);
+    }
+
+    public void setTipoMalla(int tipo) {
+	this.tipoMalla = tipo;
     }
 
     public TAfin getMatriz() {
-        return matriz;
+	return matriz;
     }
 
     public void setMatriz(TAfin matriz) {
-        this.matriz = matriz;
+	this.matriz = matriz;
     }
-
 }

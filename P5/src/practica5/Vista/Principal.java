@@ -9,11 +9,21 @@ import com.sun.opengl.util.*;
 import practica5.Controlador.GL3D;
 import practica5.Modelo.Basic.Camara;
 import practica5.Modelo.Basic.PuntoVector3D;
+import practica5.Modelo.Basic.Color;
+import practica5.Modelo.Basic.Malla;
 
 public class Principal extends JFrame {
 
-    private static final String ETIQUETA_ACTIVA_NOMALES= "Activa Normales";
-    private static final String ETIQUETA_DESACTIVA_NOMALES= "Desactiva Normales";
+    private static final String ETIQUETA_ACTIVA_NOMALES = "Activa Normales";
+    private static final String ETIQUETA_DESACTIVA_NOMALES = "Desactiva Normales";
+    private static final Color color1 = new Color(1, 0, 0);
+    private static final Color color2 = new Color(0, 1, 0);
+    private static final Color color3 = new Color(0, 0, 1);
+    private static final Color color4 = new Color(0, 0, 1);
+    private static final Color color5 = new Color(1, 1, 0);
+    private static final Color color6 = new Color(0, 1, 1);
+    private static final Color color7 = new Color(1, 0, 1);
+    private static final Color color8 = new Color(1, 1, 1);
     // Atributos
     private Container panel;
     private GLJPanel canvas;
@@ -44,7 +54,7 @@ public class Principal extends JFrame {
 
 	// Contenedor del editor
 	panel = this.getContentPane();
-	panel.setBackground(Color.blue);
+	panel.setBackground(java.awt.Color.blue);
 	panel.setLayout(new BorderLayout());
 
 	// Generamos el menu
@@ -121,16 +131,16 @@ public class Principal extends JFrame {
 			JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, opciones, opciones[0]);
 		switch (eleccion) {
 		    case 0:
-			escena.getMalla().setTipoMalla(escena.getMalla().GL_POINTS);
+			escena.getObjeto3D().setTipoMalla(Malla.GL_POINTS);
 			break;
 		    case 1:
-			escena.getMalla().setTipoMalla(escena.getMalla().GL_LINES);
+			escena.getObjeto3D().setTipoMalla(Malla.GL_LINES);
 			break;
 		    case 2:
-			escena.getMalla().setTipoMalla(escena.getMalla().GL_POLYGON);
+			escena.getObjeto3D().setTipoMalla(Malla.GL_POLYGON);
 			break;
 		    default:
-			escena.getMalla().setTipoMalla(escena.getMalla().GL_LINES);
+			escena.getObjeto3D().setTipoMalla(Malla.GL_LINES);
 			break;
 		}
 		canvas.repaint();
@@ -189,15 +199,15 @@ public class Principal extends JFrame {
 		// Giros	   
 		case KeyEvent.VK_R:
 		    camara.roll(10);
-		    escena.getMalla().setColor(0);
+		    escena.getObjeto3D().setColor(color1);
 		    break;
 		case KeyEvent.VK_P:
 		    camara.pitch(10);
-		    escena.getMalla().setColor(1);
+		    escena.getObjeto3D().setColor(color2);
 		    break;
 		case KeyEvent.VK_Y:
 		    camara.yaw(10);
-		    escena.getMalla().setColor(2);
+		    escena.getObjeto3D().setColor(color3);
 		    break;
 		// Traslaciones
 		case KeyEvent.VK_UP:

@@ -5,43 +5,27 @@ import javax.media.opengl.GL;
 
 public class Malla extends Objeto3D {
 
-    public final int GL_POINTS = 0;
-    public final int GL_LINES = 1;
-    public final int GL_POLYGON = 2;
+    public static final int GL_POINTS = 0;
+    public static final int GL_LINES = 1;
+    public static final int GL_POLYGON = 2;
     // Atributos protegidos
     protected ArrayList<PuntoVector3D> vertices;
     protected ArrayList<PuntoVector3D> normales;
     protected ArrayList<Cara> caras;
-    private int tipoMalla;
     private boolean normalesActivadas;
-    private int color;
 
     // Constructora por defecto
     public Malla() {
 	vertices = new ArrayList<PuntoVector3D>();
 	normales = new ArrayList<PuntoVector3D>();
 	caras = new ArrayList<Cara>();
-
 	normalesActivadas = false;
-	tipoMalla = GL_LINES;
     }
 
-    public void setColor(int color) {
-	this.color = color;
-
-    }
     // Método que permite dibujar la malla
     public void dibuja(GL gl) {
-	if (color == 0) {
-	    gl.glColor3f(1, 0.5f, 0.5f);
-	} else if (color == 1) {
-	    gl.glColor3f(0.5f, 1, 0.5f);
-	} else {
-	    gl.glColor3f(0.5f, 1, 1);
-	}
-
+	super.dibuja(gl);
 	for (int i = 0; i < caras.size(); i++) {
-
 	    switch (tipoMalla) {
 		case GL_POINTS:
 		    gl.glBegin(gl.GL_POINTS);
@@ -60,27 +44,17 @@ public class Malla extends Objeto3D {
 		int iV = caras.get(i).getIndiceVertice(j);
 
 		if (normalesActivadas) {
-		    gl.glNormal3f((float) normales.get(iN).getX(),
-			    (float) normales.get(iN).getY(),
-			    (float) normales.get(iN).getZ());
+		    gl.glNormal3d(normales.get(iN).getX(),
+			    normales.get(iN).getY(),
+			    normales.get(iN).getZ());
 		}
 
-		gl.glVertex3f((float) vertices.get(iV).getX(),
-			(float) vertices.get(iV).getY(),
-			(float) vertices.get(iV).getZ());
+		gl.glVertex3d(vertices.get(iV).getX(),
+			vertices.get(iV).getY(),
+			vertices.get(iV).getZ());
 	    }
 	    gl.glEnd();
-
 	}
-
-    /*	//    }
-    gl.glRotated(0.5, 0.5, 0.5, 0.5);
-    try {
-    Thread.sleep(10);
-    } catch (InterruptedException ex) {
-    ex.printStackTrace();
-    }
-    ///////////////////////////////////////////// */
     }
 
     public PuntoVector3D metodoNewell(ArrayList<PuntoVector3D> v) {
@@ -113,9 +87,5 @@ public class Malla extends Objeto3D {
 
     public void setNormales(boolean valor) {
 	normalesActivadas = valor;
-    }
-
-    public void setTipoMalla(int tipo) {
-	tipoMalla = tipo;
     }
 }
