@@ -8,7 +8,6 @@ import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 
 import practica5.Modelo.Basic.Camara;
-import practica5.Modelo.Basic.Malla;
 import practica5.Modelo.Basic.Objeto3D;
 import practica5.Modelo.Objetos.Toro;
 
@@ -18,8 +17,10 @@ public class GL3D implements GLEventListener {
     public static final int PROY_ORTOGONAL = 0;
     public static final int PROY_PERSPECTIVA = 1;
     // Atributos privados
+    private GL gl;
     private GLU glu;
     private GLContext context;
+    
     private double xLeft,  xRight;
     private double yTop,  yBot;
     private double xCentro,  yCentro;
@@ -27,13 +28,13 @@ public class GL3D implements GLEventListener {
     private int altura;
     private Camara camara;
     private double RatioViewPort;
-  //  private double eyeX, eyeY, eyeZ, lookX, lookY, lookZ, upX, upY, upZ; // camara
     private float[] PosicionLuz0 = new float[4];
 
     private Objeto3D mallaToro = new Toro(25, 36, 180.5f, 90.0f);
 
     public GL3D(int anchura, int altura) {
 	this.glu = new GLU();
+	
 	this.anchura = anchura; this.altura = altura;
 	this.xRight = anchura / 2.0;	this.xLeft = -xRight;
 	this.yTop = altura / 2.0;	this.yBot = -xRight;
@@ -43,7 +44,7 @@ public class GL3D implements GLEventListener {
 
     public void display(GLAutoDrawable drw) {
 	
-	GL gl = drw.getGL();
+	//GL gl = drw.getGL();
 	try{
 	//Thread.sleep(100);
 	} catch (Exception e){}
@@ -51,7 +52,7 @@ public class GL3D implements GLEventListener {
 
 	gl.glColor3d(100.0, 100.0, 250.0);
 	//pruebas(gl);
-//	camara.yaw(10);
+	camara.setModelViewMatrix();
 	mallaToro.dibuja(gl);
 	gl.glFlush();
     }
@@ -59,11 +60,10 @@ public class GL3D implements GLEventListener {
     public void displayChanged(GLAutoDrawable drw, boolean arg1, boolean arg2) {}
 
     public void init(GLAutoDrawable drw) {
-	GL gl = drw.getGL();
-	GLU glu = new GLU();
-
-//	gl.glClearColor(0.6f, 0.7f, 0.8f, 1.0f);
-
+	gl = drw.getGL();
+	glu = new GLU();
+	gl = glu.getCurrentGL();
+	
 	this.camara = new Camara(gl);
 	this.activarLuces(gl);
 	this.activarOpcionesOpenGL(gl);
@@ -89,7 +89,7 @@ public class GL3D implements GLEventListener {
 	//gl.glEnable(gl.GL_CULL_FACE);
 	gl.glShadeModel(gl.GL_SMOOTH);   //defecto
 
-	//gl.glClearColor(0, 0, 0, 1);
+	gl.glClearColor(0, 0, 0, 1);
 
 	gl.glMatrixMode(GL.GL_PROJECTION);
 	gl.glLoadIdentity();
@@ -118,7 +118,7 @@ public class GL3D implements GLEventListener {
 	    xLeft = xCentro - anchoNew / 2.0;
 	}
 
-	GL gl = drw.getGL();
+	//GL gl = drw.getGL();
 	gl.glMatrixMode(GL.GL_PROJECTION);
 	gl.glLoadIdentity();
 	gl.glOrtho(xLeft, xRight, yBot, yTop, -1000.0f, 1000.0f);

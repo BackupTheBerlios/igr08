@@ -200,6 +200,9 @@ public class Principal extends JFrame {
 		case KeyEvent.VK_R:
 		    camara.roll(10);
 		    escena.getObjeto3D().setColor(color1);
+		/*   double[] m = escena.getCamara().getMatrix();
+		    System.out.println(m);*/
+		    //this.gl.glLoadMatrixd(m, 0);
 		    break;
 		case KeyEvent.VK_P:
 		    camara.pitch(10);

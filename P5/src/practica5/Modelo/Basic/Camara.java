@@ -25,7 +25,7 @@ public class Camara {
 	/*eye = new PuntoVector3D(0, 0, 0);
 	look = new PuntoVector3D(0, 0, -1);
 	up = new PuntoVector3D(0, 1, 0);
-*/
+	 */
 	setView(eye, look, up);
 	setModelViewMatrix();
 	setProjection();
@@ -59,12 +59,12 @@ public class Camara {
     }
 
     public void setModelViewMatrix() {
-	double x, y, z;
+	/*double x, y, z;
 	x = -eye.prodEsc(u);
 	y = -eye.prodEsc(v);
 	z = -eye.prodEsc(n);
-	/*PuntoVector3D d = new PuntoVector3D(x, y, z);
-	 1 Fila
+	PuntoVector3D d = new PuntoVector3D(x, y, z);
+	1 Fila
 	m[0] = u.x;
 	m[1] = u.y;
 	m[2] = u.z;
@@ -182,5 +182,9 @@ public class Camara {
 
     public void setUp(PuntoVector3D normal) {
 	this.up = normal;
+    }
+
+    public double[] getMatrix() {
+	return m;
     }
 }
