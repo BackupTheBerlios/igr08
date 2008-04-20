@@ -197,19 +197,26 @@ public class Principal extends JFrame {
 	    camara = escena.getCamara();
 	    switch (evento.getKeyCode()) {
 		// Giros	   
-		case KeyEvent.VK_R:
-		    camara.roll(10);
-		    escena.getObjeto3D().setColor(color1);
-		/*   double[] m = escena.getCamara().getMatrix();
-		    System.out.println(m);*/
-		    //this.gl.glLoadMatrixd(m, 0);
-		    break;
-		case KeyEvent.VK_P:
+		case KeyEvent.VK_Q:
 		    camara.pitch(10);
 		    escena.getObjeto3D().setColor(color2);
 		    break;
-		case KeyEvent.VK_Y:
+		case KeyEvent.VK_W:
+		    camara.pitch(-10);
+		    break;
+		case KeyEvent.VK_E:
+		    camara.roll(10);
+		    escena.getObjeto3D().setColor(color1);
+		    break;
+		case KeyEvent.VK_R:
+		    camara.roll(-10);
+		    break;
+		case KeyEvent.VK_T:
 		    camara.yaw(10);
+		    escena.getObjeto3D().setColor(color3);
+		    break;
+		case KeyEvent.VK_Y:
+		    camara.yaw(-10);
 		    escena.getObjeto3D().setColor(color3);
 		    break;
 		// Traslaciones
@@ -236,8 +243,6 @@ public class Principal extends JFrame {
 		    break;
 	    }
 	    canvas.repaint();
-	    camara.setModelViewMatrix();
-	    escena.setCamara(camara);
 	    System.out.println("tecla: " + evento.getKeyChar());
 	}
 

@@ -43,15 +43,8 @@ public class GL3D implements GLEventListener {
     }
 
     public void display(GLAutoDrawable drw) {
-	
-	//GL gl = drw.getGL();
-	try{
-	//Thread.sleep(100);
-	} catch (Exception e){}
 	gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_COLOR_BUFFER_BIT);
 
-	gl.glColor3d(100.0, 100.0, 250.0);
-	//pruebas(gl);
 	camara.setModelViewMatrix();
 	mallaToro.dibuja(gl);
 	gl.glFlush();
@@ -62,7 +55,7 @@ public class GL3D implements GLEventListener {
     public void init(GLAutoDrawable drw) {
 	gl = drw.getGL();
 	glu = new GLU();
-	gl = glu.getCurrentGL();
+	
 	
 	this.camara = new Camara(gl);
 	this.activarLuces(gl);
@@ -170,9 +163,7 @@ public class GL3D implements GLEventListener {
     public Objeto3D getObjeto3D(){
 	return mallaToro;
     }
-    public void setCamara(Camara c) {
-	this.camara = c;
-    }
+
 
     public Camara getCamara() {
 	return this.camara;
