@@ -220,23 +220,23 @@ public class Principal extends JFrame {
 		    escena.getObjeto3D().setColor(color3);
 		    break;
 		// Traslaciones
+		case KeyEvent.VK_RIGHT:
+		    camara.desliza(new PuntoVector3D(10, 0, 0, 1));
+		    break;
+		case KeyEvent.VK_LEFT:
+		    camara.desliza(new PuntoVector3D(-10, 0, 0, 1));
+		    break;
 		case KeyEvent.VK_UP:
 		    camara.desliza(new PuntoVector3D(0, 10, 0, 1));
 		    break;
 		case KeyEvent.VK_DOWN:
 		    camara.desliza(new PuntoVector3D(0, -10, 0, 1));
 		    break;
-		case KeyEvent.VK_LEFT:
-		    camara.desliza(new PuntoVector3D(-10, 0, 1, 1));
-		    break;
-		case KeyEvent.VK_RIGHT:
-		    camara.desliza(new PuntoVector3D(10, 0, 1, 1));
-		    break;
 		case KeyEvent.VK_A:
-		    camara.desliza(new PuntoVector3D(0, 0, -10, 1));
+		    camara.desliza(new PuntoVector3D(0, 0, 10, 1));
 		    break;
 		case KeyEvent.VK_Z:
-		    camara.desliza(new PuntoVector3D(50, 50, 100, 1));
+		    camara.desliza(new PuntoVector3D(0, 0, -10, 1));
 		    break;
 		default:
 		    System.out.print("Ignorada ");
