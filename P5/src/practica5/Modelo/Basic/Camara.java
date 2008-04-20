@@ -19,14 +19,10 @@ public class Camara {
 	this.gl = gl;
 	this.glu = new GLU();
 
-	eye = new PuntoVector3D(400.0, 400.0, 400.0, 0);
-	look = new PuntoVector3D(0.0, 0.0, 0.0, 0);
-	up = new PuntoVector3D(0.0, 1.0, 0.0, 0);
-
-	/*eye = new PuntoVector3D(0, 0, 0);
+	eye = new PuntoVector3D(0, 0, 0);
 	look = new PuntoVector3D(0, 0, -1);
 	up = new PuntoVector3D(0, 1, 0);
-	 */
+
 	setView(eye, look, up);
 	setModelViewMatrix();
 	setProjection(GL3D.PROY_ORTOGONAL);
