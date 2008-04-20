@@ -42,7 +42,7 @@ public class Principal extends JFrame {
     //  private final Animator animacion;
     //private ArrayList<PuntoVector3D> perfil;
     //private Malla mallaActual;
-    private Camara camara;
+    //private Camara camara;
 
     // Constructora
     public Principal() {
@@ -194,7 +194,7 @@ public class Principal extends JFrame {
 
 	public void keyPressed(KeyEvent evento) {
 
-	    camara = escena.getCamara();
+	    Camara camara = escena.getCamara();
 	    switch (evento.getKeyCode()) {
 		// Giros	   
 		case KeyEvent.VK_Q:
