@@ -37,6 +37,7 @@ public class Principal extends JFrame {
     private JButton botonCambiarModo;
     private JButton botonDibujarNormales;
     private JPanel panelBotones;
+    private grupoBotones gBotones;
     //private int tipoMalla;
     //private boolean entradaDatos;
     //  private final Animator animacion;
@@ -74,7 +75,7 @@ public class Principal extends JFrame {
 
 	// Creamos los botones
 	this.panelBotones = new JPanel();
-	panelBotones.setLayout(new GridLayout(1, 2));
+	panelBotones.setLayout(new GridLayout(2, 2));
 	panel.add(panelBotones, BorderLayout.SOUTH);
 
 	botonCambiarModo = new JButton("Cambiar Modo");
@@ -84,6 +85,10 @@ public class Principal extends JFrame {
 	botonDibujarNormales = new JButton(ETIQUETA_ACTIVA_NOMALES);
 	botonDibujarNormales.setVisible(true);
 	panelBotones.add(botonDibujarNormales);
+
+	gBotones = new grupoBotones();
+	//gBotones.addKeyListener(new ManejadorTeclado());
+	panelBotones.add(gBotones);
 
 	// Creamos el canvas de dibujo
 	canvas = new GLJPanel();
@@ -98,10 +103,6 @@ public class Principal extends JFrame {
 	panel.addKeyListener(new ManejadorTeclado());
 	botonCambiarModo.addKeyListener(new ManejadorTeclado());
 	botonDibujarNormales.addKeyListener(new ManejadorTeclado());
-
-	// Animacion de la escena
-	//animacion = new Animator(canvas);
-	//animacion.start();
 
 	// Accion por defecto al cerrar la ventana
 	this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -205,11 +206,11 @@ public class Principal extends JFrame {
 		    camara.pitch(-10);
 		    break;
 		case KeyEvent.VK_E:
-		    camara.roll(10);
+		    camara.roll(5);
 		    escena.getObjeto3D().setColor(color1);
 		    break;
 		case KeyEvent.VK_R:
-		    camara.roll(-10);
+		    camara.roll(-5);
 		    break;
 		case KeyEvent.VK_T:
 		    camara.yaw(10);
@@ -238,6 +239,9 @@ public class Principal extends JFrame {
 		case KeyEvent.VK_Z:
 		    camara.desliza(new PuntoVector3D(0, 0, -10, 1));
 		    break;
+		// Extra
+		case KeyEvent.VK_SHIFT:
+		    escena.cambiaCamara();
 		default:
 		    System.out.print("Ignorada ");
 		    break;

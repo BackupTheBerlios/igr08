@@ -9,6 +9,7 @@ import javax.media.opengl.GLEventListener;
 
 import practica5.Modelo.Basic.Camara;
 import practica5.Modelo.Basic.Objeto3D;
+import practica5.Modelo.Basic.PuntoVector3D;
 import practica5.Modelo.Objetos.Toro;
 
 public class GL3D implements GLEventListener {
@@ -21,44 +22,48 @@ public class GL3D implements GLEventListener {
     private GL gl;
     private GLU glu;
     private GLContext context;
-    
     private double xLeft,  xRight;
     private double yTop,  yBot;
     private double xCentro,  yCentro;
     private int anchura;
     private int altura;
-    private Camara camara;
+    private Camara camaraActual;
+    private Camara camaraSecundaria;
     private double RatioViewPort;
     private float[] PosicionLuz0 = new float[4];
-
     private Objeto3D mallaToro = new Toro(25, 36, 180.5f, 90.0f);
 
     public GL3D(int anchura, int altura) {
 	this.glu = new GLU();
-	
-	this.anchura = anchura; this.altura = altura;
-	this.xRight = anchura / 2.0;	this.xLeft = -xRight;
-	this.yTop = altura / 2.0;	this.yBot = -xRight;
-	this.xCentro = (xRight + xLeft) / 2.0;	this.yCentro = (yTop + yBot) / 2.0;
+
+	this.anchura = anchura;
+	this.altura = altura;
+	this.xRight = anchura / 2.0;
+	this.xLeft = -xRight;
+	this.yTop = altura / 2.0;
+	this.yBot = -xRight;
+	this.xCentro = (xRight + xLeft) / 2.0;
+	this.yCentro = (yTop + yBot) / 2.0;
 	this.RatioViewPort = 1.0;
     }
 
     public void display(GLAutoDrawable drw) {
 	gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_COLOR_BUFFER_BIT);
 
-	camara.setModelViewMatrix();
+	camaraActual.setModelViewMatrix();
 	mallaToro.dibuja(gl);
 	gl.glFlush();
     }
 
-    public void displayChanged(GLAutoDrawable drw, boolean arg1, boolean arg2) {}
+    public void displayChanged(GLAutoDrawable drw, boolean arg1, boolean arg2) {
+    }
 
     public void init(GLAutoDrawable drw) {
 	gl = drw.getGL();
 	glu = new GLU();
-	
-	
-	this.camara = new Camara(gl);
+
+	this.camaraActual = new Camara(gl);
+	this.camaraSecundaria = new Camara(new PuntoVector3D(100, 100, 100), new PuntoVector3D(0, 0, 0), new PuntoVector3D(0, 1, 0), gl);
 	this.activarLuces(gl);
 	this.activarOpcionesOpenGL(gl);
 
@@ -160,13 +165,18 @@ public class GL3D implements GLEventListener {
 	//gl.glEnable(gl.GL_CULL_FACE);
 	gl.glShadeModel(gl.GL_SMOOTH);   //defecto
     }
-    
-    public Objeto3D getObjeto3D(){
+
+    public Objeto3D getObjeto3D() {
 	return mallaToro;
     }
 
-
     public Camara getCamara() {
-	return this.camara;
+	return this.camaraActual;
+    }
+
+    public void cambiaCamara() {
+	Camara aux = camaraActual;
+	camaraActual = camaraSecundaria;
+	camaraSecundaria = aux;
     }
 }
