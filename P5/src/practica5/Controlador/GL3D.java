@@ -18,6 +18,8 @@ public class GL3D implements GLEventListener {
     public static final int PROY_ORTOGONAL = 0;
     public static final int PROY_PERSPECTIVA = 1;
     public static final int PROY_OBLICUA = 2;
+    
+    
     // Atributos privados
     private GL gl;
     private GLU glu;
