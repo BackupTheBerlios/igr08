@@ -10,6 +10,7 @@ import javax.media.opengl.GLEventListener;
 import practica5.Modelo.Basic.Camara;
 import practica5.Modelo.Basic.Objeto3D;
 import practica5.Modelo.Basic.PuntoVector3D;
+import practica5.Modelo.Objetos.Habitaciones;
 import practica5.Modelo.Objetos.Toro;
 
 public class GL3D implements GLEventListener {
@@ -53,7 +54,10 @@ public class GL3D implements GLEventListener {
 	gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_COLOR_BUFFER_BIT);
 
 	camaraActual.setModelViewMatrix();
-	mallaToro.dibuja(gl);
+	//mallaToro.dibuja(gl);
+        Habitaciones ha = new Habitaciones();
+        ha.dibuja(gl);
+        
 	gl.glFlush();
     }
 

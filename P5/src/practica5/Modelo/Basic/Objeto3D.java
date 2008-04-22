@@ -11,9 +11,9 @@ import javax.media.opengl.GL;
 public class Objeto3D {
 
     // Atributos privados
-    private int id;
-    private Color color;
-    private TAfin matriz;
+    protected int id;
+    protected Color color;
+    protected TAfin matriz;
     protected int tipoMalla;
 
     protected boolean normalesEnabled;
@@ -23,6 +23,7 @@ public class Objeto3D {
 	color = new Color(1, 1, 1);
 	tipoMalla = Malla.GL_LINES;
         normalesEnabled = false;
+        matriz = new TAfin();
     }
 
     // Metodo virtual

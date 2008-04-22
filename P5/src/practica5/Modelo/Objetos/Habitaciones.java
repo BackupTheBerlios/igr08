@@ -5,6 +5,11 @@ import practica5.Modelo.Basic.*;
 public class Habitaciones extends ObjetoCompuesto3D{
     
     // Atributos privados
+    private Mesa mesa;
+    private Muebles mueble;
+    private Puerta puerta;
+    private Silla[] sillas;
+    private Estanteria estante;
     
     // Constructora
     public Habitaciones() {

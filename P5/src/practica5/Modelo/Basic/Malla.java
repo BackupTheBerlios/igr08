@@ -5,9 +5,11 @@ import javax.media.opengl.GL;
 
 public class Malla extends Objeto3D {
     
+    // Constantes
     public static final int GL_POINTS = 0;
     public static final int GL_LINES = 1;
     public static final int GL_POLYGON = 2;
+    
     // Atributos protegidos
     protected ArrayList<PuntoVector3D> vertices;
     protected ArrayList<PuntoVector3D> normales;
@@ -78,8 +80,67 @@ public class Malla extends Objeto3D {
         return normalPlano;
     }
     
-    // AÃ±ade un nuevo vertice
+    // Añade un nuevo vertice
     public void addVertice(PuntoVector3D punto) {
         vertices.add(punto);
     }
+    
+    // Añade una nueva normal
+    public void addNormal(PuntoVector3D normal) {
+        normales.add(normal);
+    }
+    
+    // Añade una nueva cara
+    public void addCara(Cara cara) {
+        caras.add(cara);
+    }  
+    
+    // Calcula normal dados unos puntos
+    public PuntoVector3D calculaNormal(int ind1, int ind2, int ind3, int ind4) {
+        
+        double x = 0;
+        x += (vertices.get(ind1).getY() - vertices.get(ind2).getY())*
+             (vertices.get(ind1).getZ() + vertices.get(ind2).getZ());
+        
+        x += (vertices.get(ind2).getY() - vertices.get(ind3).getY())*
+             (vertices.get(ind2).getZ() + vertices.get(ind3).getZ());
+
+        x += (vertices.get(ind3).getY() - vertices.get(ind4).getY())*
+             (vertices.get(ind3).getZ() + vertices.get(ind4).getZ());
+
+        x += (vertices.get(ind4).getY() - vertices.get(ind1).getY())*
+             (vertices.get(ind4).getZ() + vertices.get(ind1).getZ());
+        
+
+        double y = 0;
+        y += (vertices.get(ind1).getZ() - vertices.get(ind2).getZ())*
+             (vertices.get(ind1).getX() + vertices.get(ind2).getX());
+        
+        y += (vertices.get(ind2).getZ() - vertices.get(ind3).getZ())*
+             (vertices.get(ind2).getX() + vertices.get(ind3).getX());
+
+        y += (vertices.get(ind3).getZ() - vertices.get(ind4).getZ())*
+             (vertices.get(ind3).getX() + vertices.get(ind4).getX());
+
+        y += (vertices.get(ind4).getZ() - vertices.get(ind1).getZ())*
+             (vertices.get(ind4).getX() + vertices.get(ind1).getX());
+        
+        
+        double z = 0;
+        z += (vertices.get(ind1).getX() - vertices.get(ind2).getX())*
+             (vertices.get(ind1).getY() + vertices.get(ind2).getY());
+        
+        z += (vertices.get(ind2).getX() - vertices.get(ind3).getX())*
+             (vertices.get(ind2).getY() + vertices.get(ind3).getY());
+
+        z += (vertices.get(ind3).getX() - vertices.get(ind4).getX())*
+             (vertices.get(ind3).getY() + vertices.get(ind4).getY());
+
+        z += (vertices.get(ind4).getX() - vertices.get(ind1).getX())*
+             (vertices.get(ind4).getY() + vertices.get(ind1).getY());
+
+        
+        return (new PuntoVector3D(x, y, z, 0).normaliza());
+    }
+        
 }

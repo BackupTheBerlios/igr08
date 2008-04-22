@@ -49,7 +49,7 @@ public class ObjetoCompuesto3D extends Objeto3D{
         gl.glPushMatrix();
     
         // Situamos el objeto compuesto en la escena
-        gl.glMultMatrixd(this.getMatriz().getMatriz(), 0);
+        gl.glMultMatrixd(matriz.getMatriz(), 0);
         
         // Dibujamos cada uno de los objetos
         for (int elem=0; elem<hijos.size(); elem++) 
