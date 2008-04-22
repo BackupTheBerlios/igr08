@@ -140,7 +140,6 @@ public class Camara {
 		sn * t.getX() + cs * n.getX(),
 		sn * t.getY() + cs * n.getY(),
 		sn * t.getZ() + cs * n.getZ());
-
 	setModelViewMatrix();
     }
 
@@ -148,7 +147,19 @@ public class Camara {
 	eye.x += des.x;
 	eye.y += des.y;
 	eye.z += des.z;
-
 	setModelViewMatrix();
+    }
+    
+    public void setOblicua(PuntoVector3D d) {
+	gl.glMatrixMode(gl.GL_PROJECTION);
+        gl.glLoadIdentity();
+        gl.glOrtho(l,r,b,t,N,F);
+        if(d.z!=0 & d != new PuntoVector3D(0,0,1)){
+        TAfin matriz = new TAfin();
+        matriz.setIdentity();
+        matriz.setMatrizComponent(8,-d.x/d.z);
+        matriz.setMatrizComponent(9,-d.y/d.z);
+        gl.glMultMatrixd(matriz.getMatriz(),0);
+        }
     }
 }

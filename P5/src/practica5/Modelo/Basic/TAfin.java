@@ -10,7 +10,7 @@ public class TAfin {
     
     // Constructora
     public TAfin() {
-        // Trabajamos con el formato de matriz equivalente a openGL 
+        // Trabajamos con el formato de matriz equivalente a openGL
         matriz = new double[16];
     }
     
@@ -40,6 +40,20 @@ public class TAfin {
     
     public void setMatriz(double[] m) {
         this.matriz = m;
+    }
+    
+    public void setMatrizComponent(int indice, double valor){
+        matriz[indice] = valor;
+    }
+    
+    public void setIdentity(){
+        for (int i=0; i<16; i++){
+            this.matriz[i]=0;
+        }
+        matriz[0]=1;
+        matriz[5]=1;
+        matriz[10]=1;
+        matriz[15]=1;
     }
 }
 

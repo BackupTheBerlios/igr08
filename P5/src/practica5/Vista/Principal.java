@@ -42,6 +42,10 @@ public class Principal extends JFrame {
     private JRadioButton rbSolido;
     private JCheckBox jcNormales;
     private JCheckBox jcTexturas;
+    private ButtonGroup gBotonesProyeccion;
+    private JRadioButton rbOrtogonal;
+    private JRadioButton rbPerspectiva;
+    private JRadioButton rbOblicua;
     private OyenteTeclado oyenteTeclado;
     private OyenteRaton oyenteRaton;
     
@@ -147,6 +151,29 @@ public class Principal extends JFrame {
         gBotonesModo.add(rbLineas);
         gBotonesModo.add(rbSolido);
         
+        rbOrtogonal = new JRadioButton("Ortogonal");
+        rbOrtogonal.setForeground(java.awt.Color.pink);
+        rbOrtogonal.setBackground(java.awt.Color.black);
+        rbOrtogonal.setBounds(700, 450, 120, 25);
+        canvas.add(rbOrtogonal);
+        
+        rbPerspectiva = new JRadioButton("Perspectiva");
+        rbPerspectiva.setForeground(java.awt.Color.pink);
+        rbPerspectiva.setBackground(java.awt.Color.black);
+        rbPerspectiva.setBounds(700, 480, 120, 25);
+        canvas.add(rbPerspectiva);
+        
+        rbOblicua = new JRadioButton("Oblicua");
+        rbOblicua.setForeground(java.awt.Color.pink);
+        rbOblicua.setBackground(java.awt.Color.black);
+        rbOblicua.setBounds(700, 510, 120, 25);
+        canvas.add(rbOblicua);
+        
+        gBotonesModo = new ButtonGroup();
+        gBotonesModo.add(rbOrtogonal);
+        gBotonesModo.add(rbPerspectiva);
+        gBotonesModo.add(rbOblicua);
+        
         // Ponemos el oyente en los distintos elementos
         canvas.addKeyListener(oyenteTeclado);
         panel.addKeyListener(oyenteTeclado);
@@ -158,6 +185,9 @@ public class Principal extends JFrame {
         rbPuntos.addKeyListener(oyenteTeclado);
         rbLineas.addKeyListener(oyenteTeclado);
         rbSolido.addKeyListener(oyenteTeclado);
+        rbOrtogonal.addKeyListener(oyenteTeclado);
+        rbPerspectiva.addKeyListener(oyenteTeclado);
+        rbOblicua.addKeyListener(oyenteTeclado);
         
         // Accion por defecto al cerrar la ventana
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -199,6 +229,30 @@ public class Principal extends JFrame {
             
             public void actionPerformed(ActionEvent e) {
                 escena.getObjeto3D().setTipoMalla(Malla.GL_POLYGON);
+                canvas.repaint();
+            }
+        });
+        
+        rbOrtogonal.addActionListener(new ActionListener() {
+            
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("ortogonal");
+                canvas.repaint();
+            }
+        });
+        
+        rbPerspectiva.addActionListener(new ActionListener() {
+            
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Perspectiva");
+                canvas.repaint();
+            }
+        });
+        
+        rbOblicua.addActionListener(new ActionListener() {
+            
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Oblicua");
                 canvas.repaint();
             }
         });
