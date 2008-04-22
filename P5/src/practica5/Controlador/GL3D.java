@@ -8,8 +8,10 @@ import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 
 import practica5.Modelo.Basic.Camara;
+import practica5.Modelo.Basic.Cilindro;
 import practica5.Modelo.Basic.Objeto3D;
 import practica5.Modelo.Basic.PuntoVector3D;
+import practica5.Modelo.Basic.Tablero;
 import practica5.Modelo.Objetos.Habitaciones;
 import practica5.Modelo.Objetos.Toro;
 
@@ -55,8 +57,15 @@ public class GL3D implements GLEventListener {
 
 	camaraActual.setModelViewMatrix();
 	//mallaToro.dibuja(gl);
+        /*
         Habitaciones ha = new Habitaciones();
         ha.dibuja(gl);
+   */
+        Tablero tablero = new Tablero(500, 250, 20, 3, 3, 3);
+        tablero.setId(1);
+        //tablero.getMatriz().trasladar(200.0, 300.0, 0.35);
+        tablero.setColor(new practica5.Modelo.Basic.Color(0, 1, 0));
+        tablero.dibuja(gl);
         
 	gl.glFlush();
     }
