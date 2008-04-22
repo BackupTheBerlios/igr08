@@ -16,10 +16,13 @@ public class Objeto3D {
     private TAfin matriz;
     protected int tipoMalla;
 
+    protected boolean normalesEnabled;
+
     // Constructora
     public Objeto3D() {
 	color = new Color(1, 1, 1);
 	tipoMalla = Malla.GL_LINES;
+        normalesEnabled = false;
     }
 
     // Metodo virtual
@@ -58,5 +61,9 @@ public class Objeto3D {
 
     public void setMatriz(TAfin matriz) {
 	this.matriz = matriz;
+    }
+    
+    public void setNormalesEnabled(boolean b){
+    this.normalesEnabled = b;
     }
 }

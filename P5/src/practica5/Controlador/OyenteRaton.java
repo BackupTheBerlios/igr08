@@ -1,9 +1,8 @@
-package practica5.Vista;
+package practica5.Controlador;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.media.opengl.GLJPanel;
-import practica5.Controlador.GL3D;
 
 public class OyenteRaton implements MouseListener {
 

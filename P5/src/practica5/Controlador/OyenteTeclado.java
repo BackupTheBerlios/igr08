@@ -1,11 +1,11 @@
-package practica5.Vista;
+package practica5.Controlador;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.media.opengl.GLJPanel;
-import practica5.Controlador.GL3D;
 import practica5.Modelo.Basic.Camara;
 import practica5.Modelo.Basic.PuntoVector3D;
+import practica5.Vista.*;
 
 public class OyenteTeclado implements KeyListener {
 
