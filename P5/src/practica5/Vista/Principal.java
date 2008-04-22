@@ -152,19 +152,19 @@ public class Principal extends JFrame {
         gBotonesModo.add(rbSolido);
         
         rbOrtogonal = new JRadioButton("Ortogonal");
-        rbOrtogonal.setForeground(java.awt.Color.pink);
+        rbOrtogonal.setForeground(java.awt.Color.yellow);
         rbOrtogonal.setBackground(java.awt.Color.black);
         rbOrtogonal.setBounds(700, 450, 120, 25);
         canvas.add(rbOrtogonal);
         
         rbPerspectiva = new JRadioButton("Perspectiva");
-        rbPerspectiva.setForeground(java.awt.Color.pink);
+        rbPerspectiva.setForeground(java.awt.Color.yellow);
         rbPerspectiva.setBackground(java.awt.Color.black);
         rbPerspectiva.setBounds(700, 480, 120, 25);
         canvas.add(rbPerspectiva);
         
         rbOblicua = new JRadioButton("Oblicua");
-        rbOblicua.setForeground(java.awt.Color.pink);
+        rbOblicua.setForeground(java.awt.Color.yellow);
         rbOblicua.setBackground(java.awt.Color.black);
         rbOblicua.setBounds(700, 510, 120, 25);
         canvas.add(rbOblicua);
