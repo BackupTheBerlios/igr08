@@ -236,6 +236,7 @@ public class Principal extends JFrame {
         rbOrtogonal.addActionListener(new ActionListener() {
             
             public void actionPerformed(ActionEvent e) {
+                escena.getCamara().setProjection(GL3D.PROY_ORTOGONAL);
                 System.out.println("ortogonal");
                 canvas.repaint();
             }
@@ -244,6 +245,7 @@ public class Principal extends JFrame {
         rbPerspectiva.addActionListener(new ActionListener() {
             
             public void actionPerformed(ActionEvent e) {
+                escena.getCamara().setProjection(GL3D.PROY_PERSPECTIVA);
                 System.out.println("Perspectiva");
                 canvas.repaint();
             }
@@ -252,6 +254,7 @@ public class Principal extends JFrame {
         rbOblicua.addActionListener(new ActionListener() {
             
             public void actionPerformed(ActionEvent e) {
+                escena.getCamara().setProjection(GL3D.PROY_OBLICUA);
                 System.out.println("Oblicua");
                 canvas.repaint();
             }

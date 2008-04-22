@@ -122,8 +122,9 @@ public class GL3D implements GLEventListener {
 	//GL gl = drw.getGL();
 	gl.glMatrixMode(GL.GL_PROJECTION);
 	gl.glLoadIdentity();
-	gl.glOrtho(xLeft, xRight, yBot, yTop, -1000.0f, 1000.0f);
-
+//	gl.glOrtho(xLeft, xRight, yBot, yTop, -1000.0f, 1000.0f);
+        camaraActual.setProjection(GL3D.PROY_ORTOGONAL);
+        
 	gl.glMatrixMode(GL.GL_MODELVIEW);
 	gl.glLoadIdentity();
 	display(drw);
