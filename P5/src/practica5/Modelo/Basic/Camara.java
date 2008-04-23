@@ -110,9 +110,11 @@ public class Camara {
         m[14] = -eye.prodEsc(n);
         m[15] = 1;
         
-        this.gl.glMatrixMode(gl.GL_MODELVIEW);
-        gl.glFlush();
+        //this.gl.glMatrixMode(gl.GL_MODELVIEW);
+
+        
         this.gl.glLoadMatrixd(m, 0);
+  
     }
     
     public void roll(double angulo) {
@@ -179,4 +181,4 @@ public class Camara {
             gl.glMultMatrixd(matriz.getMatriz(),0);
         }
     }
-}
+ }

@@ -58,18 +58,17 @@ public class GL3D implements GLEventListener {
     public void display(GLAutoDrawable drw) {
 	gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_COLOR_BUFFER_BIT);
 
-	
+	gl.glMatrixMode(gl.GL_MODELVIEW);
 	//mallaToro.dibuja(gl);
     
         /*
         Habitaciones ha = new Habitaciones();
         ha.dibuja(gl);
-   */
-        
-        
+   */   
+        camaraActual.setModelViewMatrix();
      
         tablero.dibuja(gl);
-        camaraActual.setModelViewMatrix();
+        
 	gl.glFlush();
     }
 
@@ -85,11 +84,10 @@ public class GL3D implements GLEventListener {
 	this.activarLuces(gl);
 	this.activarOpcionesOpenGL(gl);
 
-        
         tablero = new Tablero(500, 250, 20, 3, 3, 3);
         tablero.setId(1);
         tablero.setGL(gl);
-        tablero.getMatriz().trasladar(100.0, 0.0, 0.35);
+        tablero.getMatriz().trasladar(100.0, 100.0, 0.35);
         tablero.setColor(Color.color3);
         
 	float LuzAmbiente[] = {0.5f, 0.5f, 0.5f, 1.0f};
