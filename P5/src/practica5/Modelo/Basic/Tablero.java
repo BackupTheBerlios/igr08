@@ -1,6 +1,7 @@
 package practica5.Modelo.Basic;
 
 import java.util.ArrayList;
+import javax.media.opengl.GL;
 
 
 public class Tablero extends Malla {
@@ -36,7 +37,7 @@ public class Tablero extends Malla {
         double incX, incY, incZ;
         
         // Cargamos la matriz de coordenadas inicial
-        this.matriz = new TAfin();
+        //this.matriz = new TAfin(thgl);
         
         // Definimos un color inicial
         this.color = new practica5.Modelo.Basic.Color(1.0, 0.0, 0.0);

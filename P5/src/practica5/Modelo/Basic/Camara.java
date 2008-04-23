@@ -18,7 +18,7 @@ public class Camara {
     public Camara(GL gl) {
         this.gl = gl;
         this.glu = new GLU();
-        
+                
         eye = new PuntoVector3D(0, 0, 0);
         look = new PuntoVector3D(0, 0, -1);
         up = new PuntoVector3D(0, 1, 0);
@@ -78,7 +78,10 @@ public class Camara {
             case GL3D.PROY_PERSPECTIVA:
                 double anguloVision = 10;
                 double proporcion = r-l / t-b;
+                //GL auxgl = glu.getCurrentGL();
+                
                 glu.gluPerspective(anguloVision, proporcion, N, F);
+                
                 break;
             case GL3D.PROY_OBLICUA:
                 setOblicua(new PuntoVector3D(3,2,1));
@@ -108,6 +111,7 @@ public class Camara {
         m[15] = 1;
         
         this.gl.glMatrixMode(gl.GL_MODELVIEW);
+        gl.glFlush();
         this.gl.glLoadMatrixd(m, 0);
     }
     

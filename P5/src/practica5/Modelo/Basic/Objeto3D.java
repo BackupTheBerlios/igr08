@@ -9,62 +9,67 @@ package practica5.Modelo.Basic;
 import javax.media.opengl.GL;
 
 public class Objeto3D {
-
+    
     // Atributos privados
     protected int id;
     protected Color color;
     protected TAfin matriz;
     protected int tipoMalla;
-
+    
     protected boolean normalesEnabled;
-
+    
     // Constructora
     public Objeto3D() {
-	color = new Color(1, 1, 1);
-	tipoMalla = Malla.GL_LINES;
+        color = new Color(1, 1, 1);
+        tipoMalla = Malla.GL_LINES;
         normalesEnabled = false;
         matriz = new TAfin();
     }
-
+    
+    
     // Metodo virtual
     public void dibuja(GL gl) {
-	gl.glColor3d(color.getRed(), color.getGreen(), color.getBlue());
+        gl.glColor3d(color.getRed(), color.getGreen(), color.getBlue());
     }
-
+    
     // Getters & Setters
     public int getId() {
-	return id;
+        return id;
     }
-
+    
     public void setId(int id) {
-	this.id = id;
+        this.id = id;
     }
-
+    
     public Color getColor() {
-	return color;
+        return color;
     }
-
+    
     public void setColor(Color color) {
-	this.color = color;
+        this.color = color;
     }
-
+    
     public void setColor3d(double Red, double Green, double Blue) {
-	this.color = new Color(Red, Green, Blue);
+        this.color = new Color(Red, Green, Blue);
     }
-
+    
     public void setTipoMalla(int tipo) {
-	this.tipoMalla = tipo;
+        this.tipoMalla = tipo;
     }
-
+    
     public TAfin getMatriz() {
-	return matriz;
+        return matriz;
     }
-
+    
     public void setMatriz(TAfin matriz) {
-	this.matriz = matriz;
+        this.matriz = matriz;
     }
     
     public void setNormalesEnabled(boolean b){
-    this.normalesEnabled = b;
+        this.normalesEnabled = b;
+    }
+    
+    public void setGL(GL gl){
+        matriz.setGL(gl);
     }
 }

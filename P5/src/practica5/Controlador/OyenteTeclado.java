@@ -24,25 +24,25 @@ public class OyenteTeclado implements KeyListener {
 	    // Giros	   
 	    case KeyEvent.VK_Q:
 		camara.pitch(5);
-		escena.getObjeto3D().setColor(Principal.color2);
+		//escena.getObjeto3D().setColor(Principal.color2);
 		break;
 	    case KeyEvent.VK_W:
 		camara.pitch(-5);
 		break;
 	    case KeyEvent.VK_E:
 		camara.roll(5);
-		escena.getObjeto3D().setColor(Principal.color1);
+		//escena.getObjeto3D().setColor(Principal.color1);
 		break;
 	    case KeyEvent.VK_R:
 		camara.roll(-5);
 		break;
 	    case KeyEvent.VK_T:
 		camara.yaw(5);
-		escena.getObjeto3D().setColor(Principal.color3);
+		//escena.getObjeto3D().setColor(Principal.color3);
 		break;
 	    case KeyEvent.VK_Y:
 		camara.yaw(-5);
-		escena.getObjeto3D().setColor(Principal.color3);
+		//escena.getObjeto3D().setColor(Principal.color3);
 		break;
 	    // Traslaciones
 	    case KeyEvent.VK_RIGHT:

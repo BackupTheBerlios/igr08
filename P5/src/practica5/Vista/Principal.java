@@ -12,15 +12,7 @@ import practica5.Modelo.Basic.Color;
 import practica5.Modelo.Basic.Malla;
 
 public class Principal extends JFrame {
-    
-    public static final Color color1 = new Color(1, 0, 0);
-    public static final Color color2 = new Color(0, 1, 0);
-    public static final Color color3 = new Color(0, 0, 1);
-    public static final Color color4 = new Color(0, 0, 1);
-    public static final Color color5 = new Color(1, 1, 0);
-    public static final Color color6 = new Color(0, 1, 1);
-    public static final Color color7 = new Color(1, 0, 1);
-    public static final Color color8 = new Color(1, 1, 1);
+
     // Atributos
     private Container panel;
     private GLJPanel canvas;

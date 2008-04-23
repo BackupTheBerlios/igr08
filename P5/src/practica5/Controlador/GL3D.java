@@ -1,11 +1,13 @@
 package practica5.Controlador;
 
 import java.nio.FloatBuffer;
+import java.security.Principal;
 import javax.media.opengl.*;
 import javax.media.opengl.glu.*;
 import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
+import practica5.Modelo.Basic.Color;
 
 import practica5.Modelo.Basic.Camara;
 import practica5.Modelo.Basic.Cilindro;
@@ -36,7 +38,8 @@ public class GL3D implements GLEventListener {
     private Camara camaraSecundaria;
     private double RatioViewPort;
     private float[] PosicionLuz0 = new float[4];
-    private Objeto3D mallaToro = new Toro(25, 36, 180.5f, 90.0f);
+    //private Objeto3D mallaToro = new Toro(25, 36, 180.5f, 90.0f);
+    private Objeto3D tablero;
 
     public GL3D(int anchura, int altura) {
 	this.glu = new GLU();
@@ -55,18 +58,18 @@ public class GL3D implements GLEventListener {
     public void display(GLAutoDrawable drw) {
 	gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_COLOR_BUFFER_BIT);
 
-	camaraActual.setModelViewMatrix();
+	
 	//mallaToro.dibuja(gl);
+    
         /*
         Habitaciones ha = new Habitaciones();
         ha.dibuja(gl);
    */
-        Tablero tablero = new Tablero(500, 250, 20, 3, 3, 3);
-        tablero.setId(1);
-        //tablero.getMatriz().trasladar(200.0, 300.0, 0.35);
-        tablero.setColor(new practica5.Modelo.Basic.Color(0, 1, 0));
-        tablero.dibuja(gl);
         
+        
+     
+        tablero.dibuja(gl);
+        camaraActual.setModelViewMatrix();
 	gl.glFlush();
     }
 
@@ -76,12 +79,19 @@ public class GL3D implements GLEventListener {
     public void init(GLAutoDrawable drw) {
 	gl = drw.getGL();
 	glu = new GLU();
-
+        
 	this.camaraActual = new Camara(gl);
 	this.camaraSecundaria = new Camara(new PuntoVector3D(100, 100, 100), new PuntoVector3D(0, 0, 0), new PuntoVector3D(0, 1, 0), gl);
 	this.activarLuces(gl);
 	this.activarOpcionesOpenGL(gl);
 
+        
+        tablero = new Tablero(500, 250, 20, 3, 3, 3);
+        tablero.setId(1);
+        tablero.setGL(gl);
+        tablero.getMatriz().trasladar(100.0, 0.0, 0.35);
+        tablero.setColor(Color.color3);
+        
 	float LuzAmbiente[] = {0.5f, 0.5f, 0.5f, 1.0f};
 	FloatBuffer LuzAmbiente1 = FloatBuffer.wrap(LuzAmbiente);
 	gl.glLightfv(gl.GL_LIGHT0, gl.GL_AMBIENT, LuzAmbiente1);
@@ -183,7 +193,7 @@ public class GL3D implements GLEventListener {
     }
 
     public Objeto3D getObjeto3D() {
-	return mallaToro;
+	return tablero;
     }
 
     public Camara getCamara() {
