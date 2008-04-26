@@ -15,13 +15,13 @@ public class Objeto3D {
     protected Color color;
     protected TAfin matriz;
     protected int tipoMalla;
-    
+    protected GL gl;
     protected boolean normalesEnabled;
     
     // Constructora
     public Objeto3D() {
-        color = new Color(1, 1, 1);
-        tipoMalla = Malla.GL_LINES;
+        color = new Color(0, 1, 0);
+        tipoMalla = Malla.GL_POLYGON;
         normalesEnabled = false;
         matriz = new TAfin();
     }
@@ -29,7 +29,7 @@ public class Objeto3D {
     
     // Metodo virtual
     public void dibuja(GL gl) {
-        gl.glColor3d(color.getRed(), color.getGreen(), color.getBlue());
+        //gl.glColor3d(color.getRed(), color.getGreen(), color.getBlue());
     }
     
     // Getters & Setters
@@ -71,5 +71,9 @@ public class Objeto3D {
     
     public void setGL(GL gl){
         matriz.setGL(gl);
+    }
+    
+    public GL getGL() {
+        return this.gl;
     }
 }

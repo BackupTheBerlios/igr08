@@ -12,6 +12,7 @@ import practica5.Modelo.Basic.Color;
 import practica5.Modelo.Basic.Camara;
 import practica5.Modelo.Basic.Cilindro;
 import practica5.Modelo.Basic.Objeto3D;
+import practica5.Modelo.Basic.ObjetoCompuesto3D;
 import practica5.Modelo.Basic.PuntoVector3D;
 import practica5.Modelo.Basic.Tablero;
 import practica5.Modelo.Objetos.Habitaciones;
@@ -40,6 +41,7 @@ public class GL3D implements GLEventListener {
     private float[] PosicionLuz0 = new float[4];
     //private Objeto3D mallaToro = new Toro(25, 36, 180.5f, 90.0f);
     private Objeto3D tablero;
+    private Objeto3D hab;
 
     public GL3D(int anchura, int altura) {
 	this.glu = new GLU();
@@ -58,16 +60,18 @@ public class GL3D implements GLEventListener {
     public void display(GLAutoDrawable drw) {
 	gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_COLOR_BUFFER_BIT);
 
-	gl.glMatrixMode(gl.GL_MODELVIEW);
+	//gl.glMatrixMode(gl.GL_MODELVIEW);
 	//mallaToro.dibuja(gl);
-    
-        /*
-        Habitaciones ha = new Habitaciones();
-        ha.dibuja(gl);
-   */   
-        camaraActual.setModelViewMatrix();
-     
-        tablero.dibuja(gl);
+    camaraActual.setModelViewMatrix();
+
+        //Habitaciones ha = new Habitaciones();
+        hab.dibuja(gl);
+        
+        
+        
+        
+        //tablero.dibuja(gl);
+        
         
 	gl.glFlush();
     }
@@ -83,12 +87,19 @@ public class GL3D implements GLEventListener {
 	this.camaraSecundaria = new Camara(new PuntoVector3D(100, 100, 100), new PuntoVector3D(0, 0, 0), new PuntoVector3D(0, 1, 0), gl);
 	this.activarLuces(gl);
 	this.activarOpcionesOpenGL(gl);
-
+/*
         tablero = new Tablero(500, 250, 20, 3, 3, 3);
         tablero.setId(1);
         tablero.setGL(gl);
         tablero.getMatriz().trasladar(100.0, 100.0, 0.35);
-        tablero.setColor(Color.color3);
+        tablero.setColor(Color.color2);
+        */
+        
+        hab = new Habitaciones(gl);
+        hab.setId(0);
+        hab.setGL(gl);
+        hab.getMatriz().trasladar(100.0, 100.0, 0.35);
+        hab.setColor(Color.verde);
         
 	float LuzAmbiente[] = {0.5f, 0.5f, 0.5f, 1.0f};
 	FloatBuffer LuzAmbiente1 = FloatBuffer.wrap(LuzAmbiente);

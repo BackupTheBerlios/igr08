@@ -3,7 +3,7 @@ package practica5.Modelo.Basic;
 import java.util.ArrayList;
 import javax.media.opengl.GL;
 
-public class Malla extends Objeto3D {
+public class Malla extends Objeto3D{
     
     // Constantes
     public static final int GL_POINTS = 0;
@@ -24,7 +24,18 @@ public class Malla extends Objeto3D {
     
     // Metodo que permite dibujar la malla
     public void dibuja(GL gl) {
-        super.dibuja(gl);
+        //super.dibuja(gl);
+        
+        // Seleccionamos el color del objeto
+        gl.glColor3d(this.getColor().getRed(), this.getColor().getGreen(), this.getColor().getBlue());
+        
+        // Guardamos el estado de la matriz de Modelado
+        gl.glPushMatrix();
+       
+        // Situamos el objeto en la escena
+        gl.glMultMatrixd(matriz.getMatriz(), 0);
+        
+        // Seleccionamos el tipo de representación
         for (int i = 0; i < caras.size(); i++) {
             switch (tipoMalla) {
                 case GL_POINTS:
@@ -37,7 +48,8 @@ public class Malla extends Objeto3D {
                     gl.glBegin(gl.GL_POLYGON);
                     break;
             }
-            
+        
+            // Comenzamos a dibujar el objeto    
             for (int j = 0; j < caras.get(i).getIndiceVerticeNormal().size(); j++) {
                 
                 int iN = caras.get(i).getIndiceNormal(j);
@@ -55,6 +67,9 @@ public class Malla extends Objeto3D {
             }
             gl.glEnd();
         }
+        
+        // Volvemos al estado anterior de la Matriz de Modelado
+        gl.glPopMatrix();
     }
     
     public PuntoVector3D metodoNewell(ArrayList<PuntoVector3D> v) {

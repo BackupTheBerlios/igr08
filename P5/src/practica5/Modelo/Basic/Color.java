@@ -2,14 +2,13 @@ package practica5.Modelo.Basic;
 
 public class Color {
     
-    public static final Color color1 = new Color(1, 0, 0);
-    public static final Color color2 = new Color(0, 1, 0);
-    public static final Color color3 = new Color(0, 0, 1);
-    public static final Color color4 = new Color(0, 0, 1);
-    public static final Color color5 = new Color(1, 1, 0);
-    public static final Color color6 = new Color(0, 1, 1);
-    public static final Color color7 = new Color(1, 0, 1);
-    public static final Color color8 = new Color(1, 1, 1);
+    public static final Color rojo = new Color(1, 0, 0);
+    public static final Color verde = new Color(0, 1, 0);
+    public static final Color azul = new Color(0, 0, 1);
+    public static final Color amarillo = new Color(1, 1, 0);
+    public static final Color turquesa = new Color(0, 1, 1);
+    public static final Color violeta = new Color(1, 0, 1);
+    public static final Color gris = new Color(1, 1, 1);
     
     // Atributos privados
     private double Red;
