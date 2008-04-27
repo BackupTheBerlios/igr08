@@ -5,7 +5,7 @@ import javax.media.opengl.GL;
 import practica5.Modelo.Basic.*;
 import practica5.util.Calculos;
 
-public class Mesa extends ObjetoCompuesto3D{
+public class Mesa extends ObjetoCompuesto3D {
     
     // Atributos privados
     private Tablero tabla;
@@ -26,25 +26,22 @@ public class Mesa extends ObjetoCompuesto3D{
         this.addHijos(tabla);  
         
         
-        /* Pata
+        // Pata
         ArrayList<PuntoVector3D> perfil = new ArrayList<PuntoVector3D>();
-        perfil.add(new PuntoVector3D(0, 50, 0));
-        perfil.add(new PuntoVector3D(0, 40, 0));
-        perfil.add(new PuntoVector3D(0, 30, 0));
-        perfil.add(new PuntoVector3D(0, 20, 0));
-        perfil.add(new PuntoVector3D(0, 10, 0));
-        perfil.add(new PuntoVector3D(0, 0, 0));
+        perfil.add(new PuntoVector3D(10, 50, 0));
+        perfil.add(new PuntoVector3D(10, 40, 0));
+        perfil.add(new PuntoVector3D(10, 30, 0));
+        perfil.add(new PuntoVector3D(10, 20, 0));
+        perfil.add(new PuntoVector3D(10, 10, 0));
+        perfil.add(new PuntoVector3D(10, 0, 0));
 
         perfil = new Calculos().calculaPuntosBSplines(perfil, 20);
         
-        pataMesa = new MallaPorRevolucion(perfil, 30, 30);
-        pataMesa.setId(4);
-        pataMesa.setGL(gl);
-        pataMesa.getMatriz().rotar(90, 1.0, 0.0, 0.0);
-        pataMesa.getMatriz().trasladarM(50, 50, -150);
+        pataMesa = new MallaPorRevolucion(perfil, 4, 1.57, gl);
+        pataMesa.getMatriz().trasladarM(pos.getX() + 50, pos.getY() - 50, pos.getZ() - 20);
         pataMesa.setColor(color.violetaOscuro);
-        this.addHijos(pataMesa);  
-        */
+        this.addHijos(pataMesa);
+                
         
         // Pata por Cilindro
         pata = new Cilindro(10, 10, 50, 20, 30);
@@ -53,7 +50,7 @@ public class Mesa extends ObjetoCompuesto3D{
         pata.getMatriz().rotar(90, 1.0, 0.0, 0.0);
         pata.getMatriz().trasladarM(pos.getX() + 50, pos.getY(), pos.getZ() - 20);
         pata.setColor(color.violetaOscuro);
-        this.addHijos(pata);  
+        //this.addHijos(pata);  
         
 
         

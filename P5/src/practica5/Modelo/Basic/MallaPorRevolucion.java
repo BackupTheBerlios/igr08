@@ -9,7 +9,10 @@ public class MallaPorRevolucion extends Malla {
     public MallaPorRevolucion() {
     }
     
-    public MallaPorRevolucion(ArrayList<PuntoVector3D> perfil, int numVerticesCara, double anguloRad) {
+    public MallaPorRevolucion(ArrayList<PuntoVector3D> perfil, int numVerticesCara, double anguloRad, GL gl) {
+        
+        super();
+        super.setGL(gl);
         
         // 1�- Calculamos los v�rtices de la figura
         int numVerticesPorRev = new PuntoVector3D().getNumVerticesDeRevolucion(anguloRad);

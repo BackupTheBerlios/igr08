@@ -16,6 +16,8 @@ public class Color {
     public static final Color violetaOscuro = new Color(1, 0, 1);  
     public static final Color blanco = new Color(255, 255, 255);
     public static final Color gris = new Color(1, 1, 1);
+    public static final Color negro = new Color(0, 0, 0);
+    
     
     // Atributos privados
     private double Red;

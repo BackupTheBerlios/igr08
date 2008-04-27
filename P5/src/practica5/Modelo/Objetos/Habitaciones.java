@@ -1,9 +1,11 @@
 package practica5.Modelo.Objetos;
 
+import java.util.ArrayList;
 import javax.media.opengl.GL;
 import practica5.Modelo.Basic.*;
+import practica5.util.Calculos;
 
-public class Habitaciones extends ObjetoCompuesto3D{
+public class Habitaciones extends ObjetoCompuesto3D {
     
     // Atributos privados
     private Mesa mesa;
@@ -13,6 +15,7 @@ public class Habitaciones extends ObjetoCompuesto3D{
     private Silla silla;
     private Lampara lampara;
     private Estanteria estante;
+    private Percha percha;
     
     // Constructora
     public Habitaciones(GL gl) {
@@ -157,7 +160,11 @@ public class Habitaciones extends ObjetoCompuesto3D{
         // Lampara
         lampara = new Lampara(new PuntoVector3D(140, 250, -140), 0, gl);
         this.addHijos(lampara);
-
+     
+        // Percha
+        percha = new Percha(new PuntoVector3D(30, 0, 50), 0, gl);
+        this.addHijos(percha);
+        
     }
     
 }
