@@ -3,7 +3,7 @@ package practica5.Modelo.Basic;
 import java.util.ArrayList;
 import javax.media.opengl.GL;
 
-public class Malla extends Objeto3D{
+public class Malla extends Objeto3D {
     
     // Constantes
     public static final int GL_POINTS = 0;
@@ -32,40 +32,40 @@ public class Malla extends Objeto3D{
         // Guardamos el estado de la matriz de Modelado
         gl.glPushMatrix();
        
-        // Situamos el objeto en la escena
-        gl.glMultMatrixd(matriz.getMatriz(), 0);
+            // Situamos el objeto en la escena
+            gl.glMultMatrixd(matriz.getMatriz(), 0);
         
-        // Seleccionamos el tipo de representación
-        for (int i = 0; i < caras.size(); i++) {
-            switch (tipoMalla) {
-                case GL_POINTS:
-                    gl.glBegin(gl.GL_POINTS);
-                    break;
-                case GL_LINES:
-                    gl.glBegin(gl.GL_LINE_LOOP);
-                    break;
-                case GL_POLYGON:
-                    gl.glBegin(gl.GL_POLYGON);
-                    break;
-            }
-        
-            // Comenzamos a dibujar el objeto    
-            for (int j = 0; j < caras.get(i).getIndiceVerticeNormal().size(); j++) {
+            // Seleccionamos el tipo de representación
+            for (int i = 0; i < caras.size(); i++) {
+                switch (this.tipoMalla) {
+                    case GL_POINTS:
+                        gl.glBegin(gl.GL_POINTS);
+                        break;
+                    case GL_LINES:
+                        gl.glBegin(gl.GL_LINE_LOOP);
+                        break;
+                    case GL_POLYGON:
+                        gl.glBegin(gl.GL_POLYGON);
+                        break;
+                }
+
+                // Comenzamos a dibujar el objeto    
+                for (int j = 0; j < caras.get(i).getIndiceVerticeNormal().size(); j++) {
                 
-                int iN = caras.get(i).getIndiceNormal(j);
-                int iV = caras.get(i).getIndiceVertice(j);
+                    int iN = caras.get(i).getIndiceNormal(j);
+                    int iV = caras.get(i).getIndiceVertice(j);
                 
-                if (this.normalesEnabled) {
-                    gl.glNormal3d(normales.get(iN).getX(),
+                    if (this.normalesEnabled) {
+                        gl.glNormal3d(normales.get(iN).getX(),
                             normales.get(iN).getY(),
                             normales.get(iN).getZ());
-                }
+                    }
                 
-                gl.glVertex3d(vertices.get(iV).getX(),
+                    gl.glVertex3d(vertices.get(iV).getX(),
                         vertices.get(iV).getY(),
                         vertices.get(iV).getZ());
-            }
-            gl.glEnd();
+                }
+                gl.glEnd();
         }
         
         // Volvemos al estado anterior de la Matriz de Modelado

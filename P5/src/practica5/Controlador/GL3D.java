@@ -2,6 +2,7 @@ package practica5.Controlador;
 
 import java.nio.FloatBuffer;
 import java.security.Principal;
+import java.util.ArrayList;
 import javax.media.opengl.*;
 import javax.media.opengl.glu.*;
 import javax.media.opengl.GL;
@@ -11,12 +12,15 @@ import practica5.Modelo.Basic.Color;
 
 import practica5.Modelo.Basic.Camara;
 import practica5.Modelo.Basic.Cilindro;
+import practica5.Modelo.Basic.Malla;
+import practica5.Modelo.Basic.MallaPorRevolucion;
 import practica5.Modelo.Basic.Objeto3D;
 import practica5.Modelo.Basic.ObjetoCompuesto3D;
 import practica5.Modelo.Basic.PuntoVector3D;
 import practica5.Modelo.Basic.Tablero;
 import practica5.Modelo.Objetos.Habitaciones;
 import practica5.Modelo.Objetos.Toro;
+import practica5.util.Calculos;
 
 public class GL3D implements GLEventListener {
 
@@ -39,9 +43,8 @@ public class GL3D implements GLEventListener {
     private Camara camaraSecundaria;
     private double RatioViewPort;
     private float[] PosicionLuz0 = new float[4];
-    //private Objeto3D mallaToro = new Toro(25, 36, 180.5f, 90.0f);
-    private Objeto3D tablero;
-    private Objeto3D hab;
+    private ObjetoCompuesto3D hab;
+
 
     public GL3D(int anchura, int altura) {
 	this.glu = new GLU();
@@ -58,22 +61,14 @@ public class GL3D implements GLEventListener {
     }
 
     public void display(GLAutoDrawable drw) {
-	gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_COLOR_BUFFER_BIT);
+	  
+        gl.glClear(gl.GL_COLOR_BUFFER_BIT | gl.GL_DEPTH_BUFFER_BIT);
 
-	//gl.glMatrixMode(gl.GL_MODELVIEW);
-	//mallaToro.dibuja(gl);
-    camaraActual.setModelViewMatrix();
+        camaraActual.setModelViewMatrix();
 
-        //Habitaciones ha = new Habitaciones();
         hab.dibuja(gl);
         
-        
-        
-        
-        //tablero.dibuja(gl);
-        
-        
-	gl.glFlush();
+        gl.glFlush();
     }
 
     public void displayChanged(GLAutoDrawable drw, boolean arg1, boolean arg2) {
@@ -87,42 +82,17 @@ public class GL3D implements GLEventListener {
 	this.camaraSecundaria = new Camara(new PuntoVector3D(100, 100, 100), new PuntoVector3D(0, 0, 0), new PuntoVector3D(0, 1, 0), gl);
 	this.activarLuces(gl);
 	this.activarOpcionesOpenGL(gl);
-/*
-        tablero = new Tablero(500, 250, 20, 3, 3, 3);
-        tablero.setId(1);
-        tablero.setGL(gl);
-        tablero.getMatriz().trasladar(100.0, 100.0, 0.35);
-        tablero.setColor(Color.color2);
-        */
-        
+
         hab = new Habitaciones(gl);
-        hab.setId(0);
+        hab.setId(Objeto3D.ESCENA);
         hab.setGL(gl);
-        hab.getMatriz().trasladar(100.0, 100.0, 0.35);
-        hab.setColor(Color.verde);
-        
-	float LuzAmbiente[] = {0.5f, 0.5f, 0.5f, 1.0f};
-	FloatBuffer LuzAmbiente1 = FloatBuffer.wrap(LuzAmbiente);
-	gl.glLightfv(gl.GL_LIGHT0, gl.GL_AMBIENT, LuzAmbiente1);
-	PosicionLuz0[0] = 25.0f;
-	PosicionLuz0[1] = 25.0f;
-	PosicionLuz0[2] = 0.0f;
-	PosicionLuz0[3] = 1.0f;
+        hab.getMatriz().trasladar(-150.0, -500.0, 0.35);
+        hab.setColor(Color.verdeClaro);
 
-	FloatBuffer PosicionLuz01 = FloatBuffer.wrap(PosicionLuz0);
-	gl.glLightfv(gl.GL_LIGHT0, gl.GL_POSITION, PosicionLuz01);
-
-	gl.glEnable(gl.GL_COLOR_MATERIAL);
-	gl.glMaterialf(gl.GL_FRONT, gl.GL_SHININESS, 0.1f);
-	//gl.glEnable(gl.GL_DEPTH_TEST);
-	gl.glEnable(gl.GL_NORMALIZE);
-	//gl.glFrontFace(gl.GL_CCW);
-	//gl.glFrontFace(gl.GL_CW);
-	//gl.glEnable(gl.GL_FRONT_FACE);
-	//gl.glEnable(gl.GL_CULL_FACE);
-	gl.glShadeModel(gl.GL_SMOOTH);   //defecto
-
-	gl.glClearColor(0, 0, 0, 1);
+	activarLuces(gl);
+        activarOpcionesOpenGL(gl);
+                     
+        gl.glClearColor(0, 0, 0, 1);
 
 	gl.glMatrixMode(GL.GL_PROJECTION);
 	gl.glLoadIdentity();
@@ -192,19 +162,20 @@ public class GL3D implements GLEventListener {
 
 	gl.glEnable(gl.GL_COLOR_MATERIAL);
 	gl.glMaterialf(gl.GL_FRONT, gl.GL_SHININESS, 0.1f);
-	//gl.glEnable(gl.GL_DEPTH_TEST);
+	gl.glEnable(gl.GL_DEPTH_TEST);
 	gl.glEnable(gl.GL_NORMALIZE);
-	//gl.glFrontFace(gl.GL_CCW);
+        //gl.glFrontFace(gl.GL_CCW);
 	//gl.glFrontFace(gl.GL_CW);
 	//gl.glEnable(gl.GL_FRONT_FACE);
 	//gl.glEnable(gl.GL_CULL_FACE);
 	gl.glShadeModel(gl.GL_SMOOTH);   //defecto
     }
 
-    public Objeto3D getObjeto3D() {
-	return tablero;
+    public ObjetoCompuesto3D getObjeto3D() {
+	return hab;
     }
-
+    
+    
     public Camara getCamara() {
 	return this.camaraActual;
     }

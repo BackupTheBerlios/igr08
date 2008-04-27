@@ -7,64 +7,157 @@ public class Habitaciones extends ObjetoCompuesto3D{
     
     // Atributos privados
     private Mesa mesa;
-    private Muebles mueble;
+    private Muebles muebles;
     private Puerta puerta;
-    private Silla[] sillas;
+    private Cuadro cuadro;
+    private Silla silla;
+    private Lampara lampara;
     private Estanteria estante;
     
     // Constructora
     public Habitaciones(GL gl) {
-        
-        PuntoVector3D pos; 
+
         Cilindro cilindro;
         Tablero tablero;
         
-        // Paredes
-        tablero = new Tablero(400, 400, 10, 3, 3, 3);
+        // Habitación Trasera: Pared central
+        tablero = new Tablero(400, 400, 20, 3, 3, 3);
         tablero.setId(0);
         tablero.setGL(gl);
-        tablero.getMatriz().trasladar(0, -200, 50);
-        tablero.getMatriz().rotar(90, 0.0, 0.0, 1.0);
-        tablero.setColor(this.getColor());   
-        this.addHijos(tablero);
-  
-        tablero = new Tablero(250, 400, 10, 3, 3, 3);
-        tablero.setId(1);
-        tablero.setGL(gl);
-        tablero.getMatriz().trasladar(0, 250, 100);
-        tablero.setColor(color.violeta);
+        tablero.getMatriz().trasladar(0, 0, -270);
+        tablero.setColor(color.rojoClaro);
         this.addHijos(tablero); 
-           /*  
-        tablero = new Tablero(150, 600, 300, 3, 3, 3);
-        tablero.setId(2);
+        
+        
+        // Habitación Trasera: Suelo
+        tablero = new Tablero(400, 400, 20, 3, 3, 3);
+        tablero.setId(0);
         tablero.setGL(gl);
-        tablero.getMatriz().trasladar(0, 0.6, 0);
-        tablero.getMatriz().rotar(Math.PI/2, 0.0, 1.0, 0.0);
-        tablero.setColor(new practica5.Modelo.Basic.Color(0, 1, 1));
+        tablero.getMatriz().rotar(90, 1.0, 0.0, 0.0);
+        tablero.getMatriz().trasladarM(0, 0, -270);
+        tablero.setColor(color.amarilloClaro);
+        this.addHijos(tablero);  
+        
+        
+        // Habitación Trasera: Pared Derecha
+        tablero = new Tablero(100, 400, 20, 3, 3, 3);
+        tablero.setId(0);
+        tablero.setGL(gl);
+        tablero.getMatriz().rotar(-90, 0.0, 1.0, 0.0);
+        tablero.getMatriz().trasladarM(0, 0, -270);
+        tablero.setColor(color.azulClaro);
+        this.addHijos(tablero); 
+        
+        tablero = new Tablero(200, 180, 20, 3, 3, 3);
+        tablero.setId(0);
+        tablero.setGL(gl);
+        tablero.getMatriz().rotar(-90, 0.0, 1.0, 0.0);
+        tablero.getMatriz().trasladarM(0, 0, -205);
+        tablero.getMatriz().trasladarM(0, 147, 0);
+        tablero.setColor(color.azulClaro);
+        this.addHijos(tablero); 
+        
+        tablero = new Tablero(200, 130, 20, 3, 3, 3);
+        tablero.setId(0);
+        tablero.setGL(gl);
+        tablero.getMatriz().rotar(-90, 0.0, 1.0, 0.0);
+        tablero.getMatriz().trasladarM(0, 0, -205);
+        tablero.setColor(color.azulClaro);
+        this.addHijos(tablero); 
+        
+        tablero = new Tablero(120, 400, 20, 3, 3, 3);
+        tablero.setId(0);
+        tablero.setGL(gl);
+        tablero.getMatriz().rotar(-90, 0.0, 1.0, 0.0);
+        tablero.getMatriz().trasladarM(0, 0, -80);
+        tablero.setColor(color.azulClaro);
+        this.addHijos(tablero); 
+        
+        // Habitación Frontal: Pared Central
+        tablero = new Tablero(150, 400, 20, 3, 3, 3);
+        tablero.setId(0);
+        tablero.setGL(gl);
+        tablero.setColor(color.verdeClaro);   
         this.addHijos(tablero);
         
-        tablero = new Tablero(150, 300, 300, 3, 3, 3);
-        tablero.setId(3);
+        tablero = new Tablero(105, 160, 20, 3, 3, 3);
+        tablero.setId(0);
         tablero.setGL(gl);
-        tablero.getMatriz().trasladar(0.65, 0.6, 0);
-        tablero.setColor(new practica5.Modelo.Basic.Color(0, 1, 1));
-        this.addHijos(tablero);
+        tablero.getMatriz().trasladar(100, 160, 0);
+        tablero.setColor(color.verdeClaro);   
+        this.addHijos(tablero);    
         
-        tablero = new Tablero(150, 300, 300, 3, 3, 3);
-        tablero.setId(4);
+        tablero = new Tablero(150, 400, 20, 3, 3, 3);
+        tablero.setId(0);
         tablero.setGL(gl);
-        tablero.getMatriz().trasladar(0.65, 1.94, 0);
-        tablero.getMatriz().rotar(Math.PI/2, 0.0, 1.0, 0.0);
-        tablero.setColor(new practica5.Modelo.Basic.Color(0, 1, 1));
+        tablero.getMatriz().trasladar(170, 0, 0);
+        tablero.setColor(color.verdeClaro);   
+        this.addHijos(tablero);
+ 
+        
+        // Habitación Frontal: Pared Derecha
+        tablero = new Tablero(160, 400, 20, 3, 3, 3);
+        tablero.setId(0);
+        tablero.setGL(gl);
+        tablero.getMatriz().rotar(-90, 0.0, 1.0, 0.0);
+        tablero.setColor(color.turquesaClaro);
+        this.addHijos(tablero); 
+        
+        tablero = new Tablero(85, 150, 20, 3, 3, 3);
+        tablero.setId(0);
+        tablero.setGL(gl);
+        tablero.getMatriz().rotar(-90, 0.0, 1.0, 0.0);
+        tablero.getMatriz().trasladarM(0, 0, 105);
+        tablero.setColor(color.turquesaClaro);
+        this.addHijos(tablero); 
+        
+        tablero = new Tablero(85, 175, 20, 3, 3, 3);
+        tablero.setId(0);
+        tablero.setGL(gl);
+        tablero.getMatriz().rotar(-90, 0.0, 1.0, 0.0);
+        tablero.getMatriz().trasladarM(0, 0, 105);
+        tablero.getMatriz().trasladarM(0, 150, 0);
+        tablero.setColor(color.turquesaClaro);
+        this.addHijos(tablero);         
+       
+        tablero = new Tablero(160, 400, 20, 3, 3, 3);
+        tablero.setId(0);
+        tablero.setGL(gl);
+        tablero.getMatriz().rotar(-90, 0.0, 1.0, 0.0);
+        tablero.getMatriz().trasladarM(0, 0, 160);
+        tablero.setColor(color.turquesaClaro);
+        this.addHijos(tablero); 
+        
+        
+        // Habitación Frontal: Suelo
+        tablero = new Tablero(400, 400, 20, 3, 3, 3);
+        tablero.setId(0);
+        tablero.setGL(gl);
+        tablero.getMatriz().rotar(90, 1.0, 0.0, 0.0);
+        tablero.setColor(color.turquesaOscuro);
         this.addHijos(tablero);
 
-        tablero = new Tablero(150, 600, 2100, 3, 3, 3);
-        tablero.setId(5);
-        tablero.setGL(gl);
-        tablero.getMatriz().trasladar(5.30, 0.6, 0);
-        tablero.getMatriz().rotar(Math.PI/2, 0.0, 1.0, 0.0);
-        tablero.setColor(new practica5.Modelo.Basic.Color(0, 1, 1));
-        this.addHijos(tablero); */
+        // Puerta
+        puerta = new Puerta(gl);
+        this.addHijos(puerta);
+        
+        // Cuadro
+        cuadro = new Cuadro(gl);
+        this.addHijos(cuadro);
+        
+        // Muebes
+        muebles = new Muebles(new PuntoVector3D(50, 50, -150), 45, gl);
+        muebles.setId(Objeto3D.MUEBLES);
+        this.addHijos(muebles);
+        
+        // Estanteria
+        estante = new Estanteria(new PuntoVector3D(10, 50, -30), 0, gl);
+        this.addHijos(estante);
+        
+        // Lampara
+        lampara = new Lampara(new PuntoVector3D(140, 250, -140), 0, gl);
+        this.addHijos(lampara);
+
     }
     
 }

@@ -79,9 +79,5 @@ public class MallaPorRevolucion extends Malla {
         }
         
     }
-    
-    public void dibujaMallaPorRevolucion(GL gl) {
-        this.dibuja(gl);
-    }
 }
 

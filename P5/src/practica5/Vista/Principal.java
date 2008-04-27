@@ -10,9 +10,10 @@ import practica5.Controlador.OyenteRaton;
 import practica5.Controlador.OyenteTeclado;
 import practica5.Modelo.Basic.Color;
 import practica5.Modelo.Basic.Malla;
+import practica5.Modelo.Basic.Objeto3D;
 
 public class Principal extends JFrame {
-
+    
     // Atributos
     private Container panel;
     private GLJPanel canvas;
@@ -85,22 +86,24 @@ public class Principal extends JFrame {
         canvas.addMouseListener(oyenteRaton);
         panel.add(canvas, BorderLayout.CENTER);
         
+        
         rbEscena = new JRadioButton("Escena");
         rbEscena.setForeground(java.awt.Color.green);
         rbEscena.setBackground(java.awt.Color.black);
         rbEscena.setBounds(10, 450, 80, 25);
+        rbEscena.setSelected(true);
         canvas.add(rbEscena);
         
         rbMuebles = new JRadioButton("Muebles");
         rbMuebles.setForeground(java.awt.Color.green);
         rbMuebles.setBackground(java.awt.Color.black);
-        rbMuebles.setBounds(10, 480, 120, 25);
+        rbMuebles.setBounds(10, 480, 80, 25);
         canvas.add(rbMuebles);
         
         rbLampara = new JRadioButton("Lampara");
         rbLampara.setForeground(java.awt.Color.green);
         rbLampara.setBackground(java.awt.Color.black);
-        rbLampara.setBounds(10, 510, 120, 25);
+        rbLampara.setBounds(10, 510, 80, 25);
         canvas.add(rbLampara);
         
         gBotones = new ButtonGroup();
@@ -123,19 +126,20 @@ public class Principal extends JFrame {
         rbPuntos = new JRadioButton("Puntos");
         rbPuntos.setForeground(java.awt.Color.pink);
         rbPuntos.setBackground(java.awt.Color.black);
-        rbPuntos.setBounds(10, 10, 80, 25);
+        rbPuntos.setBounds(10, 10, 70, 25);
         canvas.add(rbPuntos);
         
         rbLineas = new JRadioButton("Lineas");
         rbLineas.setForeground(java.awt.Color.pink);
         rbLineas.setBackground(java.awt.Color.black);
-        rbLineas.setBounds(10, 40, 120, 25);
+        rbLineas.setBounds(10, 40, 70, 25);
         canvas.add(rbLineas);
         
         rbSolido = new JRadioButton("Solido");
         rbSolido.setForeground(java.awt.Color.pink);
         rbSolido.setBackground(java.awt.Color.black);
-        rbSolido.setBounds(10, 70, 120, 25);
+        rbSolido.setBounds(10, 70, 60, 25);
+        rbSolido.setSelected(true);
         canvas.add(rbSolido);
         
         gBotonesModo = new ButtonGroup();
@@ -147,6 +151,7 @@ public class Principal extends JFrame {
         rbOrtogonal.setForeground(java.awt.Color.yellow);
         rbOrtogonal.setBackground(java.awt.Color.black);
         rbOrtogonal.setBounds(700, 450, 120, 25);
+        rbOrtogonal.setSelected(true);
         canvas.add(rbOrtogonal);
         
         rbPerspectiva = new JRadioButton("Perspectiva");
@@ -256,8 +261,24 @@ public class Principal extends JFrame {
             
             public void actionPerformed(ActionEvent e) {
                 if (jcNormales.isSelected()){
-                    escena.getObjeto3D().setNormalesEnabled(true);
-                } else {escena.getObjeto3D().setNormalesEnabled(false);}
+                    escena.getObjeto3D().activarNormales(true);
+                } else {escena.getObjeto3D().activarNormales(false);}
+                canvas.repaint();
+            }
+        });
+        
+        rbEscena.addActionListener(new ActionListener() {
+            
+            public void actionPerformed(ActionEvent e) {
+                oyenteTeclado.seleccionaObjeto(Objeto3D.ESCENA);
+                canvas.repaint();
+            }
+        });
+        
+        rbMuebles.addActionListener(new ActionListener() {
+            
+            public void actionPerformed(ActionEvent e) {
+                oyenteTeclado.seleccionaObjeto(Objeto3D.MUEBLES);
                 canvas.repaint();
             }
         });

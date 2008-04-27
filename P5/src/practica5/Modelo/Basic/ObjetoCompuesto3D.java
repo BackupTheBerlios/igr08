@@ -12,20 +12,7 @@ public class ObjetoCompuesto3D extends Objeto3D{
     public ObjetoCompuesto3D() {
         hijos = new ArrayList<Objeto3D>();
     }
-    
-    // Operaciones 
-    void rotar(double ang, double ejeX, double ejeY, double ejeZ) {
-        this.getMatriz().rotar(ang, ejeX, ejeY, ejeZ);
-    }
-    
-    void trasladar(double X, double Y, double Z) {
-        this.getMatriz().trasladar(X, Y, Z);
-    }
-    
-    void escalar(double X, double Y, double Z) {
-        this.getMatriz().escalar(X, Y, Z);
-    }
-    
+        
     // Getters & Setters
     public ArrayList<Objeto3D> getHijos() {
         return hijos;
@@ -58,16 +45,26 @@ public class ObjetoCompuesto3D extends Objeto3D{
         // Guardamos el estado de la matriz
         gl.glPushMatrix();
     
-        // Situamos el objeto compuesto en la escena
-        gl.glMultMatrixd(matriz.getMatriz(), 0);
-        
-        // Dibujamos cada uno de los objetos
-        int s = hijos.size();
-        for (int elem=0; elem<hijos.size(); elem++) 
-            hijos.get(elem).dibuja(gl);
+       
+            // Dibujamos cada uno de los objetos
+            for (int elem=0; elem<hijos.size(); elem++) 
+                hijos.get(elem).dibuja(gl);
          
         // Volvemos al estado anterior
         gl.glPopMatrix();
+    }
+    
+    
+    // Metodos generalizados
+    public void setTipoMalla(int i) {
+         for (int elem=0; elem<hijos.size(); elem++) 
+                hijos.get(elem).setTipoMalla(i); 
+    }
+    
+    public void activarNormales(boolean valor) {
+        for (int elem=0; elem<hijos.size(); elem++) 
+             hijos.get(elem).setNormalesEnabled(valor);
+
     }
     
 }

@@ -18,6 +18,16 @@ public class Objeto3D {
     protected GL gl;
     protected boolean normalesEnabled;
     
+    public static final int ESCENA = 0;
+    public static final int MUEBLES = 1;
+    public static final int LAMPARA = 2;
+    public static final int ESTANTERIA = 3;
+    public static final int PUERTA = 4;
+    public static final int CUADRO = 5;
+    public static final int SILLA = 6;
+    public static final int MESA = 7;
+           
+        
     // Constructora
     public Objeto3D() {
         color = new Color(0, 1, 0);

@@ -10,21 +10,31 @@ public class Calculos {
         
     }
     
-    
-    
     // M�todo Auxiliar que calcula los casos Base de la funci�n BSplines
-    public float BaseN(float t) {
+    public double BaseN2(double t) {
         
-        float res = (float) 0.0;
+        double res = (double) 0.0;
         
         if (0 <= t && t <= 1)
-            res = (float) (t * t * (1/2.0));
+            res = (double) (t * t * (1/2.0));
         else if (1 < t && t <= 2)
-            res = (float) ((3/4.0) - (t - 3/2.0) * (t - 3/2.0));
+            res = (double) ((3/4.0) - (t - 3/2.0) * (t - 3/2.0));
         else if (2 < t && t <= 3)
-            res = (float) ((1/2.0) * (3.0 - t) * (3.0 - t));
+            res = (double) ((1/2.0) * (3.0 - t) * (3.0 - t));
         
         return res;
+    }
+    
+    public double BaseN(double t) {
+        
+        if (t >= 0 && t <= 1)
+            return 0.5 * t * t;
+        else if (t > 1 && t <= 2)
+            return 0.75 - (t - 1.5) * (t - 1.5);
+        else if (t > 2 && t <= 3)
+            return 0.5 * (3.0 - t) * (3.0 - t);
+        else
+            return 0.0;
     }
     
     // Metodo B-Splines
@@ -34,13 +44,13 @@ public class Calculos {
         int numPuntosIniciales = perfil.size();
         
         int ind;
-        float ti, tj;
-        float xd, yd, zd;
-        float v, incr;
+        double ti, tj;
+        double xd, yd, zd;
+        double v, incr;
         
-        ti = (float) 2.0;
+        ti = (double) 2.0;
         tj = numPuntosIniciales + 1;
-        incr = (float) ((tj - 2) / numPuntosControl);
+        incr = (double) ((tj - 2) / numPuntosControl);
         
         while (ti<tj) {
             
@@ -49,7 +59,7 @@ public class Calculos {
             zd = 0;
             
             for (int i=0; i<numPuntosIniciales; i++) {
-                v = (float) BaseN(ti-i);
+                v = (double) BaseN(ti-i);
                 xd += perfil.get(i).getX() * v;
                 yd += perfil.get(i).getY() * v;
                 zd += perfil.get(i).getZ() * v;

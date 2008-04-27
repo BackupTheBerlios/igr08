@@ -30,7 +30,7 @@ public class Camara {
         r = 504;
         b = -400;
         t = 300;
-        N = 0.1;
+        N = -1000;
         F = 1000;
         setProjection(GL3D.PROY_ORTOGONAL);
     }
@@ -45,8 +45,8 @@ public class Camara {
         r = 504;
         b = -400;
         t = 300;
-        N = 1000;
-        F = -1000;
+        N = -1000;
+        F = 1000;
         setProjection(GL3D.PROY_ORTOGONAL);
     }
     
@@ -73,22 +73,18 @@ public class Camara {
         
         switch (tipoProyeccion) {
             case GL3D.PROY_ORTOGONAL:
-                gl.glOrtho(l, r, b, t, -1000, 10000);
-                break;
+                 gl.glOrtho(l, r, b, t, N, F);  break;
+                    
             case GL3D.PROY_PERSPECTIVA:
-                double anguloVision = 10;
-                double proporcion = r-l / t-b;
-                //GL auxgl = glu.getCurrentGL();
+                 double anguloVision = 90;
+                 double proporcion = r-l / t-b;
+                 this.glu.gluPerspective(anguloVision, proporcion, N, F);
+                 break;
                 
-                glu.gluPerspective(anguloVision, proporcion, N, F);
-                
-                break;
             case GL3D.PROY_OBLICUA:
-                setOblicua(new PuntoVector3D(3,2,1));
-                break;
-            default:
-                gl.glOrtho(l, r, b, t, -1000, 10000);
-                break;
+                 //gl.glFrustum(l, r, b, r, N, F);
+                 setOblicua(new PuntoVector3D(3,2,1));
+                 break;
         }
     }
     
@@ -110,10 +106,8 @@ public class Camara {
         m[14] = -eye.prodEsc(n);
         m[15] = 1;
         
-        //this.gl.glMatrixMode(gl.GL_MODELVIEW);
-
-        
-        this.gl.glLoadMatrixd(m, 0);
+        gl.glMatrixMode(gl.GL_MODELVIEW);
+        gl.glLoadMatrixd(m, 0);
   
     }
     

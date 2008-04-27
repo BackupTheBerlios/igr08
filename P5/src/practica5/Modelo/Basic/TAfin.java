@@ -17,6 +17,64 @@ public class TAfin {
     }
     
     // Transformaciones Afines
+    public void rotar(double ang, double ejeX, double ejeY, double ejeZ) {
+        gl.glMatrixMode(GL.GL_MODELVIEW);
+        gl.glPushMatrix();
+            gl.glLoadIdentity();
+            gl.glRotated(ang, ejeX, ejeY, ejeZ);
+            gl.glGetDoublev(gl.GL_MODELVIEW_MATRIX, matriz, 0);
+        gl.glPopMatrix();
+    }
+    
+    public void trasladar(double X, double Y, double Z) {
+        gl.glMatrixMode(GL.GL_MODELVIEW);
+        gl.glPushMatrix();
+            gl.glLoadIdentity();
+            gl.glTranslated(X, Y, Z);
+            gl.glGetDoublev(gl.GL_MODELVIEW_MATRIX, matriz, 0);
+        gl.glPopMatrix();
+    }
+    
+    public void escalar(double X, double Y, double Z) {
+        gl.glMatrixMode(GL.GL_MODELVIEW);
+        gl.glPushMatrix();
+            gl.glLoadIdentity();
+            gl.glScaled(X, Y, Z);
+            gl.glMultMatrixd(matriz, 0);
+            gl.glGetDoublev(gl.GL_MODELVIEW_MATRIX, matriz, 0);
+        gl.glPopMatrix();
+    }
+    
+        public void rotarM(double ang, double ejeX, double ejeY, double ejeZ) {
+        gl.glMatrixMode(GL.GL_MODELVIEW);
+        gl.glPushMatrix();
+            gl.glLoadIdentity();
+            gl.glRotated(ang, ejeX, ejeY, ejeZ);
+            gl.glMultMatrixd(matriz, 0);
+            gl.glGetDoublev(gl.GL_MODELVIEW_MATRIX, matriz, 0);
+        gl.glPopMatrix();
+    }
+    
+    public void trasladarM(double X, double Y, double Z) {
+        gl.glMatrixMode(GL.GL_MODELVIEW);
+        gl.glPushMatrix();
+            gl.glLoadIdentity();
+            gl.glTranslated(X, Y, Z);
+            gl.glMultMatrixd(matriz, 0);
+            gl.glGetDoublev(gl.GL_MODELVIEW_MATRIX, matriz, 0);
+        gl.glPopMatrix();
+    }
+    
+    public void escalarM(double X, double Y, double Z) {
+        gl.glMatrixMode(GL.GL_MODELVIEW);
+        gl.glPushMatrix();
+            gl.glLoadIdentity();
+            gl.glScaled(X, Y, Z);
+            gl.glGetDoublev(gl.GL_MODELVIEW_MATRIX, matriz, 0);
+        gl.glPopMatrix();
+    }
+    
+    /*
     public void rotar(double ang, double ejeX, double ejeY, double ejeZ){
         gl.glMatrixMode(gl.GL_MODELVIEW);
        // gl.glLoadIdentity();  //??
@@ -37,9 +95,15 @@ public class TAfin {
         gl.glScaled(X, Y, Z);
         gl.glGetDoublev(gl.GL_MODELVIEW_MATRIX, matriz, 0);
     }
-    
+    */
     public void setGL(GL gl){
         this.gl = gl;
+        
+        gl.glMatrixMode(GL.GL_MODELVIEW);
+        gl.glPushMatrix();
+            gl.glLoadIdentity();
+            gl.glGetDoublev(gl.GL_MODELVIEW_MATRIX, matriz, 0);
+        gl.glPopMatrix();
     }
     
     // Getters & Setters
