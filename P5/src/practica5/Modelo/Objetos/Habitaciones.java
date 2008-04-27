@@ -145,7 +145,7 @@ public class Habitaciones extends ObjetoCompuesto3D{
         cuadro = new Cuadro(gl);
         this.addHijos(cuadro);
         
-        // Muebes
+        // Muebles
         muebles = new Muebles(new PuntoVector3D(50, 50, -150), 45, gl);
         muebles.setId(Objeto3D.MUEBLES);
         this.addHijos(muebles);

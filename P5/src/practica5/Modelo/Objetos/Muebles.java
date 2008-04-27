@@ -14,6 +14,8 @@ public class Muebles extends ObjetoCompuesto3D {
     
     public Muebles(PuntoVector3D pos, double ori, GL gl) {
         
+        super.setGL(gl);
+        
         // Mesa
         mesa = new Mesa(new PuntoVector3D(pos.getX(), pos.getY(), pos.getZ()), ori, gl);
         this.addHijos(mesa);
@@ -33,6 +35,8 @@ public class Muebles extends ObjetoCompuesto3D {
         // Donut
         donut = new Donut(new PuntoVector3D(pos.getX() + 50, pos.getY() + 13, pos.getZ() - 20), 0, gl);
         this.addHijos(donut);
+        
+        
         
     }
     

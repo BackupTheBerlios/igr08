@@ -96,33 +96,33 @@ public class OyenteTeclado implements KeyListener {
     }
     
     public void modificarMuebles(KeyEvent e) {
-        Objeto3D select = new Objeto3D();
+
         boolean enc = false;
         int i = 0;
         while (i<escena.getObjeto3D().getHijos().size() && !enc) {
             if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.MUEBLES) {
-                select = (Objeto3D) escena.getObjeto3D().getHijos().get(i);
                 enc = true;
             }
             i++;
         }
+        i--;
         
         switch (e.getKeyCode()) {
             case KeyEvent.VK_RIGHT:
-                
-                select.getMatriz().trasladar(10, 0, 0);
+                escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar(10, 0, 0);
                 break;
             case KeyEvent.VK_LEFT:
-                select.getMatriz().trasladar(-10, 0, 0);
+                escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar(-10, 0, 0);
                 break;
             case KeyEvent.VK_UP:
-                select.getMatriz().trasladar(0, 10, 0);
+                escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar(0, 10, 0);
                 break;
             case KeyEvent.VK_DOWN:
-                select.getMatriz().trasladar(0, -10, 0);
+                escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar(0, -10, 0);
                 break;
                 
         }
+        canvas.repaint();
     }
     
     public void modificarLampara(KeyEvent e) {

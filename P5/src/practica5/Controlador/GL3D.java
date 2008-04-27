@@ -10,14 +10,7 @@ import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 import practica5.Modelo.Basic.Color;
 
-import practica5.Modelo.Basic.Camara;
-import practica5.Modelo.Basic.Cilindro;
-import practica5.Modelo.Basic.Malla;
-import practica5.Modelo.Basic.MallaPorRevolucion;
-import practica5.Modelo.Basic.Objeto3D;
-import practica5.Modelo.Basic.ObjetoCompuesto3D;
-import practica5.Modelo.Basic.PuntoVector3D;
-import practica5.Modelo.Basic.Tablero;
+import practica5.Modelo.Basic.*;
 import practica5.Modelo.Objetos.Habitaciones;
 import practica5.Modelo.Objetos.Toro;
 import practica5.util.Calculos;

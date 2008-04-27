@@ -10,6 +10,8 @@ public class Silla extends ObjetoCompuesto3D{
     
     public Silla(PuntoVector3D pos, double ori, GL gl) {
         
+        super.setGL(gl);
+        
         // Asiento
         tabla = new Tablero(50, 50, 10, 3, 3, 3);
         tabla.setId(Objeto3D.SILLA);
