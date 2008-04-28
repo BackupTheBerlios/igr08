@@ -4,6 +4,7 @@ import java.nio.FloatBuffer;
 import java.security.Principal;
 import java.util.ArrayList;
 import javax.media.opengl.*;
+import javax.media.opengl.GLContext;
 import javax.media.opengl.glu.*;
 import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
@@ -40,8 +41,8 @@ public class GL3D implements GLEventListener {
 
 
     public GL3D(int anchura, int altura) {
-	this.glu = new GLU();
-
+	//this.glu = new GLU();
+        
 	this.anchura = anchura;
 	this.altura = altura;
 	this.xRight = anchura / 2.0;
@@ -56,11 +57,11 @@ public class GL3D implements GLEventListener {
     public void display(GLAutoDrawable drw) {
 	  
         gl.glClear(gl.GL_COLOR_BUFFER_BIT | gl.GL_DEPTH_BUFFER_BIT);
-
-        camaraActual.setModelViewMatrix();
-
-        hab.dibuja(gl);
         
+        camaraActual.setModelViewMatrix();
+   
+        hab.dibuja(gl);
+                
         gl.glFlush();
     }
 
@@ -71,7 +72,7 @@ public class GL3D implements GLEventListener {
 	gl = drw.getGL();
 	glu = new GLU();
         
-	this.camaraActual = new Camara(gl);
+	this.camaraActual = new Camara(gl, glu);
 	this.camaraSecundaria = new Camara(new PuntoVector3D(100, 100, 100), new PuntoVector3D(0, 0, 0), new PuntoVector3D(0, 1, 0), gl);
 	this.activarLuces(gl);
 	this.activarOpcionesOpenGL(gl);
@@ -86,16 +87,17 @@ public class GL3D implements GLEventListener {
         activarOpcionesOpenGL(gl);
                      
         gl.glClearColor(0, 0, 0, 1);
-
+        drw.setAutoSwapBufferMode(true);
+        /*        
 	gl.glMatrixMode(GL.GL_PROJECTION);
 	gl.glLoadIdentity();
 
 	//glu.gluOrtho2D(xLeft, xRight, yBot, yTop);
-	//glu.gluPerspective(45.0, xRight, 1.0, 20.0);
-	gl.glOrtho(xLeft, xRight, yBot, yTop, -100.0f, 100.0f);
+	//glu.gluPerspective(90.0, xRight, 1.0, 20.0);
+	//gl.glOrtho(xLeft, xRight, yBot, yTop, -100.0f, 100.0f);
 
 	gl.glMatrixMode(GL.GL_MODELVIEW);
-	gl.glLoadIdentity();
+	gl.glLoadIdentity(); */
     }
 
     public void reshape(GLAutoDrawable drw, int x, int y, int width, int height) {

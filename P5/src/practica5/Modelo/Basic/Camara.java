@@ -15,9 +15,9 @@ public class Camara {
     private GL gl;
     private GLU glu;
     
-    public Camara(GL gl) {
+    public Camara(GL gl, GLU glu) {
         this.gl = gl;
-        this.glu = new GLU();
+        this.glu = glu;
                 
         eye = new PuntoVector3D(0, 0, 0);
         look = new PuntoVector3D(0, 0, -1);
@@ -78,7 +78,7 @@ public class Camara {
             case GL3D.PROY_PERSPECTIVA:
                  double anguloVision = 90;
                  double proporcion = r-l / t-b;
-                 this.glu.gluPerspective(anguloVision, proporcion, N, F);
+                 glu.gluPerspective(anguloVision, proporcion, N, F);
                  break;
                 
             case GL3D.PROY_OBLICUA:
