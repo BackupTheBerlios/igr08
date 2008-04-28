@@ -10,7 +10,7 @@ public class Muebles extends ObjetoCompuesto3D {
     private Silla silla;
     private Plato plato;
     private Donut donut;
-    private Malla copa;
+    private Copa copa;
     
     public Muebles(PuntoVector3D pos, double ori, GL gl) {
         
@@ -36,7 +36,13 @@ public class Muebles extends ObjetoCompuesto3D {
         donut = new Donut(new PuntoVector3D(pos.getX() + 50, pos.getY() + 13, pos.getZ() - 20), 0, gl);
         this.addHijos(donut);
         
-        
+        // Copa 1
+        copa = new Copa(new PuntoVector3D(pos.getX() + 30, pos.getY(), pos.getZ()), 0, gl);
+        this.addHijos(copa);        
+
+        // Copa 2
+        copa = new Copa(new PuntoVector3D(pos.getX() + 80, pos.getY(), pos.getZ() - 50), 0, gl);
+        this.addHijos(copa);    
         
     }
     
