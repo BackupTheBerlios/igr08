@@ -46,17 +46,5 @@ public class Muebles extends ObjetoCompuesto3D {
         
     }
     
-    // Operaciones
-    public void rotar(double ang, double ejeX, double ejeY, double ejeZ) {
-        this.getMatriz().rotar(ang, ejeX, ejeY, ejeZ);
-    }
-    
-    public void trasladar(double X, double Y, double Z) {
-        this.getMatriz().trasladar(X, Y, Z);
-    }
-    
-    public void escalar(double X, double Y, double Z) {
-        this.getMatriz().escalar(X, Y, Z);
-    }
     
 }

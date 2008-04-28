@@ -75,21 +75,21 @@ public class TAfin {
     }
     
     /*
-    public void rotar(double ang, double ejeX, double ejeY, double ejeZ){
+    public void rotarN(double ang, double ejeX, double ejeY, double ejeZ){
         gl.glMatrixMode(gl.GL_MODELVIEW);
        // gl.glLoadIdentity();  //??
         gl.glRotated(ang, ejeX, ejeY, ejeZ);
         gl.glGetDoublev(gl.GL_MODELVIEW_MATRIX, matriz, 0);
     }
     
-    public void trasladar(double X, double Y, double Z){
+    public void trasladarN(double X, double Y, double Z){
         gl.glMatrixMode(gl.GL_MODELVIEW);
        // gl.glLoadIdentity(); //??
         gl.glTranslated(X, Y, Z);
         gl.glGetDoublev(gl.GL_MODELVIEW_MATRIX, matriz, 0);
     }
     
-    public void escalar(double X, double Y, double Z){
+    public void escalarN(double X, double Y, double Z){
         gl.glMatrixMode(gl.GL_MODELVIEW);
         //gl.glLoadIdentity();  //??
         gl.glScaled(X, Y, Z);
@@ -127,6 +127,14 @@ public class TAfin {
         matriz[5]=1;
         matriz[10]=1;
         matriz[15]=1;
+    }
+    
+    public String imprime() {
+        String cad = "";
+        for (int i=0; i<matriz.length; i++)
+            cad += matriz[i];
+        
+        return cad;
     }
 }
 

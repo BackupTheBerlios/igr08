@@ -106,10 +106,12 @@ public class OyenteTeclado implements KeyListener {
             i++;
         }
         i--;
-        
+ 
+   
         switch (e.getKeyCode()) {
             case KeyEvent.VK_RIGHT:
                 escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar(10, 0, 0);
+                //escena.getObjeto3D().getHijos().get(i).trasladar(10, 0, 0);
                 break;
             case KeyEvent.VK_LEFT:
                 escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar(-10, 0, 0);
@@ -122,6 +124,7 @@ public class OyenteTeclado implements KeyListener {
                 break;
                 
         }
+         System.out.print(escena.getObjeto3D().getHijos().get(i).getMatriz().imprime());
         canvas.repaint();
     }
     
