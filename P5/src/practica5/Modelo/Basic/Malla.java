@@ -57,8 +57,8 @@ public class Malla extends Objeto3D {
                 
                     if (this.normalesEnabled) {
                         gl.glNormal3d(normales.get(iN).getX(),
-                            normales.get(iN).getY(),
-                            normales.get(iN).getZ());
+                                      normales.get(iN).getY(),
+                                      normales.get(iN).getZ());
                     }
                 
                     gl.glVertex3d(vertices.get(iV).getX(),
