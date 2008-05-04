@@ -283,6 +283,14 @@ public class Principal extends JFrame {
             }
         });
         
+        rbLampara.addActionListener(new ActionListener() {
+            
+            public void actionPerformed(ActionEvent e) {
+                oyenteTeclado.seleccionaObjeto(Objeto3D.LAMPARA);
+                canvas.repaint();
+            }
+        });
+        
         // Añadimos un evento para la accion de salida
         addWindowListener(new WindowAdapter() {
             

@@ -155,14 +155,17 @@ public class Habitaciones extends ObjetoCompuesto3D {
         
         // Estanteria
         estante = new Estanteria(new PuntoVector3D(10, 50, -30), 0, gl);
+        estante.setId(Objeto3D.ESTANTERIA);
         this.addHijos(estante);
         
         // Lampara
         lampara = new Lampara(new PuntoVector3D(140, 250, -140), 0, gl);
+        lampara.setId(Objeto3D.LAMPARA);
         this.addHijos(lampara);
      
         // Percha
         percha = new Percha(new PuntoVector3D(30, 0, 50), 0, gl);
+        percha.setId(Objeto3D.PERCHERO);
         this.addHijos(percha);
         
     }

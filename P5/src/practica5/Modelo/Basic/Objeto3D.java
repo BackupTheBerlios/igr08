@@ -27,6 +27,7 @@ public class Objeto3D {
     public static final int CUADRO = 5;
     public static final int SILLA = 6;
     public static final int MESA = 7;
+    public static final int PERCHERO = 8;
            
         
     // Constructora

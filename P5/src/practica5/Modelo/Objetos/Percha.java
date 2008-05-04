@@ -13,6 +13,8 @@ public class Percha extends ObjetoCompuesto3D {
     // Constructora
     public Percha(PuntoVector3D pos, double ori, GL gl) {
         
+        super.setGL(gl);
+        
         // Percha
         ArrayList<PuntoVector3D> perfil = new ArrayList<PuntoVector3D>();
         perfil.add(new PuntoVector3D(1, 250, 0));
@@ -25,6 +27,7 @@ public class Percha extends ObjetoCompuesto3D {
         percha = new MallaPorRevolucion(perfil, 4, 0.7 , gl);
         percha.getMatriz().trasladarM(pos.getX(), pos.getY(), pos.getZ());
         percha.setColor(color.negro);
+        percha.setId(8);
         this.addHijos(percha);
     }
     
