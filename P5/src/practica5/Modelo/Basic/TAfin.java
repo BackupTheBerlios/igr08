@@ -1,7 +1,7 @@
 package practica5.Modelo.Basic;
 
 import javax.media.opengl.GL;
-
+//http://www.tecnun.es/asignaturas/grafcomp/presentaciones/transformaciones.ppt
 public class TAfin {
 
     // Atributos privados
