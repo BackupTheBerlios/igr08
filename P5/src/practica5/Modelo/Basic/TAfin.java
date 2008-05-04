@@ -2,6 +2,7 @@ package practica5.Modelo.Basic;
 
 import javax.media.opengl.GL;
 //http://www.tecnun.es/asignaturas/grafcomp/presentaciones/transformaciones.ppt
+import practica5.util.Conversiones;
 public class TAfin {
 
     // Atributos privados
@@ -44,8 +45,8 @@ public class TAfin {
     }
 
     public void rotaX(double ang) {
-	double c = Math.cos(ang);
-	double s = Math.sin(ang);
+	double c = Math.cos(Conversiones.r2g(ang));
+	double s = Math.sin(Conversiones.r2g(ang));
 	this.setMatrizComponent(5, c);
 	this.setMatrizComponent(6, s);
 	this.setMatrizComponent(9, -s);
@@ -54,8 +55,8 @@ public class TAfin {
     }
 
     public void rotaY(double ang) {
-	double c = Math.cos(ang);
-	double s = Math.sin(ang);
+	double c = Math.cos(Conversiones.r2g(ang));
+	double s = Math.sin(Conversiones.r2g(ang));
 	this.setMatrizComponent(0, c);
 	this.setMatrizComponent(2, -s);
 	this.setMatrizComponent(8, s);
@@ -63,8 +64,8 @@ public class TAfin {
     }
 
     public void rotaZ(double ang) {
-	double c = Math.cos(ang);
-	double s = Math.sin(ang);
+	double c = Math.cos(Conversiones.r2g(ang));
+	double s = Math.sin(Conversiones.r2g(ang));
 	this.setMatrizComponent(0, c);
 	this.setMatrizComponent(1, s);
 	this.setMatrizComponent(4, -s);

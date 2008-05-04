@@ -163,9 +163,35 @@ public class OyenteTeclado implements KeyListener {
 		escena.getObjeto3D().getHijos().get(i).getMatriz().rotaZ(10);
 		break;
 	    case KeyEvent.VK_Y:
-				escena.getObjeto3D().getHijos().get(i).setModificado();
+		escena.getObjeto3D().getHijos().get(i).setModificado();
 		escena.getObjeto3D().getHijos().get(i).getMatriz().rotaZ(-10);
 		break;
+	    case KeyEvent.VK_S:
+		escena.getObjeto3D().getHijos().get(i).setModificado();
+		escena.getObjeto3D().getHijos().get(i).getMatriz().escalaX(10);
+		break;
+		case KeyEvent.VK_D:
+		escena.getObjeto3D().getHijos().get(i).setModificado();
+		escena.getObjeto3D().getHijos().get(i).getMatriz().escalaX(-10);
+		break;
+		
+		case KeyEvent.VK_F:
+		escena.getObjeto3D().getHijos().get(i).setModificado();
+		escena.getObjeto3D().getHijos().get(i).getMatriz().escalaY(10);
+		break;
+		case KeyEvent.VK_G:
+		escena.getObjeto3D().getHijos().get(i).setModificado();
+		escena.getObjeto3D().getHijos().get(i).getMatriz().escalaY(-10);
+		break;
+		case KeyEvent.VK_H:
+		escena.getObjeto3D().getHijos().get(i).setModificado();
+		escena.getObjeto3D().getHijos().get(i).getMatriz().escalaZ(10);
+		break;
+		case KeyEvent.VK_J:
+		escena.getObjeto3D().getHijos().get(i).setModificado();
+		escena.getObjeto3D().getHijos().get(i).getMatriz().escalaZ(-10);
+		break;
+		
 	    // Extra
 	    case KeyEvent.VK_SHIFT:
 		escena.cambiaCamara();
