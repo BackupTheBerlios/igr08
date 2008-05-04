@@ -8,9 +8,11 @@ public class ObjetoCompuesto3D extends Objeto3D{
     // Atributos protegigos
     protected ArrayList<Objeto3D> hijos;
     
+    
     // Constructora
     public ObjetoCompuesto3D() {
         hijos = new ArrayList<Objeto3D>();
+
     }
         
     // Getters & Setters
@@ -44,8 +46,10 @@ public class ObjetoCompuesto3D extends Objeto3D{
     
         // Guardamos el estado de la matriz
         gl.glPushMatrix();
-    
-       
+           
+            if (modificado)
+                gl.glMultMatrixd(matriz.getMatriz(), 0);
+        
             // Dibujamos cada uno de los objetos
             for (int elem=0; elem<hijos.size(); elem++) 
                 hijos.get(elem).dibuja(gl);
@@ -79,5 +83,7 @@ public class ObjetoCompuesto3D extends Objeto3D{
     public void escalar(double X, double Y, double Z) {
         this.getMatriz().escalar(X, Y, Z);
     }
+    
+
     
 }

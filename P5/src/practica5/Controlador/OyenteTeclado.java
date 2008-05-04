@@ -110,17 +110,21 @@ public class OyenteTeclado implements KeyListener {
    
         switch (e.getKeyCode()) {
             case KeyEvent.VK_RIGHT:
-                escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar(10, 0, 0);
-                //escena.getObjeto3D().getHijos().get(i).trasladar(10, 0, 0);
+                escena.getObjeto3D().getHijos().get(i).setModificado();
+                escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(10, 0, 0);
+                 //escena.getObjeto3D().getHijos().get(i).trasladar(10, 0, 0);
                 break;
             case KeyEvent.VK_LEFT:
-                escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar(-10, 0, 0);
+                escena.getObjeto3D().getHijos().get(i).setModificado();
+                escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(-10, 0, 0);
                 break;
             case KeyEvent.VK_UP:
-                escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar(0, 10, 0);
+                escena.getObjeto3D().getHijos().get(i).setModificado();
+                escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(0, 0, 10);
                 break;
             case KeyEvent.VK_DOWN:
-                escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar(0, -10, 0);
+                escena.getObjeto3D().getHijos().get(i).setModificado();
+                escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(0, 0, -10);
                 break;
                 
         }

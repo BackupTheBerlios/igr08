@@ -106,7 +106,7 @@ public class GL3D implements GLEventListener {
     public void reshape(GLAutoDrawable drw, int x, int y, int width, int height) {
 	RatioViewPort = (double) width / (double) height;
 	double RatioVolVista = (xRight - xLeft) / (yTop - yBot);
-
+        
 	if (RatioVolVista >= RatioViewPort) {
 	    //Aumentamos yTop-yBot
 	    double altoNew = (xRight - xLeft) / RatioViewPort;

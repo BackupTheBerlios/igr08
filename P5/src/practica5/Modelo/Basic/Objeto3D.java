@@ -17,6 +17,7 @@ public class Objeto3D {
     protected int tipoMalla;
     protected GL gl;
     protected boolean normalesEnabled;
+    protected boolean modificado;
     
     public static final int ESCENA = 0;
     public static final int MUEBLES = 1;
@@ -34,6 +35,7 @@ public class Objeto3D {
         tipoMalla = Malla.GL_POLYGON;
         normalesEnabled = false;
         matriz = new TAfin();
+        modificado = false;
     }
     
     
@@ -85,5 +87,9 @@ public class Objeto3D {
     
     public GL getGL() {
         return this.gl;
+    }
+    
+    public void setModificado() {
+        modificado = true;
     }
 }

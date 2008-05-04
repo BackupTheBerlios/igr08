@@ -1,6 +1,7 @@
 package practica5.Modelo.Basic;
 
 import javax.media.opengl.GL;
+import javax.media.opengl.GLContext;
 import javax.media.opengl.glu.GLU;
 import practica5.Controlador.GL3D;
 import practica5.util.Conversiones;
@@ -68,9 +69,11 @@ public class Camara {
     }
     
     public void setProjection(int tipoProyeccion) {
+                
         gl.glMatrixMode(gl.GL_PROJECTION);
         gl.glLoadIdentity();
         
+                        
         switch (tipoProyeccion) {
             case GL3D.PROY_ORTOGONAL:
                  gl.glOrtho(l, r, b, t, N, F);  break;

@@ -172,7 +172,7 @@ public class TAfin {
     }
 
     public void setMatrizComponent(int indice, double valor) {
-	matriz[indice] = valor;
+	matriz[indice] += valor;
     }
 
     public void setIdentity() {
