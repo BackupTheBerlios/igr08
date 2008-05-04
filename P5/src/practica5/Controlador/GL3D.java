@@ -69,9 +69,12 @@ public class GL3D implements GLEventListener {
     }
 
     public void init(GLAutoDrawable drw) {
-	gl = drw.getGL();
+	context = drw.getContext();
+	context.makeCurrent();
+	gl = context.getGL();
+	//gl = drw.getGL();
 	glu = new GLU();
-        
+
 	this.camaraActual = new Camara(gl, glu);
 	this.camaraSecundaria = new Camara(new PuntoVector3D(100, 100, 100), new PuntoVector3D(0, 0, 0), new PuntoVector3D(0, 1, 0), gl);
 	this.activarLuces(gl);

@@ -16,6 +16,16 @@ public class TAfin {
         matriz = new double[16];
     }
     
+    public void trasladar1(double X, double Y, double Z) {
+        
+        this.setMatrizComponent(12, X);
+	this.setMatrizComponent(13, Y);
+	this.setMatrizComponent(14, Z);
+	for (int i = 0; i<matriz.length; i++){
+	    System.out.println(matriz[i]);
+	}
+    }
+    
     // Transformaciones Afines
     public void rotar(double ang, double ejeX, double ejeY, double ejeZ) {
         gl.glMatrixMode(GL.GL_MODELVIEW);
@@ -33,7 +43,9 @@ public class TAfin {
             gl.glTranslated(X, Y, Z);
             gl.glGetDoublev(gl.GL_MODELVIEW_MATRIX, matriz, 0);
         gl.glPopMatrix();
-    }
+	for (int i = 0; i<matriz.length; i++)
+	    System.out.println(matriz[i]);
+	}
     
     public void escalar(double X, double Y, double Z) {
         gl.glMatrixMode(GL.GL_MODELVIEW);
