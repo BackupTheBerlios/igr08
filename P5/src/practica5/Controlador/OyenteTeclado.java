@@ -104,14 +104,14 @@ public class OyenteTeclado implements KeyListener {
     public void modificarMuebles(KeyEvent e) {
 
 	boolean enc = false;
-	int i = 0;
+	int i = -1;
 	while (i < escena.getObjeto3D().getHijos().size() && !enc) {
+	    i++;
 	    if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.MUEBLES) {
 		enc = true;
 	    }
-	    i++;
 	}
-	i--;
+
 
 
 	switch (e.getKeyCode()) {
@@ -151,15 +151,15 @@ public class OyenteTeclado implements KeyListener {
 		escena.getObjeto3D().getHijos().get(i).getMatriz().rotaX(-10);
 		break;
 	    case KeyEvent.VK_E:
-				escena.getObjeto3D().getHijos().get(i).setModificado();
+		escena.getObjeto3D().getHijos().get(i).setModificado();
 		escena.getObjeto3D().getHijos().get(i).getMatriz().rotaY(10);
 		break;
 	    case KeyEvent.VK_R:
-				escena.getObjeto3D().getHijos().get(i).setModificado();
+		escena.getObjeto3D().getHijos().get(i).setModificado();
 		escena.getObjeto3D().getHijos().get(i).getMatriz().rotaY(-10);
 		break;
 	    case KeyEvent.VK_T:
-				escena.getObjeto3D().getHijos().get(i).setModificado();
+		escena.getObjeto3D().getHijos().get(i).setModificado();
 		escena.getObjeto3D().getHijos().get(i).getMatriz().rotaZ(10);
 		break;
 	    case KeyEvent.VK_Y:
@@ -168,30 +168,30 @@ public class OyenteTeclado implements KeyListener {
 		break;
 	    case KeyEvent.VK_S:
 		escena.getObjeto3D().getHijos().get(i).setModificado();
-		escena.getObjeto3D().getHijos().get(i).getMatriz().escalaX(10);
+		escena.getObjeto3D().getHijos().get(i).getMatriz().escalaX(1.3);
 		break;
-		case KeyEvent.VK_D:
+	    case KeyEvent.VK_D:
 		escena.getObjeto3D().getHijos().get(i).setModificado();
-		escena.getObjeto3D().getHijos().get(i).getMatriz().escalaX(-10);
+		escena.getObjeto3D().getHijos().get(i).getMatriz().escalaX(-1.3);
 		break;
-		
-		case KeyEvent.VK_F:
+
+	    case KeyEvent.VK_F:
 		escena.getObjeto3D().getHijos().get(i).setModificado();
-		escena.getObjeto3D().getHijos().get(i).getMatriz().escalaY(10);
+		escena.getObjeto3D().getHijos().get(i).getMatriz().escalaY(1.3);
 		break;
-		case KeyEvent.VK_G:
+	    case KeyEvent.VK_G:
 		escena.getObjeto3D().getHijos().get(i).setModificado();
-		escena.getObjeto3D().getHijos().get(i).getMatriz().escalaY(-10);
+		escena.getObjeto3D().getHijos().get(i).getMatriz().escalaY(-1.3);
 		break;
-		case KeyEvent.VK_H:
+	    case KeyEvent.VK_H:
 		escena.getObjeto3D().getHijos().get(i).setModificado();
-		escena.getObjeto3D().getHijos().get(i).getMatriz().escalaZ(10);
+		escena.getObjeto3D().getHijos().get(i).getMatriz().escalaZ(1.3);
 		break;
-		case KeyEvent.VK_J:
+	    case KeyEvent.VK_J:
 		escena.getObjeto3D().getHijos().get(i).setModificado();
-		escena.getObjeto3D().getHijos().get(i).getMatriz().escalaZ(-10);
+		escena.getObjeto3D().getHijos().get(i).getMatriz().escalaZ(-1.3);
 		break;
-		
+
 	    // Extra
 	    case KeyEvent.VK_SHIFT:
 		escena.cambiaCamara();
@@ -200,41 +200,40 @@ public class OyenteTeclado implements KeyListener {
 	System.out.print(escena.getObjeto3D().getHijos().get(i).getMatriz().imprime());
 	canvas.repaint();
     }
- 
+
     public void modificarLampara(KeyEvent e) {
 
-        boolean enc = false;
-        int i = 0;
-        while (i<escena.getObjeto3D().getHijos().size() && !enc) {
-            if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.LAMPARA) {
-                enc = true;
-            }
-            i++;
-        }
-        i--;
-   
-        switch (e.getKeyCode()) {
-            case KeyEvent.VK_RIGHT:
-                escena.getObjeto3D().getHijos().get(i).setModificado();
-                escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(10, 0, 0);
-                 //escena.getObjeto3D().getHijos().get(i).trasladar(10, 0, 0);
-                break;
-            case KeyEvent.VK_LEFT:
-                escena.getObjeto3D().getHijos().get(i).setModificado();
-                escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(-10, 0, 0);
-                break;
-            case KeyEvent.VK_UP:
-                escena.getObjeto3D().getHijos().get(i).setModificado();
-                escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(0, 0, 10);
-                break;
-            case KeyEvent.VK_DOWN:
-                escena.getObjeto3D().getHijos().get(i).setModificado();
-                escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(0, 0, -10);
-                break;
-                
-        }
-         System.out.print(escena.getObjeto3D().getHijos().get(i).getMatriz().imprime());
-        canvas.repaint();
+	boolean enc = false;
+	int i = -1;
+	while (i < escena.getObjeto3D().getHijos().size() && !enc) {
+	    i++;
+	    if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.LAMPARA) {
+		enc = true;
+	    }
+	}
+
+
+	switch (e.getKeyCode()) {
+	    case KeyEvent.VK_RIGHT:
+		escena.getObjeto3D().getHijos().get(i).setModificado();
+		escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(10, 0, 0);
+		//escena.getObjeto3D().getHijos().get(i).trasladar(10, 0, 0);
+		break;
+	    case KeyEvent.VK_LEFT:
+		escena.getObjeto3D().getHijos().get(i).setModificado();
+		escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(-10, 0, 0);
+		break;
+	    case KeyEvent.VK_UP:
+		escena.getObjeto3D().getHijos().get(i).setModificado();
+		escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(0, 0, 10);
+		break;
+	    case KeyEvent.VK_DOWN:
+		escena.getObjeto3D().getHijos().get(i).setModificado();
+		escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(0, 0, -10);
+		break;
+
+	}
+	System.out.print(escena.getObjeto3D().getHijos().get(i).getMatriz().imprime());
+	canvas.repaint();
     }
-    
 }    
