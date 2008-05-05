@@ -15,7 +15,7 @@ public class Habitaciones extends ObjetoCompuesto3D {
     private Silla silla;
     private Lampara lampara;
     private Estanteria estante;
-    private Percha percha;
+    private Perchero percha;
     
     // Constructora
     public Habitaciones(GL gl) {
@@ -163,8 +163,8 @@ public class Habitaciones extends ObjetoCompuesto3D {
         lampara.setId(Objeto3D.LAMPARA);
         this.addHijos(lampara);
      
-        // Percha
-        percha = new Percha(new PuntoVector3D(30, 0, 50), 0, gl);
+        // Perchero
+        percha = new Perchero(new PuntoVector3D(30, 0, 50), 0, gl);
         percha.setId(Objeto3D.PERCHERO);
         this.addHijos(percha);
         

@@ -5,17 +5,17 @@ import javax.media.opengl.GL;
 import practica5.Modelo.Basic.*;
 import practica5.util.Calculos;
 
-public class Percha extends ObjetoCompuesto3D {
+public class Perchero extends ObjetoCompuesto3D {
     
     // Atributos privados
     private Malla percha;
     
     // Constructora
-    public Percha(PuntoVector3D pos, double ori, GL gl) {
+    public Perchero(PuntoVector3D pos, double ori, GL gl) {
         
         super.setGL(gl);
         
-        // Percha
+        // Perchero
         ArrayList<PuntoVector3D> perfil = new ArrayList<PuntoVector3D>();
         perfil.add(new PuntoVector3D(1, 250, 0));
         perfil.add(new PuntoVector3D(3, 50, 0));
