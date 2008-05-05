@@ -6,6 +6,7 @@ import javax.media.opengl.GLJPanel;
 import practica5.Modelo.Basic.*;
 import practica5.Modelo.Basic.Objeto3D;
 import practica5.Modelo.Basic.Objeto3D;
+import practica5.Modelo.Objetos.Habitaciones;
 import practica5.Modelo.Objetos.Muebles;
 import practica5.Vista.*;
 
@@ -107,7 +108,7 @@ public class OyenteTeclado implements KeyListener {
 	int i = -1;
 	while (i < escena.getObjeto3D().getHijos().size() && !enc) {
 	    i++;
-	    if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.MUEBLES) {
+	    if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.ESCENA) {
 		enc = true;
 	    }
 	}
@@ -147,6 +148,7 @@ public class OyenteTeclado implements KeyListener {
                 escena.getObjeto3D().getHijos().get(i).setSentido(true);
                 escena.getObjeto3D().getHijos().get(i).setEje(0);
                 escena.getObjeto3D().getHijos().get(i).setGira();
+
 		break;
 	    case KeyEvent.VK_W:
 		escena.getObjeto3D().getHijos().get(i).setModificado();

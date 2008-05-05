@@ -16,6 +16,7 @@ public class Habitaciones extends ObjetoCompuesto3D {
     private Lampara lampara;
     private Estanteria estante;
     private Perchero percha;
+    private Camilla camilla;
     
     // Constructora
     public Habitaciones(GL gl) {
@@ -168,6 +169,10 @@ public class Habitaciones extends ObjetoCompuesto3D {
         percha.setId(Objeto3D.PERCHERO);
         this.addHijos(percha);
         
+        // Mesa 2
+        camilla = new Camilla(new PuntoVector3D(150, 0, 150), 0, gl);
+        camilla.setId(Objeto3D.PERCHERO);
+        this.addHijos(camilla);
     }
-    
+        
 }

@@ -3,6 +3,7 @@ package practica5.Modelo.Basic;
 public class Color {
     
     public static final Color rojoClaro = new Color(255, 0, 0);
+    public static final Color rosa = new Color(50, 1, 50);
     public static final Color marron = new Color(1, 0, 0);
     public static final Color verdeClaro = new Color(0, 255, 0);
     public static final Color verdeOscuro = new Color(0, 1, 0);
