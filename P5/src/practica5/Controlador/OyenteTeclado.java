@@ -108,7 +108,7 @@ public class OyenteTeclado implements KeyListener {
 	int i = -1;
 	while (i < escena.getObjeto3D().getHijos().size() && !enc) {
 	    i++;
-	    if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.ESCENA) {
+	    if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.MUEBLES) {
 		enc = true;
 	    }
 	}
@@ -123,22 +123,27 @@ public class OyenteTeclado implements KeyListener {
 		//escena.getObjeto3D().getHijos().get(i).trasladar(10, 0, 0);
 		break;
 	    case KeyEvent.VK_LEFT:
+                escena.getObjeto3D().getHijos().get(i).setNoGira();
 		escena.getObjeto3D().getHijos().get(i).setModificado();
 		escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(-10, 0, 0);
 		break;
 	    case KeyEvent.VK_UP:
+                escena.getObjeto3D().getHijos().get(i).setNoGira();
 		escena.getObjeto3D().getHijos().get(i).setModificado();
 		escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(0, 0, 10);
 		break;
 	    case KeyEvent.VK_DOWN:
+                escena.getObjeto3D().getHijos().get(i).setNoGira();
 		escena.getObjeto3D().getHijos().get(i).setModificado();
 		escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(0, 0, -10);
 		break;
 	    case KeyEvent.VK_A:
+                escena.getObjeto3D().getHijos().get(i).setNoGira();
 		escena.getObjeto3D().getHijos().get(i).setModificado();
 		escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(0, -10, 0);
 		break;
 	    case KeyEvent.VK_Z:
+                escena.getObjeto3D().getHijos().get(i).setNoGira();
 		escena.getObjeto3D().getHijos().get(i).setModificado();
 		escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(0, 10, 0);
 		break;

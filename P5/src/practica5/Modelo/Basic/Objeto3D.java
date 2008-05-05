@@ -113,6 +113,9 @@ public class Objeto3D {
     public void setGira() {
         gira = true;
     }
+    public void setNoGira() {
+        gira = false;
+    }
     
     public void setSentido(boolean sent) {
         sentido = sent;

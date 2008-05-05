@@ -17,6 +17,8 @@ public class Habitaciones extends ObjetoCompuesto3D {
     private Estanteria estante;
     private Perchero percha;
     private Camilla camilla;
+    private Sofa sofa;
+    private Jarron estatua;
     
     // Constructora
     public Habitaciones(GL gl) {
@@ -173,6 +175,16 @@ public class Habitaciones extends ObjetoCompuesto3D {
         camilla = new Camilla(new PuntoVector3D(150, 0, 150), 0, gl);
         camilla.setId(Objeto3D.PERCHERO);
         this.addHijos(camilla);
+        
+        // Sofa
+        sofa = new Sofa(new PuntoVector3D(10, 0, 150), 0, gl);
+        sofa.setId(Objeto3D.SOFA);
+        this.addHijos(sofa);
+        
+        // Jarron
+        estatua = new Jarron(new PuntoVector3D(230, 0, 50), 0, gl);
+        estatua.setId(Objeto3D.ESTATUA);
+        this.addHijos(estatua);
     }
         
 }
