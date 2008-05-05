@@ -19,6 +19,11 @@ public class Objeto3D {
     protected boolean normalesEnabled;
     protected boolean modificado;
     
+    protected int ang;
+    protected int ejeGiro;
+    protected boolean gira;
+    protected boolean sentido;
+    
     public static final int ESCENA = 0;
     public static final int MUEBLES = 1;
     public static final int LAMPARA = 2;
@@ -37,6 +42,10 @@ public class Objeto3D {
         normalesEnabled = false;
         matriz = new TAfin();
         modificado = false;
+        gira = false;
+        sentido = true;
+        ejeGiro = 0;
+        ang = 1;
     }
     
     
@@ -93,4 +102,18 @@ public class Objeto3D {
     public void setModificado() {
         modificado = true;
     }
+    
+    public void setGira() {
+        gira = true;
+    }
+    
+    public void setSentido(boolean sent) {
+        sentido = sent;
+    }
+    
+    public void setEje(int i) {
+        ang = 1;
+        ejeGiro = i;
+    }
+    
 }

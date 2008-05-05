@@ -45,12 +45,20 @@ public class TAfin {
     }
 
     public void rotaX(double ang) {
-	double c = Math.cos(Conversiones.r2g(ang));
+        
+        double a = ang * 2 * Math.PI / 360;
+        
+        double c = Math.cos(Conversiones.r2g(ang));
 	double s = Math.sin(Conversiones.r2g(ang));
-	this.setMatrizComponent(5, c);
+        
+	//double c = Math.cos(Conversiones.r2g(ang));
+	//double s = Math.sin(Conversiones.r2g(ang));
+
+        this.setMatrizComponent(5, c);
 	this.setMatrizComponent(6, s);
 	this.setMatrizComponent(9, -s);
 	this.setMatrizComponent(10, c);
+        
 	
     }
 
@@ -113,7 +121,7 @@ public class TAfin {
 	gl.glGetDoublev(gl.GL_MODELVIEW_MATRIX, matriz, 0);
 	gl.glPopMatrix();
     }
-
+    
     public void trasladarM(double X, double Y, double Z) {
 	gl.glMatrixMode(GL.GL_MODELVIEW);
 	gl.glPushMatrix();
