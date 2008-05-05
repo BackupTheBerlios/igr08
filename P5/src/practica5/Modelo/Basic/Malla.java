@@ -31,41 +31,49 @@ public class Malla extends Objeto3D {
         
         // Guardamos el estado de la matriz de Modelado
         gl.glPushMatrix();
-       
-            // Situamos el objeto en la escena
-            gl.glMultMatrixd(matriz.getMatriz(), 0);
         
-            // Seleccionamos el tipo de representación
-            for (int i = 0; i < caras.size(); i++) {
-                switch (this.tipoMalla) {
-                    case GL_POINTS:
-                        gl.glBegin(gl.GL_POINTS);
-                        break;
-                    case GL_LINES:
-                        gl.glBegin(gl.GL_LINE_LOOP);
-                        break;
-                    case GL_POLYGON:
-                        gl.glBegin(gl.GL_POLYGON);
-                        break;
+        // Situamos el objeto en la escena
+        gl.glMultMatrixd(matriz.getMatriz(), 0);
+        
+        // Seleccionamos el tipo de representación
+        for (int i = 0; i < caras.size(); i++) {
+            switch (this.tipoMalla) {
+                case GL_POINTS:
+                    gl.glBegin(gl.GL_POINTS);
+                    break;
+                case GL_LINES:
+                    gl.glBegin(gl.GL_LINE_LOOP);
+                    break;
+                case GL_POLYGON:
+                    gl.glBegin(gl.GL_POLYGON);
+                    break;
+            }
+            
+            
+            
+            // Comenzamos a dibujar el objeto
+            for (int j = 0; j < caras.get(i).getIndiceVerticeNormal().size(); j++) {
+                
+                if ((baldosas) && (getId() == Objeto3D.SUELO))
+                    if (j%2 == 0)
+                        gl.glColor3d(255, 255, 255);
+                    else
+                        gl.glColor3d(0, 0, 0);
+                
+                int iN = caras.get(i).getIndiceNormal(j);
+                int iV = caras.get(i).getIndiceVertice(j);
+                
+                if (this.normalesEnabled) {
+                    gl.glNormal3d(normales.get(iN).getX(),
+                            normales.get(iN).getY(),
+                            normales.get(iN).getZ());
                 }
-
-                // Comenzamos a dibujar el objeto    
-                for (int j = 0; j < caras.get(i).getIndiceVerticeNormal().size(); j++) {
                 
-                    int iN = caras.get(i).getIndiceNormal(j);
-                    int iV = caras.get(i).getIndiceVertice(j);
-                
-                    if (this.normalesEnabled) {
-                        gl.glNormal3d(normales.get(iN).getX(),
-                                      normales.get(iN).getY(),
-                                      normales.get(iN).getZ());
-                    }
-                
-                    gl.glVertex3d(vertices.get(iV).getX(),
+                gl.glVertex3d(vertices.get(iV).getX(),
                         vertices.get(iV).getY(),
                         vertices.get(iV).getZ());
-                }
-                gl.glEnd();
+            }
+            gl.glEnd();
         }
         
         // Volvemos al estado anterior de la Matriz de Modelado
@@ -108,54 +116,54 @@ public class Malla extends Objeto3D {
     // Añade una nueva cara
     public void addCara(Cara cara) {
         caras.add(cara);
-    }  
+    }
     
     // Calcula normal dados unos puntos
     public PuntoVector3D calculaNormal(int ind1, int ind2, int ind3, int ind4) {
         
         double x = 0;
         x += (vertices.get(ind1).getY() - vertices.get(ind2).getY())*
-             (vertices.get(ind1).getZ() + vertices.get(ind2).getZ());
+                (vertices.get(ind1).getZ() + vertices.get(ind2).getZ());
         
         x += (vertices.get(ind2).getY() - vertices.get(ind3).getY())*
-             (vertices.get(ind2).getZ() + vertices.get(ind3).getZ());
-
-        x += (vertices.get(ind3).getY() - vertices.get(ind4).getY())*
-             (vertices.get(ind3).getZ() + vertices.get(ind4).getZ());
-
-        x += (vertices.get(ind4).getY() - vertices.get(ind1).getY())*
-             (vertices.get(ind4).getZ() + vertices.get(ind1).getZ());
+                (vertices.get(ind2).getZ() + vertices.get(ind3).getZ());
         
-
+        x += (vertices.get(ind3).getY() - vertices.get(ind4).getY())*
+                (vertices.get(ind3).getZ() + vertices.get(ind4).getZ());
+        
+        x += (vertices.get(ind4).getY() - vertices.get(ind1).getY())*
+                (vertices.get(ind4).getZ() + vertices.get(ind1).getZ());
+        
+        
         double y = 0;
         y += (vertices.get(ind1).getZ() - vertices.get(ind2).getZ())*
-             (vertices.get(ind1).getX() + vertices.get(ind2).getX());
+                (vertices.get(ind1).getX() + vertices.get(ind2).getX());
         
         y += (vertices.get(ind2).getZ() - vertices.get(ind3).getZ())*
-             (vertices.get(ind2).getX() + vertices.get(ind3).getX());
-
+                (vertices.get(ind2).getX() + vertices.get(ind3).getX());
+        
         y += (vertices.get(ind3).getZ() - vertices.get(ind4).getZ())*
-             (vertices.get(ind3).getX() + vertices.get(ind4).getX());
-
+                (vertices.get(ind3).getX() + vertices.get(ind4).getX());
+        
         y += (vertices.get(ind4).getZ() - vertices.get(ind1).getZ())*
-             (vertices.get(ind4).getX() + vertices.get(ind1).getX());
+                (vertices.get(ind4).getX() + vertices.get(ind1).getX());
         
         
         double z = 0;
         z += (vertices.get(ind1).getX() - vertices.get(ind2).getX())*
-             (vertices.get(ind1).getY() + vertices.get(ind2).getY());
+                (vertices.get(ind1).getY() + vertices.get(ind2).getY());
         
         z += (vertices.get(ind2).getX() - vertices.get(ind3).getX())*
-             (vertices.get(ind2).getY() + vertices.get(ind3).getY());
-
+                (vertices.get(ind2).getY() + vertices.get(ind3).getY());
+        
         z += (vertices.get(ind3).getX() - vertices.get(ind4).getX())*
-             (vertices.get(ind3).getY() + vertices.get(ind4).getY());
-
+                (vertices.get(ind3).getY() + vertices.get(ind4).getY());
+        
         z += (vertices.get(ind4).getX() - vertices.get(ind1).getX())*
-             (vertices.get(ind4).getY() + vertices.get(ind1).getY());
-
+                (vertices.get(ind4).getY() + vertices.get(ind1).getY());
+        
         
         return (new PuntoVector3D(x, y, z, 0).normaliza());
     }
-        
+    
 }

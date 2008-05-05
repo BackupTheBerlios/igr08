@@ -34,7 +34,7 @@ public class Habitaciones extends ObjetoCompuesto3D {
         
         // Habitación Trasera: Suelo
         tablero = new Tablero(400, 400, 20, 3, 3, 3);
-        tablero.setId(0);
+        tablero.setId(Objeto3D.SUELO);
         tablero.setGL(gl);
         tablero.getMatriz().rotar(90, 1.0, 0.0, 0.0);
         tablero.getMatriz().trasladarM(0, 0, -270);
@@ -134,7 +134,7 @@ public class Habitaciones extends ObjetoCompuesto3D {
         
         // Habitación Frontal: Suelo
         tablero = new Tablero(400, 400, 20, 3, 3, 3);
-        tablero.setId(0);
+        tablero.setId(Objeto3D.SUELO);
         tablero.setGL(gl);
         tablero.getMatriz().rotar(90, 1.0, 0.0, 0.0);
         tablero.setColor(color.turquesaOscuro);

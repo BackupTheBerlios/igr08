@@ -50,7 +50,7 @@ public class Objeto3D {
         ejeGiro = 0;
         ang = 1;
         
-        baldosas = true;
+        baldosas = false;
     }
     
     
