@@ -79,14 +79,14 @@ public class Camara {
                  gl.glOrtho(l, r, b, t, N, F);  break;
                     
             case GL3D.PROY_PERSPECTIVA:
-                 double anguloVision = 90;
+           /*      double anguloVision = 90;
                  double proporcion = r-l / t-b;
-                 glu.gluPerspective(anguloVision, proporcion, N, F);
+                 glu.gluPerspective(anguloVision, proporcion, N, F);*/
                  break;
                 
             case GL3D.PROY_OBLICUA:
                  //gl.glFrustum(l, r, b, r, N, F);
-                 setOblicua(new PuntoVector3D(3,2,1));
+             //    setOblicua(new PuntoVector3D(3,2,1));
                  break;
         }
     }

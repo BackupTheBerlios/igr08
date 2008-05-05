@@ -185,19 +185,46 @@ public class TAfin {
     }
 
     public void setIdentity() {
-	for (int i = 0; i < 16; i++) {
-	    this.matriz[i] = 0;
-	}
+	setZeroMatrix();
+	
 	matriz[0] = 1;
 	matriz[5] = 1;
 	matriz[10] = 1;
 	matriz[15] = 1;
     }
+    
+    public void setZeroMatrix(){
+    	for (int i = 0; i < 16; i++) {
+	    this.matriz[i] = 0;
+	}
+    }
+    /**
+     * @param fovy Specifies the field of view angle, in degrees, in the y direction. 
+     * @param aspect Specifies the aspect ratio that determines the field of view in the x direction. The aspect ratio is the ratio of x (width) to y (height). 
+     * @param zNear Specifies the distance from the viewer to the near clipping plane (always positive). 
+     * @param zFar Specifies the distance from the viewer to the far clipping plane (always positive). 
+     * @return
+     */
+    public double[] getPerspectiveMatrix(double fovy,double aspect, double zNear, double zFar){
+	// http://pyopengl.sourceforge.net/documentation/manual/gluPerspective.3G.html
+	
+	double f = Math.atan(fovy/2);
+	
+	setZeroMatrix();
+	
+	setMatrizComponent(0, f/aspect);
+	setMatrizComponent(5, f);
+	setMatrizComponent(10, (zFar+zNear)/(zNear-zFar));
+	setMatrizComponent(11, -1);
+	setMatrizComponent(14, (2*zFar*zNear)/(zNear-zFar));
+	
+	return matriz;    
+    }
 
     public String imprime() {
 	String cad = "";
 	for (int i = 0; i < matriz.length; i++) {
-	    cad += matriz[i];
+	    cad += matriz[i]+"**";
 	}
 
 	return cad;

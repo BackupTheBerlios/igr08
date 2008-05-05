@@ -34,7 +34,7 @@ public class Principal extends JFrame {
     private JRadioButton rbLineas;
     private JRadioButton rbSolido;
     private JCheckBox jcNormales;
-    private JCheckBox jcTexturas;
+    private JCheckBox jcBaldosas;
     private ButtonGroup gBotonesProyeccion;
     private JRadioButton rbOrtogonal;
     private JRadioButton rbPerspectiva;
@@ -117,11 +117,11 @@ public class Principal extends JFrame {
         jcNormales.setBounds(700, 10, 80, 25);
         canvas.add(jcNormales);
         
-        jcTexturas = new JCheckBox("Texturas");
-        jcTexturas.setForeground(java.awt.Color.white);
-        jcTexturas.setBackground(java.awt.Color.black);
-        jcTexturas.setBounds(700, 40, 80, 25);
-        canvas.add(jcTexturas);
+        jcBaldosas = new JCheckBox("Baldosas");
+        jcBaldosas.setForeground(java.awt.Color.white);
+        jcBaldosas.setBackground(java.awt.Color.black);
+        jcBaldosas.setBounds(700, 40, 80, 25);
+        canvas.add(jcBaldosas);
         
         rbPuntos = new JRadioButton("Puntos");
         rbPuntos.setForeground(java.awt.Color.pink);
@@ -178,7 +178,7 @@ public class Principal extends JFrame {
         rbMuebles.addKeyListener(oyenteTeclado);
         rbLampara.addKeyListener(oyenteTeclado);
         jcNormales.addKeyListener(oyenteTeclado);
-        jcTexturas.addKeyListener(oyenteTeclado);
+        jcBaldosas.addKeyListener(oyenteTeclado);
         rbPuntos.addKeyListener(oyenteTeclado);
         rbLineas.addKeyListener(oyenteTeclado);
         rbSolido.addKeyListener(oyenteTeclado);
@@ -233,7 +233,8 @@ public class Principal extends JFrame {
         rbOrtogonal.addActionListener(new ActionListener() {
             
             public void actionPerformed(ActionEvent e) {
-                escena.getCamara().setProjection(GL3D.PROY_ORTOGONAL);
+                //escena.getCamara().setProjection(GL3D.PROY_ORTOGONAL);
+		escena.setPerspectiva(GL3D.PROY_ORTOGONAL);
                 System.out.println("ortogonal");
                 canvas.repaint();
             }
@@ -242,7 +243,8 @@ public class Principal extends JFrame {
         rbPerspectiva.addActionListener(new ActionListener() {
             
             public void actionPerformed(ActionEvent e) {
-                escena.getCamara().setProjection(GL3D.PROY_PERSPECTIVA);
+               // escena.getCamara().setProjection(GL3D.PROY_PERSPECTIVA);
+		escena.setPerspectiva(GL3D.PROY_PERSPECTIVA);
                 System.out.println("Perspectiva");
                 canvas.repaint();
             }
@@ -251,7 +253,8 @@ public class Principal extends JFrame {
         rbOblicua.addActionListener(new ActionListener() {
             
             public void actionPerformed(ActionEvent e) {
-                escena.getCamara().setProjection(GL3D.PROY_OBLICUA);
+                //escena.getCamara().setProjection(GL3D.PROY_OBLICUA);
+		escena.setPerspectiva(GL3D.PROY_OBLICUA);
                 System.out.println("Oblicua");
                 canvas.repaint();
             }
@@ -267,17 +270,17 @@ public class Principal extends JFrame {
             }
         });
         
-        jcTexturas.addActionListener(new ActionListener() {
+        jcBaldosas.addActionListener(new ActionListener() {
             
             public void actionPerformed(ActionEvent e) {
-                if (jcTexturas.isSelected()){
+                if (jcBaldosas.isSelected()){
                    for (int i=0; i<escena.getObjeto3D().getHijos().size(); i++)
-                       if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.SUELO)
-                         escena.getObjeto3D().setBaldosas(); 
+                       if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.SUELO) 
+                         escena.getObjeto3D().getHijos().get(i).setBaldosas(); 
                 } else 
                      for (int i=0; i<escena.getObjeto3D().getHijos().size(); i++)
                        if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.SUELO)
-                         escena.getObjeto3D().setBaldosas();
+                         escena.getObjeto3D().getHijos().get(i).setBaldosas(); 
                 canvas.repaint();
             }
         });

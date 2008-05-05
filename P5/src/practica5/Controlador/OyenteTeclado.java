@@ -24,7 +24,7 @@ public class OyenteTeclado implements KeyListener {
 
     public void keyPressed(KeyEvent e) {
 
-	switch (tipo) {
+    	switch (tipo) {
 
 	    case Objeto3D.ESCENA:
 		modificarEscena(e);
