@@ -65,7 +65,9 @@ public class GL3D implements GLEventListener {
 
 	switch (perspectiva) {
 	    case PROY_ORTOGONAL:
-
+		gl.glMatrixMode(gl.GL_PROJECTION);
+		gl.glLoadIdentity();   
+		gl.glOrtho(l, r, b, t, N, F);
 		break;
 	    case PROY_OBLICUA:
 		gl.glMatrixMode(gl.GL_PROJECTION);
