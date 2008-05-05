@@ -24,6 +24,8 @@ public class Objeto3D {
     protected boolean gira;
     protected boolean sentido;
     
+    protected boolean baldosas;
+    
     public static final int ESCENA = 0;
     public static final int MUEBLES = 1;
     public static final int LAMPARA = 2;
@@ -33,6 +35,7 @@ public class Objeto3D {
     public static final int SILLA = 6;
     public static final int MESA = 7;
     public static final int PERCHERO = 8;
+    public static final int SUELO = 9;
            
         
     // Constructora
@@ -46,6 +49,8 @@ public class Objeto3D {
         sentido = true;
         ejeGiro = 0;
         ang = 1;
+        
+        baldosas = true;
     }
     
     
@@ -114,6 +119,13 @@ public class Objeto3D {
     public void setEje(int i) {
         ang = 1;
         ejeGiro = i;
+    }
+    
+    public void setBaldosas() {
+        if (baldosas)
+            baldosas = false;
+        else
+            baldosas = true;
     }
     
 }
