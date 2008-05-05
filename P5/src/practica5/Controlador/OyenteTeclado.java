@@ -222,8 +222,10 @@ public class OyenteTeclado implements KeyListener {
 		escena.cambiaCamara();
 
 	}
+        
 	System.out.print(escena.getObjeto3D().getHijos().get(i).getMatriz().imprime());
 	canvas.repaint();
+
     }
 
     public void modificarLampara(KeyEvent e) {

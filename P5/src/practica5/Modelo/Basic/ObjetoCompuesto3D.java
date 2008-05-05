@@ -64,6 +64,7 @@ public class ObjetoCompuesto3D extends Objeto3D{
                     case 2: gl.glRotated(ang, 0.0, 0.0, 0.0); break;
             
                 }
+                gira = false;
             }
         
         
