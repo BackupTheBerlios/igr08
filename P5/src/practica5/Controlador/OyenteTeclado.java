@@ -33,9 +33,11 @@ public class OyenteTeclado implements KeyListener {
             case Objeto3D.ESCENA:
                 modificarEscena(e);
                 break;
+                
             case Objeto3D.MUEBLES:
                 modificarMuebles(e);
                 break;
+                
             case Objeto3D.LAMPARA:
                 modificarLampara(e);
                 break;

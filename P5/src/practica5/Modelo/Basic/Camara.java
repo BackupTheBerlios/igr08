@@ -178,4 +178,8 @@ public class Camara {
             gl.glMultMatrixd(matriz.getMatriz(),0);
         }
     }
+    
+    public void setPuntoMira(PuntoVector3D p) {
+        this.eye = p;
+    }
  }

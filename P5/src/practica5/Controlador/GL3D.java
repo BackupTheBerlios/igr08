@@ -56,52 +56,52 @@ public class GL3D implements GLEventListener {
     }
 
     public void display(GLAutoDrawable drw) {
-	double l = -504;
+	
+        double l = -504;
 	double r = 504;
 	double b = -400;
 	double t = 300;
 	double N = -1000;
 	double F = 800;
 
+        // Tipo de proyección
 	switch (perspectiva) {
-	    case PROY_ORTOGONAL:
-		gl.glMatrixMode(gl.GL_PROJECTION);
-		gl.glLoadIdentity();   
-		gl.glOrtho(l, r, b, t, N, F);
-		break;
-	    case PROY_OBLICUA:
-		gl.glMatrixMode(gl.GL_PROJECTION);
-		gl.glLoadIdentity();
-		PuntoVector3D d = new PuntoVector3D(1, 2, 3);
-		gl.glOrtho(l, r, b, t, N, F);
-		if (d.getZ() != 0 & d != new PuntoVector3D(0, 0, 1)) {
-		    TAfin matriz = new TAfin();
-		    matriz.setIdentity();
-		    matriz.setMatrizComponent(8, -d.getX() / d.getZ());
-		    matriz.setMatrizComponent(9, -d.getY() / d.getZ());
-		    gl.glMultMatrixd(matriz.getMatriz(), 0);
-		}
-		break;
-	    case PROY_PERSPECTIVA:
-				gl.glMatrixMode(gl.GL_PROJECTION);
-		gl.glLoadIdentity();
-		double anguloVision = 40;
-		double proporcion = r - l / t - b;
-
-		TAfin a = new TAfin();
-		double[] m = a.getPerspectiveMatrix(anguloVision, proporcion, N, F);
-		gl.glLoadMatrixd(m, 0);
-		//glu.gluPerspective(anguloVision, proporcion, N, F);
-		break;
+            
+	    case PROY_ORTOGONAL: gl.glMatrixMode(gl.GL_PROJECTION);
+                                 gl.glLoadIdentity();   
+                                 gl.glOrtho(l, r, b, t, N, F);
+                                 camaraActual.setPuntoMira(new PuntoVector3D(200, 200, 200));
+                                 break;
+                                 
+	    case PROY_OBLICUA:  gl.glMatrixMode(gl.GL_PROJECTION);
+                                gl.glLoadIdentity();
+                                PuntoVector3D d = new PuntoVector3D(1, 2, 3);
+                                gl.glOrtho(l, r, b, t, N, F);
+                                if (d.getZ() != 0 & d != new PuntoVector3D(0, 0, 1)) {
+                                    TAfin matriz = new TAfin();
+                                    matriz.setIdentity();
+                                    matriz.setMatrizComponent(8, -d.getX() / d.getZ());
+                                    matriz.setMatrizComponent(9, -d.getY() / d.getZ());
+                                    gl.glMultMatrixd(matriz.getMatriz(), 0);
+                                }
+                                camaraActual.setPuntoMira(new PuntoVector3D(100, 120, 0));
+                                break;
+                                
+                                
+	    case PROY_PERSPECTIVA: gl.glMatrixMode(gl.GL_PROJECTION);
+                                   gl.glLoadIdentity();
+                                   double anguloVision = 90;
+                                   double proporcion = 1.5; //r - l / t - b;
+                                   N = 1;
+                                   camaraActual.setPuntoMira(new PuntoVector3D(100, 120, 300));
+                                   TAfin a = new TAfin();
+                                   double[] m = a.getPerspectiveMatrix(anguloVision, proporcion, N, F);
+                                   gl.glLoadMatrixd(m, 0);
+                                   break;
 	}
 
-
-
-
-
-
-	//////////////////////////////////////////////////////////////////////
-
+        
+        
 	gl.glClear(gl.GL_COLOR_BUFFER_BIT | gl.GL_DEPTH_BUFFER_BIT);
 
 	camaraActual.setModelViewMatrix();
