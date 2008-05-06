@@ -12,7 +12,7 @@ public class Puerta extends ObjetoCompuesto3D {
         
         // Puerta
         tablero = new Tablero(110, 240, 10, 3, 3, 3);
-        tablero.setId(1);
+        tablero.setId(Objeto3D.PUERTA);
         tablero.setGL(gl);
         tablero.getMatriz().rotar(-45, 0.0, 1.0, 0.0);
         tablero.getMatriz().trasladarM(100, 0, 0);
@@ -21,7 +21,7 @@ public class Puerta extends ObjetoCompuesto3D {
         
         // Picaporte 1
         esfera = new Esfera(5, 10, 10);
-        esfera.setId(1);
+        esfera.setId(Objeto3D.PUERTA);
         esfera.setGL(gl);
         esfera.getMatriz().trasladarM(135, 75, 50);
         esfera.setColor(color.gris);
@@ -29,7 +29,7 @@ public class Puerta extends ObjetoCompuesto3D {
         
         // Picaporte 2
         esfera = new Esfera(5, 10, 10);
-        esfera.setId(1);
+        esfera.setId(Objeto3D.PUERTA);
         esfera.setGL(gl);
         esfera.getMatriz().trasladarM(145, 75, 40);
         esfera.setColor(color.gris);

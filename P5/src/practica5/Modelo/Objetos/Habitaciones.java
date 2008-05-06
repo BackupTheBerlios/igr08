@@ -147,6 +147,7 @@ public class Habitaciones extends ObjetoCompuesto3D {
 
         // Puerta
         puerta = new Puerta(gl);
+        puerta.setId(Objeto3D.PUERTA);
         this.addHijos(puerta);
         
         // Cuadro

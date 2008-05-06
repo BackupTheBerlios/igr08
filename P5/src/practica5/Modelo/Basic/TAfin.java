@@ -150,7 +150,7 @@ public class TAfin {
     
     // Transformaciones Afines
     public void rotar(double ang, double ejeX, double ejeY, double ejeZ) {
-        gl.glMatrixMode(GL.GL_MODELVIEW);
+        gl.glMatrixMode(gl.GL_MODELVIEW);
         gl.glPushMatrix();
         gl.glLoadIdentity();
         gl.glRotated(ang, ejeX, ejeY, ejeZ);
@@ -209,7 +209,7 @@ public class TAfin {
         gl.glPopMatrix();
     }
     
-
+    
     public void setGL(GL gl) {
         this.gl = gl;
         
