@@ -135,7 +135,7 @@ public class Principal extends JFrame {
         jcPersianas= new JCheckBox("Persianas");
         jcPersianas.setForeground(java.awt.Color.white);
         jcPersianas.setBackground(java.awt.Color.black);
-        jcPersianas.setBounds(700, 100, 100, 25);
+        jcPersianas.setBounds(700, 100, 90, 25);
         canvas.add(jcPersianas);
         
         rbPuntos = new JRadioButton("Puntos");
