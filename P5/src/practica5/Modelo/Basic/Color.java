@@ -18,42 +18,44 @@ public class Color {
     public static final Color blanco = new Color(255, 255, 255);
     public static final Color gris = new Color(1, 1, 1);
     public static final Color negro = new Color(0, 0, 0);
-    
+    public static final Color naranja = new Color(java.awt.Color.orange.getRed(),
+                                                  java.awt.Color.orange.getGreen(),
+                                                  java.awt.Color.orange.getBlue());
     
     // Atributos privados
-    private double Red;
-    private double Green;
-    private double Blue;
+    private int Red;
+    private int Green;
+    private int Blue;
     
     // Constructora
-    public Color(double Red, double Green, double Blue) {
+    public Color(int Red, int Green, int Blue) {
         this.Red = Red;
         this.Green = Green;
         this.Blue = Blue;
     }
     
     // Getters & Setters
-    public double getRed() {
+    public int getRed() {
         return Red;
     }
     
-    public void setRed(double Red) {
+    public void setRed(int Red) {
         this.Red = Red;
     }
     
-    public double getGreen() {
+    public int getGreen() {
         return Green;
     }
     
-    public void setGreen(double Green) {
+    public void setGreen(int Green) {
         this.Green = Green;
     }
     
-    public double getBlue() {
+    public int getBlue() {
         return Blue;
     }
     
-    public void setBlue(double Blue) {
+    public void setBlue(int Blue) {
         this.Blue = Blue;
     }
 }
