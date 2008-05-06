@@ -182,7 +182,7 @@ public class Principal extends JFrame {
         rbOblicua.setBounds(700, 510, 120, 25);
         canvas.add(rbOblicua);
         
-        rbPersona = new JRadioButton("1º Persona");
+        rbPersona = new JRadioButton("1 Persona");
         rbPersona.setForeground(java.awt.Color.yellow);
         rbPersona.setBackground(java.awt.Color.black);
         rbPersona.setBounds(700, 420, 120, 25);
@@ -300,7 +300,7 @@ public class Principal extends JFrame {
                 escena.setPerspectiva(GL3D.CAMARA_PERSONA);
                 oyenteTeclado.seleccionaObjeto(Objeto3D.PERSONA);
                 
-                System.out.println("1º PERSONA");
+                System.out.println("1 PERSONA");
                 canvas.repaint();
             }
         });

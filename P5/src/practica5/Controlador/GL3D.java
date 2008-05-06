@@ -41,6 +41,9 @@ public class GL3D implements GLEventListener {
     private ObjetoCompuesto3D hab;
     private int perspectiva = PROY_ORTOGONAL;
     
+    public double desplPersonaX = 0;
+    public double desplPersonaY = 0;
+    public double desplPersonaZ = 0;
     
     public GL3D(int anchura, int altura) {
         //this.glu = new GLU();
@@ -65,7 +68,7 @@ public class GL3D implements GLEventListener {
         double N = -1000;
         double F = 800;
         
-        // Tipo de proyección
+        // Tipo de proyecciï¿½n
         switch (perspectiva) {
             
             case PROY_ORTOGONAL: gl.glMatrixMode(gl.GL_PROJECTION);
@@ -244,7 +247,7 @@ public class GL3D implements GLEventListener {
             case PROY_PERSPECTIVA: camaraActual.setPuntoMira(new PuntoVector3D(100, 120, 300));
                                    break;
                                    
-            case CAMARA_PERSONA: camaraActual.setPuntoMira(new PuntoVector3D(250, 120, 300));
+            case CAMARA_PERSONA: camaraActual.setPuntoMira(new PuntoVector3D(250+desplPersonaX, 120+desplPersonaY, 300+desplPersonaZ));
                                    break;                       
             
         }

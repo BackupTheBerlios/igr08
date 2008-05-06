@@ -17,7 +17,7 @@ public class OyenteTeclado implements KeyListener {
     private GLJPanel canvas;
     
     private int veces;
-    
+
     public OyenteTeclado(GL3D escena, GLJPanel canvas) {
         this.escena = escena;
         this.canvas = canvas;
@@ -210,35 +210,41 @@ public class OyenteTeclado implements KeyListener {
                 escena.getObjeto3D().getHijos().get(i).setModificado();
                 camara.desliza(new PuntoVector3D(-10, 0, 0, 1));
                 escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(-10, 0, 0);
+		escena.desplPersonaX-=10;
                 break;
                 
             case KeyEvent.VK_LEFT:
                 escena.getObjeto3D().getHijos().get(i).setModificado();
                 camara.desliza(new PuntoVector3D(10, 0, 0, 1));
                 escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(10, 0, 0);
-                break;
+                escena.desplPersonaX+=10;
+		break;
                 
             case KeyEvent.VK_UP:
                 escena.getObjeto3D().getHijos().get(i).setModificado();
                 camara.desliza(new PuntoVector3D(0, 0, -10, 1));
                 escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(0, 0, -10);
-                break;
+                escena.desplPersonaZ-=10;
+		break;
                 
             case KeyEvent.VK_DOWN:
                 escena.getObjeto3D().getHijos().get(i).setModificado();
                 camara.desliza(new PuntoVector3D(0, 0, 10, 1));
                 escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(0, 0, 10);
-                break;
+                escena.desplPersonaZ+=10;
+		break;
                 
             case KeyEvent.VK_A:
                 escena.getObjeto3D().getHijos().get(i).setModificado();
                 escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(0, -10, 0);
-                break;
+                escena.desplPersonaY-=10;
+		break;
                 
             case KeyEvent.VK_Z:
                 escena.getObjeto3D().getHijos().get(i).setModificado();
                 escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(0, 10, 0);
-                break;
+                escena.desplPersonaY+=10;
+		break;
               }      
         canvas.repaint();
     }
