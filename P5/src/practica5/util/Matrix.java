@@ -1,13 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package practica5.util;
 
-/**
- *
- * @author Iván
- */
 public class Matrix {
 
     /* Matrix-multiply two arrays together.

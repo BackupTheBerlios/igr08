@@ -47,11 +47,11 @@ public class ObjetoCompuesto3D extends Objeto3D{
     
         // Guardamos el estado de la matriz
         gl.glPushMatrix();
-        double[] m = new double[16]; 
+     //   double[] m = new double[16]; 
             if (modificado)
                 gl.glMultMatrixd(matriz.getMatriz(), 0);
         
-            if (gira) {
+       /*     if (gira) {
                 
                 if (sentido)
                     ang++;
@@ -76,7 +76,7 @@ public class ObjetoCompuesto3D extends Objeto3D{
             
                 }
                 gira = false;
-            }
+            }*/
         
             if ((subir) && (getId() == Objeto3D.PERSIANA)) {
                gl.glScaled(0.0, 50.0, 0.0);

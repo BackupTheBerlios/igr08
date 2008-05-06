@@ -94,10 +94,46 @@ public void rotaZM(double ang){
 //	this.setMatrizComponent(5, c);
         matriz = Matrix.multiplica(matriz,m);
 }
-    public void escalaX(double s) {
+    public void escala1X(double s) {
+	double[] m = new double[16];
+        m[0]=1;
+        m[5]=1;
+        m[10]=1;
+        m[15]=1;
+        
+        m[0]=s;
+        //this.setMatrizComponent(0, s);
+        matriz = Matrix.multiplica(matriz,m);
+    }
+    
+       public void escala1Y(double s) {
+	double[] m = new double[16];
+        m[0]=1;
+        m[5]=1;
+        m[10]=1;
+        m[15]=1;
+        
+        m[5]=s;
+        //this.setMatrizComponent(0, s);
+        matriz = Matrix.multiplica(matriz,m);
+    }
+       
+          public void escala1Z(double s) {
+	double[] m = new double[16];
+        m[0]=1;
+        m[5]=1;
+        m[10]=1;
+        m[15]=1;
+        
+        m[10]=s;
+        //this.setMatrizComponent(0, s);
+        matriz = Matrix.multiplica(matriz,m);
+    }
+          
+  public void escalaX(double s) {
 	this.setMatrizComponent(0, s);
     }
-
+          
     public void escalaY(double s) {
 	this.setMatrizComponent(5, s);
     }
@@ -112,7 +148,7 @@ public void rotaZM(double ang){
 	escalaZ(s);
     }
 
-    public void rotaX(double ang) {
+ /*   public void rotaX(double ang) {
         
         double a = ang * 2 * Math.PI / 360;
         
@@ -146,7 +182,7 @@ public void rotaZM(double ang){
 	this.setMatrizComponent(1, s);
 	this.setMatrizComponent(4, -s);
 	this.setMatrizComponent(5, c);
-    }
+    }*/
 /////////////////////////////////////////////////////
     // Transformaciones Afines
     public void rotar(double ang, double ejeX, double ejeY, double ejeZ) {
@@ -298,7 +334,6 @@ public void rotaZM(double ang){
 	for (int i = 0; i < matriz.length; i++) {
 	    cad += matriz[i]+"**";
 	}
-
 	return cad;
     }
 }
