@@ -107,6 +107,13 @@ public class OyenteTeclado implements KeyListener {
             case KeyEvent.VK_Z:
                 camara.desliza(new PuntoVector3D(0, 0, -10, 1));
                 break;
+	    // Zoom
+	    case KeyEvent.VK_X:
+		camara.zoomIn();
+		break;
+	    case KeyEvent.VK_C:
+		camara.zoomOut();
+		break;	
                 // Extra
             case KeyEvent.VK_SHIFT:
                 escena.cambiaCamara();
@@ -165,7 +172,7 @@ public class OyenteTeclado implements KeyListener {
                     escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(0, 5, 0);
                     veces++;
                 } else  {
-                    System.out.print("La persiana no puede subir más");
+                    System.out.print("La persiana no puede subir mï¿½s");
                 }
                 break;
             case KeyEvent.VK_DOWN:
@@ -174,7 +181,7 @@ public class OyenteTeclado implements KeyListener {
                     escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(0, -5, 0);
                     veces--;
                 } else  {
-                    System.out.print("La persiana no puede bajar más");
+                    System.out.print("La persiana no puede bajar mï¿½s");
                 }
                 break;
         }
