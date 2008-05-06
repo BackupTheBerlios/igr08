@@ -36,6 +36,7 @@ public class Principal extends JFrame {
     private JCheckBox jcNormales;
     private JCheckBox jcBaldosas;
     private JCheckBox jcTexturas;
+    private JCheckBox jcPersianas;
     private ButtonGroup gBotonesProyeccion;
     private JRadioButton rbOrtogonal;
     private JRadioButton rbPerspectiva;
@@ -78,6 +79,7 @@ public class Principal extends JFrame {
         
         // Creamos el canvas de dibujo
         canvas = new GLJPanel();
+        canvas.setBackground(java.awt.Color.cyan);
         escena = new GL3D(800, 600);
         oyenteTeclado = new OyenteTeclado(escena, canvas);
         oyenteRaton = new OyenteRaton(escena, canvas);
@@ -129,6 +131,12 @@ public class Principal extends JFrame {
         jcTexturas.setBackground(java.awt.Color.black);
         jcTexturas.setBounds(700, 70, 80, 25);
         canvas.add(jcTexturas);
+        
+        jcPersianas= new JCheckBox("Persianas");
+        jcPersianas.setForeground(java.awt.Color.white);
+        jcPersianas.setBackground(java.awt.Color.black);
+        jcPersianas.setBounds(700, 100, 100, 25);
+        canvas.add(jcPersianas);
         
         rbPuntos = new JRadioButton("Puntos");
         rbPuntos.setForeground(java.awt.Color.pink);
@@ -187,6 +195,7 @@ public class Principal extends JFrame {
         jcNormales.addKeyListener(oyenteTeclado);
         jcBaldosas.addKeyListener(oyenteTeclado);
         jcTexturas.addKeyListener(oyenteTeclado);
+        jcPersianas.addKeyListener(oyenteTeclado);
         rbPuntos.addKeyListener(oyenteTeclado);
         rbLineas.addKeyListener(oyenteTeclado);
         rbSolido.addKeyListener(oyenteTeclado);
@@ -312,8 +321,8 @@ public class Principal extends JFrame {
                        
                      }
                     
-                    if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.MUEBLES) {
-                         escena.getObjeto3D().getHijos().get(i).textSelec(2);
+                    if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.PERSIANA) {
+                         escena.getObjeto3D().getHijos().get(i).textSelec(1);
                          escena.getObjeto3D().getHijos().get(i).setTexturizado(); 
                        
                      }  
@@ -326,10 +335,28 @@ public class Principal extends JFrame {
                        escena.getObjeto3D().getHijos().get(i).setTexturizado(); 
                         if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.SUELO)
                          escena.getObjeto3D().getHijos().get(i).setTexturizado(); 
-                        if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.MUEBLES)
+                        if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.PERSIANA)
                          escena.getObjeto3D().getHijos().get(i).setTexturizado(); 
                      }
                        
+                canvas.repaint();
+            }
+        });
+        
+        jcPersianas.addActionListener(new ActionListener() {
+            
+            public void actionPerformed(ActionEvent e) {
+                if (jcPersianas.isSelected()){
+                    oyenteTeclado.seleccionaObjeto(Objeto3D.PERSIANA);
+                    
+                    canvas.repaint();
+                  /* for (int i=0; i<escena.getObjeto3D().getHijos().size(); i++)
+                       if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.PERSIANA) 
+                         escena.getObjeto3D().getHijos().get(i).setBajar(); */
+                } else 
+                     for (int i=0; i<escena.getObjeto3D().getHijos().size(); i++)
+                       if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.PERSIANA)
+                         escena.getObjeto3D().getHijos().get(i).setQuieta(); 
                 canvas.repaint();
             }
         });

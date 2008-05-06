@@ -36,6 +36,8 @@ public class Objeto3D {
     protected Texture texturaAct;
     protected int textSelec;
     
+    protected boolean subir;
+    protected boolean bajar;
     
     public static final int ESCENA = 0;
     public static final int MUEBLES = 1;
@@ -177,5 +179,20 @@ public class Objeto3D {
     
     public void textSelec(int i) {
         texturaAct = textura[i];
+    }
+    
+    public void setSubir() {
+        subir = true;
+        bajar = false;
+    }
+    
+    public void setBajar() {
+        subir = false;
+        bajar = true;
+    }
+    
+    public void setQuieta() {
+        subir = false;
+        bajar = false;
     }
 }
