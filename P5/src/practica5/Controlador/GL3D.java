@@ -68,7 +68,7 @@ public class GL3D implements GLEventListener {
         double N = -1000;
         double F = 800;
         
-        // Tipo de proyecci�n
+        // Tipo de proyecciï¿½n
         switch (perspectiva) {
             
             case PROY_ORTOGONAL: gl.glMatrixMode(gl.GL_PROJECTION);
@@ -133,8 +133,9 @@ public class GL3D implements GLEventListener {
         //gl = drw.getGL();
         glu = new GLU();
         
-        this.camaraActual = new Camara(gl, glu);
-        this.camaraSecundaria = new Camara(new PuntoVector3D(150, 150, 150), new PuntoVector3D(0, 0, 0), new PuntoVector3D(0, 1, 0), gl);
+       // this.camaraActual = new Camara(gl, glu);
+        this.camaraActual = new Camara(new PuntoVector3D(100, 100, -50), new PuntoVector3D(0, 0, 0), new PuntoVector3D(0, 1, 0), gl);
+	this.camaraSecundaria = new Camara(new PuntoVector3D(100, 100, 100), new PuntoVector3D(0, 0, 0), new PuntoVector3D(0, 1, 0), gl);
         this.activarLuces(gl);
         this.activarOpcionesOpenGL(gl);
         
@@ -238,19 +239,17 @@ public class GL3D implements GLEventListener {
         
         switch (perspectiva) {
             
-            case PROY_ORTOGONAL: camaraActual.setPuntoMira(new PuntoVector3D(100, 100, 100));
-                                 camaraSecundaria.setPuntoMira(new PuntoVector3D(100, 100, 100));
-                                break;
-            
-            case PROY_OBLICUA:   camaraActual.setPuntoMira(new PuntoVector3D(100, 120, 0));
-                                 break;
-            
-            case PROY_PERSPECTIVA: camaraActual.setPuntoMira(new PuntoVector3D(100, 120, 300));
-                                   break;
-                                   
+//            case PROY_ORTOGONAL: camaraActual.setPuntoMira(new PuntoVector3D(100, 100, 100));
+//                                break;
+//            
+//            case PROY_OBLICUA:   camaraActual.setPuntoMira(new PuntoVector3D(100, 120, 0));
+//                                 break;
+//            
+//            case PROY_PERSPECTIVA: camaraActual.setPuntoMira(new PuntoVector3D(100, 120, 300));
+//                                   break;
+//                                   
             case CAMARA_PERSONA: camaraActual.setPuntoMira(new PuntoVector3D(250+desplPersonaX, 120+desplPersonaY, 300+desplPersonaZ));
-                                   break;                       
-            
+                                   break;
         }
     }
 }
