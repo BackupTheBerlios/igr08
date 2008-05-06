@@ -44,7 +44,7 @@ public class Malla extends Objeto3D {
         gl.glMultMatrixd(matriz.getMatriz(), 0);
         
         if (texturizado) {
-               texturaAct.enable(); //texturaAct
+               texturaAct.enable();
                texturaAct.bind();
                gl.glTexEnvi(gl.GL_TEXTURE_ENV, gl.GL_TEXTURE_ENV_MODE, gl.GL_REPLACE);
                TextureCoords coords = texturaAct.getImageTexCoords();   

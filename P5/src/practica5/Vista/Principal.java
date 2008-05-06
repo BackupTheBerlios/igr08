@@ -283,7 +283,7 @@ public class Principal extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (jcBaldosas.isSelected()){
                    for (int i=0; i<escena.getObjeto3D().getHijos().size(); i++)
-                       if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.ESCENA) 
+                       if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.SUELO) 
                          escena.getObjeto3D().getHijos().get(i).setBaldosas(); 
                 } else 
                      for (int i=0; i<escena.getObjeto3D().getHijos().size(); i++)
@@ -312,7 +312,7 @@ public class Principal extends JFrame {
                        
                      }
                     
-                    if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.LAMPARA) {
+                    if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.MUEBLES) {
                          escena.getObjeto3D().getHijos().get(i).textSelec(2);
                          escena.getObjeto3D().getHijos().get(i).setTexturizado(); 
                        
@@ -326,7 +326,7 @@ public class Principal extends JFrame {
                        escena.getObjeto3D().getHijos().get(i).setTexturizado(); 
                         if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.SUELO)
                          escena.getObjeto3D().getHijos().get(i).setTexturizado(); 
-                        if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.LAMPARA)
+                        if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.MUEBLES)
                          escena.getObjeto3D().getHijos().get(i).setTexturizado(); 
                      }
                        
