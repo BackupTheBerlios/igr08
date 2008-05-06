@@ -23,21 +23,13 @@ public class Objeto3D {
     protected GL gl;
     protected boolean normalesEnabled;
     protected boolean modificado;
-    
-    protected int ang;
-    protected int ejeGiro;
-    protected boolean gira;
-    protected boolean sentido;
-    
+        
     protected boolean baldosas;
     protected boolean texturizado;
     
     protected Texture[] textura;
     protected Texture texturaAct;
-    protected int textSelec;
-    
-    protected boolean subir;
-    protected boolean bajar;
+
     
     public static final int ESCENA = 0;
     public static final int MUEBLES = 1;
@@ -60,14 +52,9 @@ public class Objeto3D {
         normalesEnabled = false;
         matriz = new TAfin();
         modificado = false;
-        gira = false;
-        sentido = true;
-        ejeGiro = 0;
-        ang = 1;
                 
         baldosas = false;
         texturizado = false;
-        textSelec = 0;
         
         textura = new Texture[5];
         //for (int i=0; i<5; i++)
@@ -131,23 +118,7 @@ public class Objeto3D {
     public void setModificado() {
         modificado = true;
     }
-    
-    public void setGira() {
-        gira = true;
-    }
-    public void setNoGira() {
-        gira = false;
-    }
-    
-    public void setSentido(boolean sent) {
-        sentido = sent;
-    }
-    
-    public void setEje(int i) {
-        ang = 1;
-        ejeGiro = i;
-    }
-    
+  
     public void setBaldosas() {
         if (baldosas)
             baldosas = false;
@@ -181,18 +152,4 @@ public class Objeto3D {
         texturaAct = textura[i];
     }
     
-    public void setSubir() {
-        subir = true;
-        bajar = false;
-    }
-    
-    public void setBajar() {
-        subir = false;
-        bajar = true;
-    }
-    
-    public void setQuieta() {
-        subir = false;
-        bajar = false;
-    }
 }

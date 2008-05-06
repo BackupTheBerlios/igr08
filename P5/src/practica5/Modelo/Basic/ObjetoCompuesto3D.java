@@ -47,44 +47,9 @@ public class ObjetoCompuesto3D extends Objeto3D{
     
         // Guardamos el estado de la matriz
         gl.glPushMatrix();
-     //   double[] m = new double[16]; 
+
             if (modificado)
                 gl.glMultMatrixd(matriz.getMatriz(), 0);
-        
-       /*     if (gira) {
-                
-                if (sentido)
-                    ang++;
-                else
-                    ang--;
-                            
-                switch(ejeGiro) { 
-                    
-                    case 0: gl.glRotated(ang, 1.0, 0.0, 0.0);
-                    gl.glGetDoublev(gl.GL_MODELVIEW_MATRIX,m,0);
-                    gl.glMultMatrixd(m,0);
-                    gl.glRotated(-ang, 1.0, 0.0, 0.0);
-                            break;
-                    case 1: gl.glRotated(ang, 0.0, 1.0, 0.0); 
-                    gl.glMultMatrixd(matriz.getMatriz(),0);
-                            gl.glRotated(-ang, 0.0, 1.0, 0.0);
-                            break;
-                    case 2: gl.glRotated(ang, 0.0, 0.0, 1.0); 
-                        gl.glMultMatrixd(matriz.getMatriz(),0);
-                            gl.glRotated(-ang, 0.0, 0.0, 1.0);
-                    break;
-            
-                }
-                gira = false;
-            }*/
-        
-            if ((subir) && (getId() == Objeto3D.PERSIANA)) {
-               gl.glScaled(0.0, 50.0, 0.0);
-            }
-        
-            if ((bajar) && (getId() == Objeto3D.PERSIANA)) {
-                gl.glScaled(0.0, -50.0, 0.0);
-            }
         
             // Dibujamos cada uno de los objetos
             for (int elem=0; elem<hijos.size(); elem++) 
@@ -106,20 +71,5 @@ public class ObjetoCompuesto3D extends Objeto3D{
              hijos.get(elem).setNormalesEnabled(valor);
 
     }
-    
-    // Operaciones
-/*    public void rotar(double ang, double ejeX, double ejeY, double ejeZ) {
-        this.getMatriz().rotar(ang, ejeX, ejeY, ejeZ);
-    }
-    
-    public void trasladar(double X, double Y, double Z) {
-        this.getMatriz().trasladar(X, Y, Z);
-    }
-    
-    public void escalar(double X, double Y, double Z) {
-        this.getMatriz().escalar(X, Y, Z);
-    }
-    
-*/
     
 }

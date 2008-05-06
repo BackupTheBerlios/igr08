@@ -251,7 +251,7 @@ public class Principal extends JFrame {
             
             public void actionPerformed(ActionEvent e) {
                 //escena.getCamara().setProjection(GL3D.PROY_ORTOGONAL);
-		escena.setPerspectiva(GL3D.PROY_ORTOGONAL);
+                escena.setPerspectiva(GL3D.PROY_ORTOGONAL);
                 System.out.println("ortogonal");
                 canvas.repaint();
             }
@@ -260,8 +260,8 @@ public class Principal extends JFrame {
         rbPerspectiva.addActionListener(new ActionListener() {
             
             public void actionPerformed(ActionEvent e) {
-               // escena.getCamara().setProjection(GL3D.PROY_PERSPECTIVA);
-		escena.setPerspectiva(GL3D.PROY_PERSPECTIVA);
+                // escena.getCamara().setProjection(GL3D.PROY_PERSPECTIVA);
+                escena.setPerspectiva(GL3D.PROY_PERSPECTIVA);
                 System.out.println("Perspectiva");
                 canvas.repaint();
             }
@@ -271,7 +271,7 @@ public class Principal extends JFrame {
             
             public void actionPerformed(ActionEvent e) {
                 //escena.getCamara().setProjection(GL3D.PROY_OBLICUA);
-		escena.setPerspectiva(GL3D.PROY_OBLICUA);
+                escena.setPerspectiva(GL3D.PROY_OBLICUA);
                 System.out.println("Oblicua");
                 canvas.repaint();
             }
@@ -291,13 +291,13 @@ public class Principal extends JFrame {
             
             public void actionPerformed(ActionEvent e) {
                 if (jcBaldosas.isSelected()){
-                   for (int i=0; i<escena.getObjeto3D().getHijos().size(); i++)
-                       if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.SUELO) 
-                         escena.getObjeto3D().getHijos().get(i).setBaldosas(); 
-                } else 
-                     for (int i=0; i<escena.getObjeto3D().getHijos().size(); i++)
-                       if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.SUELO)
-                         escena.getObjeto3D().getHijos().get(i).setBaldosas(); 
+                    for (int i=0; i<escena.getObjeto3D().getHijos().size(); i++)
+                        if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.SUELO)
+                            escena.getObjeto3D().getHijos().get(i).setBaldosas();
+                } else
+                    for (int i=0; i<escena.getObjeto3D().getHijos().size(); i++)
+                        if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.SUELO)
+                            escena.getObjeto3D().getHijos().get(i).setBaldosas();
                 canvas.repaint();
             }
         });
@@ -306,39 +306,39 @@ public class Principal extends JFrame {
             
             public void actionPerformed(ActionEvent e) {
                 if (jcTexturas.isSelected()){
-                  
-                    for (int i=0; i<escena.getObjeto3D().getHijos().size(); i++) {
-                     
-                    if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.ESCENA) {
-                         escena.getObjeto3D().getHijos().get(i).textSelec(3);
-                         escena.getObjeto3D().getHijos().get(i).setTexturizado(); 
-                       
-                     }  
-                     
-                    if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.SUELO) {
-                         escena.getObjeto3D().getHijos().get(i).textSelec(0);
-                         escena.getObjeto3D().getHijos().get(i).setTexturizado(); 
-                       
-                     }
                     
-                    if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.PERSIANA) {
-                         escena.getObjeto3D().getHijos().get(i).textSelec(1);
-                         escena.getObjeto3D().getHijos().get(i).setTexturizado(); 
-                       
-                     }  
+                    for (int i=0; i<escena.getObjeto3D().getHijos().size(); i++) {
+                        
+                        if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.ESCENA) {
+                            escena.getObjeto3D().getHijos().get(i).textSelec(3);
+                            escena.getObjeto3D().getHijos().get(i).setTexturizado();
                             
-                   }
-            
-                } else 
-                     for (int i=0; i<escena.getObjeto3D().getHijos().size(); i++) {
-                        if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.ESCENA) 
-                       escena.getObjeto3D().getHijos().get(i).setTexturizado(); 
-                        if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.SUELO)
-                         escena.getObjeto3D().getHijos().get(i).setTexturizado(); 
-                        if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.PERSIANA)
-                         escena.getObjeto3D().getHijos().get(i).setTexturizado(); 
-                     }
-                       
+                        }
+                        
+                        if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.SUELO) {
+                            escena.getObjeto3D().getHijos().get(i).textSelec(0);
+                            escena.getObjeto3D().getHijos().get(i).setTexturizado();
+                            
+                        }
+                        
+                        if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.PERSIANA) {
+                            escena.getObjeto3D().getHijos().get(i).textSelec(1);
+                            escena.getObjeto3D().getHijos().get(i).setTexturizado();
+                            
+                        }
+                        
+                    }
+                    
+                } else
+                    for (int i=0; i<escena.getObjeto3D().getHijos().size(); i++) {
+                    if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.ESCENA)
+                        escena.getObjeto3D().getHijos().get(i).setTexturizado();
+                    if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.SUELO)
+                        escena.getObjeto3D().getHijos().get(i).setTexturizado();
+                    if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.PERSIANA)
+                        escena.getObjeto3D().getHijos().get(i).setTexturizado();
+                    }
+                
                 canvas.repaint();
             }
         });
@@ -346,17 +346,18 @@ public class Principal extends JFrame {
         jcPersianas.addActionListener(new ActionListener() {
             
             public void actionPerformed(ActionEvent e) {
-                if (jcPersianas.isSelected()){
-                    oyenteTeclado.seleccionaObjeto(Objeto3D.PERSIANA);
-                    
-                    canvas.repaint();
-                  /* for (int i=0; i<escena.getObjeto3D().getHijos().size(); i++)
-                       if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.PERSIANA) 
-                         escena.getObjeto3D().getHijos().get(i).setBajar(); */
-                } else 
-                     for (int i=0; i<escena.getObjeto3D().getHijos().size(); i++)
-                       if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.PERSIANA)
-                         escena.getObjeto3D().getHijos().get(i).setQuieta(); 
+                if (jcPersianas.isSelected()) {
+                  oyenteTeclado.seleccionaObjeto(Objeto3D.PERSIANA);  
+                }
+                else {
+                    if (rbEscena.isSelected())
+                        oyenteTeclado.seleccionaObjeto(Objeto3D.ESCENA);
+                    else if (rbMuebles.isSelected())
+                        oyenteTeclado.seleccionaObjeto(Objeto3D.MUEBLES);
+                    else
+                        oyenteTeclado.seleccionaObjeto(Objeto3D.LAMPARA);
+                }
+
                 canvas.repaint();
             }
         });

@@ -188,7 +188,7 @@ public class Habitaciones extends ObjetoCompuesto3D {
         this.addHijos(estatua);
         
         // Persiana
-        persiana = new Persiana(new PuntoVector3D(5, 140, -215), 0, gl);
+        persiana = new Persiana(new PuntoVector3D(-5, 140, -215), 0, gl);
         persiana.setId(Objeto3D.PERSIANA);
         this.addHijos(persiana);
     }
