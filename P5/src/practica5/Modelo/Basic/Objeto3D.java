@@ -49,7 +49,7 @@ public class Objeto3D {
     public static final int SUELO = 9;
     public static final int SOFA = 10;
     public static final int ESTATUA = 11;
-    
+    public static final int PERSIANA = 12;
     
     // Constructora
     public Objeto3D() {
