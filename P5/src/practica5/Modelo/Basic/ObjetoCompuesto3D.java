@@ -1,5 +1,6 @@
 package practica5.Modelo.Basic;
 
+import com.sun.opengl.util.texture.TextureCoords;
 import java.util.ArrayList;
 import javax.media.opengl.GL;
 
@@ -46,7 +47,7 @@ public class ObjetoCompuesto3D extends Objeto3D{
     
         // Guardamos el estado de la matriz
         gl.glPushMatrix();
-           
+                   
             if (modificado)
                 gl.glMultMatrixd(matriz.getMatriz(), 0);
         

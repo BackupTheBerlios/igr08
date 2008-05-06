@@ -35,6 +35,7 @@ public class Principal extends JFrame {
     private JRadioButton rbSolido;
     private JCheckBox jcNormales;
     private JCheckBox jcBaldosas;
+    private JCheckBox jcTexturas;
     private ButtonGroup gBotonesProyeccion;
     private JRadioButton rbOrtogonal;
     private JRadioButton rbPerspectiva;
@@ -123,6 +124,12 @@ public class Principal extends JFrame {
         jcBaldosas.setBounds(700, 40, 80, 25);
         canvas.add(jcBaldosas);
         
+        jcTexturas = new JCheckBox("Texturas");
+        jcTexturas.setForeground(java.awt.Color.white);
+        jcTexturas.setBackground(java.awt.Color.black);
+        jcTexturas.setBounds(700, 70, 80, 25);
+        canvas.add(jcTexturas);
+        
         rbPuntos = new JRadioButton("Puntos");
         rbPuntos.setForeground(java.awt.Color.pink);
         rbPuntos.setBackground(java.awt.Color.black);
@@ -179,6 +186,7 @@ public class Principal extends JFrame {
         rbLampara.addKeyListener(oyenteTeclado);
         jcNormales.addKeyListener(oyenteTeclado);
         jcBaldosas.addKeyListener(oyenteTeclado);
+        jcTexturas.addKeyListener(oyenteTeclado);
         rbPuntos.addKeyListener(oyenteTeclado);
         rbLineas.addKeyListener(oyenteTeclado);
         rbSolido.addKeyListener(oyenteTeclado);
@@ -275,12 +283,53 @@ public class Principal extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (jcBaldosas.isSelected()){
                    for (int i=0; i<escena.getObjeto3D().getHijos().size(); i++)
-                       if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.SUELO) 
+                       if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.ESCENA) 
                          escena.getObjeto3D().getHijos().get(i).setBaldosas(); 
                 } else 
                      for (int i=0; i<escena.getObjeto3D().getHijos().size(); i++)
                        if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.SUELO)
                          escena.getObjeto3D().getHijos().get(i).setBaldosas(); 
+                canvas.repaint();
+            }
+        });
+        
+        jcTexturas.addActionListener(new ActionListener() {
+            
+            public void actionPerformed(ActionEvent e) {
+                if (jcTexturas.isSelected()){
+                  
+                    for (int i=0; i<escena.getObjeto3D().getHijos().size(); i++) {
+                     
+                    if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.ESCENA) {
+                         escena.getObjeto3D().getHijos().get(i).textSelec(3);
+                         escena.getObjeto3D().getHijos().get(i).setTexturizado(); 
+                       
+                     }  
+                     
+                    if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.SUELO) {
+                         escena.getObjeto3D().getHijos().get(i).textSelec(0);
+                         escena.getObjeto3D().getHijos().get(i).setTexturizado(); 
+                       
+                     }
+                    
+                    if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.LAMPARA) {
+                         escena.getObjeto3D().getHijos().get(i).textSelec(2);
+                         escena.getObjeto3D().getHijos().get(i).setTexturizado(); 
+                       
+                     }  
+                            
+                   }
+            
+                } else 
+                     for (int i=0; i<escena.getObjeto3D().getHijos().size(); i++) {
+                        if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.ESCENA) 
+                       escena.getObjeto3D().getHijos().get(i).setTexturizado(); 
+                        if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.SUELO)
+                         escena.getObjeto3D().getHijos().get(i).setTexturizado(); 
+                        if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.LAMPARA)
+                         escena.getObjeto3D().getHijos().get(i).setTexturizado(); 
+                     }
+                       
                 canvas.repaint();
             }
         });

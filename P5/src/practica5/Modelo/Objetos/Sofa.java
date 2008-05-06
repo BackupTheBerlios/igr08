@@ -3,7 +3,7 @@ package practica5.Modelo.Objetos;
 import javax.media.opengl.GL;
 import practica5.Modelo.Basic.*;
 
-public class Sofa extends ObjetoCompuesto3D{
+public class Sofa extends ObjetoCompuesto3D {
     
     // Atributos privados
     Tablero tablero;

@@ -1,9 +1,17 @@
 package practica5.Modelo.Basic;
 
+import com.sun.opengl.util.texture.TextureCoords;
 import java.util.ArrayList;
 import javax.media.opengl.GL;
 
 public class Malla extends Objeto3D {
+    
+    
+    // texturas
+    public static final String[] nombreTexturas = { "suelo.jpg", "madera.jpg", "cristalino.jpg",  
+                                                    "tela.jpg", "pared.jpg", "pared2.jpg",
+                                                    "cristalino.jpg", "tela.jpg", "suelo.jpg",  
+                                                    "madera.jpg", "tela.jpg", "suelo.jpg" };
     
     // Constantes
     public static final int GL_POINTS = 0;
@@ -35,6 +43,16 @@ public class Malla extends Objeto3D {
         // Situamos el objeto en la escena
         gl.glMultMatrixd(matriz.getMatriz(), 0);
         
+        if (texturizado) {
+               texturaAct.enable(); //texturaAct
+               texturaAct.bind();
+               gl.glTexEnvi(gl.GL_TEXTURE_ENV, gl.GL_TEXTURE_ENV_MODE, gl.GL_REPLACE);
+               TextureCoords coords = texturaAct.getImageTexCoords();   
+            }
+        else {
+          texturaAct.disable(); 
+        }
+        
         // Seleccionamos el tipo de representación
         for (int i = 0; i < caras.size(); i++) {
             switch (this.tipoMalla) {
@@ -49,8 +67,7 @@ public class Malla extends Objeto3D {
                     break;
             }
             
-            
-            
+
             // Comenzamos a dibujar el objeto
             for (int j = 0; j < caras.get(i).getIndiceVerticeNormal().size(); j++) {
                 
@@ -68,6 +85,11 @@ public class Malla extends Objeto3D {
                             normales.get(iN).getY(),
                             normales.get(iN).getZ());
                 }
+                
+                if (texturizado)
+                    gl.glTexCoord3d(vertices.get(iV).getX()/300,
+                                    vertices.get(iV).getY()/300,
+                                    vertices.get(iV).getZ()/300); 
                 
                 gl.glVertex3d(vertices.get(iV).getX(),
                         vertices.get(iV).getY(),

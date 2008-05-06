@@ -6,6 +6,11 @@
  */
 package practica5.Modelo.Basic;
 
+import com.sun.opengl.util.texture.Texture;
+import com.sun.opengl.util.texture.TextureIO;
+import java.awt.image.BufferedImage;
+import java.net.URL;
+import javax.imageio.ImageIO;
 import javax.media.opengl.GL;
 
 public class Objeto3D {
@@ -25,6 +30,12 @@ public class Objeto3D {
     protected boolean sentido;
     
     protected boolean baldosas;
+    protected boolean texturizado;
+    
+    protected Texture[] textura;
+    protected Texture texturaAct;
+    protected int textSelec;
+    
     
     public static final int ESCENA = 0;
     public static final int MUEBLES = 1;
@@ -38,8 +49,8 @@ public class Objeto3D {
     public static final int SUELO = 9;
     public static final int SOFA = 10;
     public static final int ESTATUA = 11;
-           
-        
+    
+    
     // Constructora
     public Objeto3D() {
         color = new Color(0, 1, 0);
@@ -51,8 +62,17 @@ public class Objeto3D {
         sentido = true;
         ejeGiro = 0;
         ang = 1;
-        
+                
         baldosas = false;
+        texturizado = false;
+        textSelec = 0;
+        
+        textura = new Texture[5];
+        for (int i=0; i<5; i++)
+            textura[i] = TextureIO.newTexture(Cargar_Imagen("practica5/Images/" + Malla.nombreTexturas[i]), true);
+      
+        texturaAct = textura[0];
+        //textura = TextureIO.newTexture(Cargar_Imagen("practica5/Images/" + Malla.nombreTexturas[1]), true);
     }
     
     
@@ -133,4 +153,29 @@ public class Objeto3D {
             baldosas = true;
     }
     
+    public BufferedImage Cargar_Imagen(String nombre) {
+        
+        URL url=null;
+        try {
+            url = getClass().getClassLoader().getResource(nombre);
+            
+            return ImageIO.read(url);
+        } catch (Exception e) {
+            System.out.println("No se pudo cargar la imagen " + nombre +" de "+url);
+            System.out.println("El error fue : "+e.getClass().getName()+" "+e.getMessage());
+            System.exit(0);
+            return null;
+        }
+    }
+    
+    public void setTexturizado() {
+        if (texturizado)
+            texturizado = false;
+        else
+            texturizado = true;
+    }
+    
+    public void textSelec(int i) {
+        texturaAct = textura[i];
+    }
 }
