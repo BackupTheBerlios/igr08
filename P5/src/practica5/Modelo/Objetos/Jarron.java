@@ -27,8 +27,8 @@ public class Jarron extends ObjetoCompuesto3D {
         piedra = new MallaPorRevolucion(perfil, 4, 0.1 , gl);
         piedra.getMatriz().trasladarM(pos.getX(), pos.getY(), pos.getZ());
         piedra.setColor(color.gris);
-        piedra.setId(8);
-        this.addHijos(piedra);
+        piedra.setId(Objeto3D.ESTATUA);
+        super.addHijos(piedra);
     }
     
 }

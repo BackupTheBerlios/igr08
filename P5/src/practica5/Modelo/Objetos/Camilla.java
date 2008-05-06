@@ -27,7 +27,7 @@ public class Camilla extends ObjetoCompuesto3D {
         mesitaCamilla = new MallaPorRevolucion(perfil, 4, 0.2 , gl);
         mesitaCamilla.getMatriz().trasladarM(pos.getX(), pos.getY(), pos.getZ());
         mesitaCamilla.setColor(color.rosa);
-        mesitaCamilla.setId(8);
+        mesitaCamilla.setId(Objeto3D.CAMILLA);
         this.addHijos(mesitaCamilla);
         
     }

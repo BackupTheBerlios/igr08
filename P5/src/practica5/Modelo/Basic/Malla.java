@@ -8,8 +8,8 @@ public class Malla extends Objeto3D {
     
     
     // texturas
-    public static final String[] nombreTexturas = { "suelo.jpg", "madera.jpg", "cristalino.jpg",  
-                                                    "tela.jpg", "pared.jpg", "pared2.jpg",
+    public static final String[] nombreTexturas = { "suelo.jpg", "madera.jpg", "tela.jpg", "cristalino.jpg",  
+                                                    "telado.jpg", "pared2.jpg", "pared.jpg",
                                                     "cristalino.jpg", "tela.jpg", "suelo.jpg",  
                                                     "madera.jpg", "tela.jpg", "suelo.jpg" };
     
@@ -42,7 +42,7 @@ public class Malla extends Objeto3D {
         
         // Situamos el objeto en la escena
         gl.glMultMatrixd(matriz.getMatriz(), 0);
-        
+        /*
         if (texturizado) {
                texturaAct.enable();
                texturaAct.bind();
@@ -50,9 +50,9 @@ public class Malla extends Objeto3D {
                TextureCoords coords = texturaAct.getImageTexCoords();   
             }
         else {
-         // texturaAct.disable(); 
+          texturaAct.disable(); 
         }
-        
+        */
         // Seleccionamos el tipo de representación
         for (int i = 0; i < caras.size(); i++) {
             switch (this.tipoMalla) {

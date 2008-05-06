@@ -148,16 +148,21 @@ public class Habitaciones extends ObjetoCompuesto3D {
         // Puerta
         puerta = new Puerta(gl);
         puerta.setId(Objeto3D.PUERTA);
-        this.addHijos(puerta);
+        for (int i=0; i<puerta.getHijos().size(); i++)
+            this.addHijos(puerta.getHijos().get(i));
         
         // Cuadro
         cuadro = new Cuadro(gl);
-        this.addHijos(cuadro);
+        cuadro.setId(Objeto3D.CUADRO);
+        for (int i=0; i<cuadro.getHijos().size(); i++)
+            this.addHijos(cuadro.getHijos().get(i));
         
         // Muebles
         muebles = new Muebles(new PuntoVector3D(50, 50, -150), 45, gl);
         muebles.setId(Objeto3D.MUEBLES);
-        this.addHijos(muebles);
+        for (int i=0; i<muebles.getHijos().size(); i++)
+            this.addHijos(muebles.getHijos().get(i));
+        
         
         // Estanteria
         estante = new Estanteria(new PuntoVector3D(10, 50, -30), 0, gl);
@@ -167,7 +172,8 @@ public class Habitaciones extends ObjetoCompuesto3D {
         // Lampara
         lampara = new Lampara(new PuntoVector3D(140, 250, -140), 0, gl);
         lampara.setId(Objeto3D.LAMPARA);
-        this.addHijos(lampara);
+        for (int i=0; i<lampara.getHijos().size(); i++)
+            this.addHijos(lampara.getHijos().get(i));
      
         // Perchero
         percha = new Perchero(new PuntoVector3D(30, 0, 50), 0, gl);
@@ -176,28 +182,33 @@ public class Habitaciones extends ObjetoCompuesto3D {
         
         // Mesa 2
         camilla = new Camilla(new PuntoVector3D(150, 0, 150), 0, gl);
-        camilla.setId(Objeto3D.PERCHERO);
-        this.addHijos(camilla);
+        camilla.setId(Objeto3D.MESA);
+        for (int i=0; i<camilla.getHijos().size(); i++)
+            this.addHijos(camilla.getHijos().get(i));
         
         // Sofa
         sofa = new Sofa(new PuntoVector3D(10, 0, 150), 0, gl);
         sofa.setId(Objeto3D.SOFA);
-        this.addHijos(sofa);
+        for (int i=0; i<sofa.getHijos().size(); i++)
+            this.addHijos(sofa.getHijos().get(i));
         
         // Jarron
         estatua = new Jarron(new PuntoVector3D(230, 0, 50), 0, gl);
         estatua.setId(Objeto3D.ESTATUA);
-        this.addHijos(estatua);
+        for (int i=0; i<estatua.getHijos().size(); i++)
+            this.addHijos(estatua.getHijos().get(i));
         
         // Persiana
         persiana = new Persiana(new PuntoVector3D(-5, 140, -215), 0, gl);
         persiana.setId(Objeto3D.PERSIANA);
-        this.addHijos(persiana);
+        for (int i=0; i<persiana.getHijos().size(); i++)
+            this.addHijos(persiana.getHijos().get(i));
         
         // Persona
         persona = new Persona(new PuntoVector3D(230, 0, 230), 0, gl);
         persona.setId(Objeto3D.PERSONA);
         this.addHijos(persona);
+        
     }
         
 }

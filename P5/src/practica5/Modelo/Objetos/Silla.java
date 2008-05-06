@@ -18,7 +18,7 @@ public class Silla extends ObjetoCompuesto3D{
         
         // Asiento
         tabla = new Tablero(50, 50, 10, 3, 3, 3);
-        tabla.setId(Objeto3D.SILLA);
+        tabla.setId(Objeto3D.MUEBLES);
         tabla.setGL(gl);
         tabla.getMatriz().rotar(90, 1.0, 0.0, 0.0);
         tabla.getMatriz().rotarM(ori, 0.0, 1.0, 0.0);
@@ -28,7 +28,7 @@ public class Silla extends ObjetoCompuesto3D{
         
         // Respaldo
         tabla = new Tablero(50, 50, 10, 3, 3, 3);
-        tabla.setId(Objeto3D.SILLA);
+        tabla.setId(Objeto3D.MUEBLES);
         tabla.setGL(gl);
         tabla.getMatriz().rotarM(ori, 0.0, 1.0, 0.0);
         tabla.getMatriz().trasladarM(pos.getX(), pos.getY(), pos.getZ());

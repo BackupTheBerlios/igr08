@@ -17,7 +17,7 @@ public class Mesa extends ObjetoCompuesto3D {
         
         // Tabla de la mesa
         tabla = new Tablero(150, 80, 10, 3, 3, 3);
-        tabla.setId(Objeto3D.MESA);
+        tabla.setId(Objeto3D.MUEBLES);
         tabla.setGL(gl);
         tabla.getMatriz().rotar(90, 1.0, 0.0, 0.0);
         tabla.getMatriz().rotarM(ori, 0.0, 1.0, 0.0);

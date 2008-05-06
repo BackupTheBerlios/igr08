@@ -3,7 +3,7 @@ package practica5.Modelo.Basic;
 import javax.media.opengl.glu.*;
 import javax.media.opengl.GL;
 
-public class Cilindro extends ObjetoCuadrico{
+public class Cilindro extends ObjetoCuadrico {
 
     // Atributos privados
     private double radioBaseA;

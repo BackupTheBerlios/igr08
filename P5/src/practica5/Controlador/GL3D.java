@@ -134,7 +134,7 @@ public class GL3D implements GLEventListener {
         glu = new GLU();
         
         this.camaraActual = new Camara(gl, glu);
-        this.camaraSecundaria = new Camara(new PuntoVector3D(100, 100, 100), new PuntoVector3D(0, 0, 0), new PuntoVector3D(0, 1, 0), gl);
+        this.camaraSecundaria = new Camara(new PuntoVector3D(150, 150, 150), new PuntoVector3D(0, 0, 0), new PuntoVector3D(0, 1, 0), gl);
         this.activarLuces(gl);
         this.activarOpcionesOpenGL(gl);
         
@@ -239,6 +239,7 @@ public class GL3D implements GLEventListener {
         switch (perspectiva) {
             
             case PROY_ORTOGONAL: camaraActual.setPuntoMira(new PuntoVector3D(100, 100, 100));
+                                 camaraSecundaria.setPuntoMira(new PuntoVector3D(100, 100, 100));
                                 break;
             
             case PROY_OBLICUA:   camaraActual.setPuntoMira(new PuntoVector3D(100, 120, 0));

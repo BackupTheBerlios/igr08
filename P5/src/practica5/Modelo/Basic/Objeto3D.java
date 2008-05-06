@@ -45,6 +45,7 @@ public class Objeto3D {
     public static final int ESTATUA = 11;
     public static final int PERSIANA = 12;
     public static final int PERSONA = 13;
+    public static final int CAMILLA = 14;
     
     // Constructora
     public Objeto3D() {
@@ -56,12 +57,12 @@ public class Objeto3D {
                 
         baldosas = false;
         texturizado = false;
-        
-        textura = new Texture[5];
-        //for (int i=0; i<5; i++)
-           // textura[i] = TextureIO.newTexture(Cargar_Imagen("practica5/Images/" + Malla.nombreTexturas[i]), true);
+        /*
+        textura = new Texture[6];
+        for (int i=0; i<=5; i++)
+            textura[i] = TextureIO.newTexture(Cargar_Imagen("practica5/Images/" + Malla.nombreTexturas[i]), true);
       
-        texturaAct = textura[0];
+        texturaAct = textura[0]; */
         //textura = TextureIO.newTexture(Cargar_Imagen("practica5/Images/" + Malla.nombreTexturas[1]), true);
     }
     
