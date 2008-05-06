@@ -69,11 +69,11 @@ public class ObjetoCompuesto3D extends Objeto3D{
             }
         
             if ((subir) && (getId() == Objeto3D.PERSIANA)) {
-                gl.glScaled(0.0, 100.0, 0.0);
+               glScaled(0.0, 50.0, 0.0);
             }
         
             if ((bajar) && (getId() == Objeto3D.PERSIANA)) {
-                gl.glScaled(0.0, -100.0, 0.0);
+                gl.glScaled(0.0, -50.0, 0.0);
             }
         
             // Dibujamos cada uno de los objetos
