@@ -46,6 +46,11 @@ public class OyenteTeclado implements KeyListener {
                 modificarPersiana(e);
                 break;
                 
+                
+            case Objeto3D.PERSONA:
+                modificarPersona(e);
+                break;
+                
         }
         
         System.out.println("tecla: " + e.getKeyChar());
@@ -155,27 +160,79 @@ public class OyenteTeclado implements KeyListener {
         
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
-                if (veces<=11) {    
+                if (veces<=11) {
                     escena.getObjeto3D().getHijos().get(i).setModificado();
                     escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(0, 5, 0);
                     veces++;
-                }
-                else  {
-                     System.out.print("La persiana no puede subir más");
+                } else  {
+                    System.out.print("La persiana no puede subir más");
                 }
                 break;
             case KeyEvent.VK_DOWN:
-               if (veces>=0) {   
+                if (veces>=0) {
                     escena.getObjeto3D().getHijos().get(i).setModificado();
                     escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(0, -5, 0);
                     veces--;
-               }
-               else  {
-                     System.out.print("La persiana no puede bajar más");
+                } else  {
+                    System.out.print("La persiana no puede bajar más");
                 }
                 break;
         }
-             
+        
+        canvas.repaint();
+    }
+    
+    
+    public void modificarPersona(KeyEvent e) {
+        
+        boolean enc = false;
+        int i = -1;
+
+
+        while (i < escena.getObjeto3D().getHijos().size() && !enc) {
+            i++;
+            if (escena.getObjeto3D().getHijos().get(i).getId() == Objeto3D.PERSONA) {
+                enc = true;
+            }
+        }
+
+         Camara camara = escena.getCamara();
+       switch (e.getKeyCode()) {
+            
+            case KeyEvent.VK_RIGHT:
+                escena.getObjeto3D().getHijos().get(i).setModificado();
+                camara.desliza(new PuntoVector3D(-10, 0, 0, 1));
+                escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(-10, 0, 0);
+                break;
+                
+            case KeyEvent.VK_LEFT:
+                escena.getObjeto3D().getHijos().get(i).setModificado();
+                camara.desliza(new PuntoVector3D(10, 0, 0, 1));
+                escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(10, 0, 0);
+                break;
+                
+            case KeyEvent.VK_UP:
+                escena.getObjeto3D().getHijos().get(i).setModificado();
+                camara.desliza(new PuntoVector3D(0, 0, -10, 1));
+                escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(0, 0, -10);
+                break;
+                
+            case KeyEvent.VK_DOWN:
+                escena.getObjeto3D().getHijos().get(i).setModificado();
+                camara.desliza(new PuntoVector3D(0, 0, 10, 1));
+                escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(0, 0, 10);
+                break;
+                
+            case KeyEvent.VK_A:
+                escena.getObjeto3D().getHijos().get(i).setModificado();
+                escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(0, -10, 0);
+                break;
+                
+            case KeyEvent.VK_Z:
+                escena.getObjeto3D().getHijos().get(i).setModificado();
+                escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(0, 10, 0);
+                break;
+              }      
         canvas.repaint();
     }
     
@@ -183,7 +240,7 @@ public class OyenteTeclado implements KeyListener {
     public void teclado(KeyEvent e, int i) {
         
         switch (e.getKeyCode()) {
-
+            
             case KeyEvent.VK_RIGHT:
                 escena.getObjeto3D().getHijos().get(i).setModificado();
                 escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(10, 0, 0);
@@ -221,7 +278,7 @@ public class OyenteTeclado implements KeyListener {
                 
             case KeyEvent.VK_W:
                 escena.getObjeto3D().getHijos().get(i).setModificado();
-                escena.getObjeto3D().getHijos().get(i).getMatriz().rotaXM(-1);  
+                escena.getObjeto3D().getHijos().get(i).getMatriz().rotaXM(-1);
                 break;
                 
             case KeyEvent.VK_E:

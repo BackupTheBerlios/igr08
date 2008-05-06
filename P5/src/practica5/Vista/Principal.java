@@ -41,6 +41,7 @@ public class Principal extends JFrame {
     private JRadioButton rbOrtogonal;
     private JRadioButton rbPerspectiva;
     private JRadioButton rbOblicua;
+    private JRadioButton rbPersona;
     private OyenteTeclado oyenteTeclado;
     private OyenteRaton oyenteRaton;
     
@@ -181,10 +182,18 @@ public class Principal extends JFrame {
         rbOblicua.setBounds(700, 510, 120, 25);
         canvas.add(rbOblicua);
         
+        rbPersona = new JRadioButton("1º Persona");
+        rbPersona.setForeground(java.awt.Color.yellow);
+        rbPersona.setBackground(java.awt.Color.black);
+        rbPersona.setBounds(700, 420, 120, 25);
+        canvas.add(rbPersona);
+        
         gBotonesModo = new ButtonGroup();
+        gBotonesModo.add(rbPersona);
         gBotonesModo.add(rbOrtogonal);
         gBotonesModo.add(rbPerspectiva);
         gBotonesModo.add(rbOblicua);
+        
         
         // Ponemos el oyente en los distintos elementos
         canvas.addKeyListener(oyenteTeclado);
@@ -202,6 +211,7 @@ public class Principal extends JFrame {
         rbOrtogonal.addKeyListener(oyenteTeclado);
         rbPerspectiva.addKeyListener(oyenteTeclado);
         rbOblicua.addKeyListener(oyenteTeclado);
+        rbPersona.addKeyListener(oyenteTeclado);
         
         // Accion por defecto al cerrar la ventana
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -252,6 +262,9 @@ public class Principal extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //escena.getCamara().setProjection(GL3D.PROY_ORTOGONAL);
                 escena.setPerspectiva(GL3D.PROY_ORTOGONAL);
+
+                oyenteTeclado.seleccionaObjeto(Objeto3D.ESCENA);
+                
                 System.out.println("ortogonal");
                 canvas.repaint();
             }
@@ -262,17 +275,32 @@ public class Principal extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // escena.getCamara().setProjection(GL3D.PROY_PERSPECTIVA);
                 escena.setPerspectiva(GL3D.PROY_PERSPECTIVA);
+                
                 System.out.println("Perspectiva");
                 canvas.repaint();
             }
         });
         
+      
         rbOblicua.addActionListener(new ActionListener() {
             
             public void actionPerformed(ActionEvent e) {
                 //escena.getCamara().setProjection(GL3D.PROY_OBLICUA);
                 escena.setPerspectiva(GL3D.PROY_OBLICUA);
+                
                 System.out.println("Oblicua");
+                canvas.repaint();
+            }
+        });
+
+        rbPersona.addActionListener(new ActionListener() {
+            
+            public void actionPerformed(ActionEvent e) {
+                                
+                escena.setPerspectiva(GL3D.CAMARA_PERSONA);
+                oyenteTeclado.seleccionaObjeto(Objeto3D.PERSONA);
+                
+                System.out.println("1º PERSONA");
                 canvas.repaint();
             }
         });
