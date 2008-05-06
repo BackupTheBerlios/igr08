@@ -28,7 +28,7 @@ public class Cilindro extends ObjetoCuadrico{
         
         this.glu.gluQuadricDrawStyle(glu.gluNewQuadric(), glu.GLU_FILL);
         
-        this.setColor3d(1.0, 1.0, 1.0);
+        this.setColor3d(1, 1, 1);
     }
     
     // Constructora 2

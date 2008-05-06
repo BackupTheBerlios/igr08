@@ -23,7 +23,7 @@ public class Esfera extends ObjetoCuadrico{
         
         this.glu.gluQuadricDrawStyle(glu.gluNewQuadric(), glu.GLU_LINE);
   
-        this.setColor3d(1.0, 1.0, 1.0);
+        this.setColor3d(255, 255, 255);
     }
  
     // Constructora 2

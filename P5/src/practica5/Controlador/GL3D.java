@@ -70,7 +70,7 @@ public class GL3D implements GLEventListener {
 	    case PROY_ORTOGONAL: gl.glMatrixMode(gl.GL_PROJECTION);
                                  gl.glLoadIdentity();   
                                  gl.glOrtho(l, r, b, t, N, F);
-                                 camaraActual.setPuntoMira(new PuntoVector3D(200, 200, 200));
+                                 camaraActual.setPuntoMira(new PuntoVector3D(100, 100, 100));
                                  break;
                                  
 	    case PROY_OBLICUA:  gl.glMatrixMode(gl.GL_PROJECTION);

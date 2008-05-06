@@ -40,7 +40,7 @@ public class Tablero extends Malla {
         //this.matriz = new TAfin(thgl);
         
         // Definimos un color inicial
-        this.color = new practica5.Modelo.Basic.Color(1.0, 0.0, 0.0);
+        this.color = Color.gris;
         
         // Calculamos la distancia que debe haber entre los puntos intermedios
         incX = (double) (X / divX);

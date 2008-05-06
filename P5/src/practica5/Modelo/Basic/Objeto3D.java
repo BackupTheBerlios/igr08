@@ -44,10 +44,11 @@ public class Objeto3D {
     public static final int SOFA = 10;
     public static final int ESTATUA = 11;
     public static final int PERSIANA = 12;
+    public static final int PERSONA = 13;
     
     // Constructora
     public Objeto3D() {
-        color = new Color(0, 1, 0);
+        color = Color.gris;
         tipoMalla = Malla.GL_POLYGON;
         normalesEnabled = false;
         matriz = new TAfin();
@@ -87,7 +88,7 @@ public class Objeto3D {
         this.color = color;
     }
     
-    public void setColor3d(double Red, double Green, double Blue) {
+    public void setColor3d(int Red, int Green, int Blue) {
         this.color = new Color(Red, Green, Blue);
     }
     

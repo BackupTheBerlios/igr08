@@ -19,7 +19,7 @@ public class Persona extends ObjetoCompuesto3D {
         cabeza.setId(Objeto3D.PERSONA);
         cabeza.setGL(gl);
         cabeza.getMatriz().trasladarM(pos.getX() + 25, pos.getY() + 100, pos.getZ());
-        cabeza.setColor(color.naranja);
+        cabeza.setColor(color.amarilloOscuro);
         this.addHijos(cabeza);
         
         // Tronco

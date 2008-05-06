@@ -18,9 +18,6 @@ public class Color {
     public static final Color blanco = new Color(255, 255, 255);
     public static final Color gris = new Color(1, 1, 1);
     public static final Color negro = new Color(0, 0, 0);
-    public static final Color naranja = new Color(java.awt.Color.orange.getRed(),
-                                                  java.awt.Color.orange.getGreen(),
-                                                  java.awt.Color.orange.getBlue());
     
     // Atributos privados
     private int Red;
