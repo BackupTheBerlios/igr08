@@ -3,11 +3,12 @@ package practica5.Modelo.Basic;
 import javax.media.opengl.GL;
 //http://www.tecnun.es/asignaturas/grafcomp/presentaciones/transformaciones.ppt
 import practica5.util.Conversiones;
+import practica5.util.Matrix;
 public class TAfin {
 
     // Atributos privados
     private GL gl;
-    private double[] matriz;
+    public double[] matriz;
     private static double EJE_SEL = 1.0;
 
     // Constructora
@@ -17,15 +18,82 @@ public class TAfin {
     }
 
     public void trasladar1(double X, double Y, double Z) {
-
-	this.setMatrizComponent(12, X);
+        double[] m = new double[16];
+        m[0]=1;
+        m[5]=1;
+        m[10]=1;
+        m[15]=1;
+        
+        m[12]=X;
+        m[13]=Y;
+        m[14]=Z;
+	/*this.setMatrizComponent(12, X);
 	this.setMatrizComponent(13, Y);
-	this.setMatrizComponent(14, Z);
-	for (int i = 0; i < matriz.length; i++) {
-	    System.out.println(matriz[i]);
-	}
+	this.setMatrizComponent(14, Z);*/
+       matriz = Matrix.multiplica(matriz,m);
+       
     }
+public void rotaXM(double ang){
+        double[] m = new double[16];
+        m[0]=1;
+        m[5]=1;
+        m[10]=1;
+        m[15]=1;
+        
+        double c = Math.cos(Conversiones.g2r(ang));
+	double s = Math.sin(Conversiones.g2r(ang));
+        m[5]=c;
+        m[6]=s;
+        m[9]=-s;
+        m[10]=c;
+//	this.setMatrizComponent(5, c);
+//	this.setMatrizComponent(6, s);
+//	this.setMatrizComponent(9, -s);
+//	this.setMatrizComponent(10, c);
+        matriz = Matrix.multiplica(matriz,m);
+}
 
+public void rotaYM(double ang){
+        double[] m = new double[16];
+        m[0]=1;
+        m[5]=1;
+        m[10]=1;
+        m[15]=1;
+        
+        double c = Math.cos(Conversiones.g2r(ang));
+	double s = Math.sin(Conversiones.g2r(ang));
+        m[0]=c;
+        m[2]=-s;
+        m[8]=s;
+        m[10]=c;
+//        this.setMatrizComponent(0, c);
+//	this.setMatrizComponent(2, -s);
+//	this.setMatrizComponent(8, s);
+//	this.setMatrizComponent(10, c);
+        matriz = Matrix.multiplica(matriz,m);
+}
+
+
+
+public void rotaZM(double ang){
+        double[] m = new double[16];
+        m[0]=1;
+        m[5]=1;
+        m[10]=1;
+        m[15]=1;
+        
+        double c = Math.cos(Conversiones.g2r(ang));
+	double s = Math.sin(Conversiones.g2r(ang));
+        m[0]=c;
+        m[1]=s;
+        m[4]=-s;
+        m[5]=c;
+//      this.setMatrizComponent(0, c);
+//	this.setMatrizComponent(1, s);
+//	this.setMatrizComponent(4, -s);
+//	this.setMatrizComponent(5, c);
+        matriz = Matrix.multiplica(matriz,m);
+}
     public void escalaX(double s) {
 	this.setMatrizComponent(0, s);
     }
@@ -181,6 +249,10 @@ public class TAfin {
     }
 
     public void setMatrizComponent(int indice, double valor) {
+	matriz[indice] = valor;
+    }
+    
+    public void addtMatrizComponent(int indice, double valor) {
 	matriz[indice] += valor;
     }
 

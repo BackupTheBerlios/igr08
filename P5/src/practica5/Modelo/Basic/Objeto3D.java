@@ -70,8 +70,8 @@ public class Objeto3D {
         textSelec = 0;
         
         textura = new Texture[5];
-        for (int i=0; i<5; i++)
-            textura[i] = TextureIO.newTexture(Cargar_Imagen("practica5/Images/" + Malla.nombreTexturas[i]), true);
+        //for (int i=0; i<5; i++)
+           // textura[i] = TextureIO.newTexture(Cargar_Imagen("practica5/Images/" + Malla.nombreTexturas[i]), true);
       
         texturaAct = textura[0];
         //textura = TextureIO.newTexture(Cargar_Imagen("practica5/Images/" + Malla.nombreTexturas[1]), true);

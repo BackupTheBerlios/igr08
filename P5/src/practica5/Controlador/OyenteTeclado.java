@@ -153,45 +153,57 @@ public class OyenteTeclado implements KeyListener {
 		break;
 	    // Giros
 	    case KeyEvent.VK_Q:
-		escena.getObjeto3D().getHijos().get(i).setModificado();
-                escena.getObjeto3D().getHijos().get(i).setSentido(true);
-                escena.getObjeto3D().getHijos().get(i).setEje(0);
-                escena.getObjeto3D().getHijos().get(i).setGira();
+                escena.getObjeto3D().getHijos().get(i).setModificado();
+                escena.getObjeto3D().getHijos().get(i).getMatriz().rotaXM(1);
+//		escena.getObjeto3D().getHijos().get(i).setModificado();
+//                escena.getObjeto3D().getHijos().get(i).setSentido(true);
+//                escena.getObjeto3D().getHijos().get(i).setEje(0);
+//                escena.getObjeto3D().getHijos().get(i).setGira();
 
 		break;
 	    case KeyEvent.VK_W:
-		escena.getObjeto3D().getHijos().get(i).setModificado();
-                escena.getObjeto3D().getHijos().get(i).setSentido(false);
-                escena.getObjeto3D().getHijos().get(i).setEje(0);
-                escena.getObjeto3D().getHijos().get(i).setGira();
+                                escena.getObjeto3D().getHijos().get(i).setModificado();
+                escena.getObjeto3D().getHijos().get(i).getMatriz().rotaXM(-1);
+//		escena.getObjeto3D().getHijos().get(i).setModificado();
+//                escena.getObjeto3D().getHijos().get(i).setSentido(false);
+//                escena.getObjeto3D().getHijos().get(i).setEje(0);
+//                escena.getObjeto3D().getHijos().get(i).setGira();
 		break;
 	    case KeyEvent.VK_E:
-		escena.getObjeto3D().getHijos().get(i).setModificado();
-                escena.getObjeto3D().getHijos().get(i).setSentido(true);
-                escena.getObjeto3D().getHijos().get(i).setEje(1);
-                escena.getObjeto3D().getHijos().get(i).setGira();
+                                escena.getObjeto3D().getHijos().get(i).setModificado();
+                escena.getObjeto3D().getHijos().get(i).getMatriz().rotaYM(1);
+//		escena.getObjeto3D().getHijos().get(i).setModificado();
+//                escena.getObjeto3D().getHijos().get(i).setSentido(true);
+//                escena.getObjeto3D().getHijos().get(i).setEje(1);
+//                escena.getObjeto3D().getHijos().get(i).setGira();
 		break;
 	    case KeyEvent.VK_R:
-		escena.getObjeto3D().getHijos().get(i).setModificado();
-                escena.getObjeto3D().getHijos().get(i).setSentido(false);
-                escena.getObjeto3D().getHijos().get(i).setEje(1);
-                escena.getObjeto3D().getHijos().get(i).setGira();                
+                                escena.getObjeto3D().getHijos().get(i).setModificado();
+                escena.getObjeto3D().getHijos().get(i).getMatriz().rotaYM(-1);
+//		escena.getObjeto3D().getHijos().get(i).setModificado();
+//                escena.getObjeto3D().getHijos().get(i).setSentido(false);
+//                escena.getObjeto3D().getHijos().get(i).setEje(1);
+//                escena.getObjeto3D().getHijos().get(i).setGira();                
 		//escena.getObjeto3D().getHijos().get(i).setModificado();
 		//escena.getObjeto3D().getHijos().get(i).getMatriz().rotaY(-10);
 		break;
 	    case KeyEvent.VK_T:		
-		escena.getObjeto3D().getHijos().get(i).setModificado();
-                escena.getObjeto3D().getHijos().get(i).setSentido(true);
-                escena.getObjeto3D().getHijos().get(i).setEje(2);
-                escena.getObjeto3D().getHijos().get(i).setGira();    
+                                escena.getObjeto3D().getHijos().get(i).setModificado();
+                escena.getObjeto3D().getHijos().get(i).getMatriz().rotaZM(1);
+//		escena.getObjeto3D().getHijos().get(i).setModificado();
+//                escena.getObjeto3D().getHijos().get(i).setSentido(true);
+//                escena.getObjeto3D().getHijos().get(i).setEje(2);
+//                escena.getObjeto3D().getHijos().get(i).setGira();    
                 //escena.getObjeto3D().getHijos().get(i).setModificado();
 		//escena.getObjeto3D().getHijos().get(i).getMatriz().rotaZ(10);
 		break;
 	    case KeyEvent.VK_Y:
-                escena.getObjeto3D().getHijos().get(i).setModificado();
-                escena.getObjeto3D().getHijos().get(i).setSentido(false);
-                escena.getObjeto3D().getHijos().get(i).setEje(2);
-                escena.getObjeto3D().getHijos().get(i).setGira();
+                                escena.getObjeto3D().getHijos().get(i).setModificado();
+                escena.getObjeto3D().getHijos().get(i).getMatriz().rotaZM(-1);
+//                escena.getObjeto3D().getHijos().get(i).setModificado();
+//                escena.getObjeto3D().getHijos().get(i).setSentido(false);
+//                escena.getObjeto3D().getHijos().get(i).setEje(2);
+//                escena.getObjeto3D().getHijos().get(i).setGira();
 		//escena.getObjeto3D().getHijos().get(i).setModificado();
 		//escena.getObjeto3D().getHijos().get(i).getMatriz().rotaZ(-10);
 		break;
@@ -264,10 +276,10 @@ public class OyenteTeclado implements KeyListener {
 		break;
             	    case KeyEvent.VK_Q:
 		escena.getObjeto3D().getHijos().get(i).setModificado();
-                escena.getObjeto3D().getHijos().get(i).setSentido(true);
+                escena.getObjeto3D().getHijos().get(i).getMatriz().rotaXM(10);
+               /* escena.getObjeto3D().getHijos().get(i).setSentido(true);
                 escena.getObjeto3D().getHijos().get(i).setEje(0);
-                escena.getObjeto3D().getHijos().get(i).setGira();
-
+                escena.getObjeto3D().getHijos().get(i).setGira();*/
 		break;
 	    case KeyEvent.VK_W:
 		escena.getObjeto3D().getHijos().get(i).setModificado();

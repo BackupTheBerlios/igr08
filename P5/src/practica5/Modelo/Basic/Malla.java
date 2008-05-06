@@ -50,7 +50,7 @@ public class Malla extends Objeto3D {
                TextureCoords coords = texturaAct.getImageTexCoords();   
             }
         else {
-          texturaAct.disable(); 
+         // texturaAct.disable(); 
         }
         
         // Seleccionamos el tipo de representación
