@@ -160,9 +160,9 @@ public class Habitaciones extends ObjetoCompuesto3D {
         // Muebles
         muebles = new Muebles(new PuntoVector3D(50, 50, -150), 45, gl);
         muebles.setId(Objeto3D.MUEBLES);
-        for (int i=0; i<muebles.getHijos().size(); i++)
-            this.addHijos(muebles.getHijos().get(i));
-        
+        //for (int i=0; i<muebles.getHijos().size(); i++)
+          //  this.addHijos(muebles.getHijos().get(i));
+        this.addHijos(muebles);
         
         // Estanteria
         estante = new Estanteria(new PuntoVector3D(10, 50, -30), 0, gl);
@@ -172,8 +172,7 @@ public class Habitaciones extends ObjetoCompuesto3D {
         // Lampara
         lampara = new Lampara(new PuntoVector3D(140, 250, -140), 0, gl);
         lampara.setId(Objeto3D.LAMPARA);
-        for (int i=0; i<lampara.getHijos().size(); i++)
-            this.addHijos(lampara.getHijos().get(i));
+        this.addHijos(lampara);
      
         // Perchero
         percha = new Perchero(new PuntoVector3D(30, 0, 50), 0, gl);

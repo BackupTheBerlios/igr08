@@ -262,8 +262,9 @@ public class Principal extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //escena.getCamara().setProjection(GL3D.PROY_ORTOGONAL);
                 escena.setPerspectiva(GL3D.PROY_ORTOGONAL);
-
+                
                 oyenteTeclado.seleccionaObjeto(Objeto3D.ESCENA);
+                rbEscena.setSelected(true);
                 
                 System.out.println("ortogonal");
                 canvas.repaint();
@@ -276,6 +277,9 @@ public class Principal extends JFrame {
                 // escena.getCamara().setProjection(GL3D.PROY_PERSPECTIVA);
                 escena.setPerspectiva(GL3D.PROY_PERSPECTIVA);
                 
+                oyenteTeclado.seleccionaObjeto(Objeto3D.ESCENA);
+                rbEscena.setSelected(true);
+                
                 System.out.println("Perspectiva");
                 canvas.repaint();
             }
@@ -287,6 +291,9 @@ public class Principal extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 //escena.getCamara().setProjection(GL3D.PROY_OBLICUA);
                 escena.setPerspectiva(GL3D.PROY_OBLICUA);
+                
+                oyenteTeclado.seleccionaObjeto(Objeto3D.ESCENA);
+                rbEscena.setSelected(true);
                 
                 System.out.println("Oblicua");
                 canvas.repaint();
@@ -305,7 +312,7 @@ public class Principal extends JFrame {
             }
         });
         
-        jcNormales.addActionListener(new ActionListener() {
+    /*    jcNormales.addActionListener(new ActionListener() {
             
             public void actionPerformed(ActionEvent e) {
                 if (jcNormales.isSelected()){
@@ -313,7 +320,7 @@ public class Principal extends JFrame {
                 } else {escena.getObjeto3D().activarNormales(false);}
                 canvas.repaint();
             }
-        });
+        });*/
         
         jcBaldosas.addActionListener(new ActionListener() {
             

@@ -51,7 +51,7 @@ public class Camara {
 	setProjection(GL3D.PROY_ORTOGONAL);
     }
 
-    private void setView(PuntoVector3D eye, PuntoVector3D look, PuntoVector3D up) {
+    public void setView(PuntoVector3D eye, PuntoVector3D look, PuntoVector3D up) {
 	this.eye = eye;
 	this.look = look;
 	this.up = up;
@@ -196,5 +196,15 @@ public class Camara {
 
     public void setPuntoMira(PuntoVector3D p) {
 	this.eye = p;
+    }
+    
+    public void reset(PuntoVector3D eye, PuntoVector3D look){
+    this.eye = eye;
+	this.look = look;
+	up = new PuntoVector3D(0, 1, 0);
+
+	setView(eye, look, up);
+	setModelViewMatrix();
+	setProjection(GL3D.PROY_ORTOGONAL);
     }
 }

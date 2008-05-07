@@ -1,9 +1,6 @@
 package practica5.Controlador;
 
 import java.nio.FloatBuffer;
-import java.security.Principal;
-import java.util.ArrayList;
-import javax.media.opengl.*;
 import javax.media.opengl.GLContext;
 import javax.media.opengl.glu.*;
 import javax.media.opengl.GL;
@@ -13,8 +10,6 @@ import practica5.Modelo.Basic.Color;
 
 import practica5.Modelo.Basic.*;
 import practica5.Modelo.Objetos.Habitaciones;
-import practica5.Modelo.Objetos.Toro;
-import practica5.util.Calculos;
 
 public class GL3D implements GLEventListener {
     
@@ -24,6 +19,9 @@ public class GL3D implements GLEventListener {
     public static final int PROY_OBLICUA = 2;
     public static final int CAMARA_PERSONA = 3;
     
+    public static final int VISTA_FRONTAL = 1;
+    public static final int VISTA_LATERAL = 2;
+    public static final int VISTA_CENITAL = 3;
     
     // Atributos privados
     private GL gl;
@@ -40,6 +38,8 @@ public class GL3D implements GLEventListener {
     private float[] PosicionLuz0 = new float[4];
     private ObjetoCompuesto3D hab;
     private int perspectiva = PROY_ORTOGONAL;
+    
+    private int vista;
     
     public double desplPersonaX = 0;
     public double desplPersonaY = 0;
@@ -65,18 +65,37 @@ public class GL3D implements GLEventListener {
         double r = 504;
         double b = -400;
         double t = 300;
-        double N = -1000;
+        //double N = -1000;
+        double N = 1;
         double F = 800;
+        switch (vista){
+            case  VISTA_FRONTAL:
+                camaraActual.reset(new PuntoVector3D(50,0,0), new PuntoVector3D(0,0,0));
+                break;
+            case VISTA_LATERAL:
+                camaraActual.reset(new PuntoVector3D(0,0,50), new PuntoVector3D(0,0,0));
+                break;
+            case VISTA_CENITAL:
+                camaraActual.reset(new PuntoVector3D(0,40,0), new PuntoVector3D(0,0,0));
+                break;
+        }
+        vista = 0;
+                
         
         // Tipo de proyecciï¿½n
         switch (perspectiva) {
             
-            case PROY_ORTOGONAL: gl.glMatrixMode(gl.GL_PROJECTION);
+            case PROY_ORTOGONAL:
+            /*gl.glMatrixMode(gl.GL_PROJECTION);
             gl.glLoadIdentity();
-            gl.glOrtho(l, r, b, t, N, F);
-
-            break;
-            
+            gl.glOrtho(l, r, b, t, N, F);*/
+                TAfin a2 = new TAfin();
+                double[] m2 = a2.getOrthoganalMatrix(l,r,b,t,N,F);
+                gl.glLoadMatrixd(m2, 0);
+                //camaraActual.setModelViewMatrix();
+                
+                break;
+                
             case PROY_OBLICUA:  gl.glMatrixMode(gl.GL_PROJECTION);
             gl.glLoadIdentity();
             PuntoVector3D d = new PuntoVector3D(1, 2, 3);
@@ -92,24 +111,25 @@ public class GL3D implements GLEventListener {
             break;
             
             
-            case PROY_PERSPECTIVA: gl.glMatrixMode(gl.GL_PROJECTION);
-            gl.glLoadIdentity();
-            double anguloVision = 90;
-            double proporcion = 1.5; //r - l / t - b;
-            N = 1;
-            TAfin a = new TAfin();
-            double[] m = a.getPerspectiveMatrix(anguloVision, proporcion, N, F);
-            gl.glLoadMatrixd(m, 0);
-            break;
-            
+            case PROY_PERSPECTIVA:
+                gl.glMatrixMode(gl.GL_PROJECTION);
+                gl.glLoadIdentity();
+                double anguloVision = 90;
+                double proporcion = 1.5; //r - l / t - b;
+                //N = 1;
+                TAfin a = new TAfin();
+                double[] m = a.getPerspectiveMatrix(anguloVision, proporcion, N, F);
+                gl.glLoadMatrixd(m, 0);
+                break;
+                
             case CAMARA_PERSONA: gl.glMatrixMode(gl.GL_PROJECTION);
             gl.glLoadIdentity();
-
+            
             TAfin a1 = new TAfin();
             double[] m1 = a1.getPerspectiveMatrix(90, 1.5, 1, F);
             gl.glLoadMatrixd(m1, 0);
             break;
-                
+            
         }
         
         
@@ -133,9 +153,9 @@ public class GL3D implements GLEventListener {
         //gl = drw.getGL();
         glu = new GLU();
         
-       // this.camaraActual = new Camara(gl, glu);
+        // this.camaraActual = new Camara(gl, glu);
         this.camaraActual = new Camara(new PuntoVector3D(100, 100, -50), new PuntoVector3D(0, 0, 0), new PuntoVector3D(0, 1, 0), gl);
-	this.camaraSecundaria = new Camara(new PuntoVector3D(100, 100, 100), new PuntoVector3D(0, 0, 0), new PuntoVector3D(0, 1, 0), gl);
+        this.camaraSecundaria = new Camara(new PuntoVector3D(100, 100, 100), new PuntoVector3D(0, 0, 0), new PuntoVector3D(0, 1, 0), gl);
         this.activarLuces(gl);
         this.activarOpcionesOpenGL(gl);
         
@@ -150,7 +170,7 @@ public class GL3D implements GLEventListener {
         
         gl.glClearColor(0, 0, 0, 1);
         drw.setAutoSwapBufferMode(true);
-  
+        
     }
     
     public void reshape(GLAutoDrawable drw, int x, int y, int width, int height) {
@@ -232,7 +252,10 @@ public class GL3D implements GLEventListener {
         camaraActual = camaraSecundaria;
         camaraSecundaria = aux;
     }
-        
+    
+    public void setVista(int a){
+        vista = a;
+    }
     public void setPerspectiva(int tipo){
         
         this.perspectiva = tipo;
@@ -241,15 +264,16 @@ public class GL3D implements GLEventListener {
             
 //            case PROY_ORTOGONAL: camaraActual.setPuntoMira(new PuntoVector3D(100, 100, 100));
 //                                break;
-//            
+//
 //            case PROY_OBLICUA:   camaraActual.setPuntoMira(new PuntoVector3D(100, 120, 0));
 //                                 break;
-//            
+//
 //            case PROY_PERSPECTIVA: camaraActual.setPuntoMira(new PuntoVector3D(100, 120, 300));
 //                                   break;
-//                                   
+//
             case CAMARA_PERSONA: camaraActual.setPuntoMira(new PuntoVector3D(250+desplPersonaX, 120+desplPersonaY, 300+desplPersonaZ));
-                                   break;
+            //camaraActual.reset(new PuntoVector3D(250+desplPersonaX, 120+desplPersonaY, 300+desplPersonaZ), new PuntoVector3D(0,0,0));
+            break;
         }
     }
 }

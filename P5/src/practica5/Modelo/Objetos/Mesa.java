@@ -45,12 +45,12 @@ public class Mesa extends ObjetoCompuesto3D {
         
         // Pata por Cilindro
         pata = new Cilindro(10, 10, 50, 20, 30);
-        pata.setId(Objeto3D.MESA);
+        pata.setId(Objeto3D.MUEBLES);
         pata.setGL(gl);
         pata.getMatriz().rotar(90, 1.0, 0.0, 0.0);
         pata.getMatriz().trasladarM(pos.getX() + 50, pos.getY(), pos.getZ() - 20);
         pata.setColor(color.violetaOscuro);
-        //this.addHijos(pata);  
+        this.addHijos(pata);  
         
 
         

@@ -21,19 +21,21 @@ public class Muebles extends ObjetoCompuesto3D {
         this.setId(Objeto3D.MUEBLES);
         for (int i=0; i<mesa.getHijos().size(); i++)
             this.addHijos(mesa.getHijos().get(i));
-
+        this.addHijos(mesa);
         
         // Silla 1
         silla = new Silla(new PuntoVector3D(pos.getX(), pos.getY() - 25, pos.getZ() + 60), ori + 90, gl);
         this.setId(Objeto3D.MUEBLES);
         for (int i=0; i<silla.getHijos().size(); i++)
             this.addHijos(silla.getHijos().get(i));
+        this.addHijos(silla);
         
         // Silla 2
         silla = new Silla(new PuntoVector3D(pos.getX() + 110, pos.getY() - 25, pos.getZ() - 90), -ori, gl);
         this.setId(Objeto3D.MUEBLES);
         for (int i=0; i<silla.getHijos().size(); i++)
             this.addHijos(silla.getHijos().get(i));
+        //this.addHijos(silla);
         
         // Plato
         plato = new Plato(new PuntoVector3D(pos.getX() + 50, pos.getY() + 10, pos.getZ() - 20), 0, gl);

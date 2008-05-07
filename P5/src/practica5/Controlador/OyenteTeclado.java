@@ -102,10 +102,17 @@ public class OyenteTeclado implements KeyListener {
 		camara.desliza(new PuntoVector3D(0, -10, 0, 1));
 		break;
 	    case KeyEvent.VK_A:
-		camara.desliza(new PuntoVector3D(0, 0, 10, 1));
+                camara.zoomIn();
+		//camara.desliza(new PuntoVector3D(0, 0, 10, 1));
 		break;
+            case KeyEvent.VK_K:
+                camara.reset(new PuntoVector3D(0, 0, 10), new PuntoVector3D(0, 0, 0));
+		//camara.desliza(new PuntoVector3D(0, 0, 10, 1));
+		break;
+                
 	    case KeyEvent.VK_Z:
-		camara.desliza(new PuntoVector3D(0, 0, -10, 1));
+                camara.zoomOut();
+		//camara.desliza(new PuntoVector3D(0, 0, -10, 1));
 		break;
 	    // Zoom
 	    case KeyEvent.VK_X:
@@ -114,6 +121,15 @@ public class OyenteTeclado implements KeyListener {
 	    case KeyEvent.VK_C:
 		camara.zoomOut();
 		break;
+            case KeyEvent.VK_1:
+                escena.setVista(1);
+             break;
+             case KeyEvent.VK_2:
+                escena.setVista(2);
+             break;
+             case KeyEvent.VK_3:
+                escena.setVista(3);
+             break;
 	    // Extra
 	    case KeyEvent.VK_SHIFT:
 		escena.cambiaCamara();

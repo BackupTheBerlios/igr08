@@ -274,6 +274,34 @@ public class TAfin {
         return matriz;
     }
     
+    /*
+     * @param left, right Specify the coordinates for the left and right vertical clipping planes.
+     * @param bottom, top Specify the coordinates for the bottom and top horizontal clipping planes.
+     * @param near, far Specify the distances to the nearer and farther depth clipping planes. These distances are negative if the plane is to be behind the viewer. 
+     */
+    
+    
+    
+     
+    public double[] getOrthoganalMatrix(double left, double right, double bottom, double top, double near, double far){
+     
+        double tx = (right + left)/(right - left);
+        double ty = (top + bottom)/(top - bottom);
+        double tz = (far + near)/(far - near);
+        
+        setZeroMatrix();
+        
+        setMatrizComponent(0, 2/(right- left));
+        setMatrizComponent(5, 2/(top-bottom));
+        setMatrizComponent(10, -2/(far-near));
+        setMatrizComponent(12, tx);
+        setMatrizComponent(13, ty);
+        setMatrizComponent(14, tz);
+        setMatrizComponent(15, 1);
+        return matriz;
+    
+    }
+    
     public String imprime() {
         String cad = "";
         for (int i = 0; i < matriz.length; i++) {
