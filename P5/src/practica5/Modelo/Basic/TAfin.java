@@ -283,7 +283,7 @@ public class TAfin {
     
     
      
-    public double[] getOrthoganalMatrix(double left, double right, double bottom, double top, double near, double far){
+    public double[] getOrthogonalMatrix(double left, double right, double bottom, double top, double near, double far){
      
         double tx = (right + left)/(right - left);
         double ty = (top + bottom)/(top - bottom);

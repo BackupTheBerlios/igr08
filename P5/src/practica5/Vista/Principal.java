@@ -265,7 +265,7 @@ public class Principal extends JFrame {
                 
                 oyenteTeclado.seleccionaObjeto(Objeto3D.ESCENA);
                 rbEscena.setSelected(true);
-                
+                escena.setVista(GL3D.VISTA_OBLICUA);
                 System.out.println("ortogonal");
                 canvas.repaint();
             }
@@ -279,7 +279,7 @@ public class Principal extends JFrame {
                 
                 oyenteTeclado.seleccionaObjeto(Objeto3D.ESCENA);
                 rbEscena.setSelected(true);
-                
+                escena.setVista(GL3D.VISTA_OBLICUA);
                 System.out.println("Perspectiva");
                 canvas.repaint();
             }
@@ -294,7 +294,7 @@ public class Principal extends JFrame {
                 
                 oyenteTeclado.seleccionaObjeto(Objeto3D.ESCENA);
                 rbEscena.setSelected(true);
-                
+                escena.setVista(GL3D.VISTA_OBLICUA);
                 System.out.println("Oblicua");
                 canvas.repaint();
             }

@@ -33,7 +33,7 @@ public class Camara {
 	t = 300;
 	N = -1000;
 	F = 1000;
-	setProjection(GL3D.PROY_ORTOGONAL);
+//	setProjection(GL3D.PROY_ORTOGONAL);
     }
 
     public Camara(PuntoVector3D eye, PuntoVector3D look, PuntoVector3D up, GL gl) {
@@ -48,7 +48,7 @@ public class Camara {
 	t = 300;
 	N = -1000;
 	F = 1000;
-	setProjection(GL3D.PROY_ORTOGONAL);
+	//setProjection(GL3D.PROY_ORTOGONAL);
     }
 
     public void setView(PuntoVector3D eye, PuntoVector3D look, PuntoVector3D up) {

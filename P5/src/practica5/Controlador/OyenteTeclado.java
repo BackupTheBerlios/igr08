@@ -15,7 +15,6 @@ public class OyenteTeclado implements KeyListener {
     private int tipo;
     private GL3D escena;
     private GLJPanel canvas;
- 
     private int veces;
 
     public OyenteTeclado(GL3D escena, GLJPanel canvas) {
@@ -102,17 +101,13 @@ public class OyenteTeclado implements KeyListener {
 		camara.desliza(new PuntoVector3D(0, -10, 0, 1));
 		break;
 	    case KeyEvent.VK_A:
-                camara.zoomIn();
-		//camara.desliza(new PuntoVector3D(0, 0, 10, 1));
+		camara.desliza(new PuntoVector3D(0, 0, 10, 1));
 		break;
-            case KeyEvent.VK_K:
-                camara.reset(new PuntoVector3D(0, 0, 10), new PuntoVector3D(0, 0, 0));
-		//camara.desliza(new PuntoVector3D(0, 0, 10, 1));
-		break;
-                
 	    case KeyEvent.VK_Z:
-                camara.zoomOut();
-		//camara.desliza(new PuntoVector3D(0, 0, -10, 1));
+		camara.desliza(new PuntoVector3D(0, 0, -10, 1));
+		break;
+	    case KeyEvent.VK_K:
+		camara.reset(new PuntoVector3D(0, 0, 10), new PuntoVector3D(0, 0, 0));
 		break;
 	    // Zoom
 	    case KeyEvent.VK_X:
@@ -121,15 +116,15 @@ public class OyenteTeclado implements KeyListener {
 	    case KeyEvent.VK_C:
 		camara.zoomOut();
 		break;
-            case KeyEvent.VK_1:
-                escena.setVista(1);
-             break;
-             case KeyEvent.VK_2:
-                escena.setVista(2);
-             break;
-             case KeyEvent.VK_3:
-                escena.setVista(3);
-             break;
+	    case KeyEvent.VK_1:
+		escena.setVista(GL3D.VISTA_FRONTAL);
+		break;
+	    case KeyEvent.VK_2:
+		escena.setVista(GL3D.VISTA_LATERAL);
+		break;
+	    case KeyEvent.VK_3:
+		escena.setVista(GL3D.VISTA_CENITAL);
+		break;
 	    // Extra
 	    case KeyEvent.VK_SHIFT:
 		escena.cambiaCamara();

@@ -22,6 +22,7 @@ public class GL3D implements GLEventListener {
     public static final int VISTA_FRONTAL = 1;
     public static final int VISTA_LATERAL = 2;
     public static final int VISTA_CENITAL = 3;
+    public static final int VISTA_OBLICUA = 4;
     
     // Atributos privados
     private GL gl;
@@ -66,18 +67,21 @@ public class GL3D implements GLEventListener {
         double b = -400;
         double t = 300;
         //double N = -1000;
-        double N = 1;
-        double F = 800;
+        double N = -1000;
+        double F = 1800;
         switch (vista){
             case  VISTA_FRONTAL:
-                camaraActual.reset(new PuntoVector3D(50,0,0), new PuntoVector3D(0,0,0));
+                camaraActual.reset(new PuntoVector3D(400,0,0), new PuntoVector3D(0,0,0));
                 break;
             case VISTA_LATERAL:
-                camaraActual.reset(new PuntoVector3D(0,0,50), new PuntoVector3D(0,0,0));
+                camaraActual.reset(new PuntoVector3D(0,0,400), new PuntoVector3D(0,0,0));
                 break;
             case VISTA_CENITAL:
-                camaraActual.reset(new PuntoVector3D(0,40,0), new PuntoVector3D(0,0,0));
-                break;
+		camaraActual.reset(new PuntoVector3D(0,800,0.001), new PuntoVector3D(0,0,0));
+		break;
+	    case VISTA_OBLICUA:
+		camaraActual.reset(new PuntoVector3D(500,800,0), new PuntoVector3D(0,0,0));
+		break;
         }
         vista = 0;
                 
@@ -86,14 +90,24 @@ public class GL3D implements GLEventListener {
         switch (perspectiva) {
             
             case PROY_ORTOGONAL:
-            /*gl.glMatrixMode(gl.GL_PROJECTION);
+            gl.glMatrixMode(gl.GL_PROJECTION);
             gl.glLoadIdentity();
-            gl.glOrtho(l, r, b, t, N, F);*/
+            /*gl.glOrtho(l, r, b, t, N, F);*/
                 TAfin a2 = new TAfin();
-                double[] m2 = a2.getOrthoganalMatrix(l,r,b,t,N,F);
+                double[] m2 = a2.getOrthogonalMatrix(l,r,b,t,N,F);
                 gl.glLoadMatrixd(m2, 0);
                 //camaraActual.setModelViewMatrix();
-                
+              
+	/*	gl.glMatrixMode(gl.GL_PROJECTION);  
+		gl.glLoadIdentity();
+            PuntoVector3D d1 = new PuntoVector3D(0, 0, 3);
+            gl.glOrtho(l, r, b, t, N, F);
+           TAfin matriz1 = new TAfin();
+                matriz1.setIdentity();
+                matriz1.setMatrizComponent(8, -d1.getX() / d1.getZ());
+                matriz1.setMatrizComponent(9, -d1.getY() / d1.getZ());
+                gl.glMultMatrixd(matriz1.getMatriz(), 0);
+           */
                 break;
                 
             case PROY_OBLICUA:  gl.glMatrixMode(gl.GL_PROJECTION);
@@ -118,7 +132,7 @@ public class GL3D implements GLEventListener {
                 double proporcion = 1.5; //r - l / t - b;
                 //N = 1;
                 TAfin a = new TAfin();
-                double[] m = a.getPerspectiveMatrix(anguloVision, proporcion, N, F);
+                double[] m = a.getPerspectiveMatrix(anguloVision, proporcion, 1, F);
                 gl.glLoadMatrixd(m, 0);
                 break;
                 
