@@ -181,7 +181,7 @@ public class Camara {
 	eye.z -= f * n.z;
     }
 
-    private void setOblicua(PuntoVector3D d) {
+    public void setOblicua(PuntoVector3D d) {
 	gl.glMatrixMode(gl.GL_PROJECTION);
 	gl.glLoadIdentity();
 	gl.glOrtho(l, r, b, t, N, F);
@@ -193,6 +193,15 @@ public class Camara {
 	    gl.glMultMatrixd(matriz.getMatriz(), 0);
 	}
     }
+    
+    public void setPerspective() {
+        gl.glMatrixMode(gl.GL_PROJECTION);
+        gl.glLoadIdentity();
+        double anguloVision = 90;
+        double proporcion = 1.5; //r - l / t - b;
+        glu.gluPerspective(anguloVision, proporcion, 1, F);
+    }
+
 
     public void setPuntoMira(PuntoVector3D p) {
 	this.eye = p;
