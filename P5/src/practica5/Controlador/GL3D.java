@@ -1,6 +1,11 @@
 package practica5.Controlador;
 
+import com.sun.opengl.util.texture.Texture;
+import com.sun.opengl.util.texture.TextureIO;
+import java.awt.image.BufferedImage;
+import java.net.URL;
 import java.nio.FloatBuffer;
+import javax.imageio.ImageIO;
 import javax.media.opengl.GLContext;
 import javax.media.opengl.glu.*;
 import javax.media.opengl.GL;
@@ -41,6 +46,7 @@ public class GL3D implements GLEventListener {
     private int perspectiva = PROY_ORTOGONAL;
     
     private int vista;
+    private Texture[] texturas;
     
     public double desplPersonaX = 0;
     public double desplPersonaY = 0;
@@ -62,15 +68,10 @@ public class GL3D implements GLEventListener {
     
     public void display(GLAutoDrawable drw) {
         
-        double l = -504;
-        double r = 504;
-        double b = -400;
-        double t = 300;
-         
-        double N = -1000;
-        double F = 1800;
-        switch (vista){
-            case  VISTA_FRONTAL:
+        gl.glClear(gl.GL_COLOR_BUFFER_BIT | gl.GL_DEPTH_BUFFER_BIT);
+        
+         switch (vista){
+            case VISTA_FRONTAL:
                 camaraActual.reset(new PuntoVector3D(400,0,0), new PuntoVector3D(0,0,0));
                 break;
             case VISTA_LATERAL:
@@ -84,78 +85,34 @@ public class GL3D implements GLEventListener {
                 break;
         }
         vista = 0;
-        
-        
         // Tipo de proyecciï¿½n
         switch (perspectiva) {
             
             case PROY_ORTOGONAL:
-                camaraActual.setOblicua(new PuntoVector3D(0,0,1));
-//                gl.glMatrixMode(gl.GL_PROJECTION);
-//                gl.glLoadIdentity();
-//                gl.glOrtho(l, r, b, t, N, F);
-              /*  TAfin a2 = new TAfin();
-                double[] m2 = a2.getOrthogonalMatrix(l,r,b,t,N,F);
-                gl.glLoadMatrixd(m2, 0);*/
-                //camaraActual.setModelViewMatrix();
-                
-        /*	gl.glMatrixMode(gl.GL_PROJECTION);
-                gl.glLoadIdentity();
-            PuntoVector3D d1 = new PuntoVector3D(0, 0, 3);
-            gl.glOrtho(l, r, b, t, N, F);
-           TAfin matriz1 = new TAfin();
-                matriz1.setIdentity();
-                matriz1.setMatrizComponent(8, -d1.getX() / d1.getZ());
-                matriz1.setMatrizComponent(9, -d1.getY() / d1.getZ());
-                gl.glMultMatrixd(matriz1.getMatriz(), 0);
-         */
+                camaraActual.setOrtogonal();
                 break;
                 
-            case PROY_OBLICUA: 
-           camaraActual.setOblicua(new PuntoVector3D(1,2,3));
-                /*gl.glMatrixMode(gl.GL_PROJECTION);
-           gl.glLoadIdentity();
-            PuntoVector3D d = new PuntoVector3D(1, 2, 3);
-            gl.glOrtho(l, r, b, t, N, F);
-            if (d.getZ() != 0 & d != new PuntoVector3D(0, 0, 1)) {
-                TAfin matriz = new TAfin();
-                matriz.setIdentity();
-                matriz.setMatrizComponent(8, -d.getX() / d.getZ());
-                matriz.setMatrizComponent(9, -d.getY() / d.getZ());
-                gl.glMultMatrixd(matriz.getMatriz(), 0);*/
-            //}            
-            break;
-            
-            
+            case PROY_OBLICUA:
+                camaraActual.setOblicua(new PuntoVector3D(1,2,3));
+                
+                break;
+                
+                
             case PROY_PERSPECTIVA:
                 camaraActual.setPerspective();
-//                gl.glMatrixMode(gl.GL_PROJECTION);
-//                gl.glLoadIdentity();
-//                double anguloVision = 90;
-//                double proporcion = 1.5; //r - l / t - b;
-//                glu.gluPerspective(anguloVision, proporcion, 1, F);
-                
-/*                TAfin a = new TAfin();
-                double[] m = a.getPerspectiveMatrix(anguloVision, proporcion, 1, F);
-                gl.glLoadMatrixd(m, 0);*/
                 break;
                 
             case CAMARA_PERSONA:
-                gl.glMatrixMode(gl.GL_PROJECTION);
-                gl.glLoadIdentity();
-                
-                TAfin a1 = new TAfin();
-                double[] m1 = a1.getPerspectiveMatrix(90, 1.5, 1, F);
-                gl.glLoadMatrixd(m1, 0);
+                camaraActual.setPersona();
                 break;
                 
         }
         
         
         
-        gl.glClear(gl.GL_COLOR_BUFFER_BIT | gl.GL_DEPTH_BUFFER_BIT);
         
-        camaraActual.setModelViewMatrix();
+        
+        //camaraActual.setModelViewMatrix();
         
         hab.dibuja(gl);
         
@@ -166,22 +123,27 @@ public class GL3D implements GLEventListener {
     }
     
     public void init(GLAutoDrawable drw) {
-        context = drw.getContext();
-        context.makeCurrent();
-        gl = context.getGL();
-        //gl = drw.getGL();
+        //context = drw.getContext();
+        //context.makeCurrent();
+        //gl = context.getGL();
+        gl = drw.getGL();
         glu = new GLU();
         
         // this.camaraActual = new Camara(gl, glu);
         this.camaraActual = new Camara(new PuntoVector3D(100, 100, -50), new PuntoVector3D(0, 0, 0), new PuntoVector3D(0, 1, 0), gl);
         this.camaraSecundaria = new Camara(new PuntoVector3D(100, 100, 100), new PuntoVector3D(0, 0, 0), new PuntoVector3D(0, 1, 0), gl);
+        this.camaraActual.setOrtogonal();
+        
         this.activarLuces(gl);
         this.activarOpcionesOpenGL(gl);
         
-        hab = new Habitaciones(gl);
+        texturas = new Texture[Malla.nombreTexturas.length];
+        for (int i=0; i<Malla.nombreTexturas.length; i++)
+            texturas[i] = TextureIO.newTexture(Cargar_Imagen("practica5/Images/" + Malla.nombreTexturas[i]), true);
+        
+        hab = new Habitaciones(gl, texturas);
         hab.setId(Objeto3D.ESCENA);
         hab.setGL(gl);
-        //  hab.getMatriz().trasladar(-150.0, -500.0, 0.35);
         hab.setColor(Color.verdeClaro);
         
         activarLuces(gl);
@@ -211,8 +173,8 @@ public class GL3D implements GLEventListener {
         //GL gl = drw.getGL();
         gl.glMatrixMode(GL.GL_PROJECTION);
         gl.glLoadIdentity();
-//	gl.glOrtho(xLeft, xRight, yBot, yTop, -1000.0f, 1000.0f);
-        camaraActual.setProjection(GL3D.PROY_ORTOGONAL);
+        //gl.glOrtho(xLeft, xRight, yBot, yTop, -1000.0f, 1000.0f);
+        camaraActual.setOrtogonal();
         
         gl.glMatrixMode(GL.GL_MODELVIEW);
         gl.glLoadIdentity();
@@ -293,6 +255,21 @@ public class GL3D implements GLEventListener {
             case CAMARA_PERSONA: camaraActual.setPuntoMira(new PuntoVector3D(250+desplPersonaX, 120+desplPersonaY, 300+desplPersonaZ));
             //camaraActual.reset(new PuntoVector3D(250+desplPersonaX, 120+desplPersonaY, 300+desplPersonaZ), new PuntoVector3D(0,0,0));
             break;
+        }
+    }
+    
+    public BufferedImage Cargar_Imagen(String nombre) {
+        
+        URL url = null;
+        try {
+            url = getClass().getClassLoader().getResource(nombre);
+            
+            return ImageIO.read(url);
+        } catch (Exception e) {
+            System.out.println("No se pudo cargar la imagen " + nombre +" de "+url);
+            System.out.println("El error fue : "+e.getClass().getName()+" "+e.getMessage());
+            System.exit(0);
+            return null;
         }
     }
 }

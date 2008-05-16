@@ -6,12 +6,11 @@ import javax.media.opengl.GL;
 
 public class Malla extends Objeto3D {
     
-    
-    // texturas
-    public static final String[] nombreTexturas = { "suelo.jpg", "madera.jpg", "tela.jpg", "cristalino.jpg",  
-                                                    "telado.jpg", "pared2.jpg", "pared.jpg",
-                                                    "cristalino.jpg", "tela.jpg", "suelo.jpg",  
-                                                    "madera.jpg", "tela.jpg", "suelo.jpg" };
+  
+    // Texturas
+    public static final String[] nombreTexturas = { "suelo.jpg", "madera.jpg", "tela.jpg", "carton.jpg",  
+                                                    "funda.jpg", "pared2.jpg", "plastico.jpg", "rosado.jpg",
+                                                    "tela.jpg", "piedra.jpg", "papel.jpg" };
     
     // Constantes
     public static final int GL_POINTS = 0;
@@ -32,7 +31,8 @@ public class Malla extends Objeto3D {
     
     // Metodo que permite dibujar la malla
     public void dibuja(GL gl) {
-        //super.dibuja(gl);
+
+        super.dibuja(gl);
         
         // Seleccionamos el color del objeto
         gl.glColor3d(this.getColor().getRed(), this.getColor().getGreen(), this.getColor().getBlue());
@@ -42,17 +42,20 @@ public class Malla extends Objeto3D {
         
         // Situamos el objeto en la escena
         gl.glMultMatrixd(matriz.getMatriz(), 0);
-        /*
+        
         if (texturizado) {
-               texturaAct.enable();
-               texturaAct.bind();
+            if (textura != null) {
+               textura.enable();
+               textura.bind();
                gl.glTexEnvi(gl.GL_TEXTURE_ENV, gl.GL_TEXTURE_ENV_MODE, gl.GL_REPLACE);
-               TextureCoords coords = texturaAct.getImageTexCoords();   
+               TextureCoords coords = textura.getImageTexCoords();
             }
+        }    
         else {
-          texturaAct.disable(); 
+            if (textura != null)
+                textura.disable(); 
         }
-        */
+        
         // Seleccionamos el tipo de representación
         for (int i = 0; i < caras.size(); i++) {
             switch (this.tipoMalla) {
@@ -86,7 +89,7 @@ public class Malla extends Objeto3D {
                             normales.get(iN).getZ());
                 }
                 
-                if (texturizado)
+                if ((texturizado) && (textura != null))
                     gl.glTexCoord3d(vertices.get(iV).getX()/300,
                                     vertices.get(iV).getY()/300,
                                     vertices.get(iV).getZ()/300); 

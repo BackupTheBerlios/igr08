@@ -58,7 +58,11 @@ public class ObjetoCompuesto3D extends Objeto3D{
         // Volvemos al estado anterior
         gl.glPopMatrix();
     }
-    
+      
+    public void setTexturizado() {
+        for (int i=0; i<hijos.size(); i++)
+            hijos.get(i).setTexturizado();
+    }
     
     // Metodos generalizados
     public void setTipoMalla(int i) {

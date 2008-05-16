@@ -23,7 +23,10 @@ public class Tablero extends Malla {
     
     // Constructora con parámetros
     public Tablero(double X, double Y, double Z,
-            int divX, int divY, int divZ) {
+            int divX, int divY, int divZ, GL gl) {
+        
+        this.setGL(gl);
+        
         this.X = X;
         this.Y = Y;
         this.Z = Z;

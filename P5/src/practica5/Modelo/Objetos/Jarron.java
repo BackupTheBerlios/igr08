@@ -1,5 +1,6 @@
 package practica5.Modelo.Objetos;
 
+import com.sun.opengl.util.texture.Texture;
 import java.util.ArrayList;
 import javax.media.opengl.GL;
 import practica5.Modelo.Basic.*;
@@ -11,7 +12,7 @@ public class Jarron extends ObjetoCompuesto3D {
     private Malla piedra;
     
     // Constructora
-    public Jarron(PuntoVector3D pos, double ori, GL gl) {
+    public Jarron(PuntoVector3D pos, double ori, GL gl, Texture[] texturas) {
         
         super.setGL(gl);
         
@@ -27,8 +28,9 @@ public class Jarron extends ObjetoCompuesto3D {
         piedra = new MallaPorRevolucion(perfil, 4, 0.1 , gl);
         piedra.getMatriz().trasladarM(pos.getX(), pos.getY(), pos.getZ());
         piedra.setColor(color.gris);
+        piedra.setTextura(texturas[10]);
         piedra.setId(Objeto3D.ESTATUA);
-        super.addHijos(piedra);
+        this.addHijos(piedra);
     }
     
 }

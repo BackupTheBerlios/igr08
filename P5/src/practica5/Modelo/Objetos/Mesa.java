@@ -1,5 +1,6 @@
 package practica5.Modelo.Objetos;
 
+import com.sun.opengl.util.texture.Texture;
 import java.util.ArrayList;
 import javax.media.opengl.GL;
 import practica5.Modelo.Basic.*;
@@ -10,20 +11,20 @@ public class Mesa extends ObjetoCompuesto3D {
     // Atributos privados
     private Tablero tabla;
     private Malla pataMesa;
-    private Cilindro pata;
     
     // Constructora
-    public Mesa(PuntoVector3D pos, double ori, GL gl) {
+    public Mesa(PuntoVector3D pos, double ori, GL gl, Texture[] texturas) {
+        
         
         // Tabla de la mesa
-        tabla = new Tablero(150, 80, 10, 3, 3, 3);
-        tabla.setId(Objeto3D.MUEBLES);
-        tabla.setGL(gl);
+        tabla = new Tablero(150, 80, 10, 3, 3, 3, gl);
+        tabla.setId(Objeto3D.MESA);
+        tabla.setTextura(texturas[1]);
         tabla.getMatriz().rotar(90, 1.0, 0.0, 0.0);
         tabla.getMatriz().rotarM(ori, 0.0, 1.0, 0.0);
         tabla.getMatriz().trasladarM(pos.getX(), pos.getY(), pos.getZ());
         tabla.setColor(color.violetaOscuro);
-        this.addHijos(tabla);  
+        addHijos(tabla);  
         
         
         // Pata
@@ -40,21 +41,10 @@ public class Mesa extends ObjetoCompuesto3D {
         pataMesa = new MallaPorRevolucion(perfil, 4, 1.57, gl);
         pataMesa.getMatriz().trasladarM(pos.getX() + 50, pos.getY() - 50, pos.getZ() - 20);
         pataMesa.setColor(color.violetaOscuro);
-        this.addHijos(pataMesa);
-                
-        
-        // Pata por Cilindro
-        pata = new Cilindro(10, 10, 50, 20, 30);
-        pata.setId(Objeto3D.MUEBLES);
-        pata.setGL(gl);
-        pata.getMatriz().rotar(90, 1.0, 0.0, 0.0);
-        pata.getMatriz().trasladarM(pos.getX() + 50, pos.getY(), pos.getZ() - 20);
-        pata.setColor(color.violetaOscuro);
-        this.addHijos(pata);  
-        
+        pataMesa.setId(Objeto3D.MESA);
+        pataMesa.setTextura(texturas[1]);
+        addHijos(pataMesa);
 
-        
-        
     }
     
 }

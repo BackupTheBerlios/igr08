@@ -1,17 +1,9 @@
-/** Clase Objeto3D
- * De cada objeto almacenaremos los siguientes campos:
- *    - Id: Identifica al objeto en cuestion que queremos modificar
- *    - Color: Color del objeto en cuestion.
- *    - matriz: Matriz de traformacion afin aplicado al objeto.
- */
 package practica5.Modelo.Basic;
 
-import com.sun.opengl.util.texture.Texture;
-import com.sun.opengl.util.texture.TextureIO;
-import java.awt.image.BufferedImage;
 import java.net.URL;
 import javax.imageio.ImageIO;
 import javax.media.opengl.GL;
+import com.sun.opengl.util.texture.Texture;
 
 public class Objeto3D {
     
@@ -27,9 +19,7 @@ public class Objeto3D {
     protected boolean baldosas;
     protected boolean texturizado;
     
-    protected Texture[] textura;
-    protected Texture texturaAct;
-
+    protected Texture textura;
     
     public static final int ESCENA = 0;
     public static final int MUEBLES = 1;
@@ -46,6 +36,11 @@ public class Objeto3D {
     public static final int PERSIANA = 12;
     public static final int PERSONA = 13;
     public static final int CAMILLA = 14;
+    public static final int POMO = 15;
+    public static final int LIBROS = 16;
+    public static final int COPA = 17;
+    public static final int DONUT = 18;
+    public static final int PLATO = 19;
     
     // Constructora
     public Objeto3D() {
@@ -57,20 +52,13 @@ public class Objeto3D {
                 
         baldosas = false;
         texturizado = false;
-        /*
-        textura = new Texture[6];
-        for (int i=0; i<=5; i++)
-            textura[i] = TextureIO.newTexture(Cargar_Imagen("practica5/Images/" + Malla.nombreTexturas[i]), true);
-      
-        texturaAct = textura[0]; */
-        //textura = TextureIO.newTexture(Cargar_Imagen("practica5/Images/" + Malla.nombreTexturas[1]), true);
+        
+        textura = null;
     }
     
     
     // Metodo virtual
-    public void dibuja(GL gl) {
-        //gl.glColor3d(color.getRed(), color.getGreen(), color.getBlue());
-    }
+    public void dibuja(GL gl) { }
     
     // Getters & Setters
     public int getId() {
@@ -127,31 +115,23 @@ public class Objeto3D {
         else
             baldosas = true;
     }
-    
-    public BufferedImage Cargar_Imagen(String nombre) {
-        
-        URL url=null;
-        try {
-            url = getClass().getClassLoader().getResource(nombre);
-            
-            return ImageIO.read(url);
-        } catch (Exception e) {
-            System.out.println("No se pudo cargar la imagen " + nombre +" de "+url);
-            System.out.println("El error fue : "+e.getClass().getName()+" "+e.getMessage());
-            System.exit(0);
-            return null;
-        }
-    }
-    
+ 
     public void setTexturizado() {
         if (texturizado)
             texturizado = false;
         else
-            texturizado = true;
+            texturizado = true; 
     }
     
-    public void textSelec(int i) {
-        texturaAct = textura[i];
+    public void setTextura(Texture text) {
+        this.textura = text;
     }
     
+    public Texture getTextura() {
+        return textura;
+    }
+    
+    public boolean isTexturizado() {
+        return texturizado;
+    }
 }

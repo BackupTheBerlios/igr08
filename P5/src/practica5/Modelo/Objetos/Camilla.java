@@ -1,5 +1,6 @@
 package practica5.Modelo.Objetos;
 
+import com.sun.opengl.util.texture.Texture;
 import java.util.ArrayList;
 import javax.media.opengl.GL;
 import practica5.Modelo.Basic.*;
@@ -11,7 +12,7 @@ public class Camilla extends ObjetoCompuesto3D {
     private Malla mesitaCamilla;
     
     // Coinstructora
-    public Camilla(PuntoVector3D pos, double ori, GL gl) {
+    public Camilla(PuntoVector3D pos, double ori, GL gl, Texture[] texturas) {
         
         super.setGL(gl);
         
@@ -27,6 +28,7 @@ public class Camilla extends ObjetoCompuesto3D {
         mesitaCamilla = new MallaPorRevolucion(perfil, 4, 0.2 , gl);
         mesitaCamilla.getMatriz().trasladarM(pos.getX(), pos.getY(), pos.getZ());
         mesitaCamilla.setColor(color.rosa);
+        mesitaCamilla.setTextura(texturas[5]);
         mesitaCamilla.setId(Objeto3D.CAMILLA);
         this.addHijos(mesitaCamilla);
         

@@ -1,5 +1,6 @@
 package practica5.Modelo.Objetos;
 
+import com.sun.opengl.util.texture.Texture;
 import java.util.ArrayList;
 import javax.media.opengl.GL;
 import practica5.Modelo.Basic.*;
@@ -11,7 +12,7 @@ public class Copa extends ObjetoCompuesto3D {
     private Malla copa;
     
     // Constructora
-    public Copa(PuntoVector3D pos, double ori, GL gl) {
+    public Copa(PuntoVector3D pos, double ori, GL gl, Texture[] texturas) {
         
         // Percha
         ArrayList<PuntoVector3D> perfil = new ArrayList<PuntoVector3D>();
@@ -25,6 +26,8 @@ public class Copa extends ObjetoCompuesto3D {
         
         copa = new MallaPorRevolucion(perfil, 4, 0.7 , gl);
         copa.getMatriz().trasladarM(pos.getX(), pos.getY(), pos.getZ());
+        copa.setId(Objeto3D.COPA);
+        copa.setTextura(texturas[6]);
         copa.setColor(color.turquesaClaro);
         this.addHijos(copa);
     }
