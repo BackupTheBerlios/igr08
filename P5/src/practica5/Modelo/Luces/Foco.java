@@ -62,18 +62,18 @@ public class Foco extends Objeto3D {
         
         if (on) {
             
-            float LuzAmbiente[] = { (float)0.4, (float)0.4, (float)0.4, (float)1.0};
+            float LuzAmbiente[] = { 0.4f, 0.4f, 0.4f,1.0f};
             gl.glLightfv(gl.GL_LIGHT1, gl.GL_AMBIENT, LuzAmbiente, 1);
             
-            float LuzDifusa[] = { (float)0.5, (float)0.5, (float)0.5, (float)1.0};
+            float LuzDifusa[] = { 0.5f, 0.5f, 0.5f, 1.0f};
             gl.glLightfv(gl.GL_LIGHT1, gl.GL_DIFFUSE, LuzDifusa, 0);
         
         } else {
             
-            float LuzAmbiente[] = { (float)0.0, (float)0.0, (float)0.0, (float)1.0};
+            float LuzAmbiente[] = { 0.0f, 0.0f, 0.0f, 1.0f};
             gl.glLightfv(gl.GL_LIGHT1, gl.GL_AMBIENT, LuzAmbiente, 1);
             
-            float LuzDifusa[] = { (float)0.0, (float)0.0, (float)0.0, (float)1.0};
+            float LuzDifusa[] = { 0.0f, 0.0f, 0.0f, 1.0f};
             gl.glLightfv(gl.GL_LIGHT1, gl.GL_DIFFUSE, LuzDifusa, 0);
             
         }
@@ -90,12 +90,12 @@ public class Foco extends Objeto3D {
     
     // Tipos de luces
     public void setLuzDifusa() {
-        float LuzDifusa[] = { (float)0.5, (float)0.5, (float)0.5, (float)1.0};
+        float LuzDifusa[] = { 0.5f, 0.5f, 0.5f, 1.0f};
         gl.glLightfv(gl.GL_LIGHT1, gl.GL_DIFFUSE, LuzDifusa, 1);
     }
 
     public void setLuzAmbiente() {
-        float LuzAmbiente[] = { (float)0.4, (float)0.4, (float)0.4, (float)1.0};
+        float LuzAmbiente[] = { 0.4f, 0.4f, 0.4f, 1.0f};
         gl.glLightfv(gl.GL_LIGHT1, gl.GL_AMBIENT, LuzAmbiente, 1);
     }
 

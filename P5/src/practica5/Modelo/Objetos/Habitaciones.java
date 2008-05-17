@@ -209,7 +209,44 @@ public class Habitaciones extends ObjetoCompuesto3D {
         persona = new Persona(new PuntoVector3D(230, 0, 230), 0, gl);
         persona.setId(Objeto3D.PERSONA);
         this.addHijos(persona);
-        
+    
+        // Luces
+        configurarLuzDireccional(gl);
     }
+    
+    
+    // Metodos para las luces
+    public void configurarLuzDireccional(GL gl) {
+   
+        gl.glEnable(gl.GL_LIGHT2);
         
+        float[] ambiente = { 0.2f, 0.2f, 0.2f, 1.0f};
+        float[] difusa = { 0.7f, 0.7f, 0.7f, 1.0f};
+  
+        //float difusa[] = {0.4,0.4,0.4,2.0};
+        //PV3d* posicionUno = new PV3d(1,-1,0,0);
+        
+        PuntoVector3D pos1 = new PuntoVector3D(-1,-1,0,0);
+        pos1.normaliza();
+        
+        float[] pos = { (float)pos1.getX(), (float)pos1.getY(), (float)pos1.getZ(), (float)0.0f};
+        gl.glLightfv(gl.GL_LIGHT2, gl.GL_AMBIENT, ambiente, 1);
+        gl.glLightfv(gl.GL_LIGHT2, gl.GL_DIFFUSE, difusa, 1);
+        gl.glLightfv(gl.GL_LIGHT2, gl.GL_POSITION, pos, 1);
+}
+/* Esto no se donde deberia ir
+
+ void Escena::interruptorLuzAmbiente(){
+    if (estadoLuzAmbiente == 0){
+        estadoLuzAmbiente = 0;
+        GLfloat intensidad[]={0,0,0,1};
+        glLightModelfv(GL_LIGHT_MODEL_AMBIENT,intensidad);
+    }
+    else {
+        estadoLuzAmbiente = 1;
+        GLfloat intensidad[]={0.2,0.2,0.2,1};
+        glLightModelfv(GL_LIGHT_MODEL_AMBIENT,intensidad);
+    }
+}
+ */
 }
