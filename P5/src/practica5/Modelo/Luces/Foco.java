@@ -20,7 +20,7 @@ public class Foco extends Objeto3D {
         this.on = true;
     }
     
-    // Constructora con parámetros
+    // Constructora con paremetros
     public Foco(PuntoVector3D p, PuntoVector3D ang, float alfa, boolean encendido, GL gl) {
         
         super.setGL(gl);
@@ -38,7 +38,7 @@ public class Foco extends Objeto3D {
         gl.glLightfv(gl.GL_LIGHT1, gl.GL_SPOT_DIRECTION, angLuz1, 0);
     }
     
-    // Métodos funcionales
+    // Metodos funcionales
     public void mueveFoco() {
         
         gl.glMatrixMode(gl.GL_MODELVIEW);

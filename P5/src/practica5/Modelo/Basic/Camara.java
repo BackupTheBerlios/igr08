@@ -143,14 +143,14 @@ public class Camara {
         setModelViewMatrix();
     }
     
-    public void zoomIn() {
+    public void zoomOut() {
         int f = 10;
         eye.x += f * n.x;
         eye.y += f * n.y;
         eye.z += f * n.z;
     }
     
-    public void zoomOut() {
+    public void zoomIn() {
         int f = 10;
         eye.x -= f * n.x;
         eye.y -= f * n.y;

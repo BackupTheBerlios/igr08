@@ -8,7 +8,10 @@ public class Malla extends Objeto3D {
     
   
     // Texturas
-    public static final String[] nombreTexturas = { "suelo.jpg", "madera.jpg", "tela.jpg", "carton.jpg",  
+    /*public static final String[] nombreTexturas = { "suelo.jpg", "madera.jpg", "tela.jpg", "carton.jpg",  
+                                                    "funda.jpg", "pared2.jpg", "funda.jpg", "funda.jpg",
+                                                    "funda.jpg", "funda.jpg", "funda.jpg" };*/
+public static final String[] nombreTexturas = { "suelo.jpg", "madera.jpg", "tela.jpg", "carton.jpg",  
                                                     "funda.jpg", "pared2.jpg", "plastico.jpg", "rosado.jpg",
                                                     "tela.jpg", "piedra.jpg", "papel.jpg" };
     
@@ -56,7 +59,7 @@ public class Malla extends Objeto3D {
                 textura.disable(); 
         }
         
-        // Seleccionamos el tipo de representación
+        // Seleccionamos el tipo de representaciï¿½n
         for (int i = 0; i < caras.size(); i++) {
             switch (this.tipoMalla) {
                 case GL_POINTS:
@@ -128,17 +131,17 @@ public class Malla extends Objeto3D {
         return normalPlano;
     }
     
-    // Añade un nuevo vertice
+    // Aï¿½ade un nuevo vertice
     public void addVertice(PuntoVector3D punto) {
         vertices.add(punto);
     }
     
-    // Añade una nueva normal
+    // Aï¿½ade una nueva normal
     public void addNormal(PuntoVector3D normal) {
         normales.add(normal);
     }
     
-    // Añade una nueva cara
+    // Aï¿½ade una nueva cara
     public void addCara(Cara cara) {
         caras.add(cara);
     }

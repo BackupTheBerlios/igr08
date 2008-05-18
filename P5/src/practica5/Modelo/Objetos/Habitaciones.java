@@ -29,7 +29,7 @@ public class Habitaciones extends ObjetoCompuesto3D {
         Cilindro cilindro;
         Tablero tablero;
         
-        // Habitación Trasera: Pared central
+        // Habitacion Trasera: Pared central
         tablero = new Tablero(400, 400, 20, 3, 3, 3, gl);
         tablero.setId(0);
         tablero.setTextura(texturas[2]);
@@ -38,7 +38,7 @@ public class Habitaciones extends ObjetoCompuesto3D {
         this.addHijos(tablero); 
         
         
-        // Habitación Trasera: Suelo
+        // Habitacion Trasera: Suelo
         tablero = new Tablero(400, 400, 20, 3, 3, 3, gl);
         tablero.setId(Objeto3D.SUELO);
         tablero.setTextura(texturas[0]);
@@ -48,7 +48,7 @@ public class Habitaciones extends ObjetoCompuesto3D {
         this.addHijos(tablero);  
         
         
-        // Habitación Trasera: Pared Derecha
+        // Habitacion Trasera: Pared Derecha
         tablero = new Tablero(100, 400, 20, 3, 3, 3, gl);
         tablero.setId(0);
         tablero.setTextura(texturas[2]);
@@ -82,7 +82,7 @@ public class Habitaciones extends ObjetoCompuesto3D {
         tablero.setColor(color.azulClaro);
         this.addHijos(tablero); 
         
-        // Habitación Frontal: Pared Central
+        // Habitaciï¿½n Frontal: Pared Central
         tablero = new Tablero(150, 400, 20, 3, 3, 3, gl);
         tablero.setId(0);
         tablero.setTextura(texturas[2]);
@@ -105,7 +105,7 @@ public class Habitaciones extends ObjetoCompuesto3D {
         this.addHijos(tablero);
  
         
-        // Habitación Frontal: Pared Derecha
+        // Habitacion Frontal: Pared Derecha
         tablero = new Tablero(160, 400, 20, 3, 3, 3, gl);
         tablero.setId(0);
         tablero.setTextura(texturas[2]);
@@ -139,7 +139,7 @@ public class Habitaciones extends ObjetoCompuesto3D {
         this.addHijos(tablero); 
         
         
-        // Habitación Frontal: Suelo
+        // Habitacion Frontal: Suelo
         tablero = new Tablero(400, 400, 20, 3, 3, 3, gl);
         tablero.setId(Objeto3D.SUELO);
         tablero.setTextura(texturas[0]);

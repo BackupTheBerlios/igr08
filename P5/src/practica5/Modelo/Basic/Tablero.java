@@ -13,15 +13,15 @@ public class Tablero extends Malla {
     // Constructora por defecto
     public Tablero() { }
     
-    /* El tablero está formado por una serie de cubos o planos paralelos entré sí
+    /* El tablero estï¿½ formado por una serie de cubos o planos paralelos entrï¿½ sï¿½
      * Por ello, vamos a irlo creando en orden...
-     *      1º Calculamos el primer plano
-     *      2º Calulamos los planos intermedios
-     *      3º Calculamos el último plano
+     *      1ï¿½ Calculamos el primer plano
+     *      2ï¿½ Calulamos los planos intermedios
+     *      3ï¿½ Calculamos el ï¿½ltimo plano
      * Y con esto tenemos definido el tablero
      */
     
-    // Constructora con parámetros
+    // Constructora con parï¿½metros
     public Tablero(double X, double Y, double Z,
             int divX, int divY, int divZ, GL gl) {
         
@@ -60,7 +60,7 @@ public class Tablero extends Malla {
             for (int k=0; k<divZ; k++)
                 addVertice(plano.get(k+j*divY));
         
-        // Insertamos las caras y las normales del 1º plano
+        // Insertamos las caras y las normales del 1ï¿½ plano
         calcularCarasYnormalesYZ(divY, divZ, numPlanos);
         
         // Pasamos al siguiente plano
@@ -84,7 +84,7 @@ public class Tablero extends Malla {
             x += incX;
         }
         
-        // Creamos el último plano
+        // Creamos el ï¿½ltimo plano
         plano = generarPlano(x, incY, incZ, divY, divZ);
         numPlanos++;
         
@@ -93,13 +93,13 @@ public class Tablero extends Malla {
             for (int k=0; k<divZ; k++)
                 this.addVertice(plano.get(k+j*divY));
         
-        // Insertamos las caras y las normales del último plano
+        // Insertamos las caras y las normales del ï¿½ltimo plano
         calcularCarasYnormalesYZ(divY, divZ, numPlanos);
         calcularCarasYnormalesXZ(divX, divY, divZ, numPlanos);
         calcularCarasYnormalesXY(divX, divY, divZ, numPlanos);
     }
     
-    // Método que genera el plano
+    // Mï¿½todo que genera el plano
     public ArrayList<PuntoVector3D> generarPlano(double x,double incY, double incZ,
             int divY,int divZ) {
         double z, y;
@@ -127,21 +127,21 @@ public class Tablero extends Malla {
         return superficie;
     }
     
-    // Método que calcula las normales entre cada par de ejes
+    // Mï¿½todo que calcula las normales entre cada par de ejes
     public void calcularCarasYnormalesYZ(int divY, int divZ, int numPlanos) {
         
-        // índices de vértices
+        // ï¿½ndices de vï¿½rtices
         int ind1, ind2, ind3, ind4;
         
         for (int j=0; j<divY-1; j++) {
             for (int k=0; k<divZ-1; k++) {
                 
-                if (numPlanos==1) { // Caso del 1º Plano
+                if (numPlanos==1) { // Caso del 1ï¿½ Plano
                     ind1 = (k) + (j) * divZ + divY * divZ * (numPlanos-1);
                     ind2 = (k+1) +(j) * divZ + divY * divZ * (numPlanos-1);
                     ind3 = (k+1) +(j+1) * divZ + divY * divZ * (numPlanos-1);
                     ind4 = (k) + (j+1) * divZ + divY * divZ * (numPlanos-1);
-                } else { // Caso del último plano
+                } else { // Caso del ï¿½ltimo plano
                     ind1 = (k) + (j) * divZ + divY * divZ * (numPlanos-1);
                     ind2 = (k) + (j+1) * divZ + divY * divZ * (numPlanos-1);
                     ind3 = (k+1) + (j+1) * divZ + divY * divZ * (numPlanos-1);
@@ -156,7 +156,7 @@ public class Tablero extends Malla {
     
     public void calcularCarasYnormalesXZ(int divX,int divY,int divZ, int numPlanos) {
         
-        // índices de vértices
+        // Indices de vertices
         int ind1, ind2, ind3, ind4;
         
         for (int i=0; i<divX-1; i++) {
@@ -186,7 +186,7 @@ public class Tablero extends Malla {
     
     public void calcularCarasYnormalesXY(int divX, int divY, int divZ, int numPlanos) {
         
-        // índices de vértices
+        // Indices de vertices
         int ind1,ind2,ind3,ind4; 
         
         for (int j=0; j<divY-1; j++) {
@@ -211,7 +211,7 @@ public class Tablero extends Malla {
         }
     }
     
-    // Método que genera una cara a partir de 4 indices de puntos
+    // Metodo que genera una cara a partir de 4 indices de puntos
     public Cara generarCara(int ind1,int ind2,int ind3,int ind4) {
        
         Cara cara = new Cara();
