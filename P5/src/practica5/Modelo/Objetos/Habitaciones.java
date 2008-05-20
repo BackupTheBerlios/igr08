@@ -3,6 +3,7 @@ package practica5.Modelo.Objetos;
 import java.util.ArrayList;
 import javax.media.opengl.GL;
 import practica5.Modelo.Basic.*;
+import practica5.Modelo.Luces.Foco;
 import practica5.util.Calculos;
 import com.sun.opengl.util.texture.Texture;
 
@@ -211,7 +212,17 @@ public class Habitaciones extends ObjetoCompuesto3D {
         this.addHijos(persona);
     
         // Luces
-        configurarLuzDireccional(gl);
+        Foco luzLampara = new Foco(gl);
+        luzLampara.setId(20);
+        luzLampara.setMatriz(lampara.getMatriz());
+        //luzLampara.setLuzAmbiente(gl); 
+        luzLampara.enciende();
+        luzLampara.setLuzDifusa(gl);
+        luzLampara.dibuja2(gl);
+
+        //configurarLuzDireccional(gl);
+        quitarLuzAmbiente(gl);
+
     }
     
     
@@ -233,20 +244,17 @@ public class Habitaciones extends ObjetoCompuesto3D {
         gl.glLightfv(gl.GL_LIGHT2, gl.GL_AMBIENT, ambiente, 1);
         gl.glLightfv(gl.GL_LIGHT2, gl.GL_DIFFUSE, difusa, 1);
         gl.glLightfv(gl.GL_LIGHT2, gl.GL_POSITION, pos, 1);
-}
-/* Esto no se donde deberia ir
+    } 
+    
+    public void quitarLuzAmbiente(GL gl) {
+        float[] intensidad = {-10.0f , -10.0f, -10.0f, 0.0f};
+        gl.glLightModelfv(gl.GL_LIGHT_MODEL_AMBIENT, intensidad, 1);
+    }
+    
+    public void ponerLuzAmbiente(GL gl) {
+        float intensidad[]={0.2f,0.2f,0.2f,1f};
+        gl.glLightModelfv(gl.GL_LIGHT_MODEL_AMBIENT, intensidad, 1);
+    }
+    
 
- void Escena::interruptorLuzAmbiente(){
-    if (estadoLuzAmbiente == 0){
-        estadoLuzAmbiente = 0;
-        GLfloat intensidad[]={0,0,0,1};
-        glLightModelfv(GL_LIGHT_MODEL_AMBIENT,intensidad);
-    }
-    else {
-        estadoLuzAmbiente = 1;
-        GLfloat intensidad[]={0.2,0.2,0.2,1};
-        glLightModelfv(GL_LIGHT_MODEL_AMBIENT,intensidad);
-    }
-}
- */
 }

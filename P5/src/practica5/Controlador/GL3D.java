@@ -132,7 +132,7 @@ public class GL3D implements GLEventListener {
 	hab.setId(Objeto3D.ESCENA);
 	hab.setGL(gl);
 	hab.setColor(Color.verdeClaro);
-
+        
 	activarLuces(gl);
 	activarOpcionesOpenGL(gl);
 
@@ -190,7 +190,7 @@ public class GL3D implements GLEventListener {
 	FloatBuffer LuzAmbiente1 = FloatBuffer.wrap(LuzAmbiente);
 	gl.glLightfv(gl.GL_LIGHT0, gl.GL_AMBIENT, LuzAmbiente1);
 	FloatBuffer PosicionLuz01 = FloatBuffer.wrap(PosicionLuz0);
-	gl.glLightfv(gl.GL_LIGHT0, gl.GL_POSITION, PosicionLuz01);
+	gl.glLightfv(gl.GL_LIGHT0, gl.GL_POSITION, PosicionLuz01); 
     }
 
     // Activamos opciones internas de OpenGL

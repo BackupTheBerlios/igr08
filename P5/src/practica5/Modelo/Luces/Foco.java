@@ -6,6 +6,9 @@ import practica5.Modelo.Basic.PuntoVector3D;
 
 public class Foco extends Objeto3D {
     
+    // Constanstes
+    public static int LUZ_LAMPARA = 20;
+    
     // Atributos privados
     private PuntoVector3D pos;
     private PuntoVector3D angulo;
@@ -13,7 +16,10 @@ public class Foco extends Objeto3D {
     private boolean on;
     
     // Constructora por defecto
-    public Foco() {
+    public Foco(GL gl) {
+        
+        super.setGL(gl);
+        
         this.pos = new PuntoVector3D();
         this.angulo = new PuntoVector3D();
         this.alpha = 45;
@@ -58,7 +64,7 @@ public class Foco extends Objeto3D {
     }
    
     // Metodo que dibuja
-    public void dibuja(){
+    public void dibuja2(GL gl){
         
         if (on) {
             
@@ -89,12 +95,12 @@ public class Foco extends Objeto3D {
     }
     
     // Tipos de luces
-    public void setLuzDifusa() {
+    public void setLuzDifusa(GL gl) {
         float LuzDifusa[] = { 0.5f, 0.5f, 0.5f, 1.0f};
         gl.glLightfv(gl.GL_LIGHT1, gl.GL_DIFFUSE, LuzDifusa, 1);
     }
 
-    public void setLuzAmbiente() {
+    public void setLuzAmbiente(GL gl) {
         float LuzAmbiente[] = { 0.4f, 0.4f, 0.4f, 1.0f};
         gl.glLightfv(gl.GL_LIGHT1, gl.GL_AMBIENT, LuzAmbiente, 1);
     }

@@ -8,10 +8,7 @@ public class Malla extends Objeto3D {
     
   
     // Texturas
-    /*public static final String[] nombreTexturas = { "suelo.jpg", "madera.jpg", "tela.jpg", "carton.jpg",  
-                                                    "funda.jpg", "pared2.jpg", "funda.jpg", "funda.jpg",
-                                                    "funda.jpg", "funda.jpg", "funda.jpg" };*/
-public static final String[] nombreTexturas = { "suelo.jpg", "madera.jpg", "tela.jpg", "carton.jpg",  
+   public static final String[] nombreTexturas = { "suelo.jpg", "madera.jpg", "tela.jpg", "carton.jpg",  
                                                     "funda.jpg", "pared2.jpg", "plastico.jpg", "rosado.jpg",
                                                     "tela.jpg", "piedra.jpg", "papel.jpg" };
     
