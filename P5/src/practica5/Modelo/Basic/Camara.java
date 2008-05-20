@@ -32,7 +32,7 @@ public class Camara {
         b = -400;
         t = 300;
         N = 1;
-        F = 1000;
+        F = 10000;
 //	setProjection(GL3D.PROY_ORTOGONAL);
     }
     
@@ -47,7 +47,7 @@ public class Camara {
         b = -400;
         t = 300;
         N = 1;
-        F = 1000;
+        F = 10000;
         //setProjection(GL3D.PROY_ORTOGONAL);
     }
     

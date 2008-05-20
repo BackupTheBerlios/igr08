@@ -9,22 +9,23 @@ public class Tablero extends Malla {
     // Atributos privados
     private double X, Y, Z;
     private int divX, divY, divZ;
+    private int numTrozos;
+    private int numCaras;
+    private int numVertices;
+    private int numNormales;
     
     // Constructora por defecto
-    public Tablero() { }
+    public Tablero() {
+        
+        super();
+    }
     
-    /* El tablero estï¿½ formado por una serie de cubos o planos paralelos entrï¿½ sï¿½
-     * Por ello, vamos a irlo creando en orden...
-     *      1ï¿½ Calculamos el primer plano
-     *      2ï¿½ Calulamos los planos intermedios
-     *      3ï¿½ Calculamos el ï¿½ltimo plano
-     * Y con esto tenemos definido el tablero
-     */
     
     // Constructora con parï¿½metros
     public Tablero(double X, double Y, double Z,
             int divX, int divY, int divZ, GL gl) {
         
+        super();
         this.setGL(gl);
         
         this.X = X;
@@ -34,97 +35,12 @@ public class Tablero extends Malla {
         this.divY = divY;
         this.divZ = divZ;
         
-        Cara cara;
-        int numPlanos = 0;
-        ArrayList<PuntoVector3D> plano;
-        double incX, incY, incZ;
+        this.numTrozos = divX * divY * divZ;
+        this.numVertices = numTrozos * 8;
+        this.numCaras = numTrozos * 6;
+        this.numNormales = this.numCaras;
         
-        // Cargamos la matriz de coordenadas inicial
-        //this.matriz = new TAfin(thgl);
-        
-        // Definimos un color inicial
-        this.color = Color.gris;
-        
-        // Calculamos la distancia que debe haber entre los puntos intermedios
-        incX = (double) (X / divX);
-        incY = (double) (Y / divY);
-        incZ = (double) (Z / divZ);
-        
-        // Creamos el primer plano ( x = constante, (Y, Z) = variables )
-        double x = 0;
-        plano = generarPlano(x, incY, incZ, divY, divZ);
-        numPlanos++;
-        
-        // Insertarmos los vertices
-        for (int j=0; j<divY; j++)
-            for (int k=0; k<divZ; k++)
-                addVertice(plano.get(k+j*divY));
-        
-        // Insertamos las caras y las normales del 1ï¿½ plano
-        calcularCarasYnormalesYZ(divY, divZ, numPlanos);
-        
-        // Pasamos al siguiente plano
-        x += incX;
-        
-        // Creamos los planos intermedios
-        for (int i=1; i<divX-1; i++) {
-            plano = generarPlano(x, incY, incZ, divY, divZ);
-            numPlanos++;
-            
-            for (int j=0; j<divY; j++)
-                for (int k=0; k<divZ; k++)
-                    addVertice(plano.get(k+j*divY));
-            
-            
-            // Insertamos las caras y las normales de los planos intermedios
-            calcularCarasYnormalesXZ(divX, divY, divZ, numPlanos);
-            calcularCarasYnormalesXY(divX, divY, divZ, numPlanos);
-            
-            // Siguiente plano a calcular
-            x += incX;
-        }
-        
-        // Creamos el ï¿½ltimo plano
-        plano = generarPlano(x, incY, incZ, divY, divZ);
-        numPlanos++;
-        
-        // Insertarmos los vertices
-        for (int j=0; j<divY; j++)
-            for (int k=0; k<divZ; k++)
-                this.addVertice(plano.get(k+j*divY));
-        
-        // Insertamos las caras y las normales del ï¿½ltimo plano
-        calcularCarasYnormalesYZ(divY, divZ, numPlanos);
-        calcularCarasYnormalesXZ(divX, divY, divZ, numPlanos);
-        calcularCarasYnormalesXY(divX, divY, divZ, numPlanos);
-    }
-    
-    // Mï¿½todo que genera el plano
-    public ArrayList<PuntoVector3D> generarPlano(double x,double incY, double incZ,
-            int divY,int divZ) {
-        double z, y;
-        PuntoVector3D punto;
-        ArrayList<PuntoVector3D> superficie;
-        
-        superficie = new ArrayList<PuntoVector3D>();
-        for (int i=0; i<divY; i++)
-            for (int k=0; k<divZ; k++) 
-                superficie.add(new PuntoVector3D());
-            
-        
-        //superficie.ensureCapacity((divY+1)*(divZ+1));
-        
-        y = 0;
-        for (int j=0; j<divY; j++) {
-            z = 0;
-            for (int k=0; k<divZ; k++) {
-                superficie.get(k+j*divZ).setXYZ(x, y, z);
-                z += incZ;
-            }
-            y += incY;
-        }
-        
-        return superficie;
+        dimensionarTablero();
     }
     
     // Mï¿½todo que calcula las normales entre cada par de ejes
@@ -149,7 +65,7 @@ public class Tablero extends Malla {
                 }
                 
                 // this.addNormal(new Malla().calculaNormal(ind1, ind2, ind3, ind4));
-                 this.addCara(generarCara(ind1,ind2,ind3,ind4));
+                this.addCara(generarCara(ind1,ind2,ind3,ind4));
             }
         }
     }
@@ -187,7 +103,7 @@ public class Tablero extends Malla {
     public void calcularCarasYnormalesXY(int divX, int divY, int divZ, int numPlanos) {
         
         // Indices de vertices
-        int ind1,ind2,ind3,ind4; 
+        int ind1,ind2,ind3,ind4;
         
         for (int j=0; j<divY-1; j++) {
             
@@ -199,7 +115,7 @@ public class Tablero extends Malla {
             
             // this.addNormal(new Malla().calculaNormal(ind1, ind2, ind3, ind4));
             this.addCara(generarCara(ind1,ind2,ind3,ind4));
-                
+            
             // Plano z=Z
             ind1 = (divZ-1) + (j) * divZ + divY * divZ * (numPlanos-1);
             ind2 = (divZ-1) + (j) * divZ + divY * divZ * (numPlanos-2);
@@ -213,15 +129,156 @@ public class Tablero extends Malla {
     
     // Metodo que genera una cara a partir de 4 indices de puntos
     public Cara generarCara(int ind1,int ind2,int ind3,int ind4) {
-       
+        
         Cara cara = new Cara();
         
         cara.setIndiceVerticeNormal(new VerticeNormal(ind1, 0));
         cara.setIndiceVerticeNormal(new VerticeNormal(ind2, 0));
         cara.setIndiceVerticeNormal(new VerticeNormal(ind3, 0));
         cara.setIndiceVerticeNormal(new VerticeNormal(ind4, 0));
-       
-        return cara;       
+        
+        
+        return cara;
     }
     
+    public void dimensionarTablero() {
+        
+        int nV = 0;
+        int nC = 0;
+        
+        double ancho = this.X / this.divX;
+        double alto =  this.Y/ this.divY;
+        double grosor = this.Z / this.divX;
+        
+        Cara unaCara;
+        VerticeNormal vn;
+        ArrayList<PuntoVector3D> listaVertices;
+        ArrayList<VerticeNormal> listaVerticesNormales;
+                
+        for (int i=0; i<divX; i++)
+            for (int j=0; j<divY; j++)
+                for (int k=0; k<divZ; k++) {
+      
+                    // Calculamos los vértices
+                    vertices.add(new PuntoVector3D(i * ancho, j * alto, (k+1) * grosor));
+                    vertices.add(new PuntoVector3D((i+1) * ancho,j * alto, (k+1) * grosor));
+                    vertices.add(new PuntoVector3D(i * ancho, (j+1) * alto, (k+1) * grosor));
+                    vertices.add(new PuntoVector3D((i+1) * ancho, (j+1) * alto, (k+1) * grosor));
+                    vertices.add(new PuntoVector3D(i * ancho, j * alto, k * grosor));
+                    vertices.add(new PuntoVector3D((i+1) * ancho, j * alto, k * grosor));
+                    vertices.add(new PuntoVector3D(i * ancho, (j+1) * alto, k * grosor));
+                    vertices.add(new PuntoVector3D((i+1) * ancho, (j+1) * alto, k * grosor));
+            
+                    // Calculamos las normales y las caras
+                    listaVerticesNormales = new ArrayList<VerticeNormal>();
+                    listaVerticesNormales.add(new VerticeNormal(nV, nC));
+                    listaVerticesNormales.add(new VerticeNormal(nV + 1, nC));
+                    listaVerticesNormales.add(new VerticeNormal(nV + 3, nC));
+                    listaVerticesNormales.add(new VerticeNormal(nV + 2, nC));
+                    
+                    unaCara = new Cara();
+                    unaCara.setIndiceVerticeNormal(listaVerticesNormales);
+                    caras.add(unaCara);
+                    
+                    listaVertices = new ArrayList<PuntoVector3D>();
+                    for (int l=0; l<listaVerticesNormales.size(); l++) {
+                        listaVertices.add(vertices.get(listaVerticesNormales.get(l).getIndiceVertice()));
+                    }
+                                        
+                    normales.add(this.metodoNewell(listaVertices));
+                    nC++;
+                    
+                    listaVerticesNormales = new ArrayList<VerticeNormal>();
+                    listaVerticesNormales.add(new VerticeNormal(nV + 1, nC));
+                    listaVerticesNormales.add(new VerticeNormal(nV + 5, nC));
+                    listaVerticesNormales.add(new VerticeNormal(nV + 7, nC));
+                    listaVerticesNormales.add(new VerticeNormal(nV + 3, nC));
+                    
+                    unaCara = new Cara();
+                    unaCara.setIndiceVerticeNormal(listaVerticesNormales);
+                    caras.add(unaCara);
+                    
+                    listaVertices = new ArrayList<PuntoVector3D>();
+                    for (int l=0; l<listaVerticesNormales.size(); l++) {
+                        listaVertices.add(vertices.get(listaVerticesNormales.get(l).getIndiceVertice()));
+                    }
+                                        
+                    normales.add(this.metodoNewell(listaVertices));
+                    nC++;
+
+                    listaVerticesNormales = new ArrayList<VerticeNormal>();
+                    listaVerticesNormales.add(new VerticeNormal(nV + 5, nC));
+                    listaVerticesNormales.add(new VerticeNormal(nV + 4, nC));
+                    listaVerticesNormales.add(new VerticeNormal(nV + 6, nC));
+                    listaVerticesNormales.add(new VerticeNormal(nV + 7, nC));
+                    
+                    unaCara = new Cara();
+                    unaCara.setIndiceVerticeNormal(listaVerticesNormales);
+                    caras.add(unaCara);
+                    
+                    listaVertices = new ArrayList<PuntoVector3D>();
+                    for (int l=0; l<listaVerticesNormales.size(); l++) {
+                        listaVertices.add(vertices.get(listaVerticesNormales.get(l).getIndiceVertice()));
+                    }
+                                        
+                    normales.add(this.metodoNewell(listaVertices));
+                    nC++;
+
+                    listaVerticesNormales = new ArrayList<VerticeNormal>();
+                    listaVerticesNormales.add(new VerticeNormal(nV, nC));
+                    listaVerticesNormales.add(new VerticeNormal(nV + 2, nC));
+                    listaVerticesNormales.add(new VerticeNormal(nV + 6, nC));
+                    listaVerticesNormales.add(new VerticeNormal(nV + 4, nC));
+                    
+                    unaCara = new Cara();
+                    unaCara.setIndiceVerticeNormal(listaVerticesNormales);
+                    caras.add(unaCara);
+                    
+                    listaVertices = new ArrayList<PuntoVector3D>();
+                    for (int l=0; l<listaVerticesNormales.size(); l++) {
+                        listaVertices.add(vertices.get(listaVerticesNormales.get(l).getIndiceVertice()));
+                    }
+                                        
+                    normales.add(this.metodoNewell(listaVertices));
+                    nC++;
+                    
+                    listaVerticesNormales = new ArrayList<VerticeNormal>();
+                    listaVerticesNormales.add(new VerticeNormal(nV + 2, nC));
+                    listaVerticesNormales.add(new VerticeNormal(nV + 3, nC));
+                    listaVerticesNormales.add(new VerticeNormal(nV + 7, nC));
+                    listaVerticesNormales.add(new VerticeNormal(nV + 6, nC));
+                    
+                    unaCara = new Cara();
+                    unaCara.setIndiceVerticeNormal(listaVerticesNormales);
+                    caras.add(unaCara);
+                    
+                    listaVertices = new ArrayList<PuntoVector3D>();
+                    for (int l=0; l<listaVerticesNormales.size(); l++) {
+                        listaVertices.add(vertices.get(listaVerticesNormales.get(l).getIndiceVertice()));
+                    }
+                                        
+                    normales.add(this.metodoNewell(listaVertices));
+                    nC++;
+                    
+                    listaVerticesNormales = new ArrayList<VerticeNormal>();
+                    listaVerticesNormales.add(new VerticeNormal(nV, nC));
+                    listaVerticesNormales.add(new VerticeNormal(nV + 4, nC));
+                    listaVerticesNormales.add(new VerticeNormal(nV + 5, nC));
+                    listaVerticesNormales.add(new VerticeNormal(nV + 1, nC));
+                    
+                    unaCara = new Cara();
+                    unaCara.setIndiceVerticeNormal(listaVerticesNormales);
+                    caras.add(unaCara);
+                    
+                    listaVertices = new ArrayList<PuntoVector3D>();
+                    for (int l=0; l<listaVerticesNormales.size(); l++) {
+                        listaVertices.add(vertices.get(listaVerticesNormales.get(l).getIndiceVertice()));
+                    }
+                                        
+                    normales.add(this.metodoNewell(listaVertices));
+                    nC++;
+                    
+                    nV += 8;
+                }
+    }
 }

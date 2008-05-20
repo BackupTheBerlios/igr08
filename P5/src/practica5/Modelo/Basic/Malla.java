@@ -85,14 +85,14 @@ public class Malla extends Objeto3D {
                 
                 if (this.normalesEnabled) {
                     gl.glNormal3d(normales.get(iN).getX(),
-                            normales.get(iN).getY(),
-                            normales.get(iN).getZ());
+                                  normales.get(iN).getY(),
+                                  normales.get(iN).getZ());
                 }
                 
                 if ((texturizado) && (textura != null))
-                    gl.glTexCoord3d(vertices.get(iV).getX()/300,
-                                    vertices.get(iV).getY()/300,
-                                    vertices.get(iV).getZ()/300); 
+                    gl.glTexCoord3d(vertices.get(iV).getX()/350,
+                                    vertices.get(iV).getY()/350,
+                                    vertices.get(iV).getZ()/350); 
                 
                 gl.glVertex3d(vertices.get(iV).getX(),
                         vertices.get(iV).getY(),

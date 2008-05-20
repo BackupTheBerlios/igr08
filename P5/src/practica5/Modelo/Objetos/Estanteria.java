@@ -12,7 +12,7 @@ public class Estanteria extends ObjetoCompuesto3D{
     public Estanteria(PuntoVector3D pos, double ori, GL gl, Texture[] texturas) {
         
         // Estante 1
-        tablero = new Tablero(120, 10, 50, 3, 3, 3, gl);
+        tablero = new Tablero(120, 10, 30, 3, 3, 3, gl);
         tablero.setId(Objeto3D.ESTANTERIA);
         tablero.setTextura(texturas[1]);
         tablero.getMatriz().rotar(ori, 0.0, 1.0, 0.0);
@@ -21,7 +21,7 @@ public class Estanteria extends ObjetoCompuesto3D{
         this.addHijos(tablero);
         
         // Estante 2
-        tablero = new Tablero(120, 10, 50, 3, 3, 3, gl);
+        tablero = new Tablero(120, 10, 30, 3, 3, 3, gl);
         tablero.setId(Objeto3D.ESTANTERIA);
         tablero.setTextura(texturas[1]);
         tablero.getMatriz().rotar(ori, 0.0, 1.0, 0.0);
@@ -30,7 +30,7 @@ public class Estanteria extends ObjetoCompuesto3D{
         this.addHijos(tablero);
         
         // Estante 3
-        tablero = new Tablero(120, 10, 50, 3, 3, 3, gl);
+        tablero = new Tablero(120, 10, 30, 3, 3, 3, gl);
         tablero.setId(Objeto3D.ESTANTERIA);
         tablero.setTextura(texturas[1]);
         tablero.getMatriz().rotar(ori, 0.0, 1.0, 0.0);
@@ -56,7 +56,7 @@ public class Estanteria extends ObjetoCompuesto3D{
         this.addHijos(tablero);
         
         // Libros del estante 3
-        tablero = new Tablero(5, 30, 50, 3, 3, 3, gl);
+        tablero = new Tablero(5, 30, 30, 3, 3, 3, gl);
         tablero.setId(Objeto3D.LIBROS);
         tablero.setTextura(texturas[3]);
         tablero.getMatriz().rotar(ori, 0.0, 1.0, 0.0);
@@ -64,7 +64,7 @@ public class Estanteria extends ObjetoCompuesto3D{
         tablero.setColor(Color.blanco);   
         this.addHijos(tablero);
         
-        tablero = new Tablero(30, 10, 40, 3, 3, 3, gl);
+        tablero = new Tablero(30, 10, 30, 3, 3, 3, gl);
         tablero.setId(Objeto3D.LIBROS);
         tablero.setTextura(texturas[3]);
         tablero.getMatriz().rotar(ori, 0.0, 1.0, 0.0);

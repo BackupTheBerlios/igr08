@@ -12,30 +12,30 @@ public class Puerta extends ObjetoCompuesto3D {
     public Puerta(GL gl, Texture[] texturas) {
         
         // Puerta
-        tablero = new Tablero(110, 240, 10, 3, 3, 3, gl);
+        tablero = new Tablero(80, 160, 5, 3, 3, 3, gl);
         tablero.setId(Objeto3D.PUERTA);
         tablero.setTextura(texturas[1]);
-        tablero.getMatriz().rotar(-45, 0.0, 1.0, 0.0);
-        tablero.getMatriz().trasladarM(100, 0, 0);
+        tablero.getMatriz().rotar(-60, 0.0, 1.0, 0.0);
+        tablero.getMatriz().trasladarM(150, 0, 0);
         tablero.setColor(color.marron);
         this.addHijos(tablero);
         
         // Picaporte 1
-        esfera = new Esfera(5, 10, 10);
+        esfera = new Esfera(3, 10, 10);
         esfera.setId(Objeto3D.PUERTA);
         esfera.setGL(gl);
         esfera.setTextura(texturas[5]);
-        esfera.getMatriz().trasladarM(135, 75, 50);
-        esfera.setColor(color.gris);
+        esfera.getMatriz().trasladarM(175, 75, 62);
+        esfera.setColor(color.blanco);
         this.addHijos(esfera);
         
         // Picaporte 2
-        esfera = new Esfera(5, 10, 10);
+        esfera = new Esfera(3, 10, 10);
         esfera.setId(Objeto3D.PUERTA);
         esfera.setGL(gl);
         esfera.setTextura(texturas[5]);
-        esfera.getMatriz().trasladarM(145, 75, 40);
-        esfera.setColor(color.gris);
+        esfera.getMatriz().trasladarM(185, 75, 55);
+        esfera.setColor(color.blanco);
         this.addHijos(esfera);
         
     }

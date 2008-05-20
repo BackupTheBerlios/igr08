@@ -1,5 +1,6 @@
 package practica5.Modelo.Objetos;
 
+import com.sun.opengl.util.texture.Texture;
 import javax.media.opengl.GL;
 import practica5.Modelo.Basic.*;
 
@@ -8,12 +9,13 @@ public class Cuadro extends ObjetoCompuesto3D {
     // Atributos privados
     private Tablero tablero;
     
-    public Cuadro(GL gl) {
+    public Cuadro(GL gl, Texture[] texturas) {
         
         // Cuadro
-        tablero = new Tablero(160, 120, 10, 3, 3, 3, gl);
+        tablero = new Tablero(120, 80, 5, 3, 3, 3, gl);
         tablero.setId(Objeto3D.CUADRO);
-        tablero.getMatriz().trasladar(80, 100, -260);
+        tablero.setTextura(texturas[6]);
+        tablero.getMatriz().trasladar(120, 100, -340);
         tablero.setColor(color.gris);
         this.addHijos(tablero); 
     }

@@ -17,7 +17,7 @@ public class Mesa extends ObjetoCompuesto3D {
         
         
         // Tabla de la mesa
-        tabla = new Tablero(150, 80, 10, 3, 3, 3, gl);
+        tabla = new Tablero(150, 80, 5, 3, 3, 3, gl);
         tabla.setId(Objeto3D.MESA);
         tabla.setTextura(texturas[1]);
         tabla.getMatriz().rotar(90, 1.0, 0.0, 0.0);
@@ -38,8 +38,8 @@ public class Mesa extends ObjetoCompuesto3D {
 
         perfil = new Calculos().calculaPuntosBSplines(perfil, 20);
         
-        pataMesa = new MallaPorRevolucion(perfil, 4, 1.57, gl);
-        pataMesa.getMatriz().trasladarM(pos.getX() + 50, pos.getY() - 50, pos.getZ() - 20);
+        pataMesa = new MallaPorRevolucion(perfil, 4, 0.3, gl);
+        pataMesa.getMatriz().trasladarM(pos.getX() + 75, pos.getY() - 50, pos.getZ() - 20);
         pataMesa.setColor(color.violetaOscuro);
         pataMesa.setId(Objeto3D.MESA);
         pataMesa.setTextura(texturas[1]);

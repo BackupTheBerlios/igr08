@@ -31,66 +31,66 @@ public class Habitaciones extends ObjetoCompuesto3D {
         Tablero tablero;
         
         // Habitacion Trasera: Pared central
-        tablero = new Tablero(400, 400, 20, 3, 3, 3, gl);
+        tablero = new Tablero(350, 250, 10, 3, 3, 3, gl);
         tablero.setId(0);
         tablero.setTextura(texturas[2]);
-        tablero.getMatriz().trasladar(0, 0, -270);
+        tablero.getMatriz().trasladar(0, 0, -350);
         tablero.setColor(color.rojoClaro);
         this.addHijos(tablero); 
         
         
         // Habitacion Trasera: Suelo
-        tablero = new Tablero(400, 400, 20, 3, 3, 3, gl);
+        tablero = new Tablero(350, 350, 10, 3, 3, 3, gl);
         tablero.setId(Objeto3D.SUELO);
         tablero.setTextura(texturas[0]);
         tablero.getMatriz().rotar(90, 1.0, 0.0, 0.0);
-        tablero.getMatriz().trasladarM(0, 0, -270);
+        tablero.getMatriz().trasladarM(0, 0, -350);
         tablero.setColor(color.amarilloClaro);
         this.addHijos(tablero);  
         
         
         // Habitacion Trasera: Pared Derecha
-        tablero = new Tablero(100, 400, 20, 3, 3, 3, gl);
+        tablero = new Tablero(100, 250, 10, 3, 3, 3, gl);
         tablero.setId(0);
         tablero.setTextura(texturas[2]);
         tablero.getMatriz().rotar(-90, 0.0, 1.0, 0.0);
-        tablero.getMatriz().trasladarM(0, 0, -270);
+        tablero.getMatriz().trasladarM(0, 0, -350);
         tablero.setColor(color.azulClaro);
         this.addHijos(tablero); 
         
-        tablero = new Tablero(200, 180, 20, 3, 3, 3, gl);
+        tablero = new Tablero(200, 102, 10, 3, 3, 3, gl);
         tablero.setId(0);
         tablero.setTextura(texturas[2]);
         tablero.getMatriz().rotar(-90, 0.0, 1.0, 0.0);
-        tablero.getMatriz().trasladarM(0, 0, -205);
+        tablero.getMatriz().trasladarM(0, 0, -250);
         tablero.getMatriz().trasladarM(0, 147, 0);
         tablero.setColor(color.azulClaro);
         this.addHijos(tablero); 
         
-        tablero = new Tablero(200, 130, 20, 3, 3, 3, gl);
+        tablero = new Tablero(200, 80, 10, 3, 3, 3, gl);
         tablero.setId(0);
         tablero.setTextura(texturas[2]);
         tablero.getMatriz().rotar(-90, 0.0, 1.0, 0.0);
-        tablero.getMatriz().trasladarM(0, 0, -205);
+        tablero.getMatriz().trasladarM(0, 0, -250);
         tablero.setColor(color.azulClaro);
         this.addHijos(tablero); 
         
-        tablero = new Tablero(120, 400, 20, 3, 3, 3, gl);
+        tablero = new Tablero(100, 250, 10, 3, 3, 3, gl);
         tablero.setId(0);
         tablero.setTextura(texturas[2]);
         tablero.getMatriz().rotar(-90, 0.0, 1.0, 0.0);
-        tablero.getMatriz().trasladarM(0, 0, -80);
+        tablero.getMatriz().trasladarM(0, 0, -90);
         tablero.setColor(color.azulClaro);
         this.addHijos(tablero); 
         
         // Habitaci�n Frontal: Pared Central
-        tablero = new Tablero(150, 400, 20, 3, 3, 3, gl);
+        tablero = new Tablero(150, 250, 10, 3, 3, 3, gl);
         tablero.setId(0);
         tablero.setTextura(texturas[2]);
         tablero.setColor(color.verdeClaro);   
         this.addHijos(tablero);
         
-        tablero = new Tablero(105, 160, 20, 3, 3, 3, gl);
+        tablero = new Tablero(130, 90, 10, 3, 3, 3, gl);
         tablero.setId(0);
         tablero.setGL(gl);
         tablero.setTextura(texturas[2]);
@@ -98,40 +98,23 @@ public class Habitaciones extends ObjetoCompuesto3D {
         tablero.setColor(color.verdeClaro);   
         this.addHijos(tablero);    
         
-        tablero = new Tablero(150, 400, 20, 3, 3, 3, gl);
+        tablero = new Tablero(120, 250, 10, 3, 3, 3, gl);
         tablero.setId(0);
         tablero.setTextura(texturas[2]);
-        tablero.getMatriz().trasladar(170, 0, 0);
+        tablero.getMatriz().trasladar(230, 0, 0);
         tablero.setColor(color.verdeClaro);   
         this.addHijos(tablero);
  
         
         // Habitacion Frontal: Pared Derecha
-        tablero = new Tablero(160, 400, 20, 3, 3, 3, gl);
+        tablero = new Tablero(160, 250, 10, 3, 3, 3, gl);
         tablero.setId(0);
         tablero.setTextura(texturas[2]);
         tablero.getMatriz().rotar(-90, 0.0, 1.0, 0.0);
         tablero.setColor(color.turquesaClaro);
         this.addHijos(tablero); 
         
-        tablero = new Tablero(85, 150, 20, 3, 3, 3, gl);
-        tablero.setId(0);
-        tablero.setTextura(texturas[2]);
-        tablero.getMatriz().rotar(-90, 0.0, 1.0, 0.0);
-        tablero.getMatriz().trasladarM(0, 0, 105);
-        tablero.setColor(color.turquesaClaro);
-        this.addHijos(tablero); 
-        
-        tablero = new Tablero(85, 175, 20, 3, 3, 3, gl);
-        tablero.setId(0);
-        tablero.setTextura(texturas[2]);
-        tablero.getMatriz().rotar(-90, 0.0, 1.0, 0.0);
-        tablero.getMatriz().trasladarM(0, 0, 105);
-        tablero.getMatriz().trasladarM(0, 150, 0);
-        tablero.setColor(color.turquesaClaro);
-        this.addHijos(tablero);         
-       
-        tablero = new Tablero(160, 400, 20, 3, 3, 3, gl);
+        tablero = new Tablero(50, 100, 10, 3, 3, 3, gl);
         tablero.setId(0);
         tablero.setTextura(texturas[2]);
         tablero.getMatriz().rotar(-90, 0.0, 1.0, 0.0);
@@ -139,9 +122,25 @@ public class Habitaciones extends ObjetoCompuesto3D {
         tablero.setColor(color.turquesaClaro);
         this.addHijos(tablero); 
         
+        tablero = new Tablero(50, 100, 10, 3, 3, 3, gl);
+        tablero.setId(0);
+        tablero.setTextura(texturas[2]);
+        tablero.getMatriz().rotar(-90, 0.0, 1.0, 0.0);
+        tablero.getMatriz().trasladarM(0, 150, 160);
+        tablero.setColor(color.turquesaClaro);
+        this.addHijos(tablero);         
+       
+        tablero = new Tablero(140, 250, 10, 3, 3, 3, gl);
+        tablero.setId(0);
+        tablero.setTextura(texturas[2]);
+        tablero.getMatriz().rotar(-90, 0.0, 1.0, 0.0);
+        tablero.getMatriz().trasladarM(0, 0, 210);
+        tablero.setColor(color.turquesaClaro);
+        this.addHijos(tablero); 
+        
         
         // Habitacion Frontal: Suelo
-        tablero = new Tablero(400, 400, 20, 3, 3, 3, gl);
+        tablero = new Tablero(350, 350, 10, 3, 3, 3, gl);
         tablero.setId(Objeto3D.SUELO);
         tablero.setTextura(texturas[0]);
         tablero.getMatriz().rotar(90, 1.0, 0.0, 0.0);
@@ -155,14 +154,13 @@ public class Habitaciones extends ObjetoCompuesto3D {
             this.addHijos(puerta.getHijos().get(i));
         
         // Cuadro
-        cuadro = new Cuadro(gl);
+        cuadro = new Cuadro(gl, texturas);
         cuadro.setId(Objeto3D.CUADRO);
-        cuadro.setTextura(texturas[3]);
         for (int i=0; i<cuadro.getHijos().size(); i++)
             this.addHijos(cuadro.getHijos().get(i));
         
         // Muebles
-        muebles = new Muebles(new PuntoVector3D(50, 50, -150), 45, gl, texturas);
+        muebles = new Muebles(new PuntoVector3D(100, 50, -150), 45, gl, texturas);
         muebles.setId(Objeto3D.MUEBLES);
         muebles.setTextura(texturas[1]);
         this.addHijos(muebles);
@@ -174,40 +172,40 @@ public class Habitaciones extends ObjetoCompuesto3D {
             this.addHijos(estante.getHijos().get(i));
         
         // Lampara
-        lampara = new Lampara(new PuntoVector3D(140, 250, -140), 0, gl);
+        lampara = new Lampara(new PuntoVector3D(150, 250, -150), 0, gl);
         lampara.setId(Objeto3D.LAMPARA);
         this.addHijos(lampara);
      
         // Perchero
-        percha = new Perchero(new PuntoVector3D(30, 0, 50), 0, gl);
+        percha = new Perchero(new PuntoVector3D(30, 0, 30), 0, gl);
         percha.setId(Objeto3D.PERCHERO);
         this.addHijos(percha);
         
         // Mesa 2
-        camilla = new Camilla(new PuntoVector3D(150, 0, 150), 0, gl, texturas);
+        camilla = new Camilla(new PuntoVector3D(200, 0, 200), 0, gl, texturas);
         for (int i=0; i<camilla.getHijos().size(); i++)
             this.addHijos(camilla.getHijos().get(i));
         
         // Sofa
-        sofa = new Sofa(new PuntoVector3D(10, 0, 150), 0, gl, texturas);
+        sofa = new Sofa(new PuntoVector3D(10, 0, 200), 0, gl, texturas);
         sofa.setId(Objeto3D.SOFA);
         for (int i=0; i<sofa.getHijos().size(); i++)
             this.addHijos(sofa.getHijos().get(i));
         
         // Jarron
-        estatua = new Jarron(new PuntoVector3D(230, 0, 50), 0, gl, texturas);
+        estatua = new Jarron(new PuntoVector3D(300, 0, 50), 0, gl, texturas);
         estatua.setId(Objeto3D.ESTATUA);
         for (int i=0; i<estatua.getHijos().size(); i++)
             this.addHijos(estatua.getHijos().get(i));
         
         // Persiana
-        persiana = new Persiana(new PuntoVector3D(-5, 140, -215), 0, gl, texturas);
+        persiana = new Persiana(new PuntoVector3D(-5, 140, -265), 0, gl, texturas);
         persiana.setId(Objeto3D.PERSIANA);
         for (int i=0; i<persiana.getHijos().size(); i++)
             this.addHijos(persiana.getHijos().get(i));
         
         // Persona
-        persona = new Persona(new PuntoVector3D(230, 0, 230), 0, gl);
+        persona = new Persona(new PuntoVector3D(280, 0, 280), 0, gl);
         persona.setId(Objeto3D.PERSONA);
         this.addHijos(persona);
     
@@ -221,7 +219,7 @@ public class Habitaciones extends ObjetoCompuesto3D {
         luzLampara.dibuja2(gl);
 
         //configurarLuzDireccional(gl);
-        quitarLuzAmbiente(gl);
+        ponerLuzAmbiente(gl);
 
     }
     

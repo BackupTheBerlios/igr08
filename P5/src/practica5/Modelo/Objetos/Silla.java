@@ -18,7 +18,7 @@ public class Silla extends ObjetoCompuesto3D{
         int valorY = -25;
         
         // Asiento
-        tabla = new Tablero(50, 50, 10, 3, 3, 3, gl);
+        tabla = new Tablero(35, 35, 5, 3, 3, 3, gl);
         tabla.setId(Objeto3D.SILLA);
         tabla.setTextura(texturas[1]);
         tabla.getMatriz().rotar(90, 1.0, 0.0, 0.0);
@@ -27,8 +27,8 @@ public class Silla extends ObjetoCompuesto3D{
         tabla.setColor(color.violetaOscuro);
         this.addHijos(tabla);  
         
-        // Respaldo
-        tabla = new Tablero(50, 50, 10, 3, 3, 3, gl);
+        // Respaldo 
+        tabla = new Tablero(35, 35, 5, 3, 3, 3, gl);
         tabla.setId(Objeto3D.SILLA);
         tabla.setTextura(texturas[1]);
         tabla.getMatriz().rotarM(ori, 0.0, 1.0, 0.0);
@@ -81,11 +81,11 @@ public class Silla extends ObjetoCompuesto3D{
 
         if (ori >= 0) {
             valorX = 0;
-            valorZ = -30;
+            valorZ = -40;
         }
         else {
             valorX= -0;
-            valorZ = 30;
+            valorZ = 40;
         }     
         
         pata = new MallaPorRevolucion(perfil, 4, 1.57, gl);

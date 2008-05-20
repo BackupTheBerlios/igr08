@@ -23,7 +23,7 @@ public class Plato extends ObjetoCompuesto3D {
         
         
         // Plato
-        plato = new MallaPorRevolucion(perfil, 4, 0.7 , gl);
+        plato = new MallaPorRevolucion(perfil, 10, 0.3 , gl);
         plato.setId(Objeto3D.PLATO);
         plato.setTextura(texturas[6]);
         plato.getMatriz().trasladarM(pos.getX(), pos.getY(), pos.getZ());
