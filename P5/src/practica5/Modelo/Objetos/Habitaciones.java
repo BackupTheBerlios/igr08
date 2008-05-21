@@ -23,7 +23,7 @@ public class Habitaciones extends ObjetoCompuesto3D {
     private Jarron estatua;
     private Persiana persiana;
     private Persona persona;
-    private PuntoVector3D p;
+    private PuntoVector3D p, a;
     
     // Constructora
     public Habitaciones(GL gl, PuntoVector3D pos, Texture[] texturas) {
@@ -208,6 +208,12 @@ public class Habitaciones extends ObjetoCompuesto3D {
         persona.setId(Objeto3D.PERSONA);
         this.addHijos(persona);
     
+        // Foco de Luz
+        p = new PuntoVector3D(-150, 250, 0, 0);
+        a = new PuntoVector3D(0, 0 -1, 0);
+        Foco luz = new Foco(p, a, 45, true, gl);
+        this.addHijos(luz);
+        
     }
     
     

@@ -131,8 +131,8 @@ public class GL3D implements GLEventListener {
         PuntoVector3D pos = new PuntoVector3D(0, 0, 0, 1);
         
         hab = new Habitaciones(gl, pos, texturas);
-        hab.setId(Objeto3D.ESCENA);
         hab.setGL(gl);
+        hab.setId(Objeto3D.ESCENA);
         hab.setColor(Color.verdeClaro);
         
         activarLuces(gl);
@@ -194,7 +194,7 @@ public class GL3D implements GLEventListener {
         FloatBuffer PosicionLuz01 = FloatBuffer.wrap(PosicionLuz0);
         gl.glLightfv(gl.GL_LIGHT0, gl.GL_POSITION, PosicionLuz01);
          *
-         */
+        
         float[] material_ambient = {0.05f, 0.05f, 0.05f, 1.0f};
         float[] material_diffuse = { 0.8f, 0.0f, 0.0f, 1.0f};
         float[] material_specular = {0.9f, 0.8f, 0.8f, 1.0f};
@@ -218,7 +218,7 @@ public class GL3D implements GLEventListener {
 //        gl.glLightfv(gl.GL_LIGHT0, gl.GL_SPOT_DIRECTION, luz_direccion, 1 );
 //        gl.glLightfv(gl.GL_LIGHT0, gl.GL_SPOT_CUTOFF, luz_angulo, 1);
 //        //gl.glEnable(gl.GL_DEPTH_TEST);
-        
+        */
     }
     
     // Activamos opciones internas de OpenGL

@@ -36,6 +36,8 @@ public class Foco extends Objeto3D {
         this.alpha = alfa;
         this.on = encendido;
         
+        gl.glEnable(gl.GL_LIGHT1);
+        
         float[] posLuz1 = { (float)pos.getX(), (float)pos.getY(), (float)pos.getZ(), 1 };
         gl.glLightfv(gl.GL_LIGHT1, gl.GL_POSITION, posLuz1, 0);
         gl.glLightf(gl.GL_LIGHT1, gl.GL_SPOT_CUTOFF, alpha);
