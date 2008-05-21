@@ -45,7 +45,7 @@ public class Habitaciones extends ObjetoCompuesto3D {
         tablero.setTextura(texturas[0]);
         tablero.getMatriz().rotaXM(90);
         tablero.getMatriz().trasladar(pos.getX(), pos.getY(), pos.getZ()-350);
-        tablero.setColor(color.amarilloClaro);
+        tablero.setColor(color.azulOscuro);
         this.addHijos(tablero);  
         
         // Habitacion Trasera: Pared Derecha

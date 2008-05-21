@@ -15,9 +15,8 @@ public class Donut extends ObjetoCompuesto3D {
         super.setGL(gl);
         
         // Donut
-        donut = new Toro(20, 20, 10, 5);
+        donut = new Toro(20, 20, 10, 5, gl);
         donut.setId(Objeto3D.DONUT);
-        donut.setGL(gl);
         donut.setTextura(texturas[7]);
         donut.getMatriz().rotaXM(90);
         donut.getMatriz().rotaYM(ori);

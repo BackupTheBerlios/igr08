@@ -1,6 +1,7 @@
 package practica5.Modelo.Objetos;
 
 import java.util.ArrayList;
+import javax.media.opengl.GL;
 import practica5.Modelo.Basic.*;
 
 public class Toro extends Malla {
@@ -22,8 +23,11 @@ public class Toro extends Malla {
      * @param r1: Radio del toro. Radio "grande"
      * @param r2: Radio de la secci�n del toro. Radio "pequeño"
      */
-    public Toro(int nP, int nQ, float r1, float r2) {
+    public Toro(int nP, int nQ, float r1, float r2, GL gl) {
+        
         super();
+        super.setGL(gl);
+        
         this.nP = nP;
         this.nQ = nQ;
         this.r1 = r1;
