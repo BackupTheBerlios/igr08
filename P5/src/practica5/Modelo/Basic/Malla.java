@@ -83,11 +83,12 @@ public class Malla extends Objeto3D {
                 int iN = caras.get(i).getIndiceNormal(j);
                 int iV = caras.get(i).getIndiceVertice(j);
                 
-                if (this.normalesEnabled) {
+                if (this.normalizado) {
                     gl.glNormal3d(normales.get(iN).getX(),
                                   normales.get(iN).getY(),
                                   normales.get(iN).getZ());
                 }
+
                 
                 if ((texturizado) && (textura != null))
                     gl.glTexCoord3d(vertices.get(iV).getX()/350,

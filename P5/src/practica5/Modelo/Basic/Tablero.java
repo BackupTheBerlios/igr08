@@ -26,7 +26,7 @@ public class Tablero extends Malla {
             int divX, int divY, int divZ, GL gl) {
         
         super();
-        this.setGL(gl);
+        super.setGL(gl);
         
         this.X = X;
         this.Y = Y;

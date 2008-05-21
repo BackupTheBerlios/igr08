@@ -13,7 +13,7 @@ public class Objeto3D {
     protected TAfin matriz;
     protected int tipoMalla;
     protected GL gl;
-    protected boolean normalesEnabled;
+    protected boolean normalizado;
     protected boolean modificado;
         
     protected boolean baldosas;
@@ -46,7 +46,7 @@ public class Objeto3D {
     public Objeto3D() {
         color = Color.gris;
         tipoMalla = Malla.GL_POLYGON;
-        normalesEnabled = false;
+        normalizado = false;
         matriz = new TAfin();
         modificado = false;
                 
@@ -93,10 +93,6 @@ public class Objeto3D {
         this.matriz = matriz;
     }
     
-    public void setNormalesEnabled(boolean b){
-        this.normalesEnabled = b;
-    }
-    
     public void setGL(GL gl){
         matriz.setGL(gl);
     }
@@ -121,6 +117,13 @@ public class Objeto3D {
             texturizado = false;
         else
             texturizado = true; 
+    }
+    
+    public void setNormalizado() {
+        if (normalizado)
+            normalizado = false;
+        else
+            normalizado = true; 
     }
     
     public void setTextura(Texture text) {

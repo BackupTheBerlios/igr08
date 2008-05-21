@@ -16,8 +16,8 @@ public class Lampara extends ObjetoCompuesto3D {
         lampara = new Cilindro(5, 5, 20, 20, 30);
         lampara.setId(Objeto3D.LAMPARA);
         lampara.setGL(gl);
-        lampara.getMatriz().rotar(90, 1.0, 0.0, 0.0);
-        lampara.getMatriz().trasladarM(pos.getX(), pos.getY() + 15, pos.getZ());
+        lampara.getMatriz().rotaXM(90);
+        lampara.getMatriz().trasladar(pos.getX(), pos.getY() + 15, pos.getZ());
         lampara.setColor(color.amarilloClaro);
         this.addHijos(lampara);  
         
@@ -25,8 +25,8 @@ public class Lampara extends ObjetoCompuesto3D {
         lampara = new Cilindro(10, 30, 40, 20, 30);
         lampara.setId(Objeto3D.LAMPARA);
         lampara.setGL(gl);
-        lampara.getMatriz().rotar(90, 1.0, 0.0, 0.0);
-        lampara.getMatriz().trasladarM(pos.getX(), pos.getY(), pos.getZ());
+        lampara.getMatriz().rotaXM(90);
+        lampara.getMatriz().trasladar(pos.getX(), pos.getY(), pos.getZ());
         lampara.setColor(color.violetaClaro);
         this.addHijos(lampara);  
     }

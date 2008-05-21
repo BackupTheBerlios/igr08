@@ -25,7 +25,7 @@ public class Perchero extends ObjetoCompuesto3D {
         perfil = new Calculos().calculaPuntosBSplines(perfil, 30);
         
         percha = new MallaPorRevolucion(perfil, 4, 0.2 , gl);
-        percha.getMatriz().trasladarM(pos.getX(), pos.getY(), pos.getZ());
+        percha.getMatriz().trasladar(pos.getX(), pos.getY(), pos.getZ());
         percha.setColor(color.negro);
         percha.setId(8);
         this.addHijos(percha);

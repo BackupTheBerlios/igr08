@@ -317,9 +317,13 @@ public class Principal extends JFrame {
         jcNormales.addActionListener(new ActionListener() {
      
             public void actionPerformed(ActionEvent e) {
-                if (jcNormales.isSelected()){
-                    escena.getObjeto3D().activarNormales(true);
-                } else {escena.getObjeto3D().activarNormales(false);}
+                
+                for (int i=0; i<escena.getObjeto3D().getHijos().size(); i++) {
+                    if (jcNormales.isSelected())
+                        escena.getObjeto3D().getHijos().get(i).setNormalizado();
+                    else 
+                        escena.getObjeto3D().getHijos().get(i).setNormalizado();
+                }
                 canvas.repaint();
             }
         });

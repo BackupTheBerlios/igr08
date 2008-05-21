@@ -180,7 +180,7 @@ public class OyenteTeclado implements KeyListener {
 	    case KeyEvent.VK_UP:
 		if (veces <= 11) {
 		    escena.getObjeto3D().getHijos().get(i).setModificado();
-		    escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(0, 5, 0);
+		    escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar(0, 5, 0);
 		    veces++;
 		} else {
 		    System.out.print("La persiana no puede subir m�s");
@@ -189,7 +189,7 @@ public class OyenteTeclado implements KeyListener {
 	    case KeyEvent.VK_DOWN:
 		if (veces >= 0) {
 		    escena.getObjeto3D().getHijos().get(i).setModificado();
-		    escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(0, -5, 0);
+		    escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar(0, -5, 0);
 		    veces--;
 		} else {
 		    System.out.print("La persiana no puede bajar m�s");
@@ -218,42 +218,42 @@ public class OyenteTeclado implements KeyListener {
 	    case KeyEvent.VK_RIGHT:
 		escena.getObjeto3D().getHijos().get(i).setModificado();
 		camara.desliza(new PuntoVector3D(-10, 0, 0, 1));
-		escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(-10, 0, 0);
+		escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar(-10, 0, 0);
 		escena.desplPersonaX -= 10;
 		break;
 
 	    case KeyEvent.VK_LEFT:
 		escena.getObjeto3D().getHijos().get(i).setModificado();
 		camara.desliza(new PuntoVector3D(10, 0, 0, 1));
-		escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(10, 0, 0);
+		escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar(10, 0, 0);
 		escena.desplPersonaX += 10;
 		break;
 
 	    case KeyEvent.VK_UP:
 		escena.getObjeto3D().getHijos().get(i).setModificado();
 		camara.desliza(new PuntoVector3D(0, 0, -10, 1));
-		escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(0, 0, -10);
+		escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar(0, 0, -10);
 		escena.desplPersonaZ -= 10;
 		break;
 
 	    case KeyEvent.VK_DOWN:
 		escena.getObjeto3D().getHijos().get(i).setModificado();
 		camara.desliza(new PuntoVector3D(0, 0, 10, 1));
-		escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(0, 0, 10);
+		escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar(0, 0, 10);
 		escena.desplPersonaZ += 10;
 		break;
 
 	    case KeyEvent.VK_A:
 		escena.getObjeto3D().getHijos().get(i).setModificado();
 		camara.desliza(new PuntoVector3D(0, -10, 0, 1));
-		escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(0, -10, 0);
+		escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar(0, -10, 0);
 		escena.desplPersonaY -= 10;
 		break;
 
 	    case KeyEvent.VK_Z:
 		escena.getObjeto3D().getHijos().get(i).setModificado();
 		camara.desliza(new PuntoVector3D(0, 10, 0, 1));
-		escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(0, 10, 0);
+		escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar(0, 10, 0);
 		escena.desplPersonaY += 10;
 		break;
 	    // Giros
@@ -289,32 +289,32 @@ public class OyenteTeclado implements KeyListener {
 
 		    case KeyEvent.VK_RIGHT:
 			escena.getObjeto3D().getHijos().get(i).setModificado();
-			escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(10, 0, 0);
+			escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar(10, 0, 0);
 			break;
 
 		    case KeyEvent.VK_LEFT:
 			escena.getObjeto3D().getHijos().get(i).setModificado();
-			escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(-10, 0, 0);
+			escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar(-10, 0, 0);
 			break;
 
 		    case KeyEvent.VK_UP:
 			escena.getObjeto3D().getHijos().get(i).setModificado();
-			escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(0, 0, 10);
+			escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar(0, 0, 10);
 			break;
 
 		    case KeyEvent.VK_DOWN:
 			escena.getObjeto3D().getHijos().get(i).setModificado();
-			escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(0, 0, -10);
+			escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar(0, 0, -10);
 			break;
 
 		    case KeyEvent.VK_A:
 			escena.getObjeto3D().getHijos().get(i).setModificado();
-			escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(0, -10, 0);
+			escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar(0, -10, 0);
 			break;
 
 		    case KeyEvent.VK_Z:
 			escena.getObjeto3D().getHijos().get(i).setModificado();
-			escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar1(0, 10, 0);
+			escena.getObjeto3D().getHijos().get(i).getMatriz().trasladar(0, 10, 0);
 			break;
 
 		    case KeyEvent.VK_Q:

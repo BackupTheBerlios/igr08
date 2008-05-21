@@ -17,28 +17,28 @@ public class Sofa extends ObjetoCompuesto3D {
        tablero= new Tablero(70, 40, 120, 3, 3, 3, gl);
        tablero.setId(Objeto3D.SOFA);
        tablero.setTextura(texturas[4]);
-       tablero.getMatriz().trasladarM(pos.getX(), pos.getY(), pos.getZ() + 10);
+       tablero.getMatriz().trasladar(pos.getX(), pos.getY(), pos.getZ() + 10);
        tablero.setColor(color.azulOscuro);
        this.addHijos(tablero); 
        
        tablero= new Tablero(10, 100, 140, 3, 3, 3, gl);
        tablero.setId(Objeto3D.SOFA);
        tablero.setTextura(texturas[4]);
-       tablero.getMatriz().trasladarM(pos.getX(), pos.getY(), pos.getZ());
+       tablero.getMatriz().trasladar(pos.getX(), pos.getY(), pos.getZ());
        tablero.setColor(color.verdeOscuro);
        this.addHijos(tablero); 
        
        tablero= new Tablero(70, 60, 10, 3, 3, 3, gl);
        tablero.setId(Objeto3D.SOFA);
        tablero.setTextura(texturas[4]);
-       tablero.getMatriz().trasladarM(pos.getX(), pos.getY(), pos.getZ());
+       tablero.getMatriz().trasladar(pos.getX(), pos.getY(), pos.getZ());
        tablero.setColor(color.marron);
        this.addHijos(tablero); 
        
        tablero= new Tablero(70, 60, 10, 3, 3, 3, gl);
        tablero.setId(Objeto3D.SOFA);
        tablero.setTextura(texturas[4]);
-       tablero.getMatriz().trasladarM(pos.getX(), pos.getY(), pos.getZ() + 130);
+       tablero.getMatriz().trasladar(pos.getX(), pos.getY(), pos.getZ() + 130);
        tablero.setColor(color.marron);
        this.addHijos(tablero); 
        

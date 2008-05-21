@@ -17,7 +17,7 @@ public class Persiana extends ObjetoCompuesto3D {
        tablero= new Tablero(2, 100, 180, 3, 3, 3, gl);
        tablero.setId(Objeto3D.PERSIANA);
        tablero.setTextura(texturas[1]);
-       tablero.getMatriz().trasladarM(pos.getX(), pos.getY(), pos.getZ() + 15);
+       tablero.getMatriz().trasladar(pos.getX(), pos.getY(), pos.getZ() + 15);
        tablero.setColor(Color.amarilloClaro);
        this.addHijos(tablero); 
     }

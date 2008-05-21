@@ -64,16 +64,15 @@ public class ObjetoCompuesto3D extends Objeto3D{
             hijos.get(i).setTexturizado();
     }
     
+    public void setNormalizado() {
+        for (int i=0; i<hijos.size(); i++)
+            hijos.get(i).setNormalizado();
+    }
+    
     // Metodos generalizados
     public void setTipoMalla(int i) {
          for (int elem=0; elem<hijos.size(); elem++) 
                 hijos.get(elem).setTipoMalla(i); 
     }
-    
-    public void activarNormales(boolean valor) {
-        for (int elem=0; elem<hijos.size(); elem++) 
-             hijos.get(elem).setNormalesEnabled(valor);
-
-    }
-    
+        
 }

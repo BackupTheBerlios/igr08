@@ -16,7 +16,7 @@ public class TAfin {
         matriz = new double[16]; //formato de matriz equivalente a openGL
     }
     
-    public void trasladar1(double X, double Y, double Z) {
+    public void trasladar(double X, double Y, double Z) {
         
         double[] m = new double[16];
         
@@ -147,12 +147,12 @@ public class TAfin {
         escalaY(s);
         escalaZ(s);
     }
-    
+    /*
     // Transformaciones Afines
     public void rotar(double ang, double ejeX, double ejeY, double ejeZ) {
         gl.glMatrixMode(gl.GL_MODELVIEW);
         gl.glPushMatrix();
-        gl.glLoadIdentity();
+        gl.glLoadIdentity();        
         gl.glRotated(ang, ejeX, ejeY, ejeZ);
         gl.glGetDoublev(gl.GL_MODELVIEW_MATRIX, matriz, 0);
         gl.glPopMatrix();
@@ -175,7 +175,6 @@ public class TAfin {
         gl.glPushMatrix();
         gl.glLoadIdentity();
         gl.glScaled(X, Y, Z);
-        gl.glMultMatrixd(matriz, 0);
         gl.glGetDoublev(gl.GL_MODELVIEW_MATRIX, matriz, 0);
         gl.glPopMatrix();
     }
@@ -209,7 +208,7 @@ public class TAfin {
         gl.glPopMatrix();
     }
     
-    
+    */
     public void setGL(GL gl) {
         this.gl = gl;
         

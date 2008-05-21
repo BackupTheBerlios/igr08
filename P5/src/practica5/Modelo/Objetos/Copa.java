@@ -25,7 +25,7 @@ public class Copa extends ObjetoCompuesto3D {
         perfil = new Calculos().calculaPuntosBSplines(perfil, 30);
         
         copa = new MallaPorRevolucion(perfil, 4, 0.7 , gl);
-        copa.getMatriz().trasladarM(pos.getX(), pos.getY(), pos.getZ());
+        copa.getMatriz().trasladar(pos.getX(), pos.getY(), pos.getZ());
         copa.setId(Objeto3D.COPA);
         copa.setTextura(texturas[6]);
         copa.setColor(color.turquesaClaro);

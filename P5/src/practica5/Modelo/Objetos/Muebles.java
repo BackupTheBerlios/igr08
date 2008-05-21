@@ -12,37 +12,44 @@ public class Muebles extends ObjetoCompuesto3D {
     private Plato plato;
     private Donut donut;
     private Copa copa;
+    private PuntoVector3D p;
     
-    public Muebles(PuntoVector3D pos, double ori, GL gl, Texture[] texturas) {
+    public Muebles(GL gl, Texture[] texturas, PuntoVector3D pos, double ori) {
            
         super.setGL(gl);
         
         // Mesa
-        mesa = new Mesa(new PuntoVector3D(pos.getX(), pos.getY(), pos.getZ()), ori, gl, texturas);
+        mesa = new Mesa(pos, ori, gl, texturas);
         this.addHijos(mesa);
         
         // Silla 1
-        silla = new Silla(new PuntoVector3D(pos.getX() + 5, pos.getY() - 25, pos.getZ() + 85), ori + 90, gl, texturas);
+        p = new PuntoVector3D(pos.getX()+5, pos.getY()-25, pos.getZ()+85);
+        silla = new Silla(p, ori + 90, gl, texturas);
         this.addHijos(silla);
         
         // Silla 2
-        silla = new Silla(new PuntoVector3D(pos.getX() + 160, pos.getY() - 25, pos.getZ() - 135), -ori, gl, texturas);
+        p = new PuntoVector3D(pos.getX()+160, pos.getY()-25, pos.getZ()-135);
+        silla = new Silla(p, -ori, gl, texturas);
         this.addHijos(silla);
         
         // Plato
-        plato = new Plato(new PuntoVector3D(pos.getX() + 75, pos.getY(), pos.getZ() - 25), 0, gl, texturas);
+        p = new PuntoVector3D(pos.getX()+75, pos.getY(), pos.getZ()-25);
+        plato = new Plato(p, 0, gl, texturas);
         this.addHijos(plato);
         
         // Donut
-        donut = new Donut(new PuntoVector3D(pos.getX() + 75, pos.getY() + 13, pos.getZ() - 25), 0, gl, texturas);
+        p = new PuntoVector3D(pos.getX()+75, pos.getY()+13, pos.getZ()-25);
+        donut = new Donut(p, 0, gl, texturas);
         this.addHijos(donut);
         
         // Copa 1
-        copa = new Copa(new PuntoVector3D(pos.getX() + 45, pos.getY(), pos.getZ()+ 15), 0, gl, texturas);
+        p = new PuntoVector3D(pos.getX()+45, pos.getY(), pos.getZ()+15);
+        copa = new Copa(p, 0, gl, texturas);
         this.addHijos(copa);        
 
         // Copa 2
-        copa = new Copa(new PuntoVector3D(pos.getX() + 115, pos.getY(), pos.getZ() - 65), 0, gl, texturas);
+        p = new PuntoVector3D(pos.getX()+115, pos.getY(), pos.getZ()-65);
+        copa = new Copa(p, 0, gl, texturas);
         this.addHijos(copa);    
         
     }

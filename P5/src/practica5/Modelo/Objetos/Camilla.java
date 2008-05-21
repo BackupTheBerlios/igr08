@@ -26,7 +26,7 @@ public class Camilla extends ObjetoCompuesto3D {
         perfil = new Calculos().calculaPuntosBSplines(perfil, 50);
         
         mesitaCamilla = new MallaPorRevolucion(perfil, 4, 0.2 , gl);
-        mesitaCamilla.getMatriz().trasladarM(pos.getX(), pos.getY(), pos.getZ());
+        mesitaCamilla.getMatriz().trasladar(pos.getX(), pos.getY(), pos.getZ());
         mesitaCamilla.setColor(color.rosa);
         mesitaCamilla.setTextura(texturas[5]);
         mesitaCamilla.setId(Objeto3D.CAMILLA);
