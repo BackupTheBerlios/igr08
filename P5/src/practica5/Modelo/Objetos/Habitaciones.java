@@ -42,7 +42,7 @@ public class Habitaciones extends ObjetoCompuesto3D {
         // Habitacion Trasera: Suelo
         tablero = new Tablero(350, 350, 10, 3, 3, 3, gl);
         tablero.setId(Objeto3D.SUELO);
-        tablero.setTextura(texturas[0]);
+        tablero.setTextura(texturas[11]);
         tablero.getMatriz().rotaXM(90);
         tablero.getMatriz().trasladar(pos.getX(), pos.getY(), pos.getZ()-350);
         tablero.setColor(color.azulOscuro);
