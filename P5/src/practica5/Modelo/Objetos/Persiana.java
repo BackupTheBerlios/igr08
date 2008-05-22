@@ -10,11 +10,11 @@ public class Persiana extends ObjetoCompuesto3D {
     Tablero tablero;
     
     // Cosntructora
-    public Persiana(PuntoVector3D pos, double ori, GL gl, Texture[] texturas)  {
+    public Persiana(PuntoVector3D pos, double ori, Texture[] texturas)  {
         
-       super.setGL(gl);
+//       super.setGL(gl);
        
-       tablero= new Tablero(2, 100, 180, 3, 3, 3, gl);
+       tablero= new Tablero(2, 100, 180, 3, 3, 3);
        tablero.setId(Objeto3D.PERSIANA);
        tablero.setTextura(texturas[1]);
        tablero.getMatriz().trasladar(pos.getX(), pos.getY(), pos.getZ() + 15);

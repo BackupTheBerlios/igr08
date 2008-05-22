@@ -12,9 +12,9 @@ public class Jarron extends ObjetoCompuesto3D {
     private Malla piedra;
     
     // Constructora
-    public Jarron(PuntoVector3D pos, double ori, GL gl, Texture[] texturas) {
+    public Jarron(PuntoVector3D pos, double ori, Texture[] texturas) {
         
-        super.setGL(gl);
+//        super.setGL(gl);
         
         // Perchero
         ArrayList<PuntoVector3D> perfil = new ArrayList<PuntoVector3D>();
@@ -25,7 +25,7 @@ public class Jarron extends ObjetoCompuesto3D {
 
         perfil = new Calculos().calculaPuntosBSplines(perfil, 30);
         
-        piedra = new MallaPorRevolucion(perfil, 4, 0.1 , gl);
+        piedra = new MallaPorRevolucion(perfil, 4, 0.1);
         piedra.getMatriz().trasladar(pos.getX(), pos.getY(), pos.getZ());
         piedra.setColor(color.gris);
         piedra.setTextura(texturas[10]);

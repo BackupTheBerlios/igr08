@@ -10,32 +10,32 @@ public class Sofa extends ObjetoCompuesto3D {
     Tablero tablero;
     
     // Constructora
-    public Sofa(PuntoVector3D pos, double ori, GL gl, Texture[] texturas) {
+    public Sofa(PuntoVector3D pos, double ori, Texture[] texturas) {
         
-       super.setGL(gl);
+//       super.setGL(gl);
        
-       tablero= new Tablero(70, 40, 120, 3, 3, 3, gl);
+       tablero= new Tablero(70, 40, 120, 3, 3, 3);
        tablero.setId(Objeto3D.SOFA);
        tablero.setTextura(texturas[4]);
        tablero.getMatriz().trasladar(pos.getX(), pos.getY(), pos.getZ() + 10);
        tablero.setColor(color.azulOscuro);
        this.addHijos(tablero); 
        
-       tablero= new Tablero(10, 100, 140, 3, 3, 3, gl);
+       tablero= new Tablero(10, 100, 140, 3, 3, 3);
        tablero.setId(Objeto3D.SOFA);
        tablero.setTextura(texturas[4]);
        tablero.getMatriz().trasladar(pos.getX(), pos.getY(), pos.getZ());
        tablero.setColor(color.verdeOscuro);
        this.addHijos(tablero); 
        
-       tablero= new Tablero(70, 50, 10, 3, 3, 3, gl);
+       tablero= new Tablero(70, 50, 10, 3, 3, 3);
        tablero.setId(Objeto3D.SOFA);
        tablero.setTextura(texturas[4]);
        tablero.getMatriz().trasladar(pos.getX(), pos.getY(), pos.getZ());
        tablero.setColor(color.marron);
        this.addHijos(tablero); 
        
-       tablero= new Tablero(70, 50, 10, 3, 3, 3, gl);
+       tablero= new Tablero(70, 50, 10, 3, 3, 3);
        tablero.setId(Objeto3D.SOFA);
        tablero.setTextura(texturas[4]);
        tablero.getMatriz().trasladar(pos.getX(), pos.getY(), pos.getZ() + 130);

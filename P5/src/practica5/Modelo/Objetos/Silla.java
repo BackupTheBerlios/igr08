@@ -11,27 +11,27 @@ public class Silla extends ObjetoCompuesto3D{
     private Tablero tabla;
     private Malla pata;
     
-    public Silla(PuntoVector3D pos, double ori, GL gl, Texture[] texturas) {
+    public Silla(PuntoVector3D pos, double ori, Texture[] texturas) {
         
-        super.setGL(gl);
+//        super.setGL(gl);
         int valorX, valorZ;
         int valorY = -25;
         
         // Asiento
-        tabla = new Tablero(35, 35, 5, 3, 3, 3, gl);
+        tabla = new Tablero(35, 35, 5, 3, 3, 3);
         tabla.setId(Objeto3D.SILLA);
         tabla.setTextura(texturas[1]);
-        tabla.getMatriz().rotaXM(90);
-        tabla.getMatriz().rotaYM(ori);
+        tabla.getMatriz().rotaX(90);
+        tabla.getMatriz().rotaY(ori);
         tabla.getMatriz().trasladar(pos.getX(), pos.getY(), pos.getZ());
         tabla.setColor(color.violetaOscuro);
         this.addHijos(tabla);  
         
         // Respaldo 
-        tabla = new Tablero(35, 35, 5, 3, 3, 3, gl);
+        tabla = new Tablero(35, 35, 5, 3, 3, 3);
         tabla.setId(Objeto3D.SILLA);
         tabla.setTextura(texturas[1]);
-        tabla.getMatriz().rotaYM(ori);
+        tabla.getMatriz().rotaY(ori);
         tabla.getMatriz().trasladar(pos.getX(), pos.getY(), pos.getZ());
         tabla.setColor(color.violetaOscuro);
         this.addHijos(tabla);  
@@ -54,8 +54,8 @@ public class Silla extends ObjetoCompuesto3D{
             valorZ = 20;
         }
         
-        pata = new MallaPorRevolucion(perfil, 4, 1.57, gl);
-        pata.getMatriz().rotaYM(ori);
+        pata = new MallaPorRevolucion(perfil, 4, 1.57);
+        pata.getMatriz().rotaY(ori);
         pata.setTextura(texturas[1]);
         pata.getMatriz().trasladar(pos.getX() + valorX, pos.getY() + valorY, pos.getZ() + valorZ);
         pata.setId(Objeto3D.SILLA);
@@ -71,8 +71,8 @@ public class Silla extends ObjetoCompuesto3D{
             valorZ = 5;
         }        
         
-        pata = new MallaPorRevolucion(perfil, 4, 1.57, gl);
-        pata.getMatriz().rotaYM(ori);
+        pata = new MallaPorRevolucion(perfil, 4, 1.57);
+        pata.getMatriz().rotaY(ori);
         pata.getMatriz().trasladar(pos.getX() + valorX, pos.getY() + valorY, pos.getZ() + valorZ);
         pata.setId(Objeto3D.SILLA);
         pata.setTextura(texturas[1]);
@@ -88,8 +88,8 @@ public class Silla extends ObjetoCompuesto3D{
             valorZ = 40;
         }     
         
-        pata = new MallaPorRevolucion(perfil, 4, 1.57, gl);
-        pata.getMatriz().rotaYM(ori);
+        pata = new MallaPorRevolucion(perfil, 4, 1.57);
+        pata.getMatriz().rotaY(ori);
         pata.getMatriz().trasladar(pos.getX() + valorX, pos.getY() + valorY, pos.getZ() + valorZ);
         pata.setId(Objeto3D.SILLA);
         pata.setTextura(texturas[1]);
@@ -105,8 +105,8 @@ public class Silla extends ObjetoCompuesto3D{
             valorZ = 17;
         }     
         
-        pata = new MallaPorRevolucion(perfil, 4, 1.57, gl);
-        pata.getMatriz().rotaYM(ori);
+        pata = new MallaPorRevolucion(perfil, 4, 1.57);
+        pata.getMatriz().rotaY(ori);
         pata.getMatriz().trasladar(pos.getX() + valorX, pos.getY() + valorY, pos.getZ() + valorZ);
         pata.setId(Objeto3D.SILLA);
         pata.setTextura(texturas[1]);

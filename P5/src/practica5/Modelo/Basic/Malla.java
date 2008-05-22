@@ -11,7 +11,9 @@ public class Malla extends Objeto3D {
    public static final String[] nombreTexturas = { "suelo.jpg", "madera.jpg", "tela.jpg", "carton.jpg",  
                                                     "funda.jpg", "pared2.jpg", "plastico.jpg", "rosado.jpg",
                                                     "tela.jpg", "piedra.jpg", "papel.jpg", "chess.jpg" };
-    
+//       public static final String[] nombreTexturas = { "suelo.jpg", "madera.jpg", "tela.jpg", "tela.jpg",  
+//                                                        "funda.jpg", "pared2.jpg", "tela.jpg", "tela.jpg",
+//	                                                "tela.jpg", "tela.jpg", "tela.jpg", "chess.jpg" };
     // Constantes
     public static final int GL_POINTS = 0;
     public static final int GL_LINES = 1;

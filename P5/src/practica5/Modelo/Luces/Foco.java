@@ -16,9 +16,9 @@ public class Foco extends Objeto3D {
     private boolean on;
     
     // Constructora por defecto
-    public Foco(GL gl) {
+    public Foco() {
         
-        super.setGL(gl);
+      //  super.setGL(gl);
         
         this.pos = new PuntoVector3D();
         this.angulo = new PuntoVector3D();
@@ -29,7 +29,7 @@ public class Foco extends Objeto3D {
     // Constructora con paremetros
     public Foco(PuntoVector3D p, PuntoVector3D ang, float alfa, boolean encendido, GL gl) {
         
-        super.setGL(gl);
+//        super.setGL(gl);
         
         this.pos = p;
         this.angulo = ang;

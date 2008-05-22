@@ -68,16 +68,20 @@ public class GL3D implements GLEventListener {
         
         switch (vista) {
             case VISTA_FRONTAL:
+		hab.getMatriz().setIdentity();
                 camaraActual.reset(new PuntoVector3D(400, 0, 0), new PuntoVector3D(0, 0, 0));
                 break;
             case VISTA_LATERAL:
-                camaraActual.reset(new PuntoVector3D(0, 0, 400), new PuntoVector3D(0, 0, 0));
+                hab.getMatriz().setIdentity();
+		camaraActual.reset(new PuntoVector3D(0, 0, 400), new PuntoVector3D(0, 0, 0));
                 break;
             case VISTA_CENITAL:
-                camaraActual.reset(new PuntoVector3D(0, 800, 0.001), new PuntoVector3D(0, 0, 0));
+                hab.getMatriz().setIdentity();
+		camaraActual.reset(new PuntoVector3D(0, 800, 0.001), new PuntoVector3D(0, 0, 0));
                 break;
             case VISTA_POR_DEFECTO:
-                camaraActual.reset(new PuntoVector3D(500, 500, -250), new PuntoVector3D(0, 0, 0));
+                hab.getMatriz().setIdentity();
+		camaraActual.reset(new PuntoVector3D(500, 500, -250), new PuntoVector3D(0, 0, 0));
                 break;
         }
         vista = 0;
@@ -117,7 +121,7 @@ public class GL3D implements GLEventListener {
         
         // this.camaraActual = new Camara(gl, glu);
         this.camaraActual = new Camara(new PuntoVector3D(500, 500, -250), new PuntoVector3D(0, 0, 0), new PuntoVector3D(0, 1, 0), gl);
-        this.camaraSecundaria = new Camara(new PuntoVector3D(100, 100, 100), new PuntoVector3D(0, 0, 0), new PuntoVector3D(0, 1, 0), gl);
+        this.camaraSecundaria = new Camara(new PuntoVector3D(300, 300, 300), new PuntoVector3D(0, 0, 0), new PuntoVector3D(0, 1, 0), gl);
         this.camaraActual.setOrtogonal();
         
         this.activarLuces(gl);
@@ -131,7 +135,7 @@ public class GL3D implements GLEventListener {
         PuntoVector3D pos = new PuntoVector3D(0, 0, 0, 1);
         
         hab = new Habitaciones(gl, pos, texturas);
-        hab.setGL(gl);
+//        hab.setGL(gl);
         hab.setId(Objeto3D.ESCENA);
         hab.setColor(Color.verdeClaro);
         

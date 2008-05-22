@@ -33,9 +33,9 @@ public class ObjetoCompuesto3D extends Objeto3D{
         return super.getGL();
     }
     
-    public void setGL(GL gl) {
-        super.setGL(gl);
-    }
+//    public void setGL(GL gl) {
+//        super.setGL(gl);
+//    }
     
     // Metodo dibujar
     public void dibuja(GL gl) {

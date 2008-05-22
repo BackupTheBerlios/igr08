@@ -21,12 +21,12 @@ public class Tablero extends Malla {
     }
     
     
-    // Constructora con parï¿½metros
+    // Constructora con parametros
     public Tablero(double X, double Y, double Z,
-            int divX, int divY, int divZ, GL gl) {
+            int divX, int divY, int divZ) {
         
         super();
-        super.setGL(gl);
+//        super.setGL(gl);
         
         this.X = X;
         this.Y = Y;
@@ -43,7 +43,7 @@ public class Tablero extends Malla {
         dimensionarTablero();
     }
     
-    // Mï¿½todo que calcula las normales entre cada par de ejes
+    // Metodo que calcula las normales entre cada par de ejes
     public void calcularCarasYnormalesYZ(int divY, int divZ, int numPlanos) {
         
         // ï¿½ndices de vï¿½rtices
@@ -159,7 +159,7 @@ public class Tablero extends Malla {
             for (int j=0; j<divY; j++)
                 for (int k=0; k<divZ; k++) {
       
-                    // Calculamos los vértices
+                    // Calculamos los vertices
                     vertices.add(new PuntoVector3D(i * ancho, j * alto, (k+1) * grosor));
                     vertices.add(new PuntoVector3D((i+1) * ancho,j * alto, (k+1) * grosor));
                     vertices.add(new PuntoVector3D(i * ancho, (j+1) * alto, (k+1) * grosor));

@@ -23,10 +23,10 @@ public class Toro extends Malla {
      * @param r1: Radio del toro. Radio "grande"
      * @param r2: Radio de la secci�n del toro. Radio "pequeño"
      */
-    public Toro(int nP, int nQ, float r1, float r2, GL gl) {
+    public Toro(int nP, int nQ, float r1, float r2) {
         
         super();
-        super.setGL(gl);
+//        super.setGL(gl);
         
         this.nP = nP;
         this.nQ = nQ;

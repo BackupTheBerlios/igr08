@@ -10,16 +10,16 @@ public class Donut extends ObjetoCompuesto3D {
     private Toro donut;
     
     
-    public Donut(PuntoVector3D pos, double ori, GL gl, Texture[] texturas) {
+    public Donut(PuntoVector3D pos, double ori, Texture[] texturas) {
         
-        super.setGL(gl);
+//        super.setGL(gl);
         
         // Donut
-        donut = new Toro(20, 20, 10, 5, gl);
+        donut = new Toro(20, 20, 10, 5);
         donut.setId(Objeto3D.DONUT);
         donut.setTextura(texturas[7]);
-        donut.getMatriz().rotaXM(90);
-        donut.getMatriz().rotaYM(ori);
+        donut.getMatriz().rotaX(90);
+        donut.getMatriz().rotaY(ori);
         donut.getMatriz().trasladar(pos.getX(), pos.getY(), pos.getZ());
         donut.setColor(color.verdeOscuro);
         this.addHijos(donut);  

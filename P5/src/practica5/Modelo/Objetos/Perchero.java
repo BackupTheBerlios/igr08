@@ -11,9 +11,9 @@ public class Perchero extends ObjetoCompuesto3D {
     private Malla percha;
     
     // Constructora
-    public Perchero(PuntoVector3D pos, double ori, GL gl) {
+    public Perchero(PuntoVector3D pos, double ori) {
         
-        super.setGL(gl);
+//        super.setGL(gl);
         
         // Perchero
         ArrayList<PuntoVector3D> perfil = new ArrayList<PuntoVector3D>();
@@ -24,7 +24,7 @@ public class Perchero extends ObjetoCompuesto3D {
 
         perfil = new Calculos().calculaPuntosBSplines(perfil, 30);
         
-        percha = new MallaPorRevolucion(perfil, 4, 0.2 , gl);
+        percha = new MallaPorRevolucion(perfil, 4, 0.2);
         percha.getMatriz().trasladar(pos.getX(), pos.getY(), pos.getZ());
         percha.setColor(color.negro);
         percha.setId(8);

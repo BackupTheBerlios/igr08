@@ -9,10 +9,10 @@ public class Cuadro extends ObjetoCompuesto3D {
     // Atributos privados
     private Tablero tablero;
     
-    public Cuadro(GL gl, Texture[] texturas, PuntoVector3D pos) {
+    public Cuadro(Texture[] texturas, PuntoVector3D pos) {
         
         // Cuadro
-        tablero = new Tablero(120, 80, 5, 3, 3, 3, gl);
+        tablero = new Tablero(120, 80, 5, 3, 3, 3);
         tablero.setId(Objeto3D.CUADRO);
         tablero.setTextura(texturas[6]);
         tablero.getMatriz().trasladar(pos.getX()+120, pos.getY()+100, pos.getZ()-340);

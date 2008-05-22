@@ -12,9 +12,9 @@ public class Camilla extends ObjetoCompuesto3D {
     private Malla mesitaCamilla;
     
     // Coinstructora
-    public Camilla(PuntoVector3D pos, double ori, GL gl, Texture[] texturas) {
+    public Camilla(PuntoVector3D pos, double ori, Texture[] texturas) {
         
-        super.setGL(gl);
+//        super.setGL(gl);
         
         // Perchero
         ArrayList<PuntoVector3D> perfil = new ArrayList<PuntoVector3D>();
@@ -25,7 +25,7 @@ public class Camilla extends ObjetoCompuesto3D {
         
         perfil = new Calculos().calculaPuntosBSplines(perfil, 50);
         
-        mesitaCamilla = new MallaPorRevolucion(perfil, 4, 0.2 , gl);
+        mesitaCamilla = new MallaPorRevolucion(perfil, 4, 0.2);
         mesitaCamilla.getMatriz().trasladar(pos.getX(), pos.getY(), pos.getZ());
         mesitaCamilla.setColor(color.rosa);
         mesitaCamilla.setTextura(texturas[5]);

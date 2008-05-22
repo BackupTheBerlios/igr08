@@ -93,9 +93,9 @@ public class Objeto3D {
         this.matriz = matriz;
     }
     
-    public void setGL(GL gl){
-        matriz.setGL(gl);
-    }
+//    public void setGL(GL gl){
+//        matriz.setGL(gl);
+//    }
     
     public GL getGL() {
         return this.gl;

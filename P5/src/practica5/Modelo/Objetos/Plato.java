@@ -12,7 +12,7 @@ public class Plato extends ObjetoCompuesto3D {
     private Malla plato;
     
     
-    public Plato(PuntoVector3D pos, double ori, GL gl, Texture[] texturas) {
+    public Plato(PuntoVector3D pos, double ori, Texture[] texturas) {
         
         ArrayList<PuntoVector3D> perfil = new ArrayList<PuntoVector3D>();
         perfil.add(new PuntoVector3D(25, 15, 0));
@@ -23,7 +23,7 @@ public class Plato extends ObjetoCompuesto3D {
         
         
         // Plato
-        plato = new MallaPorRevolucion(perfil, 10, 0.3 , gl);
+        plato = new MallaPorRevolucion(perfil, 10, 0.3);
         plato.setId(Objeto3D.PLATO);
         plato.setTextura(texturas[6]);
         plato.getMatriz().trasladar(pos.getX(), pos.getY(), pos.getZ());

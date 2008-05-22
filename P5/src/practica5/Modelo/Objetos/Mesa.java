@@ -13,15 +13,15 @@ public class Mesa extends ObjetoCompuesto3D {
     private Malla pataMesa;
     
     // Constructora
-    public Mesa(PuntoVector3D pos, double ori, GL gl, Texture[] texturas) {
+    public Mesa(PuntoVector3D pos, double ori, Texture[] texturas) {
         
         
         // Tabla de la mesa
-        tabla = new Tablero(150, 80, 5, 3, 3, 3, gl);
+        tabla = new Tablero(150, 80, 5, 3, 3, 3);
         tabla.setId(Objeto3D.MESA);
         tabla.setTextura(texturas[1]);
-        tabla.getMatriz().rotaXM(90);
-        tabla.getMatriz().rotaYM(ori);
+        tabla.getMatriz().rotaX(90);
+        tabla.getMatriz().rotaY(ori);
         tabla.getMatriz().trasladar(pos.getX(), pos.getY(), pos.getZ());
         tabla.setColor(color.violetaOscuro);
         addHijos(tabla);  
@@ -38,7 +38,7 @@ public class Mesa extends ObjetoCompuesto3D {
 
         perfil = new Calculos().calculaPuntosBSplines(perfil, 20);
         
-        pataMesa = new MallaPorRevolucion(perfil, 4, 0.3, gl);
+        pataMesa = new MallaPorRevolucion(perfil, 4, 0.3);
         pataMesa.getMatriz().trasladar(pos.getX() + 75, pos.getY() - 50, pos.getZ() - 20);
         pataMesa.setColor(color.violetaOscuro);
         pataMesa.setId(Objeto3D.MESA);

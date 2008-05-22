@@ -48,7 +48,7 @@ public class Cilindro extends ObjetoCuadrico {
         this.setColor(c);
     }
     
-    // M�todo Dibuja
+    // Metodo Dibuja
     public void dibuja(GL gl) {
         
         // Seleccionamos color de dibujo

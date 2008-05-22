@@ -12,7 +12,7 @@ public class Copa extends ObjetoCompuesto3D {
     private Malla copa;
     
     // Constructora
-    public Copa(PuntoVector3D pos, double ori, GL gl, Texture[] texturas) {
+    public Copa(PuntoVector3D pos, double ori, Texture[] texturas) {
         
         // Percha
         ArrayList<PuntoVector3D> perfil = new ArrayList<PuntoVector3D>();
@@ -24,7 +24,7 @@ public class Copa extends ObjetoCompuesto3D {
 
         perfil = new Calculos().calculaPuntosBSplines(perfil, 30);
         
-        copa = new MallaPorRevolucion(perfil, 4, 0.7 , gl);
+        copa = new MallaPorRevolucion(perfil, 4, 0.7);
         copa.getMatriz().trasladar(pos.getX(), pos.getY(), pos.getZ());
         copa.setId(Objeto3D.COPA);
         copa.setTextura(texturas[6]);

@@ -1,19 +1,14 @@
 package practica5.Modelo.Basic;
 
-import javax.media.opengl.GL;
-
 import practica5.util.Conversiones;
 import practica5.util.Matrix;
 public class TAfin {
-    
-    // Atributos privados
-    private GL gl;
     public double[] matriz;
-    private static double EJE_SEL = 1.0;
     
     // Constructora
     public TAfin() {
         matriz = new double[16]; //formato de matriz equivalente a openGL
+	setIdentity();
     }
     
     public void trasladar(double X, double Y, double Z) {
@@ -32,7 +27,7 @@ public class TAfin {
         matriz = Matrix.multiplica(matriz,m);   
     }
    
-    public void rotaXM(double ang){
+    public void rotaX(double ang){
         double[] m = new double[16];
         double c = Math.cos(Conversiones.g2r(ang));
         double s = Math.sin(Conversiones.g2r(ang));
@@ -50,8 +45,7 @@ public class TAfin {
         matriz = Matrix.multiplica(matriz,m);
     }
     
-    public void rotaYM(double ang){
-        
+    public void rotaY(double ang){
         double[] m = new double[16];
         double c = Math.cos(Conversiones.g2r(ang));
         double s = Math.sin(Conversiones.g2r(ang));
@@ -69,8 +63,7 @@ public class TAfin {
         matriz = Matrix.multiplica(matriz,m);
     }
 
-    public void rotaZM(double ang){
-        
+    public void rotaZ(double ang){
         double[] m = new double[16];
         double c = Math.cos(Conversiones.g2r(ang));
         double s = Math.sin(Conversiones.g2r(ang));
@@ -88,8 +81,7 @@ public class TAfin {
         matriz = Matrix.multiplica(matriz,m);
     }
     
-    public void escala1X(double s) {
-        
+    public void escalaX(double s) {
         double[] m = new double[16];
         
         m[0]=1;
@@ -102,8 +94,7 @@ public class TAfin {
         matriz = Matrix.multiplica(matriz,m);
     }
     
-    public void escala1Y(double s) {
-        
+    public void escalaY(double s) {
         double[] m = new double[16];
         
         m[0]=1;
@@ -116,8 +107,7 @@ public class TAfin {
         matriz = Matrix.multiplica(matriz,m);
     }
     
-    public void escala1Z(double s) {
-        
+    public void escalaZ(double s) {
         double[] m = new double[16];
        
         m[0]=1;
@@ -130,94 +120,32 @@ public class TAfin {
         matriz = Matrix.multiplica(matriz,m);
     }
     
-    public void escalaX(double s) {
-        this.setMatrizComponent(0, s);
-    }
-    
-    public void escalaY(double s) {
-        this.setMatrizComponent(5, s);
-    }
-    
-    public void escalaZ(double s) {
-        this.setMatrizComponent(10, s);
-    }
-    
     public void escalaXYZ(double s) {
         escalaX(s);
         escalaY(s);
         escalaZ(s);
     }
-    /*
-    // Transformaciones Afines
-    public void rotar(double ang, double ejeX, double ejeY, double ejeZ) {
-        gl.glMatrixMode(gl.GL_MODELVIEW);
-        gl.glPushMatrix();
-        gl.glLoadIdentity();        
-        gl.glRotated(ang, ejeX, ejeY, ejeZ);
-        gl.glGetDoublev(gl.GL_MODELVIEW_MATRIX, matriz, 0);
-        gl.glPopMatrix();
-    }
     
-    public void trasladar(double X, double Y, double Z) {
-        gl.glMatrixMode(GL.GL_MODELVIEW);
-        gl.glPushMatrix();
-        gl.glLoadIdentity();
-        gl.glTranslated(X, Y, Z);
-        gl.glGetDoublev(gl.GL_MODELVIEW_MATRIX, matriz, 0);
-        gl.glPopMatrix();
-        for (int i = 0; i < matriz.length; i++) {
-            System.out.println(matriz[i]);
-        }
-    }
-    
-    public void escalar(double X, double Y, double Z) {
-        gl.glMatrixMode(GL.GL_MODELVIEW);
-        gl.glPushMatrix();
-        gl.glLoadIdentity();
-        gl.glScaled(X, Y, Z);
-        gl.glGetDoublev(gl.GL_MODELVIEW_MATRIX, matriz, 0);
-        gl.glPopMatrix();
-    }
-    
-    public void rotarM(double ang, double ejeX, double ejeY, double ejeZ) {
-        gl.glMatrixMode(GL.GL_MODELVIEW);
-        gl.glPushMatrix();
-        gl.glLoadIdentity();
-        gl.glRotated(ang, ejeX, ejeY, ejeZ);
-        gl.glMultMatrixd(matriz, 0);
-        gl.glGetDoublev(gl.GL_MODELVIEW_MATRIX, matriz, 0);
-        gl.glPopMatrix();
-    }
-    
-    public void trasladarM(double X, double Y, double Z) {
-        gl.glMatrixMode(GL.GL_MODELVIEW);
-        gl.glPushMatrix();
-        gl.glLoadIdentity();
-        gl.glTranslated(X, Y, Z);
-        gl.glMultMatrixd(matriz, 0);
-        gl.glGetDoublev(gl.GL_MODELVIEW_MATRIX, matriz, 0);
-        gl.glPopMatrix();
-    }
-    
-    public void escalarM(double X, double Y, double Z) {
-        gl.glMatrixMode(GL.GL_MODELVIEW);
-        gl.glPushMatrix();
-        gl.glLoadIdentity();
-        gl.glScaled(X, Y, Z);
-        gl.glGetDoublev(gl.GL_MODELVIEW_MATRIX, matriz, 0);
-        gl.glPopMatrix();
-    }
-    
-    */
-    public void setGL(GL gl) {
-        this.gl = gl;
-        
-        gl.glMatrixMode(GL.GL_MODELVIEW);
-        gl.glPushMatrix();
-        gl.glLoadIdentity();
-        gl.glGetDoublev(gl.GL_MODELVIEW_MATRIX, matriz, 0);
-        gl.glPopMatrix();
-    }
+//    private void escala_X(double s) {
+//        this.setMatrizComponent(0, s);
+//    }
+//    
+//    private void escala_Y(double s) {
+//        this.setMatrizComponent(5, s);
+//    }
+//    
+//    private void escala_Z(double s) {
+//        this.setMatrizComponent(10, s);
+//    }
+//    public void setGL(GL gl) {
+//        this.gl = gl;
+//        
+//        gl.glMatrixMode(GL.GL_MODELVIEW);
+//        gl.glPushMatrix();
+//        gl.glLoadIdentity();
+//        gl.glGetDoublev(gl.GL_MODELVIEW_MATRIX, matriz, 0);
+//        gl.glPopMatrix();
+//    }
     
     // Getters & Setters
     public double[] getMatriz() {
@@ -259,7 +187,6 @@ public class TAfin {
      */
     public double[] getPerspectiveMatrix(double fovy,double aspect, double zNear, double zFar){
         // http://pyopengl.sourceforge.net/documentation/manual/gluPerspective.3G.html
-        
         double f = Math.atan(fovy/2);
         
         setZeroMatrix();
@@ -273,15 +200,12 @@ public class TAfin {
         return matriz;
     }
     
-    /*
+    /**
      * @param left, right Specify the coordinates for the left and right vertical clipping planes.
      * @param bottom, top Specify the coordinates for the bottom and top horizontal clipping planes.
      * @param near, far Specify the distances to the nearer and farther depth clipping planes. These distances are negative if the plane is to be behind the viewer. 
-     */
-    
-    
-    
-     
+     * @return 
+     */    
     public double[] getOrthogonalMatrix(double left, double right, double bottom, double top, double near, double far){
      
         double tx = (right + left)/(right - left);
@@ -301,7 +225,7 @@ public class TAfin {
     
     }
     
-    public String imprime() {
+    public String toString() {
         String cad = "";
         for (int i = 0; i < matriz.length; i++) {
             cad += matriz[i]+"**";
