@@ -18,7 +18,8 @@ public class Camilla extends ObjetoCompuesto3D {
         
         // Perchero
         ArrayList<PuntoVector3D> perfil = new ArrayList<PuntoVector3D>();
-        perfil.add(new PuntoVector3D(100, 100, 0));
+        perfil.add(new PuntoVector3D(-100, 101, 0));
+	perfil.add(new PuntoVector3D(100, 100, 0));
         perfil.add(new PuntoVector3D(5, 90, 0));
         perfil.add(new PuntoVector3D(3, 30, 0));
         perfil.add(new PuntoVector3D(3, 0, 0));
