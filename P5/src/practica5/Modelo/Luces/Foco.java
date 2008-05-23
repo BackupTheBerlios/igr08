@@ -1,6 +1,8 @@
 package practica5.Modelo.Luces;
 
 import javax.media.opengl.GL;
+import javax.media.opengl.GLPbuffer;
+import javax.media.opengl.glu.GLU;
 import practica5.Modelo.Basic.Objeto3D;
 import practica5.Modelo.Basic.PuntoVector3D;
 
@@ -121,6 +123,23 @@ public class Foco extends Objeto3D {
     
     public void enciende() {
         on = true;
+    }
+    
+    public void rotarFocoPrueba(){
+    GLU glu = new GLU();
+	gl.glPushMatrix();
+	glu.gluLookAt(10, 10, 10, 0, 0, 0, 1, 1, 1); // sin especificar parametros en los apuntes
+	gl.glPushMatrix();
+	gl.glRotated(30, 1, 0, 0);
+	
+	gl.glLightf(gl.GL_LIGHT0, gl.GL_SPOT_CUTOFF, 45.0f); // no en los apuntes
+	 float spot_direction[] = { -1.0f, -1.0f, 0.0f }; // no en los apuntes
+	gl.glLightfv(gl.GL_LIGHT0, gl.GL_SPOT_DIRECTION, spot_direction,0);// sin especificar parametros en los apuntes
+
+	
+	gl.glPopMatrix();
+	dibuja(gl);
+	gl.glPopMatrix();
     }
     
 }

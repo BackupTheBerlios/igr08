@@ -103,8 +103,16 @@ public class GL3D implements GLEventListener {
         perspectiva = -1;
         
         camaraActual.setModelViewMatrix();
-        
+	
+	
         hab.dibuja(gl);
+//	gl.glLoadIdentity();
+//	gl.glTranslated(10, 10, 10);
+//	gl.glEnable(gl.GL_LIGHT3);
+//	gl.glLightf(gl.GL_LIGHT3, gl.GL_SPOT_CUTOFF, 45.0f); // no en los apuntes
+//	 float spot_direction[] = { 1.0f, 1.0f, 0.0f }; // no en los apuntes
+//	gl.glLightfv(gl.GL_LIGHT3, gl.GL_SPOT_DIRECTION, spot_direction,0);// sin especificar parametros en los apuntes
+
         
         gl.glFlush();
     }
