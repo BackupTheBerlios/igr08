@@ -14,6 +14,7 @@ import javax.media.opengl.GLEventListener;
 import practica5.Modelo.Basic.Color;
 
 import practica5.Modelo.Basic.*;
+import practica5.Modelo.Luces.*;
 import practica5.Modelo.Objetos.Habitaciones;
 
 public class GL3D implements GLEventListener {
@@ -27,6 +28,7 @@ public class GL3D implements GLEventListener {
     public static final int VISTA_LATERAL = 2;
     public static final int VISTA_CENITAL = 3;
     public static final int VISTA_POR_DEFECTO = 4;
+    
     // Atributos privados
     private GL gl;
     private GLU glu;
@@ -49,6 +51,8 @@ public class GL3D implements GLEventListener {
     public double desplPersonaZ = 0;
     private boolean luzAmbiente = true;
     private boolean luzDifusa = true;
+    
+    private Luz luz1;
 
     public GL3D(int anchura, int altura) {
 	//this.glu = new GLU();
@@ -117,8 +121,7 @@ public class GL3D implements GLEventListener {
 	} else {
 	    gl.glDisable(gl.GL_LIGHT1);
 	}
-	
-	
+
 	hab.dibuja(gl);
 //	gl.glLoadIdentity();
 //	gl.glTranslated(10, 10, 10);
@@ -127,6 +130,7 @@ public class GL3D implements GLEventListener {
 //	 float spot_direction[] = { 1.0f, 1.0f, 0.0f }; // no en los apuntes
 //	gl.glLightfv(gl.GL_LIGHT3, gl.GL_SPOT_DIRECTION, spot_direction,0);// sin especificar parametros en los apuntes
 
+        
 
 	gl.glFlush();
     }
@@ -203,19 +207,36 @@ public class GL3D implements GLEventListener {
     // Activamos las luces del entorno
     public void activarLuces(GL gl) {
 
+        Luz luz1 = new Luz();
+        luz1.init(gl);
+        luz1.initPosition(gl);
+                
 	// Activamos Luz en OpenGL
-	gl.glEnable(gl.GL_LIGHTING);
+	//gl.glEnable(gl.GL_LIGHTING);
 	
 
 	// Luz Ambiental
-	gl.glEnable(gl.GL_LIGHT0);
-	float LuzAmbiente[] = {0.2f, 0.2f, 0.2f, 1.0f};
-	FloatBuffer LuzAmbiente1 = FloatBuffer.wrap(LuzAmbiente);
-	gl.glLightfv(gl.GL_LIGHT0, gl.GL_AMBIENT, LuzAmbiente1);
-	//FloatBuffer PosicionLuz01 = FloatBuffer.wrap(PosicionLuz0);
+	//gl.glEnable(gl.GL_LIGHT0);
+	
+        //float LuzAmbiente[] = {0.2f, 0.2f, 0.2f, 1.0f};
+	//FloatBuffer LuzAmbiente1 = FloatBuffer.wrap(LuzAmbiente);
+	//gl.glLightfv(gl.GL_LIGHT0, gl.GL_AMBIENT, LuzAmbiente1);
+	
+        //FloatBuffer PosicionLuz01 = FloatBuffer.wrap(PosicionLuz0);
 	//gl.glLightfv(gl.GL_LIGHT0, gl.GL_POSITION, PosicionLuz01);
 
-	
+        /*
+        float[] lightPos={0.0f , 150.0f ,-250.0f ,1.0f};
+        gl.glLightfv(gl.GL_LIGHT0, gl.GL_POSITION, lightPos, 1);
+
+ 
+        float[] spotDir={0.0f, 1.0f, -1.0f};            	
+        gl.glLightfv(gl.GL_LIGHT0, gl.GL_SPOT_DIRECTION, spotDir, 1);
+        gl.glLightf(gl.GL_LIGHT0, gl.GL_SPOT_CUTOFF, 40.0f);    	
+        gl.glLightf(gl.GL_LIGHT0, gl.GL_SPOT_EXPONENT,7.0f);   	
+	*/
+        
+        
 	// Luz difusa
 //	gl.glEnable(gl.GL_LIGHT1);
 //	float[] ambiente = { 0.2f, 0.2f, 0.2f, 1.0f};
