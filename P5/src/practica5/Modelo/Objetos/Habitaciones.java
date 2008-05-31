@@ -1,8 +1,10 @@
 package practica5.Modelo.Objetos;
 
 import java.util.ArrayList;
+import javax.media.opengl.GL;
 import practica5.Modelo.Basic.*;
 import practica5.Modelo.Luces.Foco;
+import practica5.Modelo.Luces.Luz;
 import practica5.util.Calculos;
 import com.sun.opengl.util.texture.Texture;
 
@@ -24,6 +26,7 @@ public class Habitaciones extends ObjetoCompuesto3D {
     private Persona persona;
     private PuntoVector3D p, a;
     private int estadoLuzAmbiente;
+    private Luz luz1;
     
     // Constructora
     public Habitaciones(PuntoVector3D pos, Texture[] texturas) {
@@ -217,11 +220,12 @@ public class Habitaciones extends ObjetoCompuesto3D {
     //    interruptorLuzAmbiente(gl);
   //      configurarLuzDireccional(gl);
         //quitarLuzAmbiente(gl);
+        
     }
     
     
     // Metodos para las luces
-/*    public void configurarLuzDireccional(GL gl) {
+ /*   public void configurarLuzDireccional(GL gl) {
         
         gl.glEnable(gl.GL_LIGHT2);
         
@@ -260,6 +264,6 @@ public class Habitaciones extends ObjetoCompuesto3D {
             float[] intensidad={0.2f,0.2f,0.2f,1f};
             gl.glLightModelfv(gl.GL_LIGHT_MODEL_AMBIENT, intensidad, 1);
         }
-    }*/
-    
+    }
+    */
 }
