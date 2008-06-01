@@ -182,7 +182,7 @@ public class OyenteTeclado implements KeyListener {
 		escena.cambiaLuzAmbiente();
 		break;
 	    case KeyEvent.VK_L:
-		escena.cambiaLuzDifusa();
+		escena.cambiaLuzLampara();
 		break;	
 
 	    // Extra

@@ -50,9 +50,10 @@ public class GL3D implements GLEventListener {
     public double desplPersonaY = 0;
     public double desplPersonaZ = 0;
     private boolean luzAmbiente = true;
-    private boolean luzDifusa = true;
+    private boolean luzLampara = true;
     private float[] PosicionLuz0 = new float[4];
-    
+    private Luz luz1;
+            
     public GL3D(int anchura, int altura) {
         //this.glu = new GLU();
         
@@ -115,20 +116,15 @@ public class GL3D implements GLEventListener {
             gl.glDisable(gl.GL_LIGHT0);
         }
         
-        if (luzDifusa) {
-            gl.glEnable(gl.GL_LIGHT1);
+        if (luzLampara) {
+            luz1.interruptor(gl, true);
         } else {
-            gl.glDisable(gl.GL_LIGHT1);
+            luz1.interruptor(gl, false);
         }
         
         hab.dibuja(gl);
+        luz1.dibujar(gl);
         
-        // luz del pájaro
-        PuntoVector3D p = new PuntoVector3D(-100, 250, -150);
-        PuntoVector3D d = new PuntoVector3D(0.0f, 0.0f, 0.0f);
-        Color c = new Color(0.0f, 0.0f, 0.0f);
-        float a = 180.0f;
-        float e = 0.0f;
         
         gl.glFlush();
     }
@@ -159,7 +155,6 @@ public class GL3D implements GLEventListener {
         PuntoVector3D pos = new PuntoVector3D(0, 0, 0, 1);
         
         hab = new Habitaciones(pos, texturas);
-//        hab.setGL(gl);
         hab.setId(Objeto3D.ESCENA);
         hab.setColor(Color.verdeClaro);
         
@@ -221,6 +216,13 @@ public class GL3D implements GLEventListener {
         PosicionLuz0[0]=0.0f; PosicionLuz0[1]= 500.0f;
         PosicionLuz0[2]=500.0f; PosicionLuz0[3]= 1.0f;
         gl.glLightfv(gl.GL_LIGHT0, gl.GL_POSITION, PosicionLuz0, 1);
+        
+        // luz Focal
+        PuntoVector3D p = new PuntoVector3D(150, 250, -150);
+        PuntoVector3D d = new PuntoVector3D(0.0f, -1.0f, 0.0f);
+        Color c = new Color(0.0f, 0.0f, 0.0f);
+        luz1 = new Luz(gl.GL_LIGHT1, p, d, c, 30, 5);
+        luz1.interruptor(gl, true);
     }
     
     // Activamos opciones internas de OpenGL
@@ -291,8 +293,8 @@ public class GL3D implements GLEventListener {
         this.luzAmbiente = !luzAmbiente;
     }
     
-    public void cambiaLuzDifusa() {
-        this.luzDifusa = !luzDifusa;
+    public void cambiaLuzLampara() {
+        this.luzLampara = !luzLampara;
     }
     
     public BufferedImage Cargar_Imagen(String nombre) {

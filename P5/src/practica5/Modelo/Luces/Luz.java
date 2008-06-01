@@ -7,23 +7,21 @@ public class Luz extends Objeto3D {
     
     // Atributos privados
     private int idLuz;
-    private float[] posicion;
-    private float[] direccion;
-    private float[] color;
+    private PuntoVector3D posicion;
+    private PuntoVector3D direccion;
+    private Color color;
     private float angulo;
-    private float exponente;
-    private boolean encendida;
+    private float intensidad;
     
     // Constructora por defecto
     public Luz() {
         
         this.idLuz = 0;
-        this.posicion = new float[4];
-        this.direccion = new float[4];
-        this.color = new float[4];
-        this.angulo = 0;
-        this.exponente = 0;
-        this.encendida = false;
+        this.posicion = new PuntoVector3D(0, 0, 0, 1);
+        this.direccion = new PuntoVector3D(0, -1, 0, 1);
+        this.color = new Color(0.0f, 0.0f, 0.0f);
+        this.angulo = 30;
+        this.intensidad = 20;
     
     }
     
@@ -32,52 +30,67 @@ public class Luz extends Objeto3D {
         
         this.idLuz = id;
         
-        this.posicion = new float[4];
-        this.posicion[0] = (float) pos.getX();
-        this.posicion[1] = (float) pos.getY();
-        this.posicion[2] = (float) pos.getZ();
-        this.posicion[3] = 1.0f;
-        
-        this.direccion = new float[4];
-        this.direccion[0] = (float) dir.getX();
-        this.direccion[1] = (float) dir.getY();
-        this.direccion[2] = (float) dir.getZ();
-        this.direccion[3] = 1.0f;
-
-        this.color = new float[4];
-        this.color[0] = color.getRed();
-        this.color[1] = color.getGreen();
-        this.color[2] = color.getBlue();
-        this.color[3] = 1.0f;
+        this.posicion = pos;
+        this.direccion = dir;
+        this.color = color;
         
         this.angulo = ang;
-        this.exponente = exp;
-        
-        this.encendida = true;
+        this.intensidad = exp;
+
     }
     
     public void dibujar(GL gl) {
          
-        if (encendida) {
-            gl.glPushMatrix();
-                gl.glDisable(idLuz);
-                gl.glLightfv(idLuz, gl.GL_POSITION, posicion, 1);
-                gl.glLightfv(idLuz, gl.GL_SPOT_DIRECTION, direccion, 1);
-                gl.glLightf(idLuz, gl.GL_SPOT_CUTOFF, angulo);
-                gl.glLightf(idLuz, gl.GL_SPOT_EXPONENT, exponente);
-                gl.glLightfv(idLuz, gl.GL_AMBIENT, color, 1);
-                gl.glLightfv(idLuz, gl.GL_DIFFUSE, color, 1);
-                gl.glEnable(idLuz);
-            gl.glPopMatrix();
-         }
+            float[] luzDifusa={0.25f, 0.695f, 0.32f, 1.0f};
+	    gl.glLightfv(idLuz, gl.GL_DIFFUSE, luzDifusa, 0);
+	    
+	    float[] luzAmbiente={0.43f, 0.43f, 0.43f, 1.0f};
+	    gl.glLightfv(idLuz, gl.GL_AMBIENT,luzAmbiente, 0);
+	    
+	    float[] luzEspecular={0.5f, 0.5f, 0.5f, 1.0f};
+	    gl.glLightfv(idLuz, gl.GL_SPECULAR, luzEspecular, 0);
+	    
+	    
+	    float[] posicionLuz = new float[4];
+	    posicionLuz[0] = (float) posicion.getX(); 
+	    posicionLuz[1] = (float) posicion.getY();
+	    posicionLuz[2] = (float) posicion.getZ(); 
+            posicionLuz[3] =(float) posicion.getPV(); 
+	    gl.glLightfv(idLuz, gl.GL_POSITION, posicionLuz, 0);
+	   
+
+	    gl.glLightf(idLuz, gl.GL_SPOT_CUTOFF, (float) angulo);
+	  
+	    float[] direccionLuz = new float[4];
+	    direccionLuz[0] = (float) direccion.getX();
+	    direccionLuz[1] = (float) direccion.getY();
+	    direccionLuz[2] = (float) direccion.getZ();
+	    direccionLuz[3] = (float) direccion.getPV();
+	    gl.glLightfv(idLuz, gl.GL_SPOT_DIRECTION, direccionLuz, 0);
+	    
+	    
+	    // atenuacion de la intensidad
+	    gl.glLightf(idLuz, gl.GL_SPOT_EXPONENT, (float) intensidad);
+
     }
     
-    public void interruptor() {
+    public void interruptor(GL gl, boolean on) {
         
-        if (encendida)
-            encendida = false;
+        if (on)
+            gl.glEnable(idLuz);
         else
-            encendida = true;
+            gl.glDisable(idLuz);
     }
     
+    public void setPosicion(PuntoVector3D p) {
+        this.posicion = p;
+    }
+    
+    public void setIntensidad(float exp) {
+        this.intensidad = exp;
+    }
+    
+    public void setAngulo(float ang) {
+        this.angulo =ang;
+    }
 }

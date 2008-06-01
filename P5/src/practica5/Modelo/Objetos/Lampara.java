@@ -9,12 +9,9 @@ public class Lampara extends ObjetoCompuesto3D {
     
     public Lampara(PuntoVector3D pos, double ori) {
         
-//        super.setGL(gl);
-        
         // Brazo
         lampara = new Cilindro(5, 5, 20, 20, 30);
         lampara.setId(Objeto3D.LAMPARA);
-   //     lampara.setGL(gl);
         lampara.getMatriz().rotaX(90);
         lampara.getMatriz().trasladar(pos.getX(), pos.getY() + 15, pos.getZ());
         lampara.setColor(Color.amarilloClaro);
@@ -23,7 +20,6 @@ public class Lampara extends ObjetoCompuesto3D {
         // Tulipa
         lampara = new Cilindro(10, 30, 40, 20, 30);
         lampara.setId(Objeto3D.LAMPARA);
-    //    lampara.setGL(gl);
         lampara.getMatriz().rotaX(90);
         lampara.getMatriz().trasladar(pos.getX(), pos.getY(), pos.getZ());
         lampara.setColor(Color.violetaClaro);

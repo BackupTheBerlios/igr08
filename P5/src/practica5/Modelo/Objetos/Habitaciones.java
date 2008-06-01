@@ -210,60 +210,7 @@ public class Habitaciones extends ObjetoCompuesto3D {
         persona.setId(Objeto3D.PERSONA);
         this.addHijos(persona);
         
-        // Foco de Luz
-      //  p = new PuntoVector3D(-150, 250, 0, 0);
-//        a = new PuntoVector3D(0, 0 -1, 0);
-   //     Foco luz = new Foco(p, a, 45, true, gl);
-       // this.addHijos(luz);
-        
-  //      estadoLuzAmbiente = 1;
-    //    interruptorLuzAmbiente(gl);
-  //      configurarLuzDireccional(gl);
-        //quitarLuzAmbiente(gl);
         
     }
     
-    
-    // Metodos para las luces
- /*   public void configurarLuzDireccional(GL gl) {
-        
-        gl.glEnable(gl.GL_LIGHT2);
-        
-        float[] ambiente = { 0.2f, 0.2f, 0.2f, 1.0f};
-        float[] difusa = { 0.7f, 0.7f, 0.7f, 1.0f};
-        
-        //float difusa[] = {0.4,0.4,0.4,2.0};
-        //PV3d* posicionUno = new PV3d(1,-1,0,0);
-        
-        PuntoVector3D pos1 = new PuntoVector3D(-150,-150,0,0);
-        pos1.normaliza();
-        
-        float[] pos = { (float)pos1.getX(), (float)pos1.getY(), (float)pos1.getZ(), (float)0.0f};
-        gl.glLightfv(gl.GL_LIGHT2, gl.GL_AMBIENT, ambiente, 1);
-        gl.glLightfv(gl.GL_LIGHT2, gl.GL_DIFFUSE, difusa, 1);
-        gl.glLightfv(gl.GL_LIGHT2, gl.GL_POSITION, pos, 1);
-    }
-    
-    public void quitarLuzAmbiente(GL gl) {
-        float[] intensidad = {0.0f , 0.0f, 0.0f, 0.0f};
-        gl.glLightModelfv(gl.GL_LIGHT_MODEL_AMBIENT, intensidad, 1);
-    }
-    
-    public void ponerLuzAmbiente(GL gl) {
-        float intensidad[]={0.2f,0.2f,0.2f,1f};
-        gl.glLightModelfv(gl.GL_LIGHT_MODEL_AMBIENT, intensidad, 1);
-    }
-    
-    public void interruptorLuzAmbiente(GL gl){
-        if (estadoLuzAmbiente == 1){
-            estadoLuzAmbiente = 0;
-            float[] intensidad= {0.0f,0.0f,0.0f,1.0f};
-            gl.glLightModelfv(gl.GL_LIGHT_MODEL_AMBIENT,intensidad, 1);
-        } else {
-            estadoLuzAmbiente = 1;
-            float[] intensidad={0.2f,0.2f,0.2f,1f};
-            gl.glLightModelfv(gl.GL_LIGHT_MODEL_AMBIENT, intensidad, 1);
-        }
-    }
-    */
 }
