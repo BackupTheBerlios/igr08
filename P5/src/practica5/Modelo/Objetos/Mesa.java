@@ -23,7 +23,7 @@ public class Mesa extends ObjetoCompuesto3D {
         tabla.getMatriz().rotaX(90);
         tabla.getMatriz().rotaY(ori);
         tabla.getMatriz().trasladar(pos.getX(), pos.getY(), pos.getZ());
-        tabla.setColor(color.verdeOscuro);
+        tabla.setColor(Color.violetaOscuro);
         addHijos(tabla);  
         
         
@@ -40,7 +40,7 @@ public class Mesa extends ObjetoCompuesto3D {
         
         pataMesa = new MallaPorRevolucion(perfil, 4, 0.3);
         pataMesa.getMatriz().trasladar(pos.getX() + 75, pos.getY() - 50, pos.getZ() - 20);
-        pataMesa.setColor(color.violetaOscuro);
+        pataMesa.setColor(Color.violetaOscuro);
         pataMesa.setId(Objeto3D.MESA);
         pataMesa.setTextura(texturas[1]);
         addHijos(pataMesa);

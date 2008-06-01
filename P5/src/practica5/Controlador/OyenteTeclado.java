@@ -178,12 +178,15 @@ public class OyenteTeclado implements KeyListener {
 		escena.getObjeto3D().setModificado();
 		escena.getObjeto3D().getMatriz().escalaXYZ(0.8);
 		break;
-	    case KeyEvent.VK_K:
-		escena.cambiaLuzAmbiente();
+	    case KeyEvent.VK_O:
+		escena.cambiaLuzAmbiente1();
 		break;
+	    case KeyEvent.VK_P:
+		escena.cambiaLuzAmbiente2();
+		break;	
 	    case KeyEvent.VK_L:
 		escena.cambiaLuzLampara();
-		break;	
+		break;
 
 	    // Extra
 	    case KeyEvent.VK_SHIFT:

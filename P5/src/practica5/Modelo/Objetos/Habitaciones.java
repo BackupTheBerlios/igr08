@@ -29,7 +29,7 @@ public class Habitaciones extends ObjetoCompuesto3D {
     private Luz luz1;
     
     // Constructora
-    public Habitaciones(PuntoVector3D pos, Texture[] texturas) {
+    public Habitaciones(PuntoVector3D pos, Texture[] texturas, int lightNumber) {
         
         Tablero tablero, tablero1;
         
@@ -47,7 +47,7 @@ public class Habitaciones extends ObjetoCompuesto3D {
         tablero.setTextura(texturas[11]);
         tablero.getMatriz().rotaX(90);
         tablero.getMatriz().trasladar(pos.getX(), pos.getY(), pos.getZ()-350);
-        tablero.setColor(Color.verdeOscuro);
+        tablero.setColor(Color.azulOscuro);
         this.addHijos(tablero);
                
         
@@ -172,7 +172,7 @@ public class Habitaciones extends ObjetoCompuesto3D {
         
         // Lampara
         p = new PuntoVector3D(pos.getX()+150, pos.getY()+250, pos.getZ()-150);
-        lampara = new Lampara(p, 0, GL.GL_LIGHT1);
+        lampara = new Lampara(p, 0, lightNumber);
         lampara.setId(Objeto3D.LAMPARA);
         this.addHijos(lampara);
         

@@ -30,7 +30,7 @@ public class Lampara extends ObjetoCompuesto3D {
 	// Luz
 	PuntoVector3D dir = new PuntoVector3D(0, -1, 0);
 	Color c = new Color(1,1,1);
-	luz = new Luz(lightNumber, pos, dir, c, 45, 5);
+	luz = new Luz(lightNumber, pos, dir, c, 45, 10);
 	this.addHijos(luz);
 	
     }

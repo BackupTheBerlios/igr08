@@ -4,7 +4,6 @@ import com.sun.opengl.util.texture.Texture;
 import com.sun.opengl.util.texture.TextureIO;
 import java.awt.image.BufferedImage;
 import java.net.URL;
-import java.nio.FloatBuffer;
 import javax.imageio.ImageIO;
 import javax.media.opengl.GLContext;
 import javax.media.opengl.glu.*;
@@ -29,9 +28,12 @@ public class GL3D implements GLEventListener {
     public static final int VISTA_CENITAL = 3;
     public static final int VISTA_POR_DEFECTO = 4;
     
+    private static final int difuseAmbientLight1Number = GL.GL_LIGHT0;
+    private static final int difuseAmbientLight2Number = GL.GL_LIGHT1;
+    private static final int spotLightNumber = GL.GL_LIGHT2;
+    
     // Atributos privados
     private GL gl;
-    private GLU glu;
     private GLContext context;
     private double xLeft,  xRight;
     private double yTop,  yBot;
@@ -49,11 +51,11 @@ public class GL3D implements GLEventListener {
     public double desplPersonaX = 0;
     public double desplPersonaY = 0;
     public double desplPersonaZ = 0;
-    private boolean luzAmbiente = true;
+    private boolean luzAmbiente1 = true;
+    private boolean luzAmbiente2 = true;
     private boolean luzLampara = true;
     private float[] PosicionLuz0 = new float[4];
-    private Luz luz1;
-            
+                
     public GL3D(int anchura, int altura) {
         //this.glu = new GLU();
         
@@ -110,21 +112,26 @@ public class GL3D implements GLEventListener {
         
         camaraActual.setModelViewMatrix();
         
-        if (luzAmbiente) {
-            gl.glEnable(gl.GL_LIGHT0);
+        if (luzAmbiente1) {
+            gl.glEnable(difuseAmbientLight1Number);
         } else {
-            gl.glDisable(gl.GL_LIGHT0);
+            gl.glDisable(difuseAmbientLight1Number);
         }
-        
-        if (luzLampara) {
-            luz1.interruptor(gl, true);
+	
+	if (luzAmbiente2) {
+            gl.glEnable(difuseAmbientLight2Number);
         } else {
-            luz1.interruptor(gl, false);
+            gl.glDisable(difuseAmbientLight2Number);
         }
+	
+	if (luzLampara){
+	    gl.glDisable(spotLightNumber);
+	}
+	else{
+	    gl.glEnable(spotLightNumber);
+	}
         
         hab.dibuja(gl);
-      //  luz1.dibujar(gl);
-        
         
         gl.glFlush();
     }
@@ -137,15 +144,15 @@ public class GL3D implements GLEventListener {
         //context.makeCurrent();
         //gl = context.getGL();
         gl = drw.getGL();
-        glu = new GLU();
+        //glu = new GLU();
         
         // this.camaraActual = new Camara(gl, glu);
         this.camaraActual = new Camara(new PuntoVector3D(500, 500, -250), new PuntoVector3D(0, 0, 0), new PuntoVector3D(0, 1, 0), gl);
         this.camaraSecundaria = new Camara(new PuntoVector3D(300, 300, 300), new PuntoVector3D(0, 0, 0), new PuntoVector3D(0, 1, 0), gl);
         this.camaraActual.setOrtogonal();
         
-        this.activarLuces(gl);
-        this.activarOpcionesOpenGL(gl);
+        activarLuces(gl);
+        activarOpcionesOpenGL(gl);
         
         texturas = new Texture[Malla.nombreTexturas.length];
         for (int i = 0; i < Malla.nombreTexturas.length; i++) {
@@ -154,12 +161,12 @@ public class GL3D implements GLEventListener {
         
         PuntoVector3D pos = new PuntoVector3D(0, 0, 0, 1);
         
-        hab = new Habitaciones(pos, texturas);
+        hab = new Habitaciones(pos, texturas, spotLightNumber);
         hab.setId(Objeto3D.ESCENA);
         hab.setColor(Color.verdeClaro);
         
-        activarLuces(gl);
-        activarOpcionesOpenGL(gl);
+//        activarLuces(gl);
+//        activarOpcionesOpenGL(gl);
         
         gl.glClearColor(0, 0, 0, 1);
         drw.setAutoSwapBufferMode(true);
@@ -193,37 +200,46 @@ public class GL3D implements GLEventListener {
         display(drw);
     }
     
-    public GLContext getContext() {
-        return context;
-    }
+//    public GLContext getContext() {
+//        return context;
+//    }
     
     // Activamos las luces del entorno
     public void activarLuces(GL gl) {
-        
-        
+       
         // Activamos Luz en OpenGL
         gl.glEnable(gl.GL_LIGHTING);
 
         // Luz0: Luz Ambiente
-        gl.glEnable(gl.GL_LIGHT0);
+        gl.glEnable(difuseAmbientLight1Number);
              
-        float[] LuzDifusa={1.0f, 1.0f, 1.0f, 1.0f};
-        gl.glLightfv(gl.GL_LIGHT0, gl.GL_DIFFUSE, LuzDifusa, 1);
+        float[] LuzDifusa1={1.0f, 1.0f, 1.0f, 1.0f};
+        gl.glLightfv(difuseAmbientLight1Number, gl.GL_DIFFUSE, LuzDifusa1, 0);
         
-        float[] LuzAmbiente={0.3f, 0.3f, 0.3f, 1.0f};
-        gl.glLightfv(gl.GL_LIGHT0, gl.GL_AMBIENT, LuzAmbiente, 1);
+        float[] LuzAmbiente1={0.3f, 0.3f, 0.3f, 1.0f};
+        gl.glLightfv(difuseAmbientLight1Number, gl.GL_AMBIENT, LuzAmbiente1, 0);
         
         PosicionLuz0[0]=0.0f; PosicionLuz0[1]= 500.0f;
-        PosicionLuz0[2]=500.0f; PosicionLuz0[3]= 1.0f;
-        gl.glLightfv(gl.GL_LIGHT0, gl.GL_POSITION, PosicionLuz0, 1);
+        PosicionLuz0[2]=200.0f; PosicionLuz0[3]= 1.0f;
+        gl.glLightfv(difuseAmbientLight1Number, gl.GL_POSITION, PosicionLuz0, 0);
+        
+	
+	// Luz1: Luz Ambiente
+        gl.glEnable(difuseAmbientLight2Number);
+             
+        float[] LuzDifusa2={1.0f, 1.0f, 1.0f, 1.0f};
+        gl.glLightfv(difuseAmbientLight2Number, gl.GL_DIFFUSE, LuzDifusa2, 0);
+        
+        float[] LuzAmbiente2={0.3f, 0.3f, 0.3f, 1.0f};
+        gl.glLightfv(difuseAmbientLight2Number, gl.GL_AMBIENT, LuzAmbiente2, 0);
+        
+        PosicionLuz0[0]=0.0f; PosicionLuz0[1]= -200.0f;
+        PosicionLuz0[2]=200.0f; PosicionLuz0[3]= 1.0f;
+        gl.glLightfv(difuseAmbientLight2Number, gl.GL_POSITION, PosicionLuz0, 0);
         
         // luz Focal
-	gl.glEnable(GL.GL_LIGHT1);
-        PuntoVector3D posicion = new PuntoVector3D(200, 200, -200);
-        PuntoVector3D direccion = new PuntoVector3D(0.0f, -1.0f, 0.0f);
-        Color color = new Color(1.0f, 1.0f, 1.0f);
-        luz1 = new Luz(gl.GL_LIGHT1, posicion, direccion, color, 30, 5);
-        luz1.interruptor(gl, true);
+	gl.glEnable(spotLightNumber);
+
     }
     
     // Activamos opciones internas de OpenGL
@@ -290,12 +306,16 @@ public class GL3D implements GLEventListener {
         }
     }
     
-    public void cambiaLuzAmbiente() {
-        this.luzAmbiente = !luzAmbiente;
-    }
-    
     public void cambiaLuzLampara() {
         this.luzLampara = !luzLampara;
+    }
+    
+    public void cambiaLuzAmbiente1(){
+        this.luzAmbiente1 = !luzAmbiente1;
+    }
+    
+    public void cambiaLuzAmbiente2(){
+	this.luzAmbiente2 = !luzAmbiente2;
     }
     
     public BufferedImage Cargar_Imagen(String nombre) {
