@@ -25,7 +25,7 @@ public class Sofa extends ObjetoCompuesto3D {
        tablero.setId(Objeto3D.SOFA);
        tablero.setTextura(texturas[4]);
        tablero.getMatriz().trasladar(pos.getX(), pos.getY(), pos.getZ());
-       tablero.setColor(color.verdeOscuro);
+       tablero.setColor(color.amarilloClaro);
        this.addHijos(tablero); 
        
        tablero= new Tablero(70, 50, 10, 3, 3, 3);

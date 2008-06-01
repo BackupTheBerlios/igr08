@@ -13,9 +13,7 @@ public class Jarron extends ObjetoCompuesto3D {
     
     // Constructora
     public Jarron(PuntoVector3D pos, double ori, Texture[] texturas) {
-        
-//        super.setGL(gl);
-        
+                
         // Perchero
         ArrayList<PuntoVector3D> perfil = new ArrayList<PuntoVector3D>();
         perfil.add(new PuntoVector3D(30, 250, 0));

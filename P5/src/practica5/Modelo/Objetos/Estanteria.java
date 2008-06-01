@@ -68,7 +68,7 @@ public class Estanteria extends ObjetoCompuesto3D{
         tablero.setTextura(texturas[3]);
         tablero.getMatriz().rotaY(ori);
         tablero.getMatriz().trasladar(pos.getX() + 50, pos.getY() + 65, pos.getZ());
-        tablero.setColor(Color.rojoClaro);   
+        tablero.setColor(Color.rojo);   
         this.addHijos(tablero);
     }
     

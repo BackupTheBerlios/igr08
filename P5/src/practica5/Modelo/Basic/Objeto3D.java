@@ -77,7 +77,7 @@ public class Objeto3D {
         this.color = color;
     }
     
-    public void setColor3d(int Red, int Green, int Blue) {
+    public void setColor3d(float Red, float Green, float Blue) {
         this.color = new Color(Red, Green, Blue);
     }
     

@@ -34,7 +34,7 @@ public class Malla extends Objeto3D {
 	super.dibuja(gl);
 
 	// Seleccionamos el color del objeto
-	gl.glColor3d(this.getColor().getRed(), this.getColor().getGreen(), this.getColor().getBlue());
+	gl.glColor3d((double)this.getColor().getRed(), (double)this.getColor().getGreen(), (double)this.getColor().getBlue());
 
 	// Guardamos el estado de la matriz de Modelado
 	gl.glPushMatrix();
