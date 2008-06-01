@@ -123,7 +123,7 @@ public class GL3D implements GLEventListener {
         }
         
         hab.dibuja(gl);
-        luz1.dibujar(gl);
+      //  luz1.dibujar(gl);
         
         
         gl.glFlush();
@@ -218,10 +218,11 @@ public class GL3D implements GLEventListener {
         gl.glLightfv(gl.GL_LIGHT0, gl.GL_POSITION, PosicionLuz0, 1);
         
         // luz Focal
-        PuntoVector3D p = new PuntoVector3D(150, 250, -150);
-        PuntoVector3D d = new PuntoVector3D(0.0f, -1.0f, 0.0f);
-        Color c = new Color(0.0f, 0.0f, 0.0f);
-        luz1 = new Luz(gl.GL_LIGHT1, p, d, c, 30, 5);
+	gl.glEnable(GL.GL_LIGHT1);
+        PuntoVector3D posicion = new PuntoVector3D(200, 200, -200);
+        PuntoVector3D direccion = new PuntoVector3D(0.0f, -1.0f, 0.0f);
+        Color color = new Color(1.0f, 1.0f, 1.0f);
+        luz1 = new Luz(gl.GL_LIGHT1, posicion, direccion, color, 30, 5);
         luz1.interruptor(gl, true);
     }
     
@@ -231,12 +232,12 @@ public class GL3D implements GLEventListener {
         gl.glEnable(gl.GL_COLOR_MATERIAL);
         gl.glColorMaterial(gl.GL_FRONT_AND_BACK, gl.GL_AMBIENT_AND_DIFFUSE);
         gl.glMaterialf(gl.GL_FRONT, gl.GL_SHININESS, 0.1f);
-        
+	
         /*
         gl.glEnable(gl.GL_COLOR_MATERIAL);
         //gl.glMaterialf(gl.GL_FRONT_AND_BACK, gl.GL_SHININESS, 0.1f);
         gl.glEnable(gl.GL_DEPTH_TEST);
-        gl.glEnable(gl.GL_NORMALIZE); // Normalizar las normales, no sería necesario?
+        gl.glEnable(gl.GL_NORMALIZE); // Normalizar las normales, no seria necesario?
         gl.glFrontFace(gl.GL_CCW);
         //gl.glFrontFace(gl.GL_CW);
         gl.glEnable(gl.GL_FRONT_FACE);
@@ -246,7 +247,7 @@ public class GL3D implements GLEventListener {
 
         gl.glEnable(gl.GL_DEPTH_TEST);
         gl.glEnable(gl.GL_NORMALIZE);
-        gl.glShadeModel(gl.GL_SMOOTH); 
+        gl.glShadeModel(gl.GL_SMOOTH); // Modelo de sombreado suave
     }
     
     public ObjetoCompuesto3D getObjeto3D() {

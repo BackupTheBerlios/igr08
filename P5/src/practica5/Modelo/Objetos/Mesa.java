@@ -23,7 +23,7 @@ public class Mesa extends ObjetoCompuesto3D {
         tabla.getMatriz().rotaX(90);
         tabla.getMatriz().rotaY(ori);
         tabla.getMatriz().trasladar(pos.getX(), pos.getY(), pos.getZ());
-        tabla.setColor(color.violetaOscuro);
+        tabla.setColor(color.verdeOscuro);
         addHijos(tabla);  
         
         

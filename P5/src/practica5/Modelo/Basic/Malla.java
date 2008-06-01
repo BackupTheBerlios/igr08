@@ -34,8 +34,11 @@ public class Malla extends Objeto3D {
 	super.dibuja(gl);
 
 	// Seleccionamos el color del objeto
-	gl.glColor3d((double)this.getColor().getRed(), (double)this.getColor().getGreen(), (double)this.getColor().getBlue());
-
+	Color c = this.getColor();
+	gl.glEnable(GL.GL_COLOR_MATERIAL);
+	float[] v = {c.getRed(), c.getGreen(), c.getBlue()};
+	gl.glMaterialfv(GL.GL_FRONT_AND_BACK, GL.GL_AMBIENT_AND_DIFFUSE,v ,0);
+	gl.glColor3f(c.getRed(), c.getGreen(), c.getBlue());
 	// Guardamos el estado de la matriz de Modelado
 	gl.glPushMatrix();
 
@@ -120,16 +123,16 @@ public class Malla extends Objeto3D {
 	    gl.glEnd();
 
 // Dibujar normales
-	    for (int j = 0; j < caras.get(i).getIndiceVerticeNormal().size(); j++) {
-		int iN = caras.get(i).getIndiceNormal(j);
-		int iV = caras.get(i).getIndiceVertice(j);
-		gl.glBegin(gl.GL_LINES);
-		    gl.glVertex3d(vertices.get(iV).getX(), vertices.get(iV).getY(), vertices.get(iV).getZ());
-		    gl.glVertex3d(vertices.get(iV).getX()+normales.get(iN).getX(),
-			    vertices.get(iV).getY()+normales.get(iN).getY(),
-			    vertices.get(iV).getZ()+normales.get(iN).getZ());
-		gl.glEnd();
-	    }
+//	    for (int j = 0; j < caras.get(i).getIndiceVerticeNormal().size(); j++) {
+//		int iN = caras.get(i).getIndiceNormal(j);
+//		int iV = caras.get(i).getIndiceVertice(j);
+//		gl.glBegin(gl.GL_LINES);
+//		    gl.glVertex3d(vertices.get(iV).getX(), vertices.get(iV).getY(), vertices.get(iV).getZ());
+//		    gl.glVertex3d(vertices.get(iV).getX()+normales.get(iN).getX(),
+//			    vertices.get(iV).getY()+normales.get(iN).getY(),
+//			    vertices.get(iV).getZ()+normales.get(iN).getZ());
+//		gl.glEnd();
+//	    }
 	}
 
 	// Volvemos al estado anterior de la Matriz de Modelado
